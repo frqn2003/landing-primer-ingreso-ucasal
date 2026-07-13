@@ -1,11 +1,29 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/astro/Navbar.astro';
+import Hero from '../components/astro/Hero.astro';
+import Beneficios from '../components/astro/Beneficios.astro';
+import Modalidades from '../components/astro/Modalidades.astro';
+import Financiacion from '../components/astro/Financiacion.astro';
+import Faq from '../components/astro/Faq.astro';
+import Footer from '../components/astro/Footer.astro';
+import ExploradorCarreras from '../components/react/ExploradorCarreras.tsx';
+import Form from '../components/react/Form.tsx';
+import data from '../data/carreras';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const base = import.meta.env.BASE_URL;
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="Primer ingreso | Estudiá en UCASAL" description="Encontrá tu carrera, elegí tu modalidad y comenzá tu camino universitario en UCASAL.">
+    <Navbar />
+    <main>
+        <Hero base={base} />
+        <Beneficios />
+        <Modalidades />
+        <ExploradorCarreras careers={data} client:visible />
+        <Financiacion />
+        <Faq />
+        <Form careers={data} client:visible />
+    </main>
+    <Footer />
 </Layout>

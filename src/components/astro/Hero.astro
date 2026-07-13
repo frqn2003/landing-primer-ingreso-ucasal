@@ -1,0 +1,31 @@
+---
+interface Props {
+    base?: string;
+}
+
+const { base = import.meta.env.BASE_URL } = Astro.props;
+---
+
+<section class="relative overflow-hidden bg-(--azul-dark-ucasal) text-white" aria-labelledby="hero-title">
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(216,49,53,0.45),transparent_42%),linear-gradient(135deg,#022130_0%,#1c4d86_100%)]"></div>
+    <div class="contenedor relative mx-auto grid max-w-7xl gap-10 py-20 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:py-28">
+        <div class="max-w-3xl">
+            <p class="mb-5 inline-flex rounded-full border border-white/25 bg-white/10 px-4 py-2 text-sm font-semibold tracking-wide text-white/90">Primer ingreso 2026</p>
+            <h1 id="hero-title" class="text-4xl font-black leading-tight tracking-tight sm:text-5xl lg:text-7xl">Elegí tu carrera y empezá a construir tu futuro.</h1>
+            <p class="mt-6 max-w-2xl text-lg leading-8 text-white/80 sm:text-xl">Encontrá una propuesta académica que se adapte a tu proyecto de vida, con modalidades presencial, a distancia e híbrida.</p>
+            <div class="mt-9 flex flex-wrap gap-4">
+                <a href={`${base}#carreras`} class="boton-cta bg-(--rojo-ucasal) text-white">Explorar carreras</a>
+                <a href={`${base}#modalidades`} class="rounded-xl border border-white/40 px-5 py-3 font-semibold text-white transition hover:bg-white hover:text-(--azul-dark-ucasal)">Conocer modalidades</a>
+            </div>
+        </div>
+        <div class="rounded-3xl border border-white/20 bg-white/10 p-6 shadow-2xl backdrop-blur-md sm:p-8">
+            <p class="text-sm font-semibold uppercase tracking-[0.2em] text-white/70">Tu próximo paso</p>
+            <h2 class="mt-3 text-2xl font-bold">Una universidad, muchas formas de aprender.</h2>
+            <ul class="mt-6 grid gap-4 text-white/85">
+                <li class="flex gap-3"><span class="mt-1 text-(--rojo-ucasal)">●</span><span>Oferta académica actualizada y orientada al mundo laboral.</span></li>
+                <li class="flex gap-3"><span class="mt-1 text-(--rojo-ucasal)">●</span><span>Alternativas flexibles para estudiar desde donde estés.</span></li>
+                <li class="flex gap-3"><span class="mt-1 text-(--rojo-ucasal)">●</span><span>Acompañamiento durante todo tu ingreso a UCASAL.</span></li>
+            </ul>
+        </div>
+    </div>
+</section>

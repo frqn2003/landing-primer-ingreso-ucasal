@@ -1,0 +1,453 @@
+---
+import data from "../../data/carreras";
+import { sanitizarTexto } from "../../lib/utils";
+
+interface Props {
+    onSubPage?: boolean;
+    fromLanding?: boolean;
+    slug?: string;
+}
+
+const { onSubPage = false, fromLanding = false, slug = "" } = Astro.props;
+
+const slugLimpio = slug ? sanitizarTexto(slug) : "";
+
+const carreraActiva = data.find((carrera) => carrera.slug === slugLimpio);
+
+const carrerasConCCC =
+    carreraActiva?.codcar === 401 || carreraActiva?.codcar === 196;
+
+const urlInscripcion = carrerasConCCC
+    ? "https://www.ucasal.edu.ar/carreras/ccc-form.php"
+    : "https://www.ucasal.edu.ar/inscripciones/?utm_source=landing_primer_ingreso";
+
+const enlaces = onSubPage
+    ? [
+          {
+              id: "modalidades",
+              texto: "Modalidades",
+          },
+          {
+              id: "beneficios",
+              texto: "Beneficios",
+          },
+          {
+              id: "sedes",
+              texto: "Sedes",
+          },
+      ]
+    : [
+          {
+              id: "beneficios",
+              texto: "Beneficios",
+          },
+          {
+              id: "carreras",
+              texto: "Carreras",
+          },
+          {
+              id: "sedes",
+              texto: "Sedes",
+          },
+      ];
+
+const base = import.meta.env.BASE_URL;
+const homeUrl = base;
+---
+
+<div
+    id="navbar-overlay"
+    class="fixed inset-0 z-40 hidden bg-gray-700/40 backdrop-blur-sm"
+    aria-hidden="true"
+>
+</div>
+
+<nav
+    id="navbar"
+    class="relative top-0 z-50 w-full bg-white/80 backdrop-blur-md transition-all duration-500 ease-in-out"
+    role="navigation"
+    aria-label="Navegación principal"
+    data-from-landing={fromLanding ? "true" : "false"}
+>
+    <div
+        id="navbar-container"
+        class="mx-auto grid h-18 grid-cols-2 items-center justify-between px-4 py-3 lg:grid-cols-3"
+    >
+        <!-- Sector izquierdo -->
+        <div class="flex items-center justify-start">
+            {
+                fromLanding ? (
+                    <a
+                        href={homeUrl}
+                        id="back-to-home"
+                        class="flex items-center gap-2 text-center text-sm font-semibold text-(--azul-ucasal) transition-colors hover:text-(--rojo-ucasal)"
+                    >
+                        <svg
+                            class="h-4 w-4"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                            aria-hidden="true"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M15 19l-7-7 7-7"
+                            />
+                        </svg>
+
+                        <img
+                            id="back-home-logo"
+                            src={`${base}iso.svg`}
+                            alt=""
+                            class="hidden h-6 w-auto"
+                            aria-hidden="true"
+                        />
+
+                        <span>Volver al inicio</span>
+                    </a>
+                ) : (
+                    <a
+                        href={homeUrl}
+                        aria-label="Ir al inicio"
+                        class="inline-flex items-center"
+                    >
+                        <img
+                            id="navbar-logo"
+                            src={`${base}iso.svg`}
+                            data-compact-src={`${base}iso.svg`}
+                            data-full-src={`${base}ucasal-color-h.svg`}
+                            alt="UCASAL"
+                            class="h-10 w-auto"
+                            width="160"
+                            height="40"
+                        />
+                    </a>
+                )
+            }
+        </div>
+
+        <!-- Navegación desktop -->
+        <div
+            class="hidden items-center justify-center space-x-1 lg:flex lg:space-x-2"
+        >
+            {
+                enlaces.map((enlace) => (
+                    <a
+                        href={`${onSubPage ? base : ''}#${enlace.id}`}
+                        class="nav-link"
+                        data-section-link={enlace.id}
+                    >
+                        {enlace.texto}
+                    </a>
+                ))
+            }
+        </div>
+
+        <!-- Sector derecho -->
+        <div class="flex items-center justify-end">
+            <a
+                href={urlInscripcion}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="boton-cta hidden lg:flex"
+            >
+                ¡Quiero Inscribirme!
+            </a>
+
+            <button
+                type="button"
+                id="menu-button"
+                class="inline-flex size-10 items-center justify-center p-2 text-sm text-gray-500 hover:bg-gray-100 lg:hidden"
+                aria-label="Abrir menú"
+                aria-expanded="false"
+                aria-controls="navMenu"
+            >
+                <!-- Ícono hamburguesa -->
+                <svg
+                    id="menu-open-icon"
+                    class="h-4 w-4"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 17 14"
+                >
+                    <path
+                        stroke="currentColor"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M1 1h15M1 7h15M1 13h15"></path>
+                </svg>
+
+                <!-- Ícono cerrar -->
+                <svg
+                    id="menu-close-icon"
+                    class="hidden h-4 w-4"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 14 14"
+                >
+                    <path
+                        stroke="currentColor"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M1 1l12 12M13 1L1 13"></path>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Menú mobile -->
+    <div
+        id="navMenu"
+        class="invisible absolute z-50 max-h-0 w-full -translate-y-4 overflow-hidden border-t border-gray-200 bg-white/90 opacity-0 shadow-lg backdrop-blur-md transition-all duration-300 ease-out"
+        aria-hidden="true"
+    >
+        <ul class="flex w-full flex-col gap-2">
+            {
+                enlaces.map((enlace) => (
+                    <li class="w-full">
+                        <a
+                            href={`${onSubPage ? base : ''}#${enlace.id}`}
+                            class="mobile-nav-link flex w-full items-start justify-start border-l-4 border-transparent px-4 py-3 font-semibold text-gray-700 transition-colors hover:border-(--rojo-ucasal) hover:bg-red-50 hover:text-(--rojo-ucasal)"
+                            data-section-link={enlace.id}
+                        >
+                            {enlace.texto}
+                        </a>
+                    </li>
+                ))
+            }
+
+            <li class="w-full border-t border-gray-200 py-2">
+                <a
+                    href={urlInscripcion}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="mobile-nav-link flex w-full items-start justify-start border-l-4 border-transparent px-4 py-3 font-semibold text-gray-700 transition-colors hover:border-(--rojo-ucasal) hover:bg-red-50 hover:text-(--rojo-ucasal)"
+                >
+                    ¡Quiero Inscribirme!
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<script>
+    function initializeNavbar() {
+        const navbar = document.querySelector<HTMLElement>("#navbar");
+        const navbarContainer =
+            document.querySelector<HTMLElement>("#navbar-container");
+
+        const menu = document.querySelector<HTMLElement>("#navMenu");
+        const menuButton =
+            document.querySelector<HTMLButtonElement>("#menu-button");
+
+        const overlay = document.querySelector<HTMLElement>("#navbar-overlay");
+
+        const openIcon = document.querySelector<SVGElement>("#menu-open-icon");
+
+        const closeIcon =
+            document.querySelector<SVGElement>("#menu-close-icon");
+
+        const logo = document.querySelector<HTMLImageElement>("#navbar-logo");
+
+        const backHomeLogo =
+            document.querySelector<HTMLImageElement>("#back-home-logo");
+
+        const sectionLinks = document.querySelectorAll<HTMLElement>(
+            "[data-section-link]",
+        );
+
+        if (
+            !navbar ||
+            !navbarContainer ||
+            !menu ||
+            !menuButton ||
+            !overlay ||
+            !openIcon ||
+            !closeIcon
+        ) {
+            return;
+        }
+
+        let menuAbierto = false;
+        let scrolled = false;
+        let ticking = false;
+
+        const secciones = Array.from(
+            new Set(
+                Array.from(sectionLinks)
+                    .map((link) => link.dataset.sectionLink)
+                    .filter((id): id is string => Boolean(id)),
+            ),
+        );
+
+        function setMenuState(abierto: boolean) {
+            menuAbierto = abierto;
+
+            menuButton?.setAttribute("aria-expanded", String(menuAbierto));
+
+            menuButton?.setAttribute(
+                "aria-label",
+                menuAbierto ? "Cerrar menú" : "Abrir menú",
+            );
+
+            menu?.setAttribute("aria-hidden", String(!menuAbierto));
+
+            openIcon?.classList.toggle("hidden", menuAbierto);
+            closeIcon?.classList.toggle("hidden", !menuAbierto);
+            overlay?.classList.toggle("hidden", !menuAbierto);
+
+            menu?.classList.toggle("visible", menuAbierto);
+            menu?.classList.toggle("invisible", !menuAbierto);
+
+            menu?.classList.toggle("opacity-100", menuAbierto);
+            menu?.classList.toggle("opacity-0", !menuAbierto);
+
+            menu?.classList.toggle("translate-y-0", menuAbierto);
+            menu?.classList.toggle("-translate-y-4", !menuAbierto);
+
+            menu?.classList.toggle("max-h-96", menuAbierto);
+            menu?.classList.toggle("max-h-0", !menuAbierto);
+
+            document.body.classList.toggle("overflow-hidden", menuAbierto);
+        }
+
+        function setScrolledState(nuevoEstado: boolean) {
+            if (scrolled === nuevoEstado) return;
+
+            scrolled = nuevoEstado;
+
+            navbar?.classList.toggle("sticky", scrolled);
+            navbar?.classList.toggle("relative", !scrolled);
+            navbar?.classList.toggle("nav-menu", scrolled);
+
+            navbarContainer?.classList.toggle("contenedor", scrolled);
+
+            navbarContainer?.classList.toggle("px-4", !scrolled);
+
+            if (logo) {
+                const nuevaImagen = scrolled
+                    ? logo.dataset.fullSrc
+                    : logo.dataset.compactSrc;
+
+                if (nuevaImagen) {
+                    logo.src = nuevaImagen;
+                }
+
+                logo.classList.toggle("h-10", !scrolled);
+            }
+
+            backHomeLogo?.classList.toggle("hidden", !scrolled);
+        }
+
+        function setActiveSection(idActivo: string) {
+            sectionLinks.forEach((link) => {
+                const esActivo = link.dataset.sectionLink === idActivo;
+
+                link.classList.toggle("active", esActivo);
+
+                if (esActivo) {
+                    link.setAttribute("aria-current", "true");
+                } else {
+                    link.removeAttribute("aria-current");
+                }
+            });
+        }
+
+        function getActiveSection(): string {
+            if (window.scrollY < 150) {
+                return "";
+            }
+
+            const centroViewport = window.innerHeight / 2;
+
+            for (const id of secciones) {
+                const elemento = document.getElementById(id);
+
+                if (!elemento) continue;
+
+                const rect = elemento.getBoundingClientRect();
+
+                if (
+                    rect.top <= centroViewport &&
+                    rect.bottom >= centroViewport
+                ) {
+                    return id;
+                }
+            }
+
+            return "";
+        }
+
+        function updateNavbar() {
+            setScrolledState(window.scrollY > 150);
+            setActiveSection(getActiveSection());
+            ticking = false;
+        }
+
+        function handleScroll() {
+            if (menuAbierto) {
+                setMenuState(false);
+            }
+
+            if (!ticking) {
+                window.requestAnimationFrame(updateNavbar);
+                ticking = true;
+            }
+        }
+
+        function handleOutsideClick(event: MouseEvent) {
+            if (!menuAbierto) return;
+
+            const target = event.target;
+
+            if (!(target instanceof Node)) return;
+
+            const clickDentroDelMenu = menu?.contains(target);
+            const clickEnBoton = menuButton?.contains(target);
+
+            if (!clickDentroDelMenu && !clickEnBoton) {
+                setMenuState(false);
+            }
+        }
+
+        function handleEscape(event: KeyboardEvent) {
+            if (event.key !== "Escape" || !menuAbierto) {
+                return;
+            }
+
+            setMenuState(false);
+            menuButton?.focus();
+        }
+
+        menuButton?.addEventListener("click", () => {
+            setMenuState(!menuAbierto);
+        });
+
+        overlay.addEventListener("click", () => {
+            setMenuState(false);
+        });
+
+        document.addEventListener("mousedown", handleOutsideClick);
+
+        document.addEventListener("keydown", handleEscape);
+
+        window.addEventListener("scroll", handleScroll, { passive: true });
+
+        sectionLinks.forEach((link) => {
+            link.addEventListener("click", () => {
+                setMenuState(false);
+            });
+        });
+
+        // Estado inicial.
+        updateNavbar();
+    }
+
+    initializeNavbar();
+</script>
