@@ -13,12 +13,12 @@ export function getStaticPaths() {
 }
 
 const { carrera } = Astro.props;
-const title = `${carrera.nombre} | Primer ingreso UCASAL`;
+const title = `${carrera.nombre} | Estudiá en UCASAL`;
 const description = carrera.descripcion.split('\\n')[0];
 ---
 
 <Layout title={title} description={description}>
-    <Navbar onSubPage slug={carrera.slug} />
+    <Navbar onSubPage={true} />
     <CareerDetail carrera={carrera} />
     <Footer />
 </Layout>

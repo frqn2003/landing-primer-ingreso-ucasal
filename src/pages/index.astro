@@ -15,8 +15,7 @@ const base = import.meta.env.BASE_URL;
 ---
 
 <Layout title="Primer ingreso | Estudiá en UCASAL" description="Encontrá tu carrera, elegí tu modalidad y comenzá tu camino universitario en UCASAL.">
-    <Navbar />
-    <main>
+    <Navbar onSubPage={false} />
         <Hero base={base} />
         <Beneficios />
         <Modalidades />
@@ -24,6 +23,5 @@ const base = import.meta.env.BASE_URL;
         <Financiacion />
         <Faq />
         <Form careers={data} client:visible />
-    </main>
     <Footer />
 </Layout>

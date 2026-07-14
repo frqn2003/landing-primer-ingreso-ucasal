@@ -1,9 +1,12 @@
 ---
+import { formatModalidades, getFacultad } from "../../lib/utils";
+
 interface Career {
     nombre: string;
     descripcion: string;
     duracion: string;
-    modalidad: number;
+    modalidad: number[];
+    sector: number;
     perfilEgresado?: { items: string[] };
     planEstudios?: { semestre: string; materias: string[] }[];
 }
@@ -12,12 +15,13 @@ interface Props {
     carrera: Career;
 }
 const { carrera } = Astro.props;
-const modalidad = carrera.modalidad === 1 ? "Presencial" : "A distancia";
+const modalidad = formatModalidades(carrera.modalidad);
+const facultad = getFacultad(carrera.sector);
 ---
 
 <main>
     <section class="bg-(--azul-dark-ucasal) py-16 text-white">
-        <div class="contenedor mx-auto max-w-5xl">
+        <div class="contenedor">
             <a
                 href={`${import.meta.env.BASE_URL}#carreras`}
                 class="text-sm font-semibold text-white/70 hover:text-white"
@@ -30,14 +34,14 @@ const modalidad = carrera.modalidad === 1 ? "Presencial" : "A distancia";
                 class="mt-3 max-w-4xl text-4xl font-black leading-tight sm:text-6xl"
             >
                 {carrera.nombre}
-            </h1><div class="mt-7 flex flex-wrap gap-3">
+            </h1><p class="mt-3 text-sm font-semibold uppercase tracking-wide text-white/60">{facultad}</p><div class="mt-7 flex flex-wrap gap-3">
                 <span class="rounded-full bg-white/10 px-4 py-2 text-sm">Duración: {carrera.duracion}</span>
                 <span class="rounded-full bg-white/10 px-4 py-2 text-sm">Modalidad: {modalidad}</span>
             </div>
         </div>
     </section>
     <section
-        class="contenedor mx-auto grid max-w-5xl gap-12 py-16 lg:grid-cols-[1fr_0.7fr]"
+        class="contenedor mx-auto grid gap-12 py-16 lg:grid-cols-[1fr_0.7fr]"
     >
         <div>
             <h2 class="text-3xl font-black text-(--azul-dark-ucasal)">
@@ -90,7 +94,7 @@ const modalidad = carrera.modalidad === 1 ? "Presencial" : "A distancia";
     {
         carrera.planEstudios && (
             <section class="bg-slate-50 py-16">
-                <div class="contenedor mx-auto max-w-5xl">
+                <div class="contenedor">
                     <>
                         <h2 class="text-3xl font-black text-(--azul-dark-ucasal)">
                             Plan de estudios

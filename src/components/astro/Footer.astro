@@ -1,1 +1,30 @@
-<footer class="bg-(--azul-dark-ucasal) py-10 text-white"><div class="contenedor mx-auto flex max-w-7xl flex-col gap-5 text-sm text-white/70 sm:flex-row sm:items-center sm:justify-between"><div><p class="text-lg font-black text-white">UCASAL</p><p class="mt-1">Universidad Católica de Salta</p></div><div class="flex flex-wrap gap-4"><a href="https://www.ucasal.edu.ar" target="_blank" rel="noopener noreferrer" class="transition hover:text-white">Sitio institucional</a><a href="#preguntas" class="transition hover:text-white">Preguntas frecuentes</a><a href="#contacto" class="transition hover:text-white">Contacto</a></div></div></footer>
+<footer
+  class="w-full bg-(--rojo-ucasal) text-white flex flex-col items-center py-6"
+  role="contentinfo"
+>
+  <div class="contenedor w-full flex flex-col items-center">
+    {/* Logo Centrado */}
+    <div class="mb-4">
+      <a
+        href="#"
+        class="inline-block transition-transform hover:scale-105"
+      >
+        <img
+          src={`${import.meta.env.BASE_URL}ucasal-color-h.svg`}
+          alt="UCASAL"
+          class="h-10 w-auto brightness-0 invert"
+        />
+      </a>
+    </div>
+
+    {/* Línea Divisoria separadora */}
+    <div class="w-full border-t border-white/50 mb-3"></div>
+
+    {/* Copyright */}
+    <p
+      class="text-[11px] md:text-xs font-semibold tracking-wide text-center opacity-90"
+    >
+      &copy; {new Date().getFullYear()} UCASAL. Construí tu historia.
+    </p>
+  </div>
+</footer>
