@@ -11,8 +11,33 @@ import Footer from '../components/astro/Footer.astro';
             <p class="text-sm font-bold uppercase tracking-[0.2em] text-(--rojo-ucasal)">Consulta recibida</p>
             <h1 id="thanks-title" class="mt-4 text-4xl font-black text-(--azul-dark-ucasal) sm:text-5xl">Gracias por escribirnos</h1>
             <p class="mt-5 text-lg leading-8 text-slate-600">Recibimos tus datos. Nuestro equipo se pondrá en contacto para ayudarte a elegir tu carrera y modalidad.</p>
+            <ul id="resumen-solicitud" class="mt-6 hidden grid-cols-1 gap-2 rounded-xl bg-slate-50 p-5 text-left text-sm text-slate-600 sm:grid-cols-2"></ul>
             <a href={import.meta.env.BASE_URL} class="mt-8 inline-flex rounded-xl bg-(--azul-dark-ucasal) px-5 py-3 font-bold text-white transition hover:bg-(--azul-ucasal)">Volver al inicio</a>
         </section>
     </main>
     <Footer />
 </Layout>
+
+<script is:inline>
+    const params = new URLSearchParams(window.location.search);
+    const campos = [
+        ["nombre", "Nombre"],
+        ["carrera", "Carrera"],
+        ["modo", "Modalidad", (v) => (v === "7" ? "Online" : "Presencial")],
+        ["sede", "Sede"],
+    ];
+    const resumen = document.getElementById("resumen-solicitud");
+    const items = campos
+        .map(([key, label, format]) => {
+            const valor = params.get(key);
+            if (!valor) return null;
+            const texto = format ? format(valor) : valor;
+            return `<li><span class="block text-xs font-semibold uppercase tracking-wide text-slate-400">${label}</span><span class="font-semibold text-slate-800">${texto}</span></li>`;
+        })
+        .filter(Boolean);
+    if (items.length > 0 && resumen) {
+        resumen.innerHTML = items.join("");
+        resumen.classList.remove("hidden");
+        resumen.classList.add("grid");
+    }
+</script>
