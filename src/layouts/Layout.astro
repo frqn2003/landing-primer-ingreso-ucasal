@@ -12,7 +12,7 @@ const {
 } = Astro.props;
 const canonical = new URL(Astro.url.pathname, 'https://www.ucasal.edu.ar').href;
 const base = import.meta.env.BASE_URL;
-const socialImage = new URL(`${base}favicon.svg`, 'https://www.ucasal.edu.ar').href;
+const socialImage = new URL(`${base}iso.svg`, 'https://www.ucasal.edu.ar').href;
 ---
 
 <!doctype html>
@@ -22,7 +22,7 @@ const socialImage = new URL(`${base}favicon.svg`, 'https://www.ucasal.edu.ar').h
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="icon" href={`${base}favicon.svg`} />
+		<link rel="icon" href={`${base}iso.svg`} />
 
 		<!-- SEO -->
 		<title>{title}</title>

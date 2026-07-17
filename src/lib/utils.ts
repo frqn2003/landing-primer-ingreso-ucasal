@@ -10,11 +10,11 @@ export function getModalidadLabel(code: number): string {
     return modalidades.find((m) => m.code === code)?.label ?? 'Consultar modalidad';
 }
 
-export function getFacultad(sector: number): string {
+export function getNombreFacultad(sector: number): string {
     return facultades.find((f) => f.code === sector)?.label ?? 'Consultar facultad';
 }
 
-export function formatModalidades(codes: number[]): string {
+export function getNombreModalidades(codes: number[]): string {
     const labels = codes.map(getModalidadLabel);
     if (labels.length <= 1) return labels[0] ?? 'Consultar modalidad';
     if (labels.length === 2) return labels.join(' y ');

@@ -1,5 +1,5 @@
 ---
-import { formatModalidades, getFacultad } from "../../lib/utils";
+import { getNombreModalidades, getNombreFacultad } from "../../lib/utils";
 
 interface Career {
     nombre: string;
@@ -15,8 +15,8 @@ interface Props {
     carrera: Career;
 }
 const { carrera } = Astro.props;
-const modalidad = formatModalidades(carrera.modalidad);
-const facultad = getFacultad(carrera.sector);
+const modalidad = getNombreModalidades(carrera.modalidad);
+const facultad = getNombreFacultad(carrera.sector);
 ---
 
 <main>
