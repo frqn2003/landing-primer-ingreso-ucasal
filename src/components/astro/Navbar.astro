@@ -18,12 +18,19 @@ const urlInscripcion = carrerasConCCC
   : "https://www.ucasal.edu.ar/inscripciones/?utm_source=landing_agosto";
 
 const base = import.meta.env.BASE_URL;
+
+// Solo en la Home la navbar flota transparente dentro del hero; en subpáginas mantiene el comportamiento sólido de siempre.
+const flotarSobreHero = !onSubPage;
 ---
 
 <nav
   id="navbar"
   role="navigation"
-  class="w-full z-50 top-0 transition-all duration-500 ease-in-out bg-white/80 relative md:backdrop-blur-md"
+  data-flotar={flotarSobreHero ? "true" : "false"}
+  data-tema={flotarSobreHero ? "transparente" : "solido"}
+  class={flotarSobreHero
+    ? "w-full z-50 fixed top-0 transition-all duration-500 ease-in-out"
+    : "w-full z-50 top-0 transition-all duration-500 ease-in-out bg-white/80 relative md:backdrop-blur-md"}
 >
   <div
     class="px-4 mx-auto py-3 grid grid-cols-2 lg:grid-cols-3 items-center justify-between h-18 z-50"
@@ -227,7 +234,24 @@ const base = import.meta.env.BASE_URL;
   </div>
 </nav>
 
-<script is:inline define:vars={{ urlInscripcion, onSubPage: !!onSubPage }}>
+<style>
+  /* Navbar flotando transparente sobre el hero de la Home, hasta que se hace scroll */
+  #navbar[data-tema="transparente"] .nav-link {
+    color: #fff;
+  }
+  #navbar[data-tema="transparente"] .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+  }
+  #navbar[data-tema="transparente"] .nav-link.active {
+    color: #fff;
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  #navbar[data-tema="transparente"] #menu-button {
+    color: #fff;
+  }
+</style>
+
+<script is:inline define:vars={{ urlInscripcion, onSubPage: !!onSubPage, flotarSobreHero }}>
   const nav = document.getElementById("navbar");
   const navInner = document.getElementById("navbar-inner");
   const menuButton = document.getElementById("menu-button");
@@ -333,9 +357,17 @@ const base = import.meta.env.BASE_URL;
     if (menuAbierto) toggleMenu(false);
 
     const scrolled = window.scrollY > 150;
-    nav.classList.toggle("sticky", scrolled);
-    nav.classList.toggle("nav-menu", scrolled);
-    nav.classList.toggle("relative", !scrolled);
+
+    if (flotarSobreHero) {
+      nav.classList.toggle("bg-white/80", scrolled);
+      nav.classList.toggle("md:backdrop-blur-md", scrolled);
+      nav.classList.toggle("shadow-sm", scrolled);
+      nav.dataset.tema = scrolled ? "solido" : "transparente";
+    } else {
+      nav.classList.toggle("sticky", scrolled);
+      nav.classList.toggle("nav-menu", scrolled);
+      nav.classList.toggle("relative", !scrolled);
+    }
     navInner.classList.toggle("contenedor", scrolled);
     updateLogo(scrolled);
 

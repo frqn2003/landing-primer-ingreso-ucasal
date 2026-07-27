@@ -37,7 +37,7 @@
       transparent 35%,
       rgba(255, 255, 255, 0.45) 50%,
       transparent 65%);
-  animation: shimmer 2s ease-in-out infinite;
+  animation: shimmer 5s ease-in-out infinite;
   will-change: transform;
   pointer-events: none;
   border-radius: inherit;
@@ -159,14 +159,14 @@ body {
 }
 
 .contenedor {
-  padding-inline: 20px;
+  padding-inline: 25px;
 
   @media (min-width: 768px) {
-    padding-inline: 50px;
+    padding-inline: 80px;
   }
 
   @media (min-width: 1024px) {
-    padding-inline: 100px;
+    padding-inline: 160px;
   }
 }
 

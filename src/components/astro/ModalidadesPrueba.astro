@@ -1,0 +1,352 @@
+---
+const modalidades = [
+  {
+    id: "presencial",
+    codigo: 1,
+    numero: "01",
+    titulo: "Presencial",
+    sub: "Todos los días en el campus",
+    meta: "Clases en nuestras sedes",
+    descripcion:
+      "Cursás en nuestras sedes: clases, laboratorios y biblioteca a metros del aula, con la vida universitaria alrededor tuyo.",
+    cursada: "En el campus",
+    imagen: "https://placehold.co/1200x800/3d3b37/f3f2f2?text=Presencial",
+  },
+  {
+    id: "online",
+    codigo: 7,
+    numero: "02",
+    titulo: "Online",
+    sub: "Desde donde estés",
+    meta: "100% a distancia",
+    descripcion:
+      "Estudiás desde donde estés, con clases virtuales, acompañamiento docente y recursos digitales disponibles todo el día.",
+    cursada: "A distancia",
+    imagen: "https://placehold.co/1200x800/3d3b37/f3f2f2?text=Online",
+  },
+];
+---
+
+<section id="modalidades-prueba" class="bg-slate-50">
+  <div class="contenedor mx-auto">
+    <div
+      class="grid overflow-hidden rounded-2xl border-2 border-(--azul-dark-ucasal) bg-white shadow-xl md:grid-cols-[6fr_4fr]"
+    >
+      <!-- Foto (compartida) -->
+      <div
+        class="relative flex min-h-75 items-end p-5 sm:min-h-105 sm:p-8 md:min-h-135"
+      >
+        <img
+          id="modalidad-imagen"
+          src={modalidades[0].imagen}
+          alt={modalidades[0].titulo}
+          class="absolute inset-0 h-full w-full object-cover transition-opacity duration-300"
+        />
+        <div
+          class="absolute inset-0 bg-linear-to-t from-(--azul-dark-ucasal)/85 via-(--azul-dark-ucasal)/25 to-transparent"
+        >
+        </div>
+
+        <!-- Texto directo sobre la foto (solo mobile, estilo 1e) -->
+        <div class="relative flex flex-col items-start gap-2 md:hidden">
+          <h2
+            class="modalidad-titulo text-3xl leading-none font-black text-white"
+          >
+            {modalidades[0].titulo}
+          </h2>
+          <p
+            class="modalidad-descripcion max-w-[38ch] text-sm leading-relaxed text-white/85"
+          >
+            {modalidades[0].descripcion}
+          </p>
+          <p
+            class="modalidad-meta text-[10px] font-semibold tracking-wide text-white/60 uppercase"
+          >
+            {modalidades[0].meta}
+          </p>
+        </div>
+
+        <!-- Placa blanca (solo desktop, estilo 1c) -->
+        <div
+          class="relative hidden max-w-lg flex-col items-start gap-3 bg-white p-6 shadow-[0_12px_32px_rgba(2,33,48,0.22)] md:flex sm:p-7"
+        >
+          <h2
+            class="modalidad-titulo text-3xl leading-none font-black tracking-tight text-(--azul-dark-ucasal) sm:text-4xl"
+          >
+            {modalidades[0].titulo}
+          </h2>
+          <p
+            class="modalidad-descripcion text-sm leading-relaxed text-slate-600 sm:text-[15px]"
+          >
+            {modalidades[0].descripcion}
+          </p>
+          <div
+            class="mt-1/2 flex w-full gap-5 border-t-2 border-slate-200 pt-3"
+          >
+            <p
+              class="modalidad-meta text-sm font-semibold tracking-wide text-(--azul-dark-ucasal) uppercase"
+            >
+              {modalidades[0].meta}
+            </p>
+          </div>
+          <a
+            class="modalidad-cta mt-2 flex w-full items-center justify-between gap-6 rounded-lg bg-(--azul-dark-ucasal) px-5 py-3.5 text-left text-sm font-bold text-white transition-colors hover:bg-(--rojo-ucasal)"
+            href="#carreras"
+            data-codigo={modalidades[0].codigo}
+          >
+            <span class="modalidad-cta-texto"
+              >Explorar carreras {modalidades[0].titulo.toLowerCase()}</span
+            >
+            <span aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Panel derecho -->
+      <div
+        class="flex flex-col border-t-2 border-(--azul-dark-ucasal) p-6 sm:p-8 md:border-t-0 md:border-l-2 h-full"
+      >
+        <!-- Desktop: header + control vertical + lista con íconos (estilo 1a) -->
+        <div
+          class="hidden md:flex md:flex-col md:gap-6 md:justify-center h-full"
+        >
+          <div class="flex flex-col gap-1 justify-start items-start">
+            <p class="text-lg font-bold text-(--azul-dark-ucasal)">
+              Elegí cómo querés estudiar
+            </p>
+          </div>
+          <div class="flex flex-1 gap-5">
+            <div
+              id="modalidad-track-v"
+              class="relative w-4 shrink-0 cursor-grab touch-none select-none"
+            >
+              <div
+                class="absolute top-0 bottom-0 left-1/2 w-0.5 -translate-x-1/2 bg-slate-300"
+              >
+              </div>
+              {
+                modalidades.map((_m, i) => (
+                  <span
+                    class="absolute left-1/2 h-2 w-2 -translate-x-1/2 -translate-y-1/2 bg-slate-300"
+                    style={`top:${i * 50 + 25}%`}
+                  />
+                ))
+              }
+              <span
+                id="modalidad-thumb-v"
+                class="absolute left-1/2 h-4 w-4 -translate-x-1/2 -translate-y-1/2 bg-(--rojo-ucasal) transition-[top] duration-200 ease-out"
+                style="top:25%"></span>
+            </div>
+            <div class="flex flex-1 flex-col h-full justify-around">
+              {
+                modalidades.map((modalidad, i) => (
+                  <button
+                    type="button"
+                    class="modalidad-opcion flex items-center gap-4 border-t-2 border-slate-200 py-3.5 text-left transition-opacity border-b-2 cursor-pointer h-1/2 hover:bg-black/1"
+                    data-index={i}
+                  >
+                    <span class="flex h-12 w-12 flex-none items-center justify-center text-(--azul-dark-ucasal)">
+                      {modalidad.id === "presencial" ? (
+                        <img
+                          src="./icons/docente.svg"
+                          alt="Icono Presencial"
+                          class="w-full h-full"
+                        />
+                      ) : (
+                        <img
+                          src="./icons/campus-virtual.svg"
+                          alt="Icono Online"
+                          class="w-full h-full"
+                        />
+                      )}
+                    </span>
+                    <span class="flex flex-1 flex-col gap-0.5">
+                      <span class="text-xl font-bold tracking-tight text-(--azul-dark-ucasal)">
+                        {modalidad.titulo}
+                      </span>
+                      <span class="text-sm text-slate-500">
+                        {modalidad.sub}
+                      </span>
+                    </span>
+                  </button>
+                ))
+              }
+            </div>
+          </div>
+        </div>
+
+        <!-- Mobile -->
+        <div class="flex flex-col gap-4 md:hidden">
+          <div
+            id="modalidad-track-h"
+            class="relative h-4 cursor-grab touch-none select-none"
+          >
+            <div
+              class="absolute top-1.5 right-[25%] left-[25%] h-0.5 bg-slate-300"
+            >
+            </div>
+            {
+              modalidades.map((_m, i) => (
+                <span
+                  class="absolute top-1/2 h-2 w-2 -translate-x-1/2 -translate-y-1/2 bg-slate-300"
+                  style={`left:${i * 50 + 25}%`}
+                />
+              ))
+            }
+            <span
+              id="modalidad-thumb-h"
+              class="absolute top-1/2 h-4 w-4 -translate-x-1/2 -translate-y-1/2 bg-(--rojo-ucasal) transition-[left] duration-200 ease-out"
+              style="left:25%"></span>
+          </div>
+          <div
+            class="grid grid-cols-2 border-t-2 border-slate-300 justify-center items-center"
+          >
+            {
+              modalidades.map((modalidad, i) => (
+                <button
+                  type="button"
+                  class={`modalidad-opcion flex min-h-22 flex-col items-center justify-center gap-2 p-2.5 text-left transition-opacity ${modalidad.id === "presencial" ? "border-r border-slate-300" : "border-l border-slate-300"}`}
+                  data-index={i}
+                >
+                  <span class="flex h-6 w-6 items-center justify-center text-(--azul-dark-ucasal)">
+                    {modalidad.id === "presencial" ? (
+                      <span class="grid grid-cols-3 gap-0.5">
+                        {Array.from({ length: 6 }).map(() => (
+                          <span class="h-1.25 w-1.25 bg-current" />
+                        ))}
+                      </span>
+                    ) : (
+                      <span class="flex h-4 w-5.5 items-center justify-center border-2 border-current">
+                        <span class="h-1 w-1 bg-current" />
+                      </span>
+                    )}
+                  </span>
+                  <span class="text-sm font-bold tracking-tight text-(--azul-dark-ucasal)">
+                    {modalidad.titulo}
+                  </span>
+                </button>
+              ))
+            }
+          </div>
+          <a
+            class="modalidad-cta flex w-full items-center justify-between gap-4 rounded-lg bg-(--rojo-ucasal) px-4 py-3.5 text-left text-sm font-bold text-white"
+            href="#carreras"
+            data-codigo={modalidades[0].codigo}
+          >
+            <span class="modalidad-cta-texto"
+              >Explorar carreras {modalidades[0].titulo.toLowerCase()}</span
+            >
+            <span aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .modalidad-opcion[data-active="true"] {
+    opacity: 1;
+  }
+  .modalidad-opcion[data-active="false"] {
+    opacity: 0.42;
+  }
+</style>
+
+<script define:vars={{ modalidades }}>
+  const imagen = document.getElementById("modalidad-imagen");
+  const titulos = document.querySelectorAll(".modalidad-titulo");
+  const descripciones = document.querySelectorAll(".modalidad-descripcion");
+  const metas = document.querySelectorAll(".modalidad-meta");
+  const onSites = document.querySelectorAll(".modalidad-onsite");
+  const cursadas = document.querySelectorAll(".modalidad-cursada");
+  const ctas = document.querySelectorAll(".modalidad-cta");
+  const ctaTextos = document.querySelectorAll(".modalidad-cta-texto");
+  const opciones = Array.from(document.querySelectorAll(".modalidad-opcion"));
+  const trackV = document.getElementById("modalidad-track-v");
+  const trackH = document.getElementById("modalidad-track-h");
+  const thumbV = document.getElementById("modalidad-thumb-v");
+  const thumbH = document.getElementById("modalidad-thumb-h");
+  const total = modalidades.length;
+  let activa = 0;
+
+  function posicion(indice) {
+    return `${indice * (100 / total) + 100 / total / 2}%`;
+  }
+
+  function actualizar() {
+    const modalidad = modalidades[activa];
+
+    imagen.style.opacity = "0";
+    setTimeout(() => {
+      imagen.src = modalidad.imagen;
+      imagen.alt = modalidad.titulo;
+      imagen.style.opacity = "1";
+    }, 150);
+
+    titulos.forEach((el) => (el.textContent = modalidad.titulo));
+    descripciones.forEach((el) => (el.textContent = modalidad.descripcion));
+    metas.forEach((el) => (el.textContent = modalidad.meta));
+    onSites.forEach((el) => (el.textContent = modalidad.onSite));
+    cursadas.forEach((el) => (el.textContent = modalidad.cursada));
+    ctaTextos.forEach(
+      (el) =>
+        (el.textContent = `Explorar carreras ${modalidad.titulo.toLowerCase()}`),
+    );
+    ctas.forEach((el) => (el.dataset.codigo = String(modalidad.codigo)));
+
+    if (thumbV) thumbV.style.top = posicion(activa);
+    if (thumbH) thumbH.style.left = posicion(activa);
+
+    opciones.forEach((opcion) => {
+      opcion.dataset.active = String(Number(opcion.dataset.index) === activa);
+    });
+  }
+
+  function seleccionar(indice) {
+    activa = Math.max(0, Math.min(total - 1, indice));
+    actualizar();
+  }
+
+  opciones.forEach((opcion) =>
+    opcion.addEventListener("click", () =>
+      seleccionar(Number(opcion.dataset.index)),
+    ),
+  );
+
+  function configurarTrack(track, vertical) {
+    if (!track) return;
+    function indiceDesdeEvento(evento) {
+      const rect = track.getBoundingClientRect();
+      const proporcion = vertical
+        ? (evento.clientY - rect.top) / rect.height
+        : (evento.clientX - rect.left) / rect.width;
+      return Math.floor(proporcion * total);
+    }
+    track.addEventListener("pointerdown", (evento) => {
+      seleccionar(indiceDesdeEvento(evento));
+      const mover = (e) => seleccionar(indiceDesdeEvento(e));
+      const soltar = () => {
+        window.removeEventListener("pointermove", mover);
+        window.removeEventListener("pointerup", soltar);
+      };
+      window.addEventListener("pointermove", mover);
+      window.addEventListener("pointerup", soltar);
+    });
+  }
+
+  configurarTrack(trackV, true);
+  configurarTrack(trackH, false);
+
+  ctas.forEach((cta) => {
+    cta.addEventListener("click", () => {
+      window.dispatchEvent(
+        new CustomEvent("preselect-modalidad", {
+          detail: { code: Number(cta.dataset.codigo) },
+        }),
+      );
+    });
+  });
+
+  actualizar();
+</script>

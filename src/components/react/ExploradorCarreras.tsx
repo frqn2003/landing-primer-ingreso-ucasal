@@ -41,6 +41,16 @@ export default function ExploradorCarreras({ careers }: Props) {
         return () => document.removeEventListener('mousedown', handleClickFuera)
     }, [])
 
+    /* Preselección de modalidad desde el CTA de la sección "Modalidades" */
+    useEffect(() => {
+        function handlePreselectModalidad(e: Event) {
+            const { code } = (e as CustomEvent).detail
+            setModalities([code])
+        }
+        window.addEventListener('preselect-modalidad', handlePreselectModalidad)
+        return () => window.removeEventListener('preselect-modalidad', handlePreselectModalidad)
+    }, [])
+
     const filtered = useMemo(() => careers.filter((career) => {
         const matchesQuery = `${career.nombre} ${career.descripcion}`.toLowerCase().includes(query.toLowerCase())
         const matchesModality = modalities.length === 0 || career.modalidad.some((m) => modalities.includes(m))
@@ -113,9 +123,14 @@ export default function ExploradorCarreras({ careers }: Props) {
             </div>
             <p className="mt-8 text-sm text-slate-500" aria-live="polite">{filtered.length} {filtered.length === 1 ? 'carrera encontrada' : 'carreras encontradas'}</p>
             {filtered.length > 0 ?
-                <div className="mt-5 grid gap-5 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4">{filtered.map((career) =>
-                    <CartaCarrera key={career.codcar} career={career} base={import.meta.env.BASE_URL} />
-                )}
+                <div className="relative mt-5">
+                    <div className="max-h-[70vh] overflow-y-auto rounded-2xl border border-slate-200 bg-slate-50 p-4 pr-3 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-slate-300 [&::-webkit-scrollbar-track]:bg-transparent">
+                        <div className="grid gap-5 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4">{filtered.map((career) =>
+                            <CartaCarrera key={career.codcar} career={career} base={import.meta.env.BASE_URL} />
+                        )}
+                        </div>
+                    </div>
+                    <div className="pointer-events-none absolute inset-x-0 bottom-0 h-12 rounded-b-2xl bg-gradient-to-t from-slate-50 to-transparent"></div>
                 </div>
                 :
                 <div className="mt-5 rounded-2xl border border-dashed border-slate-300 p-10 text-center text-slate-600">No encontramos carreras con esos filtros.
