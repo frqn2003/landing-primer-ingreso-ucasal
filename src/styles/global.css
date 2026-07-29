@@ -13,6 +13,10 @@
   --ucasal-gray-medium: #e9ecef;
 }
 
+.boton-inscripcion{
+   @apply text-white border border-white rounded-lg px-4 py-2 transition-colors duration-300 flex flex-row items-center gap-2;
+}
+
 /* Shimmer diagonal en botón CTA */
 @keyframes shimmer {
   0% {
