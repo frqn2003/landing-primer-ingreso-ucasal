@@ -1,7 +1,5 @@
 @import "tailwindcss";
 
-@import "tailwindcss";
-
 :root {
   --rojo-ucasal: #d83135;
   --rojo-dark-ucasal: #961315;
@@ -14,7 +12,16 @@
 }
 
 .boton-inscripcion{
-   @apply text-white border border-white rounded-lg px-4 py-2 transition-colors duration-300 flex flex-row items-center gap-2;
+  color: white;
+  font-weight: 700;
+  border: 1px solid white;
+  border-radius: 0.5rem;
+  padding: 12px 16px;
+  transition: color 0.3s ease;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 /* Shimmer diagonal en botón CTA */
