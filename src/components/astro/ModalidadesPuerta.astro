@@ -1,0 +1,159 @@
+---
+const modalidades = [
+  {
+    id: 1,
+    codigo: 1,
+    numero: "01",
+    color: "--rojo-ucasal",
+    nombre: "presencial",
+    caracteristicas: [
+      "Clases en el campus",
+      "Laboratorios y biblioteca",
+      "Prácticas Presenciales",
+    ],
+    description: "Clases en vivo, acceso a laboratorios y biblioteca",
+    imagen: "https://www.placehold.co/600x400?text=Presencial",
+  },
+  {
+    id: 2,
+    codigo: 7,
+    numero: "02",
+    nombre: "virtual",
+    color: "--azul-ucasal",
+    caracteristicas: [
+      "Clases en la plataforma virtual",
+      "Acceso a laboratorios",
+      "Biblioteca",
+    ],
+    description: "Clases en vivo, acceso a laboratorios y biblioteca",
+    imagen: "https://www.placehold.co/600x400?text=Virtual",
+  },
+  {
+    id: 3,
+    codigo: 8,
+    numero: "03",
+    color: "--azul-dark-ucasal",
+    nombre: "home",
+    caracteristicas: [
+      "Clases en la plataforma virtual",
+      "Acceso a laboratorios",
+      "Biblioteca",
+    ],
+    description: "Clases en vivo, acceso a laboratorios y biblioteca",
+    imagen: "https://www.placehold.co/600x400?text=Home",
+  },
+];
+---
+
+<section id="modalidades-puerta" class="bg-slate-50 py-20">
+  <div class="contenedor mx-auto ">
+    <div class="flex max-md:flex-col h-180 sm:h-140 overflow-hidden">
+      {
+        modalidades.map((modalidad, i) => (
+          <article
+            class="puerta-panel relative overflow-hidden bg-cover bg-center capitalize"
+            style={`background-image:url(${modalidad.imagen})`}
+            data-index={i}
+            data-active={i === 0 ? "true" : "false"}
+          >
+            <div class="absolute inset-0 bg-linear-to-t from-(--azul-dark-ucasal)/95 via-(--azul-dark-ucasal)/35 to-(--azul-dark-ucasal)/10" />
+
+            <button class={`puerta-colapsado absolute inset-0 flex flex-col items-center justify-between py-7 cursor-pointer bg-(${modalidad.color}) ${modalidad.codigo === 7 ? 'bg-[#1c4d86]' : ''}`}>
+              <span class="text-[10px] font-semibold tracking-[0.2em] text-white/80 uppercase">
+                {modalidad.numero}
+              </span>
+              <span class="text-4xl font-black tracking-tight first-letter:uppercase text-white">
+                {modalidad.nombre}
+              </span>
+              <span class="text-[10px] font-semibold tracking-[0.16em] text-white/80 uppercase">
+                Ver
+              </span>
+            </button>
+
+            <div class="puerta-expandido absolute inset-x-0 bottom-0 flex-col items-start gap-4 p-10">
+              <div class="flex items-center gap-3">
+                <span class={`h-0.5 w-6 bg-(${modalidad.color})`} />
+                <span class="text-[10px] font-semibold tracking-[0.2em] text-white uppercase">
+                  Modalidad {modalidad.numero}
+                </span>
+              </div>
+              <h3 class="text-5xl leading-[0.92] font-black tracking-tight text-white">
+                {modalidad.nombre}
+              </h3>
+              <p class="max-w-[40ch] text-base leading-relaxed text-white/90">
+                {modalidad.description}
+              </p>
+              <ul class="flex flex-col gap-1.5 pt-0.5">
+                {modalidad.caracteristicas.map((caracteristica) => (
+                  <li class="flex items-center gap-2.5 text-sm font-medium text-white/90 normal-case">
+                    <span class="h-1.5 w-1.5 flex-none bg-(--rojo-ucasal)" />
+                    {caracteristica}
+                  </li>
+                ))}
+              </ul>
+              <a
+                href="#carreras"
+                class="puerta-cta mt-2 flex min-w-87.5 items-center justify-between gap-6 bg-(--rojo-ucasal) px-4.5 py-4 text-sm font-bold text-white normal-case transition-colors hover:bg-white hover:text-(--azul-dark-ucasal)"
+                data-codigo={modalidad.codigo}
+              >
+                Explorar carreras de esta modalidad
+                <span aria-hidden="true">→</span>
+              </a>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .puerta-panel {
+    flex-grow: 1;
+    flex-basis: 0;
+    transition: flex-grow 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .puerta-panel[data-active="true"] {
+    flex-grow: 2;
+  }
+  .puerta-colapsado {
+    display: flex;
+  }
+  .puerta-expandido {
+    display: none;
+  }
+  .puerta-panel[data-active="true"] .puerta-colapsado {
+    display: none;
+  }
+  .puerta-panel[data-active="true"] .puerta-expandido {
+    display: flex;
+  }
+  .puerta-panel:not([data-active="true"]) .puerta-cta {
+    pointer-events: none;
+  }
+</style>
+
+<script>
+  const paneles = Array.from(document.querySelectorAll(".puerta-panel"));
+
+  paneles.forEach((panel) => {
+    panel.addEventListener("click", () => {
+      paneles.forEach((p) => p.setAttribute("data-active", String(p === panel)));
+    });
+  });
+
+  paneles.forEach((panel) => {
+    const cta = panel.querySelector(".puerta-cta");
+    cta?.addEventListener("click", (e) => {
+      if (panel.dataset.active !== "true") {
+        e.preventDefault();
+        return;
+      }
+      window.dispatchEvent(
+        new CustomEvent("preselect-modalidad", {
+          detail: { code: Number(cta.dataset.codigo) },
+        }),
+      );
+    });
+  });
+</script>
