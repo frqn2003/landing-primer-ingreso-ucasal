@@ -3,7 +3,6 @@ const modalidades = [
   {
     id: 1,
     codigo: 1,
-    numero: "01",
     color: "--rojo-ucasal",
     nombre: "presencial",
     caracteristicas: [
@@ -17,7 +16,6 @@ const modalidades = [
   {
     id: 2,
     codigo: 7,
-    numero: "02",
     nombre: "virtual",
     color: "--azul-ucasal",
     caracteristicas: [
@@ -31,7 +29,6 @@ const modalidades = [
   {
     id: 3,
     codigo: 8,
-    numero: "03",
     color: "--azul-dark-ucasal",
     nombre: "home",
     caracteristicas: [
@@ -60,7 +57,7 @@ const modalidades = [
 
             <button class={`puerta-colapsado absolute inset-0 flex flex-col items-center justify-between py-7 cursor-pointer bg-(${modalidad.color}) ${modalidad.codigo === 7 ? 'bg-[#1c4d86]' : ''}`}>
               <span class="text-[10px] font-semibold tracking-[0.2em] text-white/80 uppercase">
-                {modalidad.numero}
+                0{modalidad.id}
               </span>
               <span class="text-4xl font-black tracking-tight first-letter:uppercase text-white">
                 {modalidad.nombre}
@@ -74,7 +71,7 @@ const modalidades = [
               <div class="flex items-center gap-3">
                 <span class={`h-0.5 w-6 bg-(${modalidad.color})`} />
                 <span class="text-[10px] font-semibold tracking-[0.2em] text-white uppercase">
-                  Modalidad {modalidad.numero}
+                  Modalidad 0{modalidad.id}
                 </span>
               </div>
               <h3 class="text-5xl leading-[0.92] font-black tracking-tight text-white">
