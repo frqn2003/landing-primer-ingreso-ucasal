@@ -3,8 +3,6 @@ import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/astro/Navbar.astro';
 import Hero from '../components/astro/Hero.astro';
 import Beneficios from '../components/astro/Beneficios.astro';
-import Modalidades from '../components/astro/Modalidades.astro';
-import ModalidadesPrueba from '../components/astro/ModalidadesPrueba.astro';
 import ModalidadesPuerta from '../components/astro/ModalidadesPuerta.astro';
 import Financiacion from '../components/astro/Financiacion.astro';
 import Faq from '../components/astro/Faq.astro';
@@ -20,9 +18,7 @@ const base = import.meta.env.BASE_URL;
     <Navbar onSubPage={false} />
         <Hero base={base} />
         <Beneficios />
-        <Modalidades />
-        <ModalidadesPrueba />
-        <ModalidadesPuerta />
+        <ModalidadesPuerta client:load />
         <ExploradorCarreras careers={data} client:visible />
         <Financiacion />
         <Faq />

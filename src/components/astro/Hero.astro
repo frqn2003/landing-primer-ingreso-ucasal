@@ -4,21 +4,12 @@ interface Props {
 }
 
 const { base = import.meta.env.BASE_URL } = Astro.props;
-
-const testimonios = [
-    { nombre: "Benjamin Elizalde", carrera: "Licenciatura en Comercialización", frase: "La facultad está siempre a disposición" },
-    { nombre: "Ebaneo Valdez Kao", carrera: "Ingeniería en Informática", frase: "Puedo ejercer mi profesión desde cualquier parte del mundo" },
-    { nombre: "Luciana Gennari", carrera: "Kinesiología", frase: "Para poder rendir bien académicamente y en entrenamiento, la universidad me da una ayuda gigante" },
-    { nombre: "Nicolás Ovejero", carrera: "Licenciatura en Turismo", frase: "Le agradezco a la universidad por brindarnos una herramienta fundamental: el capital humano, los profesores y sobre todo los compañeros" },
-    { nombre: "Nahuel Agustín Artigas", carrera: "Profesorado en Educación Física", frase: "Son todos sentimientos de alegría y felicidad porque pude realizar un sueño que tenía, que era recibirme" },
-    { nombre: "Luciano Marcelo Sato", carrera: "Licenciatura en Artes Musicales", frase: "Nos permite integrarnos muy fácil al mundo laboral en muchos aspectos, capacitándonos mucho en el día a día" },
-    { nombre: "Tania Elizabeth Flores", carrera: "Corredor Inmobiliario y Martillero Público", frase: "El apoyo de los profesores y del equipo UCASAL es fundamental: siempre están para guiarte. Como mamá, valoro mucho esa ayuda para equilibrar familia, trabajo y estudio." },
-];
+import Testimonios from "./Testimonios.astro";
 ---
 
 <section class="relative w-full text-white" aria-labelledby="hero-title">
     <!-- Foto de fondo, ocupa toda la altura de la pantalla -->
-    <div class="relative h-[62vh] min-h-[420px] w-full overflow-hidden lg:h-dvh lg:min-h-[560px]">
+    <div class="relative h-screen w-full overflow-hidden lg:h-dvh lg:min-h-screen">
         <picture>
             <source media="(min-width: 769px)" srcset={`${base}encabezados/mundial/desktop.webp`} />
             <img
@@ -27,123 +18,36 @@ const testimonios = [
                 class="absolute inset-0 h-full w-full object-cover"
             />
         </picture>
-        <div class="absolute inset-0 bg-gradient-to-t from-(--azul-dark-ucasal)/90 via-(--azul-dark-ucasal)/25 to-transparent"></div>
-        <div class="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-black/55 to-transparent lg:h-40"></div>
+        <div class="absolute inset-0 bg-linear-to-t from-(--azul-dark-ucasal)/90 via-(--azul-dark-ucasal)/25 to-transparent"></div>
+        <div class="absolute inset-x-0 top-0 h-32 bg-linear-to-b from-black/55 to-transparent lg:h-40"></div>
 
-        <!-- Desktop: título abajo-izquierda, testimonios abajo-derecha, superpuestos a la foto -->
-        <div class="contenedor absolute inset-x-0 bottom-0 mx-auto hidden pb-14 lg:flex lg:items-end lg:justify-between lg:gap-10">
+        <div class="md:mx-12 mx-5 absolute inset-x-0 bottom-0 pb-8 md:pb-14 lg:flex lg:items-end lg:justify-between lg:gap-10">
             <div class="max-w-xl">
-                <p class="mb-5 inline-flex rounded-full border border-white/25 bg-white/10 px-4 py-2 text-sm font-semibold tracking-wide text-white/90">Primer ingreso 2026</p>
-                <h1 id="hero-title" class="text-4xl font-black leading-tight tracking-tight lg:text-6xl">Elegí tu carrera y empezá a construir tu futuro.</h1>
-                <p class="mt-6 max-w-lg text-lg leading-8 text-white/85">Encontrá una propuesta académica que se adapte a tu proyecto de vida, con modalidades presencial, a distancia e híbrida.</p>
-                <div class="mt-8 flex flex-wrap gap-4">
+                <h1 id="hero-title" class="text-3xl font-black leading-tight tracking-tight lg:text-6xl">Estudia, <br>conectá,<br>crecé</h1>
+                <div class="mt-4 md:mt-8 flex md:flex-wrap flex-row gap-4">
                     <a href={`${base}#carreras`} class="boton-cta bg-(--rojo-ucasal) text-white">Explorar carreras</a>
-                    <a href={`${base}#modalidades`} class="rounded-xl border border-white/40 px-5 py-3 font-semibold text-white transition hover:bg-white hover:text-(--azul-dark-ucasal)">Conocer modalidades</a>
+                    <a href={`${base}#modalidades`} class="rounded-xl border border-white/40 px-5 py-3 font-semibold text-white transition hover:bg-white hover:text-(--azul-dark-ucasal) max-md:text-sm">Conocer modalidades</a>
                 </div>
             </div>
-
-            <div class="testimonio-widget w-full max-w-md rounded-3xl border border-white/20 bg-white/10 p-6 shadow-2xl backdrop-blur-md">
-                <p class="text-sm font-semibold uppercase tracking-[0.2em] text-white/70">Lo que dicen nuestros estudiantes</p>
-                <div class="testimonio-track mt-5 min-h-[132px]">
-                    {testimonios.map((t, i) => (
-                        <div class="testimonio-item flex flex-col gap-3" data-index={i} style={i === 0 ? "" : "display:none"}>
-                            <p class="text-lg leading-7 text-white">“{t.frase}”</p>
-                            <div class="flex items-center gap-3">
-                                <span class="flex h-10 w-10 flex-none items-center justify-center rounded-full bg-(--rojo-ucasal) font-bold text-white">{t.nombre.charAt(0)}</span>
-                                <div>
-                                    <p class="font-bold text-white">{t.nombre}</p>
-                                    <p class="text-sm text-white/70">{t.carrera}</p>
-                                </div>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-                <div class="mt-5 flex items-center justify-center gap-2">
-                    {testimonios.map((_t, i) => (
-                        <button type="button" class="testimonio-dot h-2 w-2 rounded-full bg-white/40 transition-colors" data-index={i} aria-label={`Testimonio ${i + 1}`}></button>
-                    ))}
-                </div>
+            <div class="hidden lg:block">
+                <Testimonios />
             </div>
         </div>
+        <!-- Mobile: título debajo de la foto -->
+       <!--  <div class="z-50 absolute bottom-0 px-5 py-10 lg:hidden">
+            <h1 class="text-3xl font-black leading-tight tracking-tight sm:text-4xl">Elegí tu carrera y empezá a construir tu futuro.</h1>
+            <p class="mt-5 text-base leading-7 text-white/85">Encontrá una propuesta académica que se adapte a tu proyecto de vida, con modalidades presencial, a distancia e híbrida.</p>
+            <div class="mt-7 flex flex-wrap gap-4">
+                <a href={`${base}#carreras`} class="boton-cta bg-(--rojo-ucasal) text-white">Explorar carreras</a>
+                <a href={`${base}#modalidades`} class="rounded-xl border border-white/40 px-5 py-3 font-semibold text-white transition hover:bg-white hover:text-(--azul-dark-ucasal)">Conocer modalidades</a>
+            </div>
+        </div> -->
     </div>
 
-    <!-- Mobile: título debajo de la foto -->
-    <div class="bg-(--azul-dark-ucasal) px-5 py-10 lg:hidden">
-        <p class="mb-4 inline-flex rounded-full border border-white/25 bg-white/10 px-4 py-2 text-sm font-semibold tracking-wide text-white/90">Primer ingreso 2026</p>
-        <h1 class="text-3xl font-black leading-tight tracking-tight sm:text-4xl">Elegí tu carrera y empezá a construir tu futuro.</h1>
-        <p class="mt-5 text-base leading-7 text-white/85">Encontrá una propuesta académica que se adapte a tu proyecto de vida, con modalidades presencial, a distancia e híbrida.</p>
-        <div class="mt-7 flex flex-wrap gap-4">
-            <a href={`${base}#carreras`} class="boton-cta bg-(--rojo-ucasal) text-white">Explorar carreras</a>
-            <a href={`${base}#modalidades`} class="rounded-xl border border-white/40 px-5 py-3 font-semibold text-white transition hover:bg-white hover:text-(--azul-dark-ucasal)">Conocer modalidades</a>
-        </div>
-    </div>
 
     <!-- Mobile: testimonios debajo del hero -->
     <div class="bg-slate-50 px-5 py-10 lg:hidden">
-        <p class="text-sm font-bold uppercase tracking-[0.2em] text-(--rojo-ucasal)">Lo que dicen nuestros estudiantes</p>
-        <div class="testimonio-widget mt-5 rounded-3xl border border-slate-200 bg-white p-6 shadow-lg">
-            <div class="testimonio-track min-h-[140px]">
-                {testimonios.map((t, i) => (
-                    <div class="testimonio-item flex flex-col gap-3" data-index={i} style={i === 0 ? "" : "display:none"}>
-                        <p class="text-lg leading-7 text-(--azul-dark-ucasal)">“{t.frase}”</p>
-                        <div class="flex items-center gap-3">
-                            <span class="flex h-10 w-10 flex-none items-center justify-center rounded-full bg-(--rojo-ucasal) font-bold text-white">{t.nombre.charAt(0)}</span>
-                            <div>
-                                <p class="font-bold text-(--azul-dark-ucasal)">{t.nombre}</p>
-                                <p class="text-sm text-slate-500">{t.carrera}</p>
-                            </div>
-                        </div>
-                    </div>
-                ))}
-            </div>
-            <div class="mt-5 flex items-center justify-center gap-2">
-                {testimonios.map((_t, i) => (
-                    <button type="button" class="testimonio-dot h-2 w-2 rounded-full bg-slate-300 transition-colors" data-index={i} aria-label={`Testimonio ${i + 1}`}></button>
-                ))}
-            </div>
-        </div>
+        <Testimonios />
     </div>
 </section>
 
-<style>
-    .testimonio-dot[data-active="true"] {
-        background: var(--rojo-ucasal);
-        width: 1.25rem;
-        border-radius: 9999px;
-    }
-</style>
-
-<script>
-    document.querySelectorAll<HTMLElement>(".testimonio-widget").forEach((widget) => {
-        const items = Array.from(widget.querySelectorAll<HTMLElement>(".testimonio-item"));
-        const dots = Array.from(widget.querySelectorAll<HTMLElement>(".testimonio-dot"));
-        const total = items.length;
-        let activo = 0;
-        let temporizador: ReturnType<typeof setInterval>;
-
-        function mostrar(indice: number) {
-            activo = ((indice % total) + total) % total;
-            items.forEach((item, i) => {
-                item.style.display = i === activo ? "" : "none";
-            });
-            dots.forEach((dot, i) => {
-                dot.dataset.active = String(i === activo);
-            });
-        }
-
-        function reiniciarAutoplay() {
-            clearInterval(temporizador);
-            temporizador = setInterval(() => mostrar(activo + 1), 6000);
-        }
-
-        dots.forEach((dot, i) => {
-            dot.addEventListener("click", () => {
-                mostrar(i);
-                reiniciarAutoplay();
-            });
-        });
-
-        mostrar(0);
-        reiniciarAutoplay();
-    });
-</script>
