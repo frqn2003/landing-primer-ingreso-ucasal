@@ -98,7 +98,8 @@ export function useCarrerasCascada({
                 .map((prov: any) => [prov.id_provincia, prov])
         ).values()
     ]
-    const todasLasSedes = (carreraSeleccionada?.provincias || [])
+    const localidades: any[] = carreraSeleccionada?.provincias || []
+    const todasLasSedes = localidades
         .filter((sede: any) => String(sede.id_provincia) === idProvincia)
     const sedesOficiales = todasLasSedes.filter((s: any) => s.id_sede !== 500)
     const tieneHome = todasLasSedes.some((s: any) => s.id_sede === 500)
@@ -190,6 +191,14 @@ export function useCarrerasCascada({
         onSedeChange?.(sede ? String(sede.id_sede) : '')
     }
 
+    /* Selección directa de provincia + sede en un solo paso (buscador de localidad) */
+    function seleccionarLocalidad(idProvinciaVal: string, sedeRow: any) {
+        setIdProvincia(idProvinciaVal)
+        setIdSede(getSedeValue(sedeRow))
+        onProvinciaChange?.(idProvinciaVal)
+        onSedeChange?.(String(sedeRow.id_sede))
+    }
+
     return {
         /* refs */
         containerRef,
@@ -205,6 +214,7 @@ export function useCarrerasCascada({
         modos,
         provincias,
         sedes,
+        localidades,
         sedesOficiales,
         tieneHome,
         sedesHome,
@@ -217,6 +227,7 @@ export function useCarrerasCascada({
         seleccionarModalidad,
         seleccionarProvincia,
         seleccionarSede,
+        seleccionarLocalidad,
         setCodcar,
     }
 }

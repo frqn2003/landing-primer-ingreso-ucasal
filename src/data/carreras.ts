@@ -7,7 +7,7 @@ const data = [
         nombre: "Abogacía",
         descripcion: "La carrera de Abogacía de UCASAL forma profesionales con dominio profundo del ordenamiento jurídico argentino y las tendencias del derecho comparado. A lo largo de la carrera, adquirirás herramientas para el ejercicio de la abogacía en ámbitos civiles, penales, comerciales, administrativos y laborales, desarrollando además competencias en negociación, mediación y litigio.",
         duracion: "5 años",
-        modalidad: [1,2,7],
+        modalidad: [1,7],
         perfilEgresado: {
             items: [
                 "Interpretar y aplicar normas jurídicas en distintos ámbitos del derecho.",
