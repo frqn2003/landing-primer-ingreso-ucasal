@@ -46,20 +46,20 @@ function normalizar(texto: string) {
 }
 
 const IconoPresencial = () => (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-5 h-5">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="size-5">
         <path strokeLinecap="round" strokeLinejoin="round" d="M4 21V7l8-4 8 4v14M4 21h16M9 21v-6h6v6" />
     </svg>
 )
 
 const IconoOnline = () => (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-5 h-5">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="size-5">
         <circle cx="12" cy="12" r="9" />
         <path strokeLinecap="round" d="M3 12h18M12 3c2.5 2.5 4 5.5 4 9s-1.5 6.5-4 9c-2.5-2.5-4-5.5-4-9s1.5-6.5 4-9Z" />
     </svg>
 )
 
 const IconoBuscar = () => (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-4 h-4 text-gray-400 shrink-0">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="size-4 text-gray-400 shrink-0">
         <circle cx="11" cy="11" r="7" />
         <path strokeLinecap="round" d="M21 21l-3.5-3.5" />
     </svg>
@@ -108,8 +108,7 @@ export default function FormDistinto({ codcarInicial, onSubPage }: { codcarInici
     const phoneRef = useRef<HTMLInputElement>(null)
     /* Sincronizar containerRef del hook con el form element */
     const setFormRef = (el: HTMLFormElement | null) => {
-        formRef.current = el
-            ; (containerRef as React.MutableRefObject<HTMLElement | null>).current = el
+        formRef.current = el; (containerRef as React.RefObject<HTMLElement | null>).current = el
     }
     const itiRef = useRef<ReturnType<typeof intlTelInput> | null>(null)
     const urlParametros = new URLSearchParams(typeof window !== 'undefined' ? window.location.search : '')
@@ -140,20 +139,45 @@ export default function FormDistinto({ codcarInicial, onSubPage }: { codcarInici
     const carreraSeleccionadaLocal = dataCarreras.find(c => String(c.codcar) === String(codcar))
     const sectorCarrera = carreraSeleccionadaLocal?.sector
 
+    /* Sedes */
     const localidadesFiltradas = localidades.filter((l: any) => {
         if (!buscarLocalidad) return true
+
         const q = normalizar(buscarLocalidad)
+
         return normalizar(l.nombre_provincia).includes(q) || normalizar(l.nombre_sede).includes(q)
     })
-    const localidadesAgrupadas: { nombre_provincia: string, items: any[] }[] = Object.values(
-        localidadesFiltradas.reduce((acc: Record<string, { nombre_provincia: string, items: any[] }>, l: any) => {
+
+    const sedeHome = localidadesFiltradas.find(l => Number(l.id_sede) === 500)
+
+    const sedesNoHome = localidadesFiltradas.filter(l => Number(l.id_sede) !== 500)
+
+    const localidadesAgrupadas: {
+        nombre_provincia: string,
+        items: any[]
+    }[] = Object.values(
+        sedesNoHome.reduce((acc: Record<string,
+            { nombre_provincia: string, items: any[] }>, l: any) => {
+
             const key = String(l.id_provincia)
-            if (!acc[key]) acc[key] = { nombre_provincia: l.nombre_provincia, items: [] }
+
+            if (!acc[key]) {
+                acc[key] = {
+                    nombre_provincia: l.nombre_provincia,
+                    items: [],
+                }
+            }
             acc[key].items.push(l)
             return acc
         }, {})
     )
 
+    if (sedeHome) {
+        localidadesAgrupadas.push({
+            nombre_provincia: 'Sedes Home',
+            items: [sedeHome]
+        })
+    }
     useEffect(() => {
         if (phoneRef.current) {
             itiRef.current = intlTelInput(phoneRef.current, {
@@ -206,12 +230,18 @@ export default function FormDistinto({ codcarInicial, onSubPage }: { codcarInici
         return () => document.removeEventListener('mousedown', handler)
     }, [])
 
-    /* Reflejar la localidad ya elegida en el buscador cuando corresponda */
     useEffect(() => {
         if (sedeSeleccionada) {
-            setBuscarLocalidad(sedeSeleccionada.nombre_sede)
+            setBuscarLocalidad(
+                Number(sedeSeleccionada.id_sede) === 500
+                    ? 'Home'
+                    : sedeSeleccionada.nombre_sede
+            )
         }
-    }, [sedeSeleccionada?.nombre_sede])
+    }, [
+        sedeSeleccionada?.id_sede,
+        sedeSeleccionada?.nombre_sede,
+    ])
 
     const localidadHabilitada = !!codcar && !!modalidad
     const labelModalidad = carreraSeleccionadaLocal?.modalidad.length > 1 ? 'Presencial y Virtual' : carreraSeleccionadaLocal?.modalidad.includes(7) ? 'Virtual' : 'Presencial'
@@ -253,7 +283,9 @@ export default function FormDistinto({ codcarInicial, onSubPage }: { codcarInici
                         email: email ?? '',
                         carrera: carreraSeleccionadaLocal?.nombre ?? '',
                         modo: modalidad ?? '',
-                        sede: sedeSeleccionada?.nombre_sede ?? '',
+                        sede: Number(sedeSeleccionada?.id_sede) === 500
+                            ? 'Modalidad Home (tu sede no es cercana)'
+                            : sedeSeleccionada?.nombre_sede ?? '',
                     })
                     window.location.assign(`${BASE_URL}gracias?${resumen.toString()}`)
                 },
@@ -413,14 +445,27 @@ export default function FormDistinto({ codcarInicial, onSubPage }: { codcarInici
                                             type="button"
                                             onClick={() => {
                                                 seleccionarLocalidad(String(item.id_provincia), item)
-                                                setBuscarLocalidad(item.nombre_sede)
+                                                setBuscarLocalidad(
+                                                    Number(item.id_sede) === 500
+                                                        ? 'Modalidad Home (tu sede no es cercana)'
+                                                        : item.nombre_sede
+                                                )
                                                 setLocalidadAbierta(false)
                                             }}
                                             className="flex w-full items-center justify-between px-3 py-2 text-left text-sm text-black hover:bg-black/5 cursor-pointer"
                                         >
-                                            <span className="font-bold">{item.nombre_sede}</span>
-                                            <span className={`text-xs font-semibold px-2 py-0.5 rounded ${item.id_sede === 500 ? 'bg-rose-100 text-rose-600' : 'bg-emerald-100 text-emerald-700'}`}>
-                                                {item.id_sede === 500 ? 'Home' : 'Sede'}
+                                            <span className="font-bold">
+                                                {Number(item.id_sede) === 500
+                                                    ? 'Modalidad Home (tu sede no es cercana)'
+                                                    : item.nombre_sede}
+                                            </span>
+                                            <span
+                                                className={`text-xs font-semibold px-2 py-0.5 rounded ${Number(item.id_sede) === 500
+                                                    ? 'bg-rose-100 text-rose-600'
+                                                    : 'bg-emerald-100 text-emerald-700'
+                                                    }`}
+                                            >
+                                                {Number(item.id_sede) === 500 ? 'Home' : 'Sede'}
                                             </span>
                                         </button>
                                     ))}

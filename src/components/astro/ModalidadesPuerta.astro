@@ -85,7 +85,7 @@ const modalidades = [
               <a
                 href="#carreras"
                 class={`puerta-cta mt-2 flex md:min-w-87.5 items-center justify-between gap-6 ${modalidad.codigo === 7 ? 'bg-[#1c4d86] hover:bg-[#1c4d86]/90' : `bg-(${modalidad.color}) hover:bg-(${modalidad.color})/90`} p-3 md:px-4.5 md:py-4 text-xs md:text-sm font-bold text-white normal-case transition-colors hover:bg-white hover:text-(--azul-dark-ucasal)`}
-                data-codigo={modalidad.codigo}
+                data-codigo={modalidad.codigo === 8 ? 7 : modalidad.codigo}
               >
                 Explorar carreras de esta modalidad
                 <span aria-hidden="true">→</span>

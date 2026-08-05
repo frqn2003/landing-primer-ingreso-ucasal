@@ -5,7 +5,7 @@ const modosUnicos = [...new Set(data.flatMap(c => c.modalidad))]
 let cache: any[] | null = null
 let promesa: Promise<any[]> | null = null
 
-/* const DEV_MODE = import.meta.env.DEV */
+const DEV_MODE = true
 
 export function getCarrerasApi(): Promise<any[]> {
     if (cache) return Promise.resolve(cache)
@@ -18,7 +18,7 @@ export function getCarrerasApi(): Promise<any[]> {
         return Promise.resolve(cache as any[])
     }
 
-    /* if (DEV_MODE) {
+    if (DEV_MODE) {
         promesa = fetch(`${import.meta.env.BASE_URL}mock-carreras.json`)
             .then(res => res.json())
             .then(data => {
@@ -26,7 +26,7 @@ export function getCarrerasApi(): Promise<any[]> {
                 return cache as any[]
             })
         return promesa
-    } */
+    }
 
     promesa = Promise.allSettled(
         modosUnicos.map(modo =>

@@ -11,15 +11,13 @@ type Career = {
 
 type Props = { career: Career; base?: string }
 
-
-
 export default function CartaCarrera({ career, base = import.meta.env.BASE_URL }: Props) {
     const tituloCarrera = career.nombre?.trim().split(' ') || []
     const tituloCarreraClase = tituloCarrera?.length >= 7 ? 'text-[11px] xl:text-sm 2xl:text-base' : (tituloCarrera?.length >= 3 ? 'text-sm lg:text-md xl:text-base 2xl:text-lg' : 'text-base md:text-lg')
     return (
         <div className='bg-white rounded-2xl shadow-sm flex flex-col h-75 sm:h-80 border border-slate-300'>
             <div className='h-[35%] md:h-[50%] relative'>
-                <img src={`${base}cards/${career.codcar}.webp`} alt={career.nombre} className='w-full h-full object-cover rounded-t-2xl' />
+                <img src={`${base}cards/${career.codcar}.webp`} alt={career.nombre} className='w-full h-full object-cover rounded-t-2xl' loading='lazy'/>
                 <div className="bg-black/40 sm:bg-black/15 absolute top-0 left-0 w-full h-full rounded-t-2xl"></div>
                 <div className="absolute top-4 right-2 z-10 sm:hidden">
                     <a href={`${base}${career.slug}?from=landing`} className="sm:hidden flex flecha-carrera"><span>↗</span></a>
