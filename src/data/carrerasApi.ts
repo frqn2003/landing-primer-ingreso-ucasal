@@ -19,7 +19,7 @@ export function getCarrerasApi(): Promise<any[]> {
     }
 
     if (DEV_MODE) {
-        promesa = fetch(`${import.meta.env.BASE_URL}mock-carreras.json`)
+        promesa = fetch(`${import.meta.env.BASE_URL}src/assets/mock-carreras.json`)
             .then(res => res.json())
             .then(data => {
                 cache = data

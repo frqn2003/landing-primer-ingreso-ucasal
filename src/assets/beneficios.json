@@ -1,0 +1,26 @@
+{
+    "beneficios_presencial": [
+        {
+            "titulo": "Campus en Castañares",
+            "descripcion": "Descripción 1"
+        }
+        {
+            "titulo": "Campus en Castañares",
+            "descripcion": "Descripción 1"
+        }
+        {
+            "titulo": "Campus en Castañares",
+            "descripcion": "Descripción 1"
+        }
+        {
+            "titulo": "Campus en Castañares",
+            "descripcion": "Descripción 1"
+        }
+    ],
+    "beneficios_virtual": [
+        {
+            "titulo": "Título 1",
+            "descripcion": "Descripción 1"
+        }
+    ]
+}

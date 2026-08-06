@@ -11,6 +11,54 @@
   --ucasal-gray-medium: #e9ecef;
 }
 
+@keyframes form-button-glow {
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+.boton-form-glow {
+  position: relative;
+  isolation: isolate;
+  color: black;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(216, 49, 53, 0.35);
+}
+
+.boton-form-glow::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  aspect-ratio: 1;
+  background: conic-gradient(
+    transparent 0 82%,
+    var(--azul-ucasal) 87%,
+    white 90%,
+    var(--rojo-ucasal) 94%,
+    transparent 100%
+  );
+  transform: translate(-50%, -50%);
+  animation: form-button-glow 2.4s linear infinite;
+  z-index: 0;
+}
+
+.boton-form-glow::after {
+  content: '';
+  position: absolute;
+  inset: 2px;
+  border-radius: calc(0.5rem - 2px);
+  background: rgb(247, 247, 247);
+  border-color: black;
+  z-index: 1;
+}
+
+.boton-form-glow > span {
+  position: relative;
+  z-index: 2;
+}
+
 .boton-inscripcion{
   color: white;
   font-weight: 700;
@@ -391,106 +439,6 @@ body {
 
 .border-gradient-animation {
   animation: borderColorTransition 10s ease-in-out infinite;
-}
-
-/* Borde animado con colores UCASAL */
-.animated-border {
-  --ab-thickness: 3px;
-  --ab-radius: 0.375rem;
-  --ab-bg: var(--azul-ucasal);
-  --ab-angle: 0deg;
-
-  position: relative;
-  display: inline-block;
-  padding: var(--ab-thickness);
-  border-radius: var(--ab-radius);
-  background: conic-gradient(from var(--ab-angle),
-      var(--rojo-ucasal),
-      var(--ucasal-white),
-      var(--azul-ucasal),
-      var(--ucasal-white),
-      var(--rojo-ucasal));
-  animation: ab-rotate 6s linear infinite;
-}
-
-/* Variante circular para íconos SVG */
-.animated-border-icon {
-  --ab-thickness: 3px;
-  --ab-radius: 9999px;
-  --ab-angle: 0deg;
-
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: var(--ab-thickness);
-  border-radius: var(--ab-radius);
-  background: conic-gradient(from var(--ab-angle),
-      var(--azul-ucasal),
-      var(--rojo-ucasal),
-      var(--azul-ucasal));
-  animation: ab-rotate 3s linear infinite;
-}
-
-.animated-border-icon::after {
-  content: '';
-  position: absolute;
-  inset: var(--ab-thickness);
-  border-radius: var(--ab-radius);
-  background: white;
-  z-index: 0;
-}
-
-.animated-border-icon>* {
-  position: relative;
-  z-index: 1;
-}
-
-.animated-border>.ab-inner {
-  width: 100%;
-  border-radius: var(--ab-radius);
-  background: var(--ab-bg);
-  color: var(--ucasal-white);
-  border: none;
-  /* el borde 'vivo' es el contenedor */
-}
-
-/* Hover solo con colores de marca: invertimos azul/blanco */
-.animated-border>.ab-inner:hover:not(:disabled) {
-  background: var(--ucasal-white);
-  color: var(--azul-ucasal);
-}
-
-/* Accesibilidad: foco con rojo institucional */
-.animated-border>.ab-inner:focus-visible {
-  outline: 2px solid var(--rojo-ucasal);
-  outline-offset: 2px;
-}
-
-/* Estado deshabilitado con escala de grises institucional */
-.animated-border>.ab-inner:disabled {
-  background: var(--ucasal-gray-medium);
-  color: var(--ucasal-black);
-  cursor: not-allowed;
-}
-
-/* Definición de la propiedad registrable para animación fluida */
-@property --ab-angle {
-  syntax: "<angle>";
-  inherits: false;
-  initial-value: 0deg;
-}
-
-@keyframes ab-rotate {
-  to {
-    --ab-angle: 360deg;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .animated-border {
-    animation: none;
-  }
 }
 
 /* intl-tel-input: forzar ancho completo */

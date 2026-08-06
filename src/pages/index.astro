@@ -9,7 +9,6 @@ import Faq from '../components/astro/Faq.astro';
 import Footer from '../components/astro/Footer.astro';
 import ExploradorCarreras from '../components/react/ExploradorCarreras.tsx';
 import Form from '../components/react/Form.tsx';
-import FormDistinto from '../components/react/FormDistinto.tsx';
 import data from '../data/carreras';
 
 const base = import.meta.env.BASE_URL;
@@ -24,6 +23,5 @@ const base = import.meta.env.BASE_URL;
         <Financiacion />
         <Faq />
         <Form onSubPage={false} client:visible />
-        <FormDistinto onSubPage={false} client:visible />
     <Footer />
 </Layout>

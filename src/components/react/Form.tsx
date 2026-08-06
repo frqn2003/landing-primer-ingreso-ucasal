@@ -41,6 +41,30 @@ function cargarRecaptcha() {
     return recaptchaPromise
 }
 
+function normalizar(texto: string) {
+    return texto.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase()
+}
+
+const IconoPresencial = () => (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="size-5">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M4 21V7l8-4 8 4v14M4 21h16M9 21v-6h6v6" />
+    </svg>
+)
+
+const IconoOnline = () => (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="size-5">
+        <circle cx="12" cy="12" r="9" />
+        <path strokeLinecap="round" d="M3 12h18M12 3c2.5 2.5 4 5.5 4 9s-1.5 6.5-4 9c-2.5-2.5-4-5.5-4-9s1.5-6.5 4-9Z" />
+    </svg>
+)
+
+const IconoBuscar = () => (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="size-4 text-gray-400 shrink-0">
+        <circle cx="11" cy="11" r="7" />
+        <path strokeLinecap="round" d="M21 21l-3.5-3.5" />
+    </svg>
+)
+
 export default function Form({ codcarInicial, onSubPage }: { codcarInicial?: string, onSubPage?: boolean }) {
     const { register, handleSubmit, formState: { errors, isSubmitted }, watch, setValue } = useForm({
         resolver: zodResolver(formSchema),
@@ -55,20 +79,15 @@ export default function Form({ codcarInicial, onSubPage }: { codcarInicial?: str
         modalidad,
         idProvincia,
         idSede,
-        carrerasUnicas,
         modos,
-        provincias,
-        sedesOficiales,
-        tieneHome,
-        sedesHome,
+        localidades,
         sedeSeleccionada,
         idSedeReal,
-        getSedeValue,
         carreraCompleta,
         seleccionarCodcar,
         seleccionarModalidad,
         seleccionarProvincia,
-        seleccionarSede,
+        seleccionarLocalidad,
     } = useCarrerasCascada({
         codcarInicial,
         onSubPage,
@@ -89,8 +108,7 @@ export default function Form({ codcarInicial, onSubPage }: { codcarInicial?: str
     const phoneRef = useRef<HTMLInputElement>(null)
     /* Sincronizar containerRef del hook con el form element */
     const setFormRef = (el: HTMLFormElement | null) => {
-        formRef.current = el
-        ;(containerRef as React.MutableRefObject<HTMLElement | null>).current = el
+        formRef.current = el; (containerRef as React.RefObject<HTMLElement | null>).current = el
     }
     const itiRef = useRef<ReturnType<typeof intlTelInput> | null>(null)
     const urlParametros = new URLSearchParams(typeof window !== 'undefined' ? window.location.search : '')
@@ -104,7 +122,10 @@ export default function Form({ codcarInicial, onSubPage }: { codcarInicial?: str
         campaignid: urlParametros.get('campaignid'),
         userAgent: typeof navigator !== 'undefined' ? navigator.userAgent : ''
     }
-
+    const [carreraBloqueada, setCarreraBloqueada] = useState(Boolean(codcarInicial))
+    const [buscarLocalidad, setBuscarLocalidad] = useState('')
+    const [localidadAbierta, setLocalidadAbierta] = useState(false)
+    const localidadRef = useRef<HTMLDivElement>(null)
 
     {/* Helper de estado visual */ }
     const claseBorde = (habilitado: boolean, completado: boolean) => {
@@ -118,6 +139,45 @@ export default function Form({ codcarInicial, onSubPage }: { codcarInicial?: str
     const carreraSeleccionadaLocal = dataCarreras.find(c => String(c.codcar) === String(codcar))
     const sectorCarrera = carreraSeleccionadaLocal?.sector
 
+    /* Sedes */
+    const localidadesFiltradas = localidades.filter((l: any) => {
+        if (!buscarLocalidad) return true
+
+        const q = normalizar(buscarLocalidad)
+
+        return normalizar(l.nombre_provincia).includes(q) || normalizar(l.nombre_sede).includes(q)
+    })
+
+    const sedeHome = localidadesFiltradas.find(l => Number(l.id_sede) === 500)
+
+    const sedesNoHome = localidadesFiltradas.filter(l => Number(l.id_sede) !== 500)
+
+    const localidadesAgrupadas: {
+        nombre_provincia: string,
+        items: any[]
+    }[] = Object.values(
+        sedesNoHome.reduce((acc: Record<string,
+            { nombre_provincia: string, items: any[] }>, l: any) => {
+
+            const key = String(l.id_provincia)
+
+            if (!acc[key]) {
+                acc[key] = {
+                    nombre_provincia: l.nombre_provincia,
+                    items: [],
+                }
+            }
+            acc[key].items.push(l)
+            return acc
+        }, {})
+    )
+
+    if (sedeHome) {
+        localidadesAgrupadas.push({
+            nombre_provincia: 'Sedes Home',
+            items: [sedeHome]
+        })
+    }
     useEffect(() => {
         if (phoneRef.current) {
             itiRef.current = intlTelInput(phoneRef.current, {
@@ -158,6 +218,34 @@ export default function Form({ codcarInicial, onSubPage }: { codcarInicial?: str
         observer.observe(form)
         return () => observer.disconnect()
     }, [])
+
+    /* Cerrar el buscador de localidad al hacer click afuera */
+    useEffect(() => {
+        const handler = (e: MouseEvent) => {
+            if (localidadRef.current && !localidadRef.current.contains(e.target as Node)) {
+                setLocalidadAbierta(false)
+            }
+        }
+        document.addEventListener('mousedown', handler)
+        return () => document.removeEventListener('mousedown', handler)
+    }, [])
+
+    useEffect(() => {
+        if (sedeSeleccionada) {
+            setBuscarLocalidad(
+                Number(sedeSeleccionada.id_sede) === 500
+                    ? 'Home'
+                    : sedeSeleccionada.nombre_sede
+            )
+        }
+    }, [
+        sedeSeleccionada?.id_sede,
+        sedeSeleccionada?.nombre_sede,
+    ])
+
+    const localidadHabilitada = !!codcar && !!modalidad
+    const labelModalidad = carreraSeleccionadaLocal?.modalidad.length > 1 ? 'Presencial y Virtual' : carreraSeleccionadaLocal?.modalidad.includes(7) ? 'Virtual' : 'Presencial'
+
     return (
         <form ref={setFormRef} role="form" id="pedidoinfo" method="post" encType="multipart/form-data" action="/postulantes_mail1.php"
             autoComplete="on"
@@ -193,9 +281,11 @@ export default function Form({ codcarInicial, onSubPage }: { codcarInicial?: str
                     const resumen = new URLSearchParams({
                         nombre: nombre ?? '',
                         email: email ?? '',
-                        carrera: dataCarreras.find(c => String(c.codcar) === codcar)?.nombre ?? '',
+                        carrera: carreraSeleccionadaLocal?.nombre ?? '',
                         modo: modalidad ?? '',
-                        sede: sedeSeleccionada?.nombre_sede ?? '',
+                        sede: Number(sedeSeleccionada?.id_sede) === 500
+                            ? 'Modalidad Home (tu sede no es cercana)'
+                            : sedeSeleccionada?.nombre_sede ?? '',
                     })
                     window.location.assign(`${BASE_URL}gracias?${resumen.toString()}`)
                 },
@@ -225,188 +315,241 @@ export default function Form({ codcarInicial, onSubPage }: { codcarInicial?: str
                     </p>
                 </div>
             )}
-            <div className={`${onSubPage ? 'flex flex-col gap-2 py-2' : 'grid grid-cols-2 gap-6 py-4'} border-b border-black/40`}>
-                <div className="relative z-0 w-full group">
-                    {!!codcarInicial && <input type="hidden" name="cbx_carrera" value={codcar} />}
-                    <select name={codcarInicial ? undefined : "cbx_carrera"} id="cbx_carrera" aria-label="Seleccionar Carrera" tabIndex={0}
-                        className={`${claseBorde(true, !!codcar)} block w-full mt-1 p-2 border bg-white shadow-sm dark:bg-white dark:text-dark dark:focus:ring-blue-500 focus:outline-none text-xs sm:text-sm [&>option]:text-gray-900 ${codcarInicial ? 'opacity-75 cursor-not-allowed bg-gray-50' : ''}`}
-                        required
-                        disabled={!!codcarInicial}
-                        value={codcar} onChange={e => {
-                            setValue('cbx_carrera', e.target.value, { shouldValidate: true })
-                            seleccionarCodcar(e.target.value)
-                        }}
-                    >
-                        <option value="" defaultValue={'Seleccionar Carrera'}>Seleccionar Carrera</option>
-                        {carrerasUnicas.map((c) => (
-                            <option key={c.codcar} value={c.codcar}>{c.nombre}</option>
-                        ))}
-                    </select>
-                </div>
-                <div className="relative z-0 w-full group">
-                    <select name="modo" id="cbx_modo" aria-label="Seleccionar Modalidad" tabIndex={0}
-                        className={`block w-full mt-1 p-2 border shadow-sm focus:outline-none text-xs sm:text-sm [&>option]:text-gray-900
-                            ${claseBorde(!!codcar, !!modalidad)}
-                            ${!codcar ? 'bg-gray-100 text-gray-400 cursor-not-allowed' : 'bg-white '}
-                        `}
-                        value={modalidad}
-                        onChange={e => {
-                            setValue('cbx_modo', e.target.value, { shouldValidate: true })
-                            seleccionarModalidad(e.target.value)
-                        }}
-                        disabled={!codcar}
-                        required>
-                        <option value="" disabled defaultValue={'Seleccionar Modalidad'}>Seleccionar Modalidad</option>
-                        {modos.map((m) => (
-                            <option key={m.modalidad} value={m.modalidad}>{m.modalidad === 7 ? 'Online' : 'Presencial'}</option>
-                        ))}
-                    </select>
-                </div>
-                <div className="relative z-0 w-full group">
-                    <select name="cbx_provincia" id="cbx_provincia" aria-label="Seleccionar Provincia" tabIndex={0}
-                        className={`block w-full mt-1 p-2 border shadow-sm focus:outline-none text-xs sm:text-sm [&>option]:text-gray-900
-                            ${claseBorde(!!codcar && !!modalidad, !!idProvincia)}
-                            ${!codcar || !modalidad ? 'bg-gray-100 text-gray-400 cursor-not-allowed' : 'bg-white '}
-                        `}
-                        value={idProvincia}
-                        onChange={e => {
-                            setValue('cbx_provincia', e.target.value, { shouldValidate: true })
-                            seleccionarProvincia(e.target.value)
-                        }}
-                        required
-                        disabled={!codcar || !modalidad}
-                    >
-                        {apiCargando && codcar && modalidad
-                            ? <option value="" disabled>Cargando provincias...</option>
-                            : <option value="" disabled defaultValue={'Seleccionar Provincia'}>Seleccionar Provincia</option>
-                        }
-                        {provincias.map((p: { id_provincia: string; nombre_provincia: string }) => (
-                            <option key={p.id_provincia} value={p.id_provincia}>{p.nombre_provincia}</option>
-                        ))}
-                    </select>
-                </div>
-                <div className="relative z-0 w-full group">
-                    <select id="cbx_sede" aria-label="Seleccionar Sede" tabIndex={0}
-                        className={`block w-full mt-1 p-2 border shadow-sm focus:outline-none text-xs sm:text-sm [&>option]:text-gray-900
-                            ${claseBorde(!!codcar && !!modalidad && !!idProvincia, !!idSede)}
-                            ${!codcar || !modalidad || !idProvincia ? 'bg-gray-100 text-gray-400 cursor-not-allowed' : 'bg-white '}
-                        `}
-                        value={idSede}
-                        onChange={e => {
-                            seleccionarSede(e.target.value)
-                        }}
-                        required
-                        disabled={!codcar || !modalidad || !idProvincia}>
-                        {apiCargando && codcar && modalidad && idProvincia
-                            ? <option value="" disabled>Cargando sedes...</option>
-                            : <option value="" disabled defaultValue={'Seleccionar Sede'}>Seleccionar Sede</option>
-                        }
-                        {sedesOficiales.length > 0 && (
-                            <optgroup label="Sedes disponibles">
-                                {sedesOficiales.map((s: { id_sede: string; nombre_sede: string }) => (
-                                    <option key={getSedeValue(s)} value={getSedeValue(s)}>{s.nombre_sede}</option>
-                                ))}
-                            </optgroup>
-                        )}
-                        {tieneHome && (
-                            <optgroup label="Sin sede cerca (Home)">
-                                {sedesHome.map((s: { id_sede: string; nombre_sede: string }) => (
-                                    <option key={getSedeValue(s)} value={getSedeValue(s)}> {s.nombre_sede}</option>
-                                ))}
-                            </optgroup>
-                        )}
-                    </select>
+
+            {/* 1 · CARRERA */}
+            <div className="border-b border-black/10 pb-4 mb-4">
+                <p className="text-xs font-bold text-(--azul-ucasal) tracking-wide uppercase mb-2">Elegí tu carrera</p>
+                {carreraBloqueada ? (
+                    <div className="flex items-center justify-between rounded-lg border border-gray-300 bg-white p-3 text-black">
+                        <span className="text-base text-black flex flex-col max-w-[45%]">
+                            {carreraSeleccionadaLocal?.nombre}
+                            <span className="text-xs text-gray-600">{carreraSeleccionadaLocal?.duracion}</span>
+                        </span>
+                        <div className="flex flex-row items-center gap-2 md:gap-6">
+                            <div className={`items-center h-full justify-end flex text-xs border-gray-200 border rounded text-white py-1 px-2 ${carreraSeleccionadaLocal?.modalidad.length > 1 ? 'bg-gradient-to-r from-15% from-(--rojo-ucasal) to-(--azul-ucasal) to-70%' : carreraSeleccionadaLocal?.modalidad.includes(7) ? 'bg-(--azul-ucasal)' : 'bg-(--rojo-ucasal)'}`}>{labelModalidad}</div>
+                            <div className='h-6 border border-black'></div>
+                            <button
+                                type="button"
+                                onClick={() => {
+                                    setValue('cbx_carrera', '')
+                                    seleccionarCodcar('')
+                                    setBuscarLocalidad('')
+                                    setLocalidadAbierta(false)
+                                    setCarreraBloqueada(false)
+                                }}
+                                className="rounded border border-gray-300 bg-white px-3 py-1 text-sm text-black cursor-pointer border"
+                            >
+                                Cambiar
+                            </button>
+                        </div>
+                    </div>
+                ) : (
+                    <fieldset className="flex max-h-50 flex-col gap-2 overflow-y-auto rounded-lg border border-gray-300 bg-white p-2 text-black">
+                        {dataCarreras.map((carrera) => {
+                            const value = carrera.codcar.toString()
+                            const labelModalidad = carrera.modalidad.length > 1 ? 'Presencial y Virtual' : carrera.modalidad.includes(7) ? 'Virtual' : 'Presencial'
+                            return (
+                                <div key={carrera.codcar} className='border-b border-gray-200 last:border-b-0 w-full'>
+                                    <button
+                                        type="button"
+                                        onClick={() => {
+                                            setValue('cbx_carrera', value, {
+                                                shouldValidate: true,
+                                            })
+                                            seleccionarCodcar(value)
+                                            setCarreraBloqueada(true)
+                                        }}
+                                        className="text-left w-full p-2 cursor-pointer flex flex-row items-center justify-between hover:bg-black/10"
+                                    >
+                                        <span className="text-base text-black flex flex-col max-w-[45%]">
+                                            {carrera.nombre}
+                                            <span className="text-xs text-gray-600">{carrera.duracion}</span>
+                                        </span>
+                                        <div className={`items-center h-full justify-end flex text-xs border-gray-200 border rounded text-white py-1 px-2 ${carrera.modalidad.length > 1 ? 'bg-gradient-to-r from-15% from-(--rojo-ucasal) to-(--azul-ucasal) to-70%' : carrera.modalidad.includes(7) ? 'bg-(--azul-ucasal)' : 'bg-(--rojo-ucasal)'}`}>{labelModalidad}</div>
+                                    </button>
+                                </div>
+                            )
+                        })}
+                    </fieldset>
+                )}
+                {!codcarInicial && <input type="hidden" name="cbx_carrera" value={codcar} />}
+            </div>
+
+            {/* 2 · CÓMO SE CURSA */}
+            <div className={`border-b border-black/10 pb-4 mb-4 transition-opacity ${codcar ? '' : 'opacity-50'}`}>
+                <p className="text-xs font-bold text-(--azul-ucasal) tracking-wide uppercase mb-2">Elegí tu modalidad</p>
+                <div className="flex flex-row w-full gap-3">
+                    {(codcar ? modos : [{ modalidad: 1 }, { modalidad: 7 }]).map((m: any) => {
+                        const esOnline = m.modalidad === 7
+                        const seleccionado = !!codcar && String(modalidad) === String(m.modalidad)
+                        return (
+                            <button key={m.modalidad} type="button"
+                                disabled={!codcar}
+                                onClick={() => {
+                                    setValue('cbx_modo', String(m.modalidad), { shouldValidate: true })
+                                    seleccionarModalidad(String(m.modalidad))
+                                }}
+                                className={`flex flex-row items-start gap-2 rounded-lg border p-3 text-left w-full transition-colors ${!codcar ? 'cursor-not-allowed bg-gray-100 border-gray-200' : seleccionado && esOnline ? 'border-(--azul-ucasal) bg-blue-50 cursor-pointer' : seleccionado && !esOnline ? 'border-(--rojo-ucasal) bg-red-50 cursor-pointer' : 'border-gray-300 bg-white hover:bg-gray-50 cursor-pointer'}`}
+                            >
+                                <span className={`flex items-center justify-center w-9 h-9 rounded-md ${seleccionado && esOnline ? 'bg-(--azul-ucasal) text-white' : seleccionado && !esOnline ? 'bg-(--rojo-ucasal) text-white' : 'bg-gray-100 text-gray-500'}`}>
+                                    {esOnline ? <IconoOnline /> : <IconoPresencial />}
+                                </span>
+                                <div className="flex flex-col">
+                                    <span className="text-sm font-semibold text-black">{esOnline ? 'Online' : 'Presencial'}</span>
+                                    <span className="text-xs text-gray-500">{esOnline ? 'Desde donde estés' : 'Cursás en una sede'}</span>
+                                </div>
+                            </button>
+                        )
+                    })}
                 </div>
             </div>
-            <div className="flex flex-col gap-2 mt-4" id="datosPersonales">
 
-                <div className={`grid grid-cols-1 xl:grid-cols-2 gap-3 xl:gap-6 `}>
-                    <div className={`relative z-0 w-full mb-1 group transition-all ease-in-out duration-150 ${carreraCompleta ? 'bg-white border-gray-300 focus:ring-blue-600 focus:border-blue-600' : 'bg-gray-100 border-gray-200 text-gray-400 cursor-not-allowed opacity-75 z-10 pointer-events-none'}`}>
-                        <input type="text" {...register("nombre")} id="nombre" tabIndex={0}
-                            className={`block w-full p-2 text-sm text-gray-900 bg-transparent border rounded-md appearance-none focus:outline-none focus:ring-0 peer ${claseBorde(carreraCompleta, !!nombre && !errors.nombre)}`}
-                            placeholder=" " required
+            {/* 3 · DESDE QUÉ LOCALIDAD */}
+            <div className={`border-b border-black/10 pb-4 mb-4 transition-opacity ${localidadHabilitada ? '' : 'opacity-50'}`}>
+                <div className="flex items-center justify-between mb-2">
+                    <p className="text-xs font-bold text-(--azul-ucasal) tracking-wide uppercase">Elegí tu localidad</p>
+                    {localidadHabilitada && (
+                        <span className="text-xs text-gray-500">
+                            {apiCargando ? 'Cargando...' : `${localidades.length} localidades`}
+                        </span>
+                    )}
+                </div>
+                <div ref={localidadRef} className="relative">
+                    <div className={`flex items-center gap-2 rounded-lg border p-2 ${claseBorde(localidadHabilitada, !!idSede)} ${localidadHabilitada ? 'bg-white' : 'bg-gray-100 cursor-not-allowed'}`}>
+                        <IconoBuscar />
+                        <input
+                            type="text"
+                            disabled={!localidadHabilitada}
+                            placeholder="Escribí tu ciudad, pueblo o provincia: Monteros, Orán, Jujuy..."
+                            className="w-full bg-transparent text-xs sm:text-sm text-gray-900 focus:outline-none disabled:cursor-not-allowed placeholder:text-gray-400"
+                            value={buscarLocalidad}
+                            onFocus={() => setLocalidadAbierta(true)}
+                            onChange={e => {
+                                setBuscarLocalidad(e.target.value)
+                                setLocalidadAbierta(true)
+                                if (idProvincia) seleccionarProvincia('')
+                            }}
+                        />
+                    </div>
+                    {localidadAbierta && localidadHabilitada && (
+                        <div className="absolute z-20 mt-1 max-h-60 w-full overflow-y-auto rounded-lg border border-gray-300 bg-white shadow-lg">
+                            {localidadesAgrupadas.length === 0 && (
+                                <p className="p-3 text-xs text-gray-500">No encontramos coincidencias.</p>
+                            )}
+                            {localidadesAgrupadas.map(grupo => (
+                                <div key={grupo.nombre_provincia}>
+                                    <p className="sticky top-0 bg-gray-50 px-3 py-1 text-xs font-semibold text-gray-500">{grupo.nombre_provincia}</p>
+                                    {grupo.items.map((item: any) => (
+                                        <button
+                                            key={`${item.id_provincia}-${item.id_sede}`}
+                                            type="button"
+                                            onClick={() => {
+                                                seleccionarLocalidad(String(item.id_provincia), item)
+                                                setBuscarLocalidad(
+                                                    Number(item.id_sede) === 500
+                                                        ? 'Modalidad Home (tu sede no es cercana)'
+                                                        : item.nombre_sede
+                                                )
+                                                setLocalidadAbierta(false)
+                                            }}
+                                            className="flex w-full items-center justify-between px-3 py-2 text-left text-sm text-black hover:bg-black/5 cursor-pointer"
+                                        >
+                                            <span className="font-bold">
+                                                {Number(item.id_sede) === 500
+                                                    ? 'Modalidad Home (tu sede no es cercana)'
+                                                    : item.nombre_sede}
+                                            </span>
+                                            <span
+                                                className={`text-xs font-semibold px-2 py-0.5 rounded ${Number(item.id_sede) === 500
+                                                    ? 'bg-rose-100 text-rose-600'
+                                                    : 'bg-emerald-100 text-emerald-700'
+                                                    }`}
+                                            >
+                                                {Number(item.id_sede) === 500 ? 'Home' : 'Sede'}
+                                            </span>
+                                        </button>
+                                    ))}
+                                </div>
+                            ))}
+                        </div>
+                    )}
+                </div>
+            </div>
+
+            {/* 4 · CÓMO TE CONTACTAMOS */}
+            <div className={`transition-opacity ${carreraCompleta ? '' : 'opacity-50'}`}>
+                <p className="text-xs font-bold text-(--azul-ucasal) tracking-wide uppercase mb-2">Cómo te contactamos</p>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div className={`rounded-lg border ${!carreraCompleta ? 'bg-gray-100 border-gray-200 pointer-events-none' : `bg-white ${claseBorde(carreraCompleta, !!nombre && !errors.nombre)}`}`}>
+                        <input type="text" {...register("nombre")} id="nombre"
+                            className="block w-full p-2 text-sm text-gray-900 bg-transparent rounded-md appearance-none focus:outline-none disabled:cursor-not-allowed placeholder:text-gray-400"
+                            placeholder="Nombre completo"
+                            disabled={!carreraCompleta}
                             autoComplete="name"
                             aria-invalid={!!errors.nombre}
                             aria-describedby={errors.nombre ? 'error-nombre' : undefined}
                         />
-                        {errors.nombre && (
-                            <p id="error-nombre" className="text-red-500 text-xs mt-1" role="alert">{errors.nombre.message}</p>
-                        )}
-                        <label htmlFor="nombre"
-                            className={`absolute text-xs 2xl:text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-left left-1 px-1 2xl:px-2 peer-focus:px-2 peer-focus:text-var(--azul-ucasal) peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2  peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 ${codcar && modalidad && idProvincia && idSede ? 'peer-focus:bg-white bg-white' : 'peer-focus:bg-gray-100 bg-gray-100'}`}>Nombre Completo</label>
                     </div>
-                    <div className={`relative z-0 w-full mb-1 group transition-all ease-in-out duration-150 ${carreraCompleta ? 'bg-white border-gray-300 focus:ring-blue-600 focus:border-blue-600' : 'bg-gray-100 border-gray-200 text-gray-400 cursor-not-allowed opacity-75 z-10 pointer-events-none'}`}>
-                        <input type="email" id="email" tabIndex={0}
-                            className={`block w-full p-2 text-sm text-gray-900 bg-transparent border rounded-md appearance-none focus:outline-none focus:ring-0 peer ${claseBorde(carreraCompleta, !!email && !errors.email)}`}
-                            placeholder=" " required
+                    <div className={`rounded-lg border ${!carreraCompleta ? 'bg-gray-100 border-gray-200 pointer-events-none' : `bg-white ${claseBorde(carreraCompleta, !!email && !errors.email)}`}`}>
+                        <input type="email" id="email"
+                            className="block w-full p-2 text-sm text-gray-900 bg-transparent rounded-md appearance-none focus:outline-none disabled:cursor-not-allowed placeholder:text-gray-400"
+                            placeholder="Email"
+                            disabled={!carreraCompleta}
                             autoComplete="email"
                             aria-invalid={!!errors.email}
                             aria-describedby={errors.email ? 'error-email' : undefined}
                             {...register('email')} />
-                        {errors.email && (
-                            <p id="error-email" className="text-red-500 text-xs mt-1" role="alert">{errors.email.message}</p>
-                        )}
-                        <label htmlFor="email"
-                            className={`absolute text-xs 2xl:text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-left left-1 px-1 2xl:px-2 peer-focus:px-2 peer-focus:text-var(--azul-ucasal) peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2  peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 ${codcar && modalidad && idProvincia && idSede ? 'peer-focus:bg-white bg-white' : 'peer-focus:bg-gray-100 bg-gray-100'}`}>Email</label>
                     </div>
                 </div>
-
-                <div className={`grid grid-cols-2 2xl:flex 2xl:flex-row mt-2 gap-2 sm:gap-4 pb-4`}>
-                    <div className={`relative z-0 mb-1 group transition-all ease-in-out duration-150 ${codcar && modalidad && idProvincia && idSede ? 'bg-white border-gray-300 focus:ring-blue-600 focus:border-blue-600' : 'bg-gray-100 border-gray-200 text-gray-400 cursor-not-allowed opacity-75 pointer-events-none'}`}>
-                        <div className="relative w-full group">
-                            <input name="tipo_tel" type="hidden" value="cel" />
-                            <input type="hidden" name="ddi_pais" value={ddiPais} />
-                            <input type="tel" ref={phoneRef} id="phone" autoComplete="off" tabIndex={0}
-                                className="block w-full p-2 text-sm text-gray-900 bg-transparent border border-gray-300 rounded-md appearance-none focus:outline-none focus:ring-0 caret-transparent"
-                                onKeyDown={e => e.preventDefault()}
-                                onPaste={e => e.preventDefault()}
-                                onDrop={e => e.preventDefault()} />
-                            <label htmlFor="phone" className="absolute text-xs text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 left-1 z-10 origin-left bg-white px-2">Código país</label>
-                        </div>
+                {(errors.nombre || errors.email) && (
+                    <div className="flex flex-col gap-0.5 mt-1">
+                        {errors.nombre && <p id="error-nombre" className="text-red-500 text-xs" role="alert">{errors.nombre.message}</p>}
+                        {errors.email && <p id="error-email" className="text-red-500 text-xs" role="alert">{errors.email.message}</p>}
                     </div>
+                )}
 
-                    <div className={`relative z-0 mb-1 group transition-all ease-in-out duration-150 2xl:w-1/3 w-full ${codcar && modalidad && idProvincia && idSede ? 'bg-white border-gray-300 focus:ring-blue-600 focus:border-blue-600' : 'bg-gray-100 border-gray-200 text-gray-400 cursor-not-allowed opacity-75 z-10 pointer-events-none'}`}>
-                        <div className="relative w-full group">
-                            <input type="tel" id="cod" size={4} maxLength={4} pattern="[0-9]*" inputMode="numeric" tabIndex={0}
-                                className={`block w-full p-2 text-sm text-gray-900 bg-transparent border rounded-md appearance-none focus:outline-none focus:ring-0 peer ${claseBorde(carreraCompleta, !!codArea && !errors.cod_area)}`}
-                                placeholder="" required
-                                autoComplete="tel-area-code"
-                                aria-invalid={!!errors.cod_area}
-                                aria-describedby={errors.cod_area ? 'error-cod_area' : undefined}
-                                {...register('cod_area')} />
-                            {errors.cod_area && (
-                                <p id="error-cod_area" className="text-red-500 text-xs mt-1" role="alert">{errors.cod_area.message}</p>
-                            )}
-                            <label htmlFor="cod"
-                                className={`absolute text-xs 2xl:text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-left left-1 px-1 2xl:px-2 peer-focus:px-2 peer-focus:text-var(--azul-ucasal) peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2  peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 ${codcar && modalidad && idProvincia && idSede ? 'peer-focus:bg-white bg-white' : 'peer-focus:bg-gray-100 bg-gray-100'}`}
-                            >
-                                Código
-                            </label>
-                        </div>
+                <div className={`flex flex-row gap-2 mt-3 ${!carreraCompleta ? 'pointer-events-none opacity-75' : ''}`}>
+                    <div className={`rounded-lg border shrink-0 ${!carreraCompleta ? 'bg-gray-100 border-gray-200' : 'bg-white border-gray-300'}`}>
+                        <input name="tipo_tel" type="hidden" value="cel" />
+                        <input type="hidden" name="ddi_pais" value={ddiPais} />
+                        <input type="tel" ref={phoneRef} id="phone" autoComplete="off"
+                            className="p-2 text-sm text-gray-900 bg-transparent rounded-md appearance-none focus:outline-none caret-transparent disabled:cursor-not-allowed"
+                            disabled={!carreraCompleta}
+                            onKeyDown={e => e.preventDefault()}
+                            onPaste={e => e.preventDefault()}
+                            onDrop={e => e.preventDefault()} />
                     </div>
-                    <div className="flex flex-row col-span-2 gap-2 w-full">
-                        <span className="text-[0.8rem] text-gray-700 px-1 border border-gray-500 flex justify-center items-center my-auto w-fit h-fit back rounded">15</span>
-                        <div className={`relative z-0 w-full mb-1 group transition-all ease-in-out duration-150 ${codcar && modalidad && idProvincia && idSede ? 'bg-white border-gray-300 focus:ring-blue-600 focus:border-blue-600' : 'bg-gray-100 border-gray-200 text-gray-400 cursor-not-allowed opacity-75 z-10 pointer-events-none max-sm:flex-1'}`}>
-                            <div className="relative">
-                                <input type="tel" id="tel" size={8} maxLength={8} inputMode="numeric" pattern="[0-9]+"
-                                    className={`block w-full p-2 text-sm text-gray-900 bg-transparent border rounded-md appearance-none focus:outline-none focus:ring-0 peer ${claseBorde(carreraCompleta, !!tel && !errors.tel)}`}
-                                    placeholder="" required tabIndex={0}
-                                    autoComplete="tel-local"
-                                    aria-invalid={!!errors.tel}
-                                    aria-describedby={errors.tel ? 'error-tel' : undefined}
-                                    {...register('tel')} />
-                                {errors.tel && (
-                                    <p id="error-tel" className="text-red-500 text-xs mt-1" role="alert">{errors.tel.message}</p>
-                                )}
-                                <label htmlFor="tel"
-                                    className={`absolute text-xs 2xl:text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-left left-1 px-1 2xl:px-2 peer-focus:px-2 peer-focus:text-var(--azul-ucasal) peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2  peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 ${codcar && modalidad && idProvincia && idSede ? 'peer-focus:bg-white bg-white' : 'peer-focus:bg-gray-100 bg-gray-100'}`}>
-                                    Número
-                                </label>
-                            </div>
-                        </div>
+                    <div className={`rounded-lg border w-16 ${!carreraCompleta ? 'bg-gray-100 border-gray-200' : `bg-white ${claseBorde(carreraCompleta, !!codArea && !errors.cod_area)}`}`}>
+                        <input type="tel" id="cod" size={4} maxLength={4} pattern="[0-9]*" inputMode="numeric"
+                            className="block w-full p-2 text-sm text-gray-900 bg-transparent rounded-md appearance-none focus:outline-none disabled:cursor-not-allowed placeholder:text-gray-400"
+                            placeholder="Cód. área"
+                            disabled={!carreraCompleta}
+                            autoComplete="tel-area-code"
+                            aria-invalid={!!errors.cod_area}
+                            aria-describedby={errors.cod_area ? 'error-cod_area' : undefined}
+                            {...register('cod_area')} />
+                    </div>
+                    <span className="text-[0.8rem] text-gray-700 px-1 border border-gray-500 flex justify-center items-center my-auto w-fit h-fit rounded shrink-0">15</span>
+                    <div className={`rounded-lg border flex-1 ${!carreraCompleta ? 'bg-gray-100 border-gray-200' : `bg-white ${claseBorde(carreraCompleta, !!tel && !errors.tel)}`}`}>
+                        <input type="tel" id="tel" size={8} maxLength={8} inputMode="numeric" pattern="[0-9]+"
+                            className="block w-full p-2 text-sm text-gray-900 bg-transparent rounded-md appearance-none focus:outline-none disabled:cursor-not-allowed placeholder:text-gray-400"
+                            placeholder="Número sin 0 ni 15"
+                            disabled={!carreraCompleta}
+                            autoComplete="tel-local"
+                            aria-invalid={!!errors.tel}
+                            aria-describedby={errors.tel ? 'error-tel' : undefined}
+                            {...register('tel')} />
                     </div>
                 </div>
+                {(errors.cod_area || errors.tel) && (
+                    <div className="flex flex-col gap-0.5 mt-1">
+                        {errors.cod_area && <p id="error-cod_area" className="text-red-500 text-xs" role="alert">{errors.cod_area.message}</p>}
+                        {errors.tel && <p id="error-tel" className="text-red-500 text-xs" role="alert">{errors.tel.message}</p>}
+                    </div>
+                )}
             </div>
+
             {todosCompletos && sectorCarrera && (
                 <Aranceles
                     codcar={codcar}
@@ -416,8 +559,8 @@ export default function Form({ codcarInicial, onSubPage }: { codcarInicial?: str
                     enabled={todosCompletos && !!sectorCarrera && !!idSedeReal}
                 />
             )}
-            <p className="text-[10px] md:text-xs mt-1 inline-block text-gray-600">
-                Al enviar este formulario, aceptás nuestros <button onClick={() => setModalOpen(true)} className="inline-block text-blue-500 cursor-pointer" type="button"> T&eacute;rminos y Condiciones de Privacidad</button> y autorizás a UCASAL a utilizar tus datos para contactarte y brindarte información sobre carreras y propuestas académicas.
+            <p className="text-[10px] md:text-xs mt-3 inline-block text-gray-600">
+                Al enviar aceptás los <button onClick={() => setModalOpen(true)} className="inline-block text-blue-500 cursor-pointer" type="button">T&eacute;rminos y Condiciones de Privacidad</button> y autorizás a UCASAL a contactarte con información académica.
             </p>
             {
                 modalOpen && (
@@ -473,15 +616,13 @@ export default function Form({ codcarInicial, onSubPage }: { codcarInicial?: str
             <input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response" />
             <input type="hidden" id="fecha_formulario" name="fecha_formulario" />
             <div className="flex justify-center mt-4">
-                <div className={`animated-border`}
-                    style={{ "--ab-thickness": "4px", "--ab-radius": "0.5rem", ...(enviando ? { display: 'none' } : {}) } as React.CSSProperties}>
-                    <button id="formButton" type="submit"
-                        disabled={!todosCompletos}
-                        className={`ab-inner font-medium text-sm px-5 py-2.5 text-center transition-colors duration-200 ease-in-out scale-105 ${todosCompletos ? 'cursor-pointer' : 'cursor-not-allowed'}`}
-                        tabIndex={0}>
-                        Enviar
-                    </button>
-                </div>
+                <button id="formButton" type="submit"
+                    disabled={!todosCompletos}
+                    style={enviando ? { display: 'none' } : undefined}
+                    className={`w-full font-bold text-sm px-5 py-3 text-center text-white rounded-lg transition-colors duration-200 ease-in-out ${todosCompletos ? 'boton-form-glow cursor-pointer hover:opacity-90' : 'cursor-not-allowed bg-gray-300'}`}
+                >
+                    <span>Quiero que me contacten</span>
+                </button>
                 <div id="spinnerContainer" className={enviando ? '' : 'hidden'} role="status">
                     <svg className="w-8 h-8 text-gray-200 animate-spin fill-[#B11111]" viewBox="0 0 100 101" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
@@ -495,6 +636,6 @@ export default function Form({ codcarInicial, onSubPage }: { codcarInicial?: str
                     <span className="sr-only">Loading...</span>
                 </div>
             </div>
-        </form >
+        </form>
     )
 }
