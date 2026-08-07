@@ -24,8 +24,8 @@ export default function CartaCarrera({ career, base = import.meta.env.BASE_URL }
                 </div>
             </div>
             <div className='h-[65%] md:h-[50%] flex flex-col px-3 p-4'>
-                <h2 className={`font-bold text-(--azul-dark-ucasal) leading-tight ${tituloCarreraClase}`}>{career.nombre}</h2>
-                <h3 className='text-xs md:text-sm font-semibold text-slate-500 mt-1'>{getNombreFacultad(career.sector)} • <span className='inline'>{career.duracion}</span><span className='inline'> • {getNombreModalidades(career.modalidad)}</span></h3>
+                <h4 className={`font-bold text-(--azul-dark-ucasal) leading-tight ${tituloCarreraClase}`}>{career.nombre}</h4>
+                <h5 className='text-xs md:text-sm font-semibold text-slate-500 mt-1'>{getNombreFacultad(career.sector)} • <span className='inline'>{career.duracion}</span><span className='inline'> • {getNombreModalidades(career.modalidad)}</span></h5>
                 <div className='w-full flex max-md:flex-col max-md:items-start max-md:justify-end justify-between items-end h-full text-sm font-semibold text-slate-500'>
                     <button
                         onClick={() => {
