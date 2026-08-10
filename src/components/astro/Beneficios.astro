@@ -59,6 +59,13 @@ const beneficios = {
     },
   ],
 };
+
+const pasos = [
+  {texto: "Primer paso", color: "--azul-ucasal"},
+  {texto: "Segundo paso", color: "--azul-dark-ucasal"},
+  {texto: "Tercer paso", color: "#961315"},
+  {texto: "Cuarto paso", color: "--rojo-ucasal"},
+]
 ---
 
 <section id="beneficios" class="bg-white py-10">
@@ -68,22 +75,32 @@ const beneficios = {
       <div
         class="my-4 w-0.5 shrink-0 self-stretch bg-linear-to-b from-(--azul-ucasal) to-(--rojo-ucasal)"
         aria-hidden="true"
-      />
+      >
+      </div>
 
-      <ol class="grid w-full grid-cols-1 md:grid-cols-2">
+      <ol class="grid w-full grid-cols-1 gap-4 md:grid-cols-2">
         {
           beneficios.beneficios_presencial.map((beneficio, index) => (
-            <li class="relative my-4 border-gray-500 px-4 md:even:border-l-2">
+            <li class="relative my-4 border-gray-500 px-4 md:even:border-l-2 max-md:even:border-b-2 max-md:even:pb-4 max-md:first:pt-2 max-md:first:border-t-2 [&:nth-child(7)>span]:bg-(--rojo-ucasal) [&:nth-child(7)>span]:outline-(--rojo-ucasal) [&:nth-child(5)>span]:outline-(--rojo-dark-ucasal) [&:nth-child(5)>span]:bg-(--rojo-dark-ucasal)">
               <span
                 class:list={[
-                  "absolute -left-6 top-0 z-10 size-4 rounded-full border-4 border-white bg-(--azul-ucasal)",
-                  index % 2 === 0 ? "block" : "md:hidden",
+                  "absolute -left-7.25 top-1.5 z-10 size-6 outline-2 outline-(--azul-ucasal) rounded-full border-[6.25px] border-white ",
+                  index % 2 === 0 ? "block bg-(--azul-ucasal)"  : "hidden"
                 ]}
                 aria-hidden="true"
               />
+              {index % 2 === 0 && (
+                <div class={`hidden md:block text-(${pasos[index/2]?.color})`}>
+                  {pasos[index/2]?.texto}
+                </div>
+              )}
 
               <h4 class="text-xl font-bold">{beneficio.titulo}</h4>
               <p>{beneficio.descripcion}</p>
+
+              {index === 2 && (
+                <img src="/assets/img/beneficios/beneficio-3.png" alt="Beneficio 3" />
+              )}
             </li>
           ))
         }
