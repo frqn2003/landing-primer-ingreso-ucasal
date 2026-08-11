@@ -138,7 +138,7 @@ const flotarSobreHero = !onSubPage;
       <button
         type="button"
         id="menu-button"
-        class="inline-flex lg:hidden items-center justify-center size-10 p-2 text-sm text-gray-500 hover:bg-gray-100"
+        class="inline-flex lg:hidden items-center justify-center size-10 p-2 text-sm text-gray-500 cursor-pointer hover:border hover:border-gray-800"
         aria-label="Abrir menú"
       >
         <svg
@@ -186,7 +186,7 @@ const flotarSobreHero = !onSubPage;
             <li class="w-full">
               <button
                 data-scroll-to="modalidades"
-                class="mobile-nav-link justify-start items-start flex w-full px-4 py-3 text-gray-700 hover:bg-red-50 hover:text-(--rojo-ucasal) transition-colors font-semibold border-l-4 border-transparent hover:border-(--rojo-ucasal)"
+                class="mobile-nav-link justify-start items-start flex w-full px-4 py-3  hover:bg-red-50 hover:text-(--rojo-ucasal) transition-colors font-semibold border-l-4 border-transparent hover:border-(--rojo-ucasal)"
               >
                 Modalidades
               </button>
@@ -194,7 +194,7 @@ const flotarSobreHero = !onSubPage;
             <li class="w-full">
               <button
                 data-scroll-to="beneficios"
-                class="mobile-nav-link justify-start items-start flex w-full px-4 py-3 text-gray-700 hover:bg-red-50 hover:text-(--rojo-ucasal) transition-colors font-semibold border-l-4 border-transparent hover:border-(--rojo-ucasal)"
+                class="mobile-nav-link justify-start items-start flex w-full px-4 py-3  hover:bg-red-50 hover:text-(--rojo-ucasal) transition-colors font-semibold border-l-4 border-transparent hover:border-(--rojo-ucasal)"
               >
                 Beneficios
               </button>
@@ -205,7 +205,7 @@ const flotarSobreHero = !onSubPage;
             <li class="w-full">
               <button
                 data-scroll-to="beneficios"
-                class="mobile-nav-link justify-start items-start flex w-full px-4 py-3 text-gray-700 hover:bg-red-50 hover:text-(--rojo-ucasal) transition-colors font-semibold border-l-4 border-transparent hover:border-(--rojo-ucasal)"
+                class="mobile-nav-link justify-start items-start flex w-full px-4 py-3  hover:bg-red-50 hover:text-(--rojo-ucasal) transition-colors font-semibold border-l-4 border-transparent hover:border-(--rojo-ucasal)"
               >
                 Beneficios
               </button>
@@ -213,7 +213,7 @@ const flotarSobreHero = !onSubPage;
             <li class="w-full">
               <button
                 data-scroll-to="modalidades"
-                class="mobile-nav-link justify-start items-start flex w-full px-4 py-3 text-gray-700 hover:bg-red-50 hover:text-(--rojo-ucasal) transition-colors font-semibold border-l-4 border-transparent hover:border-(--rojo-ucasal)"
+                class="mobile-nav-link justify-start items-start flex w-full px-4 py-3  hover:bg-red-50 hover:text-(--rojo-ucasal) transition-colors font-semibold border-l-4 border-transparent hover:border-(--rojo-ucasal)"
               >
                 Modalidades
               </button>
@@ -221,7 +221,7 @@ const flotarSobreHero = !onSubPage;
             <li class="w-full">
               <button
                 data-scroll-to="carreras"
-                class="mobile-nav-link justify-start items-start flex w-full px-4 py-3 text-gray-700 hover:bg-red-50 hover:text-(--rojo-ucasal) transition-colors font-semibold border-l-4 border-transparent hover:border-(--rojo-ucasal)"
+                class="mobile-nav-link justify-start items-start flex w-full px-4 py-3  hover:bg-red-50 hover:text-(--rojo-ucasal) transition-colors font-semibold border-l-4 border-transparent hover:border-(--rojo-ucasal)"
               >
                 Carreras
               </button>
@@ -232,14 +232,14 @@ const flotarSobreHero = !onSubPage;
       <li class="w-full">
         <button
           data-scroll-to="sedes"
-          class="mobile-nav-link justify-start items-start flex w-full px-4 py-3 text-gray-700 hover:bg-red-50 hover:text-(--rojo-ucasal) transition-colors font-semibold border-l-4 border-transparent hover:border-(--rojo-ucasal)"
+          class="mobile-nav-link justify-start items-start flex w-full px-4 py-3 hover:bg-red-50 hover:text-(--rojo-ucasal) transition-colors font-semibold border-l-4 border-transparent hover:border-(--rojo-ucasal)"
           >Sedes</button
         >
       </li>
       <li class="py-2 border-t border-gray-200 w-full">
         <button
           id="mobile-inscribirme"
-          class="mobile-nav-link justify-start items-start flex w-full px-4 py-3 text-gray-700 hover:bg-red-50 hover:text-(--rojo-ucasal) transition-colors font-semibold border-l-4 border-transparent hover:border-(--rojo-ucasal)"
+          class="mobile-nav-link justify-start items-start flex w-full px-4 py-3 hover:bg-red-50 hover:text-(--rojo-ucasal) transition-colors font-semibold border-l-4 border-transparent hover:border-(--rojo-ucasal)"
           >¡Quiero Inscribirme!</button
         >
       </li>
@@ -258,7 +258,7 @@ const flotarSobreHero = !onSubPage;
     color: #fff;
   }
   #navbar[data-tema="transparente"] .nav-link:hover {
-    background-color: rgba(255, 255, 255, 0.15);
+    background-color: #ffffff26;
   }
   #navbar[data-tema="transparente"] .nav-link.active {
     color: #fff;
@@ -316,7 +316,6 @@ const flotarSobreHero = !onSubPage;
   function toggleMenu(forzar) {
     menuAbierto = forzar ?? !menuAbierto;
     navMenu.classList.toggle("opacity-100", menuAbierto);
-    navMenu.classList.toggle("bg-white", menuAbierto);
     navMenu.classList.toggle("translate-y-0", menuAbierto);
     navMenu.classList.toggle("max-h-96", menuAbierto);
     navMenu.classList.toggle("visible", menuAbierto);
@@ -324,6 +323,7 @@ const flotarSobreHero = !onSubPage;
     navMenu.classList.toggle("-translate-y-4", !menuAbierto);
     navMenu.classList.toggle("max-h-0", !menuAbierto);
     navMenu.classList.toggle("invisible", !menuAbierto);
+    navMenu.classList.toggle("text-white", menuAbierto);
     overlay.classList.toggle("hidden", !menuAbierto);
     iconAbrir.classList.toggle("hidden", menuAbierto);
     iconCerrar.classList.toggle("hidden", !menuAbierto);
@@ -369,6 +369,7 @@ const flotarSobreHero = !onSubPage;
       nav.classList.toggle("bg-white/80", scrolled);
       nav.classList.toggle("md:backdrop-blur-md", scrolled);
       nav.classList.toggle("shadow-sm", scrolled);
+      navMenu.classList.toggle("bg-(#ffffff26)", scrolled);
       botonInscripcion.classList.toggle("boton-cta", scrolled);
       botonInscripcion.classList.toggle("boton-inscripcion", !scrolled);
       iconoInscripcion.style.display = scrolled ? "none" : "flex";
@@ -378,6 +379,7 @@ const flotarSobreHero = !onSubPage;
       nav.classList.toggle("nav-menu", scrolled);
       nav.classList.toggle("relative", !scrolled);
     }
+    navMenu.classList.toggle("bg-white", scrolled);
     navInner.classList.toggle("contenedor", scrolled);
 
     /* Actualizar logo */

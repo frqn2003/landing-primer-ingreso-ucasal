@@ -4,7 +4,6 @@ interface Props {
 }
 
 const { base = import.meta.env.BASE_URL } = Astro.props;
-import Testimonios from "./Testimonios.astro";
 ---
 
 <section class="relative w-full text-white" aria-labelledby="hero-title">
@@ -21,24 +20,15 @@ import Testimonios from "./Testimonios.astro";
         <div class="absolute inset-0 bg-linear-to-t from-(--azul-dark-ucasal)/90 via-(--azul-dark-ucasal)/25 to-transparent"></div>
         <div class="absolute inset-x-0 top-0 h-32 bg-linear-to-b from-black/55 to-transparent lg:h-40"></div>
 
-        <div class="md:mx-12 mx-5 absolute inset-x-0 bottom-0 pb-8 md:pb-14 lg:flex lg:items-end lg:justify-between lg:gap-10">
-            <div class="max-w-xl">
-                <h1>Estudia, <br>conectá,<br>crecé</h1>
-                <div class="mt-4 md:mt-8 flex md:flex-wrap flex-row gap-4">
-                    <a href={`${base}#carreras`} class="boton-cta bg-(--rojo-ucasal) text-white">Explorar carreras</a>
-                    <a href={`${base}#modalidades`} class="rounded-xl border border-white/40 px-5 py-3 font-semibold text-white transition hover:bg-white hover:text-(--azul-dark-ucasal) max-md:text-sm">Conocer modalidades</a>
-                </div>
+        <div class="md:mx-12 py-14 h-full mx-5 absolute inset-x-0 bottom-0 flex flex-col items-center gap-4">
+            <div class="max-w-4xl flex flex-col justify-center my-auto items-center">
+                <h1 class="uppercase">Estudia, conectá, crecé</h1>
+                <p class="text-center">Descripción epicarda</p>
             </div>
-            <div class="hidden lg:block">
-                <Testimonios />
+            <div class="flex flex-row gap-4">
+                <a href={`${base}#carreras`} class="boton-cta outline-2 outline-white/20 outline-offset-6 uppercase bg-(--rojo-ucasal) text-white group">Comienza ahora</a>
             </div>
         </div>
-    </div>
-
-
-    <!-- Mobile: testimonios debajo del hero -->
-    <div class="bg-slate-50 px-5 py-10 lg:hidden">
-        <Testimonios />
     </div>
 </section>
 
