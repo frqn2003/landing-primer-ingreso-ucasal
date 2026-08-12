@@ -1,0 +1,209 @@
+---
+interface Props {
+    base?: string;
+}
+
+const { base = import.meta.env.BASE_URL } = Astro.props;
+
+const beneficios = {
+    beneficios_presencial: [
+        {
+            codigo: "campus",
+            principal: true,
+            titulo: "Campus en Castañares",
+        },
+        {
+            codigo: "edificios-nuevos",
+            principal: true,
+            titulo: "Edificios nuevos y modernos",
+        },
+        {
+            codigo: "becas",
+            principal: false,
+            titulo: "Becas y ayudas económicas",
+            descripcion: "para cada situación para que puedas seguir con tu carrera",
+        },
+        {
+            codigo: "biblioteca",
+            principal: false,
+            titulo: "Biblioteca y biblioteca digital",
+            descripcion: "Lugar para estudiar y retirar material de estudio",
+        },
+        {
+            codigo: "deportes",
+            principal: false,
+            titulo: "Deportes y actividades recreativas",
+            descripcion: "Vida universitaria para descontracturar el estudio",
+        },
+        {
+            codigo: "practicas",
+            principal: false,
+            titulo: "Prácticas profesionales, pasantías e intercambios",
+            descripcion: "",
+        },
+        {
+            codigo: "validez",
+            principal: false,
+            titulo: "Título con validez nacional",
+            descripcion: "",
+        },
+        {
+            codigo: "pasantias",
+            principal: false,
+            titulo: "Pasantías, intercambios y bolsa de trabajo",
+            descripcion: "",
+        },
+    ],
+    beneficios_virtual: [
+        {
+            codigo: "virtual",
+            principal: true,
+            titulo: "Modalidad virtual flexible",
+            descripcion:
+                "Accedé a clases en vivo y grabadas desde cualquier dispositivo y conectá con tu comunidad estudiantil en tiempo real.",
+        },
+    ],
+};
+
+// Los grupos se arman acá, no dentro del map: el layout son 3 columnas
+// (2 cartas centrales apiladas + 1 carta lateral de cada lado).
+const principales = beneficios.beneficios_presencial.filter((b) => b.principal);
+
+// Solo entran 4 secundarios, 2 por carta lateral. Los otros quedan sin mostrar:
+// reordená el array de arriba para elegir cuáles van.
+const secundarios = beneficios.beneficios_presencial.filter(
+    (b) => !b.principal,
+);
+const laterales = [secundarios.slice(0, 2), secundarios.slice(2, 4)];
+---
+
+<section
+    id="beneficios"
+    class="relative py-8 min-h-dvh">
+    <h2 class="flex items-center justify-center mb-10 text-center z-10 relative" style="color: white;">Los beneficios de estudiar en UCASAL</h2>
+    <div class="fondo-blur absolute z-0 inset-0"></div>
+    <div
+        class="mx-auto contenedor grid max-w-400 gap-6 lg:grid-cols-[1fr_minmax(0,32rem)_1fr] lg:items-center lg:justify-center lg:gap-8"
+        data-beneficios
+    >
+        <!-- Columna central: las 2 principales, una arriba de la otra -->
+        <div class="flex flex-col lg:order-2 text-center">
+            {
+                principales.map((beneficio, index) => (
+                    <article
+                        class={`reveal group relative aspect-5/3 overflow-hidden bg-(--azul-dark-ucasal) shadow-lg ${index === 0 ? 'rounded-b-0 rounded-t-xl' : 'rounded-t-0 rounded-b-xl'}`}
+                        data-reveal="principal"
+                        style={`--retraso: ${index * 150}ms`}
+                    >
+                        <img
+                            src={`${base}beneficios/pile.webp`}
+                            alt={`${beneficio.titulo}`}
+                            loading="lazy"
+                            decoding="async"
+                            class="absolute inset-0 size-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        />
+                        <div class="absolute flex uppercase items-center justify-center w-full h-full text-xl md:text-2xl font-bold text-black z-20">
+                            <span class="bg-white/90 px-4 py-2 rounded-lg">
+                                {beneficio.titulo}
+                            </span>
+                        </div>
+                        <div
+                            class="absolute inset-0 bg-linear-to-t from-(--azul-dark-ucasal)/90 via-(--azul-dark-ucasal)/30 to-transparent z-10"
+                            aria-hidden="true"
+                        />
+                    </article>
+                    <div
+                        class:list={[
+                            index === 0 &&
+                                "flex items-center justify-center bottom-0 left-0 right-0 w-full h-1 my-0.5 bg-white",
+                        ]}
+                    />
+                ))
+            }
+
+        </div>
+        {
+            laterales.map((grupo, index) => (
+                <article
+                    class:list={[
+                        "reveal rounded-2xl border border-(--ucasal-gray-medium) bg-(--ucasal-gray-light) p-6",
+                        index === 0 ? "lg:order-1" : "lg:order-3",
+                    ]}
+                    data-reveal="lateral"
+                    style={`--retraso: ${450 + index * 150}ms; --desde-x: ${index === 0 ? "-2rem" : "2rem"}; --desde-y: 0`}
+                >
+                    <ul class="flex flex-col gap-5 text-center">
+                        {grupo.map((beneficio, index) => (
+                            <li>
+                                <h4 class="text-lg  font-bold text-(--azul-ucasal)">
+                                    {beneficio.titulo}
+                                </h4>
+                                {beneficio.descripcion && (
+                                    <p class="mt-1 text-sm text-gray-600 first-letter:uppercase">
+                                        {beneficio.descripcion}
+                                    </p>
+                                )}
+                            </li>
+                            <div
+                                class:list={[
+                                    index === 0 &&
+                                        "flex items-center justify-center bottom-0 left-0 right-0 w-full h-0.5 my-2 bg-(--azul-dark-ucasal)/30",
+                                ]}
+                            />
+                        ))}
+                    </ul>
+                </article>
+            ))
+        }
+    </div>
+</section>
+
+<style>
+.reveal {
+    opacity: 0;
+}
+
+.reveal.visible {
+    animation: entrarCarta 0.7s ease-out var(--retraso, 0ms) both;
+}
+
+@keyframes entrarCarta {
+    from {
+        opacity: 0;
+        transform: translate(var(--desde-x, 0), var(--desde-y, 24px));
+    }
+    to {
+        opacity: 1;
+        transform: translate(0, 0);
+    }
+}
+</style>
+
+<noscript>
+    <style>
+        .reveal {
+            opacity: 1;
+            transform: none;
+        }
+    </style>
+</noscript>
+
+<script>
+const contenedor = document.querySelector<HTMLElement>("[data-beneficios]");
+
+if (contenedor) {
+    const observador = new IntersectionObserver(
+        (entradas, obs) => {
+            for (const entrada of entradas) {
+                if (!entrada.isIntersecting) continue;
+                contenedor
+                    .querySelectorAll<HTMLElement>(".reveal")
+                    .forEach((el) => el.classList.add("visible"));
+                obs.disconnect();
+            }
+        },
+        { threshold: 0.3 },
+    );
+    observador.observe(contenedor);
+}
+</script>

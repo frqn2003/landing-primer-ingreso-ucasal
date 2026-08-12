@@ -1,27 +1,54 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Navbar from '../components/astro/Navbar.astro';
-import Hero from '../components/astro/Hero.astro';
-import Beneficios from '../components/astro/Beneficios.astro';
-import ModalidadesPuerta from '../components/astro/ModalidadesPuerta.astro';
-import Financiacion from '../components/astro/Financiacion.astro';
-import Faq from '../components/astro/Faq.astro';
-import Footer from '../components/astro/Footer.astro';
-import ExploradorCarreras from '../components/react/ExploradorCarreras.tsx';
-import Form from '../components/react/Form.tsx';
-import data from '../data/carreras';
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/astro/Navbar.astro";
+import Hero from "../components/astro/Hero.astro";
+import Beneficios from "../components/astro/Beneficios.astro";
+import BeneficiosCaja from "../components/astro/BeneficiosCaja.astro";
+import ModalidadesPuerta from "../components/astro/ModalidadesPuerta.astro";
+import Modalidades from "../components/astro/Modalidades.astro";
+import ModalidadesPrueba from "../components/astro/ModalidadesPrueba.astro";
+import Financiacion from "../components/astro/Financiacion.astro";
+import Faq from "../components/astro/Faq.astro";
+import Footer from "../components/astro/Footer.astro";
+import ExploradorCarreras from "../components/react/ExploradorCarreras.tsx";
+import Form from "../components/react/Form.tsx";
+import data from "../data/carreras";
 
 const base = import.meta.env.BASE_URL;
 ---
 
-<Layout title="Primer ingreso | Estudiá en UCASAL" description="Encontrá tu carrera, elegí tu modalidad y comenzá tu camino universitario en UCASAL.">
+<Layout
+    title="Primer ingreso | Estudiá en UCASAL"
+    description="Encontrá tu carrera, elegí tu modalidad y comenzá tu camino universitario en UCASAL."
+>
     <Navbar onSubPage={false} />
+    <div class="relative isolate">
+        <!-- Fondo compartido: una sola imagen para las dos secciones -->
+        <div class="absolute inset-0 -z-10">
+            <picture>
+                <source
+                    media="(min-width: 769px)"
+                    srcset={`${base}encabezados/mundial/desktop.webp`}
+                />
+                <img
+                    src={`${base}encabezados/mundial/mobile.webp`}
+                    alt=""
+                    class="sticky top-0 h-dvh w-full object-cover"
+                />
+            </picture>
+            <div
+                class="absolute inset-0 bg-linear-to-t from-(--azul-dark-ucasal)/90 via-(--azul-dark-ucasal)/25 to-transparent"
+            >
+            </div>
+        </div>
+
         <Hero base={base} />
-        <Beneficios />
-        <ModalidadesPuerta client:load />
-        <ExploradorCarreras careers={data} client:visible />
-        <Financiacion />
-        <Faq />
-        <Form onSubPage={false} client:visible />
+        <BeneficiosCaja base={base} />
+    </div>
+    <ModalidadesPuerta client:load />
+    <ExploradorCarreras careers={data} client:visible />
+    <Financiacion />
+    <Faq />
+    <Form onSubPage={false} client:visible />
     <Footer />
 </Layout>

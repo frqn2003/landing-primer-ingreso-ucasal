@@ -10,6 +10,58 @@
   --ucasal-black: #000000;
   --ucasal-gray-light: #f8f9fa;
   --ucasal-gray-medium: #e9ecef;
+  --alto-navbar: 5rem;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
+}
+
+section {
+  height: 100dvh;
+  padding-top: var(--alto-navbar);
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+/* El hero va a sangre: el navbar flota transparente encima */
+.seccion-snap-hero {
+  padding-top: 0;
+}
+
+/* Elementos cortos al final: alinean su borde inferior */
+.seccion-snap-final {
+  height: auto;
+  scroll-snap-align: end;
+  scroll-snap-stop: always;
+}
+
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background: var(--ucasal-white);
+  color: #172033;
+  font-family: 'Museo Sans', ui-sans-serif, system-ui, sans-serif;
+}
+
+.fondo-blur {
+  backdrop-filter: blur(16px);
+}
+
+@supports (animation-timeline: view()) {
+  .fondo-blur {
+    backdrop-filter: none;
+    animation: blurSeccion linear both;
+    animation-timeline: view();
+    animation-range: cover 0% cover 35%;
+  }
+}
+
+@keyframes blurSeccion {
+  from {backdrop-filter: blur(0px);}
+  to {backdrop-filter: blur(30px);}
 }
 
 @keyframes form-button-glow {
@@ -87,7 +139,7 @@ h2 {
   font-weight: 700;
   color: var(--azul-ucasal);
 }
-/* text-4xl md:text-5xl leading-[0.92] font-black tracking-tight text-white */
+
 h3{
     font-size: clamp(2rem, 4vw, 2rem);
     font-weight: 750;
@@ -257,68 +309,6 @@ h3{
   left: 0;
 }
 
-@theme {
-  --font-museo: "Museo", sans-serif;
-}
-
-@font-face {
-  font-family: "Museo Sans";
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src:
-    local("Museo Sans"),
-    url("/landing/ingreso/primer-ingreso//fonts//MuseoSans_500.woff2") format("woff2");
-}
-
-@font-face {
-  font-family: "Museo";
-  font-style: normal;
-  font-weight: 300;
-  font-display: swap;
-  src: url("/landing/ingreso/primer-ingreso//fonts//Museo300-Regular.woff2") format("woff2");
-}
-
-@font-face {
-  font-family: "Museo Sans";
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src:
-    local("Museo Sans"),
-    url("/landing/ingreso/primer-ingreso//fonts//MuseoSans_700.woff2") format("woff2");
-}
-
-@font-face {
-  font-family: "Museo Sans";
-  font-style: normal;
-  font-weight: 900;
-  font-display: swap;
-  src:
-    local("Museo Sans"),
-    url("/landing/ingreso/primer-ingreso//fonts//MuseoSans_900.woff2") format("woff2");
-}
-
-
-@font-face {
-  font-family: "Museo Sans 900";
-  font-style: normal;
-  font-weight: 300;
-  font-display: swap;
-  src:
-    local("Museo Sans"),
-    url("/landing/ingreso/primer-ingreso//fonts//MuseoSans_900.woff2") format("woff2");
-}
-
-@font-face {
-  font-family: "Museo Sans 500";
-  font-style: normal;
-  font-weight: 300;
-  font-display: swap;
-  src:
-    local("Museo Sans"),
-    url("/landing/ingreso/primer-ingreso//fonts//MuseoSans_500.woff2") format("woff2");
-}
 
 @keyframes fadeIn {
   0% {
@@ -436,6 +426,46 @@ h3{
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   transform: scale(1.05);
 }
+.boton-cta-hero {
+  align-items: center;
+  justify-content: center;
+  padding: 11px 1.4em;
+  background: linear-gradient(135deg, var(--rojo-ucasal) 10%, var(--rojo-dark-ucasal) 60%);
+  color: white;
+  outline: 2px solid #374151;
+  outline-offset: 8px;
+  font-weight: 600;
+  --boton-size: 22px;
+  font-size: 1em;
+  transition: all 0.3s ease;
+  gap: 6px;
+  border-radius: 10px;
+  cursor: pointer;
+  width: fit-content;
+  text-transform: uppercase;
+
+  @media (max-width: 1200px) {
+    padding: 12px 1.8em;
+    font-size: 1.05em;
+    --boton-size: 18px;
+    gap: 4px;
+  }
+
+  @media (max-width: 768px) {
+    padding: 10px 1.5em;
+    font-size: 0.8em;
+    --boton-size: 12px;
+    gap: 3px;
+  }
+}
+
+.boton-cta-hero:hover {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  transform: scale(1.05);
+  outline-color: white;
+  opacity: 0.75;
+
+}
 
 @keyframes borderColorTransition {
   0% {
@@ -466,18 +496,6 @@ h3{
 
 .iti-1__dropdown-content {
   width: 100%;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  margin: 0;
-  min-width: 320px;
-  background: var(--ucasal-white);
-  color: #172033;
-  font-family: 'Museo Sans', ui-sans-serif, system-ui, sans-serif;
 }
 
 .flecha-carrera {
@@ -516,4 +534,68 @@ body {
 .flecha-carrera:hover::before{
   content: 'Explorar';
   font-size: 0.9rem;
+}
+
+
+@theme {
+  --font-museo: "Museo", sans-serif;
+}
+
+@font-face {
+  font-family: "Museo Sans";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src:
+    local("Museo Sans"),
+    url("/landing/ingreso/primer-ingreso//fonts//MuseoSans_500.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Museo";
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url("/landing/ingreso/primer-ingreso//fonts//Museo300-Regular.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Museo Sans";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src:
+    local("Museo Sans"),
+    url("/landing/ingreso/primer-ingreso//fonts//MuseoSans_700.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Museo Sans";
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src:
+    local("Museo Sans"),
+    url("/landing/ingreso/primer-ingreso//fonts//MuseoSans_900.woff2") format("woff2");
+}
+
+
+@font-face {
+  font-family: "Museo Sans 900";
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src:
+    local("Museo Sans"),
+    url("/landing/ingreso/primer-ingreso//fonts//MuseoSans_900.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Museo Sans 500";
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src:
+    local("Museo Sans"),
+    url("/landing/ingreso/primer-ingreso//fonts//MuseoSans_500.woff2") format("woff2");
 }
