@@ -74,50 +74,51 @@ export default function ExploradorCarreras({ careers }: Props) {
         return counts
     }, [careers])
 
-    return <section id="carreras" className="bg-white py-20" aria-labelledby="career-title">
+    return <section id="carreras" className="seccion-alto-libre bg-white py-20" aria-labelledby="career-title">
         <div className="contenedor">
             <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
-                <div>
-                    <p className="text-sm font-bold uppercase tracking-[0.2em] text-(--rojo-ucasal)">Oferta académica</p><h2 id="career-title" className="mt-3 text-3xl font-black text-(--azul-dark-ucasal) sm:text-4xl">Encontrá tu carrera</h2><p className="mt-4 max-w-2xl text-lg text-slate-600">Buscá por nombre o filtrá según la modalidad que preferís.</p></div>
-                <div className="grid gap-3 sm:grid-cols-[minmax(220px,1fr)_170px_200px] lg:w-[620px]">
+                <div><h2 id="career-title" className="mt-3 text-3xl font-black text-(--azul-dark-ucasal) sm:text-4xl">Encontrá tu carrera</h2><p className="mt-4 max-w-2xl text-base text-slate-600">Buscá por nombre o por los filtros</p></div>
+                <div className="grid gap-3 sm:grid-cols-2 lg:w-220">
                     <label className="sr-only" htmlFor="career-search">Buscar carrera</label><input id="career-search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Buscar carrera..." className="rounded-xl border border-slate-300 px-4 py-3 outline-none focus:border-(--azul-ucasal) focus:ring-2 focus:ring-(--azul-ucasal)/20" />
-                    <div className="relative" ref={modalidadRef}>
-                        <button type="button" onClick={() => setModalidadAbierta((v) => !v)} aria-expanded={modalidadAbierta} className="w-full rounded-xl border border-slate-300 px-4 py-3 text-left text-sm">
-                            Modalidad{modalities.length > 0 ? ` (${modalities.length})` : ''}
-                        </button>
-                        {modalidadAbierta && (
-                            <fieldset className="absolute z-10 mt-1 w-full rounded-xl border border-slate-300 bg-white px-4 py-3 shadow-lg">
-                                <legend className="sr-only">Modalidad</legend>
-                                {modalidades.map((m) => (
-                                    <label key={m.code} className="flex items-center justify-between gap-2 text-sm">
-                                        <span className="flex items-center gap-2">
-                                            <input type="checkbox" checked={modalities.includes(m.code)} onChange={() => toggleModalidad(m.code)} />
-                                            {m.label}
-                                        </span>
-                                        <span className="text-slate-400">{modalidadCounts.get(m.code) ?? 0}</span>
-                                    </label>
-                                ))}
-                            </fieldset>
-                        )}
-                    </div>
-                    <div className="relative" ref={facultadRef}>
-                        <button type="button" onClick={() => setFacultadAbierta((v) => !v)} aria-expanded={facultadAbierta} className="w-full rounded-xl border border-slate-300 px-4 py-3 text-left text-sm">
-                            Facultad{faculties.length > 0 ? ` (${faculties.length})` : ''}
-                        </button>
-                        {facultadAbierta && (
-                            <fieldset className="absolute z-10 mt-1 w-full rounded-xl border border-slate-300 bg-white px-4 py-3 shadow-lg">
-                                <legend className="sr-only">Facultad</legend>
-                                {facultades.map((f) => (
-                                    <label key={f.code} className="flex items-center justify-between gap-2 text-sm">
-                                        <span className="flex items-center gap-2">
-                                            <input type="checkbox" checked={faculties.includes(f.code)} onChange={() => toggleFacultad(f.code)} />
-                                            {f.label}
-                                        </span>
-                                        <span className="text-slate-400">{facultadCounts.get(f.code) ?? 0}</span>
-                                    </label>
-                                ))}
-                            </fieldset>
-                        )}
+                    <div className="flex flex-row w-full max-md:grid max-md:grid-cols-2 gap-4">
+                        <div className="relative w-full" ref={modalidadRef}>
+                            <button type="button" onClick={() => setModalidadAbierta((v) => !v)} aria-expanded={modalidadAbierta} className="w-full rounded-xl border border-slate-300 px-4 py-3 text-left text-sm">
+                                Modalidad{modalities.length > 0 ? ` (${modalities.length})` : ''}
+                            </button>
+                            {modalidadAbierta && (
+                                <fieldset className="absolute z-10 mt-1 w-full rounded-xl border border-slate-300 bg-white px-4 py-3 shadow-lg">
+                                    <legend className="sr-only">Modalidad</legend>
+                                    {modalidades.map((m) => (
+                                        <label key={m.code} className="flex items-center justify-between gap-2 text-sm">
+                                            <span className="flex items-center gap-2">
+                                                <input type="checkbox" checked={modalities.includes(m.code)} onChange={() => toggleModalidad(m.code)} />
+                                                {m.label}
+                                            </span>
+                                            <span className="text-slate-400">{modalidadCounts.get(m.code) ?? 0}</span>
+                                        </label>
+                                    ))}
+                                </fieldset>
+                            )}
+                        </div>
+                        <div className="relative w-full" ref={facultadRef}>
+                            <button type="button" onClick={() => setFacultadAbierta((v) => !v)} aria-expanded={facultadAbierta} className="w-full rounded-xl border border-slate-300 px-4 py-3 text-left text-sm">
+                                Facultad{faculties.length > 0 ? ` (${faculties.length})` : ''}
+                            </button>
+                            {facultadAbierta && (
+                                <fieldset className="absolute z-10 mt-1 w-full rounded-xl border border-slate-300 bg-white px-4 py-3 shadow-lg">
+                                    <legend className="sr-only">Facultad</legend>
+                                    {facultades.map((f) => (
+                                        <label key={f.code} className="flex items-center justify-between gap-2 text-sm">
+                                            <span className="flex items-center gap-2">
+                                                <input type="checkbox" checked={faculties.includes(f.code)} onChange={() => toggleFacultad(f.code)} />
+                                                {f.label}
+                                            </span>
+                                            <span className="text-slate-400">{facultadCounts.get(f.code) ?? 0}</span>
+                                        </label>
+                                    ))}
+                                </fieldset>
+                            )}
+                        </div>
                     </div>
                 </div>
             </div>

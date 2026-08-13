@@ -65,12 +65,9 @@ const beneficios = {
     ],
 };
 
-// Los grupos se arman acá, no dentro del map: el layout son 3 columnas
-// (2 cartas centrales apiladas + 1 carta lateral de cada lado).
+
 const principales = beneficios.beneficios_presencial.filter((b) => b.principal);
 
-// Solo entran 4 secundarios, 2 por carta lateral. Los otros quedan sin mostrar:
-// reordená el array de arriba para elegir cuáles van.
 const secundarios = beneficios.beneficios_presencial.filter(
     (b) => !b.principal,
 );
@@ -79,19 +76,19 @@ const laterales = [secundarios.slice(0, 2), secundarios.slice(2, 4)];
 
 <section
     id="beneficios"
-    class="relative py-8 min-h-dvh">
-    <h2 class="flex items-center justify-center mb-10 text-center z-10 relative" style="color: white;">Los beneficios de estudiar en UCASAL</h2>
+    class="relative flex-col">
+    <h2 class="flex items-center justify-center mb-4 md:mb-10 text-center z-10 relative" style="color: white;">Los beneficios de estudiar en UCASAL</h2>
     <div class="fondo-blur absolute z-0 inset-0"></div>
     <div
-        class="mx-auto contenedor grid max-w-400 gap-6 lg:grid-cols-[1fr_minmax(0,32rem)_1fr] lg:items-center lg:justify-center lg:gap-8"
+        class="mx-auto contenedor grid max-w-400 gap-3 flex-1 min-h-0 lg:grid-cols-[1fr_minmax(0,32rem)_1fr] lg:items-center lg:justify-center lg:gap-8"
         data-beneficios
     >
         <!-- Columna central: las 2 principales, una arriba de la otra -->
-        <div class="flex flex-col lg:order-2 text-center">
+        <div class="flex flex-row min-w-10 max-w-full md:flex-col md:order-2 text-center">
             {
                 principales.map((beneficio, index) => (
                     <article
-                        class={`reveal group relative aspect-5/3 overflow-hidden bg-(--azul-dark-ucasal) shadow-lg ${index === 0 ? 'rounded-b-0 rounded-t-xl' : 'rounded-t-0 rounded-b-xl'}`}
+                            class={`reveal group relative flex-1 min-w-0 md:flex-none aspect-3/4 md:aspect-5/3 overflow-hidden bg-(--azul-dark-ucasal) shadow-lg ${index === 0 ? 'rounded-l-xl md:rounded-bl-none md:rounded-t-xl' : 'rounded-r-xl md:rounded-tr-none md:rounded-b-xl'}`}
                         data-reveal="principal"
                         style={`--retraso: ${index * 150}ms`}
                     >
@@ -102,8 +99,8 @@ const laterales = [secundarios.slice(0, 2), secundarios.slice(2, 4)];
                             decoding="async"
                             class="absolute inset-0 size-full object-cover transition-transform duration-500 group-hover:scale-105"
                         />
-                        <div class="absolute flex uppercase items-center justify-center w-full h-full text-xl md:text-2xl font-bold text-black z-20">
-                            <span class="bg-white/90 px-4 py-2 rounded-lg">
+                        <div class="absolute flex uppercase items-center justify-center w-full h-full text-sm md:text-2xl font-bold text-black z-20">
+                            <span class="bg-white/90 mx-2 px-3 md:px-4 py-1.5 md:py-2 rounded-lg">
                                 {beneficio.titulo}
                             </span>
                         </div>
@@ -115,7 +112,7 @@ const laterales = [secundarios.slice(0, 2), secundarios.slice(2, 4)];
                     <div
                         class:list={[
                             index === 0 &&
-                                "flex items-center justify-center bottom-0 left-0 right-0 w-full h-1 my-0.5 bg-white",
+                                "flex items-center justify-center w-1 h-full mx-0.5 md:w-full md:h-1 md:mx-0 md:my-0.5 bg-white z-30",
                         ]}
                     />
                 ))
@@ -126,20 +123,20 @@ const laterales = [secundarios.slice(0, 2), secundarios.slice(2, 4)];
             laterales.map((grupo, index) => (
                 <article
                     class:list={[
-                        "reveal rounded-2xl border border-(--ucasal-gray-medium) bg-(--ucasal-gray-light) p-6",
+                        "reveal rounded-2xl h-fit border border-(--ucasal-gray-medium) bg-(--ucasal-gray-light) p-4 md:p-6",
                         index === 0 ? "lg:order-1" : "lg:order-3",
                     ]}
                     data-reveal="lateral"
                     style={`--retraso: ${450 + index * 150}ms; --desde-x: ${index === 0 ? "-2rem" : "2rem"}; --desde-y: 0`}
                 >
-                    <ul class="flex flex-col gap-5 text-center">
+                    <ul class="flex flex-row md:flex-col gap-5 text-center">
                         {grupo.map((beneficio, index) => (
                             <li>
-                                <h4 class="text-lg  font-bold text-(--azul-ucasal)">
+                                <h4 class="text-[13px] md:text-lg  font-bold text-(--azul-ucasal)">
                                     {beneficio.titulo}
                                 </h4>
                                 {beneficio.descripcion && (
-                                    <p class="mt-1 text-sm text-gray-600 first-letter:uppercase">
+                                    <p class="mt-1 text-[10px] md:text-sm text-gray-600 first-letter:uppercase">
                                         {beneficio.descripcion}
                                     </p>
                                 )}
@@ -147,7 +144,8 @@ const laterales = [secundarios.slice(0, 2), secundarios.slice(2, 4)];
                             <div
                                 class:list={[
                                     index === 0 &&
-                                        "flex items-center justify-center bottom-0 left-0 right-0 w-full h-0.5 my-2 bg-(--azul-dark-ucasal)/30",
+                                        "flex items-center justify-center bottom-0 left-0 right-0 w-1 h-full md:w-full md:h-0.5 my-2 bg-(--azul-dark-ucasal)/30",
+                                    index !== 0 && "hidden",
                                 ]}
                             />
                         ))}

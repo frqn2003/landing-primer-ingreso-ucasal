@@ -15,11 +15,12 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-snap-type: y mandatory;
+  scroll-snap-type: y proximity;
 }
 
 section {
   height: 100dvh;
+  display: flex;
   padding-top: var(--alto-navbar);
   scroll-snap-align: start;
   scroll-snap-stop: always;
@@ -37,6 +38,19 @@ section {
   scroll-snap-stop: always;
 }
 
+/* Secciones cuyo contenido puede no entrar en una pantalla (ej. grillas largas):
+   en vez de forzar 100dvh + scroll interno, crecen con su contenido y las
+   recorre el scroll normal de la página. Además salen del snap obligatorio:
+   con mandatory, cada swipe dentro de una sección más alta que la pantalla
+   se revierte al no haber otro punto de snap hasta el final (se "tilda" en touch). */
+.seccion-alto-libre {
+  height: auto;
+  min-height: 100dvh;
+  overflow: visible;
+  scroll-snap-align: none;
+  scroll-snap-stop: normal;
+}
+
 
 body {
   margin: 0;
@@ -44,6 +58,26 @@ body {
   background: var(--ucasal-white);
   color: #172033;
   font-family: 'Museo Sans', ui-sans-serif, system-ui, sans-serif;
+}
+
+/* Título */
+h1 {
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+/* Subtitulos */
+h2 {
+  font-size: clamp(1.5rem, 4vw, 2.75rem);
+  font-weight: 700;
+  color: var(--azul-ucasal);
+}
+
+h3 {
+  font-size: clamp(2rem, 4vw, 2rem);
+  font-weight: 750;
+  line-height: 1;
 }
 
 .fondo-blur {
@@ -60,8 +94,13 @@ body {
 }
 
 @keyframes blurSeccion {
-  from {backdrop-filter: blur(0px);}
-  to {backdrop-filter: blur(30px);}
+  from {
+    backdrop-filter: blur(0px);
+  }
+
+  to {
+    backdrop-filter: blur(30px);
+  }
 }
 
 @keyframes form-button-glow {
@@ -85,13 +124,11 @@ body {
   left: 50%;
   width: 100%;
   aspect-ratio: 1;
-  background: conic-gradient(
-    transparent 0 82%,
-    var(--azul-ucasal) 87%,
-    white 90%,
-    var(--rojo-ucasal) 94%,
-    transparent 100%
-  );
+  background: conic-gradient(transparent 0 82%,
+      var(--azul-ucasal) 87%,
+      white 90%,
+      var(--rojo-ucasal) 94%,
+      transparent 100%);
   transform: translate(-50%, -50%);
   animation: form-button-glow 2.4s linear infinite;
   z-index: 0;
@@ -107,12 +144,12 @@ body {
   z-index: 1;
 }
 
-.boton-form-glow > span {
+.boton-form-glow>span {
   position: relative;
   z-index: 2;
 }
 
-.boton-inscripcion{
+.boton-inscripcion {
   color: white;
   font-weight: 700;
   border: 1px solid white;
@@ -123,27 +160,10 @@ body {
   flex-direction: row;
   align-items: center;
   gap: 0.5rem;
+
   @media (max-width: 1024px) {
     display: none;
   }
-}
-/* Título */
-h1{
-  font-size: clamp(2rem, 4vw, 3.5rem);
-  font-weight: 800;
-  line-height: 1.2;
-}
-/* Subtitulos */
-h2 {
-  font-size: clamp(1.75rem, 4vw, 2.7rem);
-  font-weight: 700;
-  color: var(--azul-ucasal);
-}
-
-h3{
-    font-size: clamp(2rem, 4vw, 2rem);
-    font-weight: 750;
-    line-height: 1;
 }
 
 /* Shimmer diagonal en botón CTA */
@@ -387,6 +407,7 @@ h3{
   color: var(--rojo-ucasal);
   border-left-color: var(--rojo-ucasal);
 }
+
 .mobile-nav-link {
   cursor: pointer;
 }
@@ -426,6 +447,7 @@ h3{
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   transform: scale(1.05);
 }
+
 .boton-cta-hero {
   align-items: center;
   justify-content: center;
@@ -526,12 +548,12 @@ h3{
   padding-inline: 50px;
 }
 
-.flecha-carrera:hover > span {
+.flecha-carrera:hover>span {
   rotate: 90deg;
   transition: all 0.4s ease;
 }
 
-.flecha-carrera:hover::before{
+.flecha-carrera:hover::before {
   content: 'Explorar';
   font-size: 0.9rem;
 }

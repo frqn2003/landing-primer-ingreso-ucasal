@@ -42,9 +42,10 @@ const modalidades = [
 ];
 ---
 
-<section id="modalidades" class="bg-slate-50 py-10">
-  <div class="contenedor mx-auto">
-    <div class="flex max-md:flex-col h-190 sm:h-140 overflow-hidden">
+<section id="modalidades" class="bg-slate-50 flex flex-col">
+  <h2 class="text-3xl font-bold text-center mb-8">Modalidades</h2>
+  <div class="contenedor mx-auto flex-1 w-full flex flex-col min-h-0">
+    <div class="flex max-md:flex-col flex-1 min-h-0 overflow-hidden">
       {
         modalidades.map((modalidad, i) => (
           <article
