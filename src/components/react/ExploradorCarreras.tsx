@@ -74,7 +74,7 @@ export default function ExploradorCarreras({ careers }: Props) {
         return counts
     }, [careers])
 
-    return <section id="carreras" className="seccion-alto-libre bg-white py-20" aria-labelledby="career-title">
+    return <section id="carreras" className="bg-white py-20 seccion-snap" aria-labelledby="career-title">
         <div className="contenedor">
             <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
                 <div><h2 id="career-title" className="mt-3 text-3xl font-black text-(--azul-dark-ucasal) sm:text-4xl">Encontrá tu carrera</h2><p className="mt-4 max-w-2xl text-base text-slate-600">Buscá por nombre o por los filtros</p></div>

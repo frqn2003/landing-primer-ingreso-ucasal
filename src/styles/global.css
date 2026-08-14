@@ -15,10 +15,37 @@
 
 html {
   scroll-behavior: smooth;
+  /* Móvil: proximity. El snap obligatorio pelea con la barra de URL y con los
+     gestos cortos del touch, así que ahí sugerimos en vez de imponer. */
   scroll-snap-type: y proximity;
 }
 
-section {
+/* Desktop: una pantalla por gesto */
+@media (min-width: 1024px) {
+  html {
+    scroll-snap-type: y mandatory;
+  }
+}
+
+/* La zona de scroll libre está en pantalla → sin snap. Lo togglea el
+   IntersectionObserver del Layout sobre [data-scroll-libre]. Sin esto, con
+   mandatory cualquier sección más alta que la pantalla queda atrapada: no hay
+   punto de snap intermedio y cada gesto se revierte. */
+html.snap-off {
+  scroll-snap-type: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-snap-type: none;
+    scroll-behavior: auto;
+  }
+}
+
+/* Secciones de pantalla completa. Es opt-in a propósito: como selector de
+   etiqueta alcanzaba a TODOS los <section> del sitio (menú del navbar,
+   CareerDetail, gracias, etc.) y los rompía. */
+.seccion-snap {
   height: 100dvh;
   display: flex;
   padding-top: var(--alto-navbar);
@@ -31,24 +58,11 @@ section {
   padding-top: 0;
 }
 
-/* Elementos cortos al final: alinean su borde inferior */
-.seccion-snap-final {
-  height: auto;
-  scroll-snap-align: end;
-  scroll-snap-stop: always;
-}
-
-/* Secciones cuyo contenido puede no entrar en una pantalla (ej. grillas largas):
-   en vez de forzar 100dvh + scroll interno, crecen con su contenido y las
-   recorre el scroll normal de la página. Además salen del snap obligatorio:
-   con mandatory, cada swipe dentro de una sección más alta que la pantalla
-   se revierte al no haber otro punto de snap hasta el final (se "tilda" en touch). */
-.seccion-alto-libre {
-  height: auto;
-  min-height: 100dvh;
-  overflow: visible;
-  scroll-snap-align: none;
-  scroll-snap-stop: normal;
+/* La zona libre tiene su propio punto de snap arriba: así la salida de la
+   última sección de pantalla completa tiene un destino válido y no queda
+   atrapada aunque el JS todavía no haya corrido. */
+[data-scroll-libre] {
+  scroll-snap-align: start;
 }
 
 

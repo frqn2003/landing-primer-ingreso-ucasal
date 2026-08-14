@@ -78,5 +78,47 @@ const socialImage = new URL(`${base}iso.svg`, 'https://www.ucasal.edu.ar').href;
 	</head>
 	<body>
 		<slot />
+		<script>
+			// El snap obligatorio no puede convivir con secciones más altas que la
+			// pantalla: no hay punto de snap intermedio, así que cada gesto se
+			// revierte. Solución: apagarlo en el contenedor una vez que la zona de
+			// scroll libre llega al tope de la pantalla.
+			//
+			// Ojo: no sirve un IntersectionObserver sobre la zona libre. Mientras el
+			// snap está activo, la zona nunca alcanza a hacerse visible (el snap la
+			// revierte primero), así que el observer no se dispararía nunca y el
+			// scroll quedaría trabado en la última sección.
+			const libre = document.querySelector('[data-scroll-libre]');
+
+			if (libre) {
+				const html = document.documentElement;
+				let limite = 0;
+				let pendiente = false;
+
+				const medir = () => {
+					limite = libre.getBoundingClientRect().top + window.scrollY;
+				};
+
+				const aplicar = () => {
+					pendiente = false;
+					html.classList.toggle('snap-off', window.scrollY >= limite - 1);
+				};
+
+				const pedir = () => {
+					if (pendiente) return;
+					pendiente = true;
+					requestAnimationFrame(aplicar);
+				};
+
+				medir();
+				aplicar();
+
+				addEventListener('scroll', pedir, { passive: true });
+				addEventListener('resize', () => {
+					medir();
+					pedir();
+				});
+			}
+		</script>
 	</body>
 </html>
