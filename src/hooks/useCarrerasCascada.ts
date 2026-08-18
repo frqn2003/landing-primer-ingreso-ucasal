@@ -27,6 +27,12 @@ export interface UseCarrerasCascadaOptions {
     onSedeChange?: (value: string) => void
     /** Callback llamado cuando se pre-selecciona la carrera desde el evento global */
     onCodcarChange?: (value: string) => void
+    /**
+     * Códigos de modo que se ofrecen en esta landing. En el build online llega
+     * solo [7], así que una carrera que se dicta [1,7] queda con un único modo
+     * elegible y la cascada lo auto-selecciona igual que si fuera exclusiva.
+     */
+    modosDisponibles?: number[]
 }
 
 export function useCarrerasCascada({
@@ -36,7 +42,10 @@ export function useCarrerasCascada({
     onProvinciaChange,
     onSedeChange,
     onCodcarChange,
+    modosDisponibles,
 }: UseCarrerasCascadaOptions = {}) {
+    const modoElegible = (modo: number) =>
+        !modosDisponibles || modosDisponibles.includes(Number(modo))
     const [carreras, setCarreras] = useState<any[]>([])
     const [apiCargando, setApiCargando] = useState(false)
     const [codcar, setCodcar] = useState(codcarInicial ?? '')
@@ -53,7 +62,8 @@ export function useCarrerasCascada({
         setApiCargando(true)
 
         if (codcarInicial) {
-            const modoInicial = String(dataCarreras.find(c => String(c.codcar) === codcarInicial)?.modalidad?.[0] ?? 7)
+            const modalidadesCarrera = dataCarreras.find(c => String(c.codcar) === codcarInicial)?.modalidad ?? []
+            const modoInicial = String(modalidadesCarrera.find(modoElegible) ?? modalidadesCarrera[0] ?? 7)
             getCarreraApi(codcarInicial, modoInicial)
                 .then(data => {
                     const resultado = data ? [data] : []
@@ -87,7 +97,7 @@ export function useCarrerasCascada({
         ...new Map(
             dataCarreras
                 .filter(c => String(c.codcar) === codcar)
-                .flatMap(c => c.modalidad.map((m) => [String(m), { modalidad: m }] as const))
+                .flatMap(c => c.modalidad.filter(modoElegible).map((m) => [String(m), { modalidad: m }] as const))
         ).values()
     ]
     const carreraSeleccionada = carreras.find(c => String(c.codcar) === codcar && String(c.modo) === modalidad)

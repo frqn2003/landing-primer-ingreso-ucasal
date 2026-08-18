@@ -6,9 +6,13 @@
     "node": ">=22.12.0"
   },
   "scripts": {
-    "dev": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview",
+    "dev": "astro dev --mode presencial",
+    "dev:online": "node scripts/dev-online.mjs",
+    "build": "npm run build:presencial && npm run build:online",
+    "build:presencial": "astro build --mode presencial outDir",
+    "build:online": "astro build --mode online outDir",
+    "preview": "astro preview --mode presencial outDir",
+    "preview:online": "astro preview --mode online outDir --port 4322",
     "astro": "astro"
   },
   "dependencies": {

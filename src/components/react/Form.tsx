@@ -65,7 +65,19 @@ const IconoBuscar = () => (
     </svg>
 )
 
-export default function Form({ codcarInicial, onSubPage }: { codcarInicial?: string, onSubPage?: boolean }) {
+export default function Form({ codcarInicial, onSubPage, modosDisponibles }: {
+    codcarInicial?: string,
+    onSubPage?: boolean,
+    /**
+     * Códigos de modo que se ofrecen en esta landing. En el build online llega
+     * solo [7]: se listan únicamente las carreras que se venden online y el
+     * selector de modalidad muestra nada más que Online.
+     * Lo resuelve el componente .astro que lo renderiza con `modosCarrera` de
+     * src/config/modalidad.ts; viene por props para no arrastrar la config al
+     * bundle del navegador.
+     */
+    modosDisponibles?: number[]
+}) {
     const { register, handleSubmit, formState: { errors, isSubmitted }, watch, setValue } = useForm({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -91,6 +103,7 @@ export default function Form({ codcarInicial, onSubPage }: { codcarInicial?: str
     } = useCarrerasCascada({
         codcarInicial,
         onSubPage,
+        modosDisponibles,
         onModalidadChange: (v) => { setValue('cbx_modo', v, { shouldValidate: true }) },
         onProvinciaChange: (v) => { setValue('cbx_provincia', v, { shouldValidate: true }) },
         onSedeChange: (v) => { setValue('cbx_sede', v, { shouldValidate: true }) },
@@ -137,6 +150,11 @@ export default function Form({ codcarInicial, onSubPage }: { codcarInicial?: str
 
     const todosCompletos = !!carreraCompleta && !!nombre && !!email && !!ddiPais && !!codArea && !!tel
     const carreraSeleccionadaLocal = dataCarreras.find(c => String(c.codcar) === String(codcar))
+
+    /* En la landing online se listan solo las carreras que se venden online */
+    const carrerasDisponibles = modosDisponibles
+        ? dataCarreras.filter(c => c.modalidad.some(m => modosDisponibles.includes(m)))
+        : dataCarreras
     const sectorCarrera = carreraSeleccionadaLocal?.sector
 
     /* Sedes */
@@ -345,7 +363,7 @@ export default function Form({ codcarInicial, onSubPage }: { codcarInicial?: str
                     </div>
                 ) : (
                     <fieldset className="flex max-h-50 flex-col gap-2 overflow-y-auto rounded-lg border border-gray-300 bg-white p-2 text-black">
-                        {dataCarreras.map((carrera) => {
+                        {carrerasDisponibles.map((carrera) => {
                             const value = carrera.codcar.toString()
                             const labelModalidad = carrera.modalidad.length > 1 ? 'Presencial y Virtual' : carrera.modalidad.includes(7) ? 'Virtual' : 'Presencial'
                             return (
@@ -379,7 +397,7 @@ export default function Form({ codcarInicial, onSubPage }: { codcarInicial?: str
             <div className={`border-b border-black/10 pb-4 mb-4 transition-opacity ${codcar ? '' : 'opacity-50'}`}>
                 <p className="text-xs font-bold text-(--azul-ucasal) tracking-wide uppercase mb-2">Elegí tu modalidad</p>
                 <div className="flex flex-row w-full gap-3">
-                    {(codcar ? modos : [{ modalidad: 1 }, { modalidad: 7 }]).map((m: any) => {
+                    {(codcar ? modos : (modosDisponibles ?? [1, 7]).map((m) => ({ modalidad: m }))).map((m: any) => {
                         const esOnline = m.modalidad === 7
                         const seleccionado = !!codcar && String(modalidad) === String(m.modalidad)
                         return (

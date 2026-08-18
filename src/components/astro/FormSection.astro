@@ -1,0 +1,66 @@
+---
+// Sección del formulario: a la izquierda cómo se puede pagar la cuota, a la
+// derecha el formulario de contacto que ya existía.
+//
+// Lleva id="contacto" porque es el destino de los CTA "Quiero recibir
+// asesoramiento" que hay repartidos en la landing.
+import Form from "../react/Form.tsx";
+import { modosCarrera } from "../../config/modalidad";
+import Financiacion from "./Financiacion.astro";
+
+// BORRADOR: las formas de pago son una primera pasada, hay que confirmarlas con
+// Tesorería antes de publicar. Si en algún momento difieren entre presencial y
+// online, esta lista se muda a src/config/contenido.ts, que ya resuelve eso.
+const formasDePago = [
+    {
+        titulo: "Débito automático",
+        detalle:
+            "Adherí tu tarjeta o CBU y la cuota se debita sola cada mes, sin recargo y sin trámites.",
+        icono: "debito",
+    },
+    {
+        titulo: "Tarjeta de crédito en cuotas",
+        detalle:
+            "Pagá con las principales tarjetas y aprovechá los planes de cuotas vigentes.",
+        icono: "tarjeta",
+    },
+    {
+        titulo: "Transferencia o pago online",
+        detalle:
+            "Desde el homebanking o el campus virtual, con el cupón de pago que generás vos mismo.",
+        icono: "transferencia",
+    },
+    {
+        titulo: "Efectivo en puntos de pago",
+        detalle:
+            "Imprimí el cupón y abonalo en la red de cobranzas o en la Tesorería del campus.",
+        icono: "efectivo",
+    },
+    {
+        titulo: "Becas y descuentos",
+        detalle:
+            "Por mérito, por hermanos, deportivas o por convenio con tu empresa: se aplican sobre la cuota.",
+        icono: "beca",
+    },
+];
+---
+
+<section id="contacto" class="bg-slate-50 py-20" aria-labelledby="contacto-titulo">
+    <div
+        class="contenedor grid w-full items-start gap-10 lg:grid-cols-[1fr_minmax(0,34rem)] lg:gap-14"
+    >
+        {/* min-w-0 en las dos columnas: sin eso el ancho mínimo del contenido
+            estira la celda del grid y se desborda el padding del contenedor. */}
+        <div class="min-w-0 h-full">
+            <Financiacion />
+        </div>
+
+        <div class="min-w-0">
+            <Form
+                onSubPage={false}
+                modosDisponibles={modosCarrera}
+                client:visible
+            />
+        </div>
+    </div>
+</section>

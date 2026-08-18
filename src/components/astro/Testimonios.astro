@@ -1,130 +1,326 @@
 ---
-const testimonios = [
-  {
-    nombre: "Benjamin Elizalde",
-    carrera: "Licenciatura en Comercialización",
-    frase: "La facultad está siempre a disposición",
-  },
-  {
-    nombre: "Ebaneo Valdez Kao",
-    carrera: "Ingeniería en Informática",
-    frase: "Puedo ejercer mi profesión desde cualquier parte del mundo",
-  },
-  {
-    nombre: "Luciana Gennari",
-    carrera: "Kinesiología",
-    frase:
-      "Para poder rendir bien académicamente y en entrenamiento, la universidad me da una ayuda gigante",
-  },
-  {
-    nombre: "Nicolás Ovejero",
-    carrera: "Licenciatura en Turismo",
-    frase:
-      "Le agradezco a la universidad por brindarnos una herramienta fundamental: el capital humano, los profesores y sobre todo los compañeros",
-  },
-  {
-    nombre: "Nahuel Agustín Artigas",
-    carrera: "Profesorado en Educación Física",
-    frase:
-      "Son todos sentimientos de alegría y felicidad porque pude realizar un sueño que tenía, que era recibirme",
-  },
-  {
-    nombre: "Luciano Marcelo Sato",
-    carrera: "Licenciatura en Artes Musicales",
-    frase:
-      "Nos permite integrarnos muy fácil al mundo laboral en muchos aspectos, capacitándonos mucho en el día a día",
-  },
-  {
-    nombre: "Tania Elizabeth Flores",
-    carrera: "Corredor Inmobiliario y Martillero Público",
-    frase:
-      "El apoyo de los profesores y del equipo UCASAL es fundamental: siempre están para guiarte. Como mamá, valoro mucho esa ayuda para equilibrar familia, trabajo y estudio.",
-  },
-];
+// Un solo testimonio grande, centrado, que va pasando solo y que además se
+// puede arrastrar con el mouse o con el dedo para cambiar de testimonio.
+//
+// Qué testimonios entran lo decide src/config/contenido.ts según el build: cada
+// uno declara si es de una carrera presencial, online o de las dos.
+import { testimonios } from "../../config/contenido";
+
+const total = testimonios.length;
 ---
 
-<div
-  class="testimonio-widget w-full max-w-md rounded-3xl border border-white/20 bg-white/10 p-6 shadow-2xl backdrop-blur-md"
+<section
+    id="testimonios"
+    class="bg-white py-20"
+    aria-labelledby="testimonios-titulo"
 >
-  <p class="text-xs md:text-sm font-semibold uppercase tracking-[0.2em] text-black md:text-white/70">
-    Lo que dicen nuestros estudiantes
-  </p>
-  <div class="testimonio-track mt-5 min-h-33">
-    {
-      testimonios.map((t, i) => (
-        <div
-          class="testimonio-item flex flex-col gap-3"
-          data-index={i}
-          style={i === 0 ? "" : "display:none"}
+    <div class="contenedor w-full text-center">
+        <p
+            class="text-sm font-bold uppercase tracking-[0.2em] text-(--rojo-ucasal)"
         >
-          <p class="text-lg leading-7 text-black md:text-white">“{t.frase}”</p>
-          <div class="flex items-center gap-3">
-            <span class="flex h-10 w-10 flex-none items-center justify-center rounded-full bg-(--rojo-ucasal) font-bold text-white">
-              {t.nombre.charAt(0)}
-            </span>
-            <div>
-              <p class="font-bold text-black md:text-white">{t.nombre}</p>
-              <p class="text-sm text-black/70 md:text-white/70">{t.carrera}</p>
+            Testimonios
+        </p>
+        <h2
+            id="testimonios-titulo"
+            class="mt-3 text-2xl font-black text-(--azul-dark-ucasal) sm:text-3xl"
+        >
+            Lo que dicen nuestros estudiantes
+        </h2>
+
+        <div
+            class="mt-10"
+            data-rotador
+            role="group"
+            aria-roledescription="carrusel"
+            aria-label="Testimonios de estudiantes"
+        >
+            <div
+                class="relative overflow-hidden rounded-3xl border border-slate-200 bg-slate-50 px-6 py-10 md:px-14 md:py-14"
+            >
+                <span
+                    class="pointer-events-none absolute top-1 left-1/2 -translate-x-1/2 text-[7rem] leading-none font-black text-(--rojo-ucasal)/10 select-none md:top-3 md:text-[11rem]"
+                    aria-hidden="true">“</span
+                >
+
+                {/* La ventana recorta lo que se arrastra fuera de la caja. */}
+                <div class="ventana relative" data-ventana>
+                    {/* Las fichas se apilan en la misma celda del grid: el alto
+                        lo fija la frase más larga y no salta al cambiar. */}
+                    <div class="pista">
+                        {
+                            testimonios.map((t, i) => (
+                                <figure
+                                    class="ficha"
+                                    data-ficha
+                                    data-activa={i === 0 ? "" : undefined}
+                                    aria-hidden={i === 0 ? "false" : "true"}
+                                    aria-label={`${i + 1} de ${total}`}
+                                >
+                                    <blockquote
+                                        class="mx-auto max-w-4xl text-xl leading-relaxed font-medium text-(--azul-dark-ucasal) md:text-3xl md:leading-[1.4]"
+                                    >
+                                        {t.frase}
+                                    </blockquote>
+
+                                    <figcaption
+                                        class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4"
+                                    >
+                                        <span
+                                            class="flex size-12 flex-none items-center justify-center rounded-full bg-(--rojo-ucasal) text-lg font-bold text-white md:size-14 md:text-xl"
+                                            aria-hidden="true"
+                                        >
+                                            {t.nombre.charAt(0)}
+                                        </span>
+                                        <div class="min-w-0 text-center sm:text-left">
+                                            <p class="font-bold text-(--azul-dark-ucasal) md:text-lg">
+                                                {t.nombre}
+                                            </p>
+                                            <p class="text-sm text-slate-600 md:text-base">
+                                                {t.carrera}
+                                            </p>
+                                        </div>
+                                    </figcaption>
+                                </figure>
+                            ))
+                        }
+                    </div>
+                </div>
             </div>
-          </div>
+
+            <ol class="mt-6 flex items-center justify-center gap-2" data-puntos>
+                {
+                    testimonios.map((t, i) => (
+                        <li>
+                            <button
+                                type="button"
+                                class="punto"
+                                data-punto
+                                data-indice={i}
+                                aria-label={`Ver el testimonio de ${t.nombre}`}
+                            />
+                        </li>
+                    ))
+                }
+            </ol>
         </div>
-      ))
-    }
-  </div>
-  <div class="mt-5 flex items-center justify-center gap-2">
-    {
-      testimonios.map((_t, i) => (
-        <button
-          type="button"
-          class="testimonio-dot h-2 w-2 rounded-full bg-black/40 md:bg-white/40 transition-colors"
-          data-index={i}
-          aria-label={`Testimonio ${i + 1}`}
-        />
-      ))
-    }
-  </div>
-</div>
+    </div>
+</section>
 
 <style>
-  .testimonio-dot[data-active="true"] {
-    background: var(--rojo-ucasal);
-    width: 1.25rem;
-    border-radius: 9999px;
-  }
+    .ventana {
+        /* El gesto horizontal cambia de testimonio; el vertical sigue
+           scrolleando la página. */
+        touch-action: pan-y;
+        cursor: grab;
+        user-select: none;
+    }
+
+    .ventana:active {
+        cursor: grabbing;
+    }
+
+    .pista {
+        display: grid;
+    }
+
+    /* Todas en la misma celda, una encima de la otra. */
+    .ficha {
+        grid-area: 1 / 1;
+        margin: 0;
+        opacity: 0;
+        /* visibility en vez de display: sigue ocupando lugar, así el alto del
+           contenedor es el de la frase más larga y no hay salto. */
+        visibility: hidden;
+        /* --arrastre lo escribe el JS mientras se arrastra, para que la ficha
+           siga al mouse. En reposo vale 0. */
+        transform: translateX(var(--arrastre, 0px)) translateY(0.5rem);
+        transition:
+            opacity 0.5s ease,
+            transform 0.5s ease;
+    }
+
+    .ficha[data-activa] {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(var(--arrastre, 0px));
+    }
+
+    /* Durante el arrastre no hay transición: la ficha tiene que seguir al
+       puntero 1 a 1. Y no se selecciona el texto al pasar por encima. */
+    [data-arrastrando] .ficha {
+        transition: none;
+    }
+
+    [data-arrastrando] .ventana {
+        user-select: none;
+    }
+
+    .punto {
+        display: block;
+        width: 0.5rem;
+        height: 0.5rem;
+        border-radius: 9999px;
+        background: color-mix(in srgb, var(--azul-dark-ucasal) 25%, transparent);
+        cursor: pointer;
+        transition:
+            width 0.3s ease,
+            background 0.3s ease;
+    }
+
+    .punto[data-activo] {
+        width: 1.5rem;
+        background: var(--rojo-ucasal);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .ficha {
+            transition-duration: 0.01ms;
+        }
+    }
 </style>
 
-
 <script>
-    document.querySelectorAll<HTMLElement>(".testimonio-widget").forEach((widget) => {
-        const items = Array.from(widget.querySelectorAll<HTMLElement>(".testimonio-item"));
-        const dots = Array.from(widget.querySelectorAll<HTMLElement>(".testimonio-dot"));
-        const total = items.length;
+    const rotador = document.querySelector<HTMLElement>("[data-rotador]");
+    const ventana = rotador?.querySelector<HTMLElement>("[data-ventana]");
+
+    if (rotador && ventana) {
+        const fichas = Array.from(
+            rotador.querySelectorAll<HTMLElement>("[data-ficha]"),
+        );
+        const puntos = Array.from(
+            rotador.querySelectorAll<HTMLElement>("[data-punto]"),
+        );
+        const total = fichas.length;
+        const ESPERA = 6000;
+        /* Cuánto hay que arrastrar para que cambie de testimonio. */
+        const UMBRAL = 60;
+
         let activo = 0;
-        let temporizador: ReturnType<typeof setInterval>;
+        let temporizador: number | undefined;
+        // Se pausa al pasar el mouse o al tabular por los puntos, y cuando la
+        // sección no está en pantalla. Se reanuda solo al revés.
+        //
+        // Arranca en true a propósito: pausar fuera de pantalla es solo un
+        // ahorro, así que si el IntersectionObserver no llega a dispararse el
+        // testimonio igual rota. Al revés, el carrusel dependería de él.
+        let enPantalla = true;
+        let detenidoPorUsuario = false;
 
-        function mostrar(indice: number) {
+        const pintar = () => {
+            fichas.forEach((ficha, i) => {
+                const esActiva = i === activo;
+                ficha.toggleAttribute("data-activa", esActiva);
+                ficha.setAttribute("aria-hidden", esActiva ? "false" : "true");
+            });
+
+            puntos.forEach((punto, i) => {
+                punto.toggleAttribute("data-activo", i === activo);
+                punto.setAttribute("aria-current", i === activo ? "true" : "false");
+            });
+        };
+
+        const ir = (indice: number) => {
             activo = ((indice % total) + total) % total;
-            items.forEach((item, i) => {
-                item.style.display = i === activo ? "" : "none";
-            });
-            dots.forEach((dot, i) => {
-                dot.dataset.active = String(i === activo);
-            });
-        }
+            pintar();
+        };
 
-        function reiniciarAutoplay() {
+        const pausar = () => {
+            if (temporizador === undefined) return;
             clearInterval(temporizador);
-            temporizador = setInterval(() => mostrar(activo + 1), 6000);
-        }
+            temporizador = undefined;
+        };
 
-        dots.forEach((dot, i) => {
-            dot.addEventListener("click", () => {
-                mostrar(i);
-                reiniciarAutoplay();
+        const arrancar = () => {
+            const quieto = matchMedia("(prefers-reduced-motion: reduce)").matches;
+            if (quieto || total < 2) return;
+            if (detenidoPorUsuario || !enPantalla || temporizador !== undefined) return;
+            temporizador = window.setInterval(() => ir(activo + 1), ESPERA);
+        };
+
+        puntos.forEach((punto) => {
+            punto.addEventListener("click", () => {
+                ir(Number(punto.dataset.indice));
+                // Reinicia la cuenta para que el elegido no dure menos.
+                pausar();
+                arrancar();
             });
         });
 
-        mostrar(0);
-        reiniciarAutoplay();
-    });
+        // Mientras se lee (mouse encima o foco adentro) no cambia solo.
+        for (const evento of ["mouseenter", "focusin"] as const) {
+            rotador.addEventListener(evento, () => {
+                detenidoPorUsuario = true;
+                pausar();
+            });
+        }
+
+        for (const evento of ["mouseleave", "focusout"] as const) {
+            rotador.addEventListener(evento, () => {
+                detenidoPorUsuario = false;
+                arrancar();
+            });
+        }
+
+        /* Arrastre con mouse o dedo: la ficha sigue al puntero y al soltar
+           cambia de testimonio si se pasó el umbral, o vuelve a su lugar. */
+        let arrastrando = false;
+        let inicioX = 0;
+        let desplazamiento = 0;
+
+        ventana.addEventListener("pointerdown", (evento) => {
+            // Solo botón principal del mouse; touch y lápiz siempre.
+            if (evento.pointerType === "mouse" && evento.button !== 0) return;
+            arrastrando = true;
+            inicioX = evento.clientX;
+            desplazamiento = 0;
+            rotador.setAttribute("data-arrastrando", "");
+            // Capturar el puntero es solo para no perder el gesto si el mouse se
+            // va de la caja; si falla, el arrastre funciona igual.
+            try {
+                ventana.setPointerCapture(evento.pointerId);
+            } catch {}
+            pausar();
+        });
+
+        ventana.addEventListener("pointermove", (evento) => {
+            if (!arrastrando) return;
+            desplazamiento = evento.clientX - inicioX;
+            fichas[activo].style.setProperty("--arrastre", `${desplazamiento}px`);
+        });
+
+        const soltar = () => {
+            if (!arrastrando) return;
+            arrastrando = false;
+            rotador.removeAttribute("data-arrastrando");
+
+            // Se limpia antes de cambiar: si no, la ficha que sale se queda
+            // corrida y vuelve así la próxima vez que le toque.
+            fichas[activo].style.removeProperty("--arrastre");
+
+            if (Math.abs(desplazamiento) > UMBRAL) {
+                ir(activo + (desplazamiento < 0 ? 1 : -1));
+            }
+
+            desplazamiento = 0;
+            arrancar();
+        };
+
+        ventana.addEventListener("pointerup", soltar);
+        ventana.addEventListener("pointercancel", soltar);
+
+        const observador = new IntersectionObserver(
+            (entradas) => {
+                for (const entrada of entradas) {
+                    enPantalla = entrada.isIntersecting;
+                    if (enPantalla) arrancar();
+                    else pausar();
+                }
+            },
+            { threshold: 0.3 },
+        );
+
+        observador.observe(rotador);
+        pintar();
+        arrancar();
+    }
 </script>

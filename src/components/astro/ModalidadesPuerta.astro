@@ -1,5 +1,7 @@
 ---
-const modalidades = [
+import { modosPuerta } from "../../config/modalidad";
+
+const todasLasModalidades = [
   {
     id: 1,
     codigo: 1,
@@ -40,6 +42,12 @@ const modalidades = [
     imagen: "https://www.placehold.co/600x400?text=Home",
   },
 ];
+
+// La landing online no vende presencial: ahí quedan solo Online y Home. Cuáles
+// entran lo decide src/config/modalidad.ts según el build.
+const modalidades = todasLasModalidades.filter((m) =>
+  modosPuerta.includes(m.codigo),
+);
 ---
 
 <section id="modalidades" class="seccion-snap bg-slate-50 flex flex-col">
@@ -58,7 +66,7 @@ const modalidades = [
 
             <button class={`puerta-colapsado absolute inset-0 flex flex-col items-center justify-between py-7 cursor-pointer bg-(${modalidad.color}) ${modalidad.codigo === 7 ? "bg-[#1c4d86]" : ""}`}>
               <span class="text-[10px] font-semibold tracking-[0.2em] text-white/80 uppercase">
-                0{modalidad.id}
+                0{i + 1}
               </span>
               <span class="text-3xl md:text-4xl font-black tracking-tight first-letter:uppercase text-white">
                 {modalidad.nombre}

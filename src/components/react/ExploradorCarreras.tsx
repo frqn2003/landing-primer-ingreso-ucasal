@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { modalidades } from '../../data/modalidades'
+import { modalidades as todasLasModalidades } from '../../data/modalidades'
 import { facultades } from '../../data/facultades'
 import CartaCarrera from './CartaCarrera'
 
@@ -13,9 +13,21 @@ type Career = {
     sector: number
 }
 
-type Props = { careers: Career[] }
+type Props = {
+    careers: Career[]
+    /**
+     * Códigos de modo que se ofrecen en esta landing. En el build online llega
+     * solo [7], así que el filtro de modalidad muestra únicamente Online.
+     * Lo resuelve index.astro con `modosCarrera` de src/config/modalidad.ts;
+     * viene por props para no arrastrar la config al bundle del navegador.
+     */
+    modosDisponibles?: number[]
+}
 
-export default function ExploradorCarreras({ careers }: Props) {
+export default function ExploradorCarreras({ careers, modosDisponibles }: Props) {
+    const modalidades = useMemo(() => modosDisponibles
+        ? todasLasModalidades.filter((m) => modosDisponibles.includes(m.code))
+        : todasLasModalidades, [modosDisponibles])
     const [query, setQuery] = useState('')
     const [modalities, setModalities] = useState<number[]>([])
     const [faculties, setFaculties] = useState<number[]>([])
@@ -65,7 +77,7 @@ export default function ExploradorCarreras({ careers }: Props) {
             counts.set(m.code, careers.filter((c) => c.modalidad.includes(m.code)).length)
         }
         return counts
-    }, [careers])
+    }, [careers, modalidades])
     const facultadCounts = useMemo(() => {
         const counts = new Map<number, number>()
         for (const f of facultades) {

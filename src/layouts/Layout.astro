@@ -13,6 +13,30 @@ const {
 const canonical = new URL(Astro.url.pathname, 'https://www.ucasal.edu.ar').href;
 const base = import.meta.env.BASE_URL;
 const socialImage = new URL(`${base}iso.svg`, 'https://www.ucasal.edu.ar').href;
+
+// Las @font-face se generan acá y no en global.css porque la ruta de los .woff2
+// depende del `base`, que cambia según la modalidad del build, y el CSS plano no
+// puede leerlo. Las dos últimas familias son alias que ya usaban componentes
+// viejos; se mantienen para no romperlos.
+const fuentes = [
+	{ familia: 'Museo Sans', peso: 500, archivo: 'MuseoSans_500.woff2', local: true },
+	{ familia: 'Museo Sans', peso: 700, archivo: 'MuseoSans_700.woff2', local: true },
+	{ familia: 'Museo Sans', peso: 900, archivo: 'MuseoSans_900.woff2', local: true },
+	{ familia: 'Museo', peso: 300, archivo: 'Museo300-Regular.woff2', local: false },
+	{ familia: 'Museo Sans 900', peso: 300, archivo: 'MuseoSans_900.woff2', local: true },
+	{ familia: 'Museo Sans 500', peso: 300, archivo: 'MuseoSans_500.woff2', local: true },
+];
+
+const cssFuentes = fuentes
+	.map(({ familia, peso, archivo, local }) => {
+		const origenes = [
+			local && `local("${familia}")`,
+			`url("${base}fonts/${archivo}") format("woff2")`,
+		].filter(Boolean);
+
+		return `@font-face{font-family:"${familia}";font-style:normal;font-weight:${peso};font-display:swap;src:${origenes.join(",")}}`;
+	})
+	.join('');
 ---
 
 <!doctype html>
@@ -23,6 +47,8 @@ const socialImage = new URL(`${base}iso.svg`, 'https://www.ucasal.edu.ar').href;
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="icon" href={`${base}iso.svg`} />
+
+		<style is:global set:html={cssFuentes}></style>
 
 		<!-- SEO -->
 		<title>{title}</title>

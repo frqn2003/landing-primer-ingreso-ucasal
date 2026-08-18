@@ -1,6 +1,64 @@
-<section id="sedes" class="bg-white py-20">
-    <div class="contenedor mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
-        <div><p class="text-sm font-bold uppercase tracking-[0.2em] text-(--rojo-ucasal)">Acompañamiento</p><h2 class="mt-3 text-3xl font-black tracking-tight text-(--azul-dark-ucasal) sm:text-4xl">Tu ingreso empieza con información clara</h2><p class="mt-5 text-lg leading-8 text-slate-600">Conocé las alternativas disponibles y recibí orientación para elegir tu carrera, modalidad y próximo paso.</p><a href="#contacto" class="mt-7 inline-flex rounded-xl bg-(--azul-dark-ucasal) px-5 py-3 font-bold text-white transition hover:bg-(--azul-ucasal)">Quiero recibir asesoramiento</a></div>
-        <div class="grid gap-4 sm:grid-cols-2"><div class="rounded-2xl bg-slate-50 p-6"><p class="text-3xl font-black text-(--rojo-ucasal)">+30</p><p class="mt-2 font-semibold text-slate-700">propuestas para explorar</p></div><div class="rounded-2xl bg-slate-50 p-6"><p class="text-3xl font-black text-(--azul-ucasal)">3</p><p class="mt-2 font-semibold text-slate-700">modalidades de estudio</p></div><div class="rounded-2xl bg-slate-50 p-6 sm:col-span-2"><p class="font-bold text-(--azul-dark-ucasal)">Encontrá tu sede y empezá a planificar tu futuro</p><p class="mt-2 text-slate-600">Nuestro equipo puede ayudarte a resolver tus dudas sobre inscripción, cursado y documentación.</p></div></div>
+---
+let tarjetas: any[] = [];
+let cargando = true;
+
+try {
+    await fetch("/landing/ingreso/assets/datosLanding.json")
+        .then((r) => r.json())
+        .then((data) => {
+            const activas: any[] = (data.tarjeta as any[])
+                .filter((t) => t.activa)
+                .sort((a, b) => a.orden - b.orden);
+
+            tarjetas = activas;
+        });
+} catch (error) {
+    console.error("Error al cargar las tarjetas", error);
+    cargando = true;
+}
+---
+
+<section
+    class="bg-center bg-cover relative h-full"
+    role="region"
+    aria-label="Financiación"
+>
+    <div
+        class="px-6 py-6 flex flex-col gap-6 z-20 bg-cover bg-center rounded-lg bg-linear-to-r from-(--azul-ucasal) to-(--azul-dark-ucasal) h-full"
+    >
+        <h2
+            class="text-2xl md:text-3xl text-center font-semibold"
+            style="color:white;"
+        >
+            Financiá tus aranceles con:
+        </h2>
+        <div class="flex flex-wrap flex-col gap-6 justify-center h-full items-center">
+            {
+                cargando ? (
+                    [1, 2, 3, 4].map(() => (
+                        <div class="h-24 rounded-xl bg-white/20 animate-pulse flex-1 max-w-100 w-full" />
+                    ))
+                ) : (
+                    <>
+                        {tarjetas.map((tarjeta) => (
+                            <div class="flex flex-col items-center gap-3 flex-1 max-w-100 w-full">
+                                <div class="bg-white/70 border border-white/80 rounded-xl px-4 py-2 sm:px-6 sm:py-3 flex items-center justify-center">
+                                    <img
+                                        src={tarjeta.imagen}
+                                        alt={tarjeta.nombre}
+                                        class="h-9 sm:h-11 object-contain"
+                                        loading="lazy"
+                                        decoding="async"
+                                    />
+                                </div>
+                                <p class="text-white text-xs sm:text-sm text-center leading-snug">
+                                    {tarjeta.descripcion}
+                                </p>
+                            </div>
+                        ))}
+                    </>
+                )
+            }
+        </div>
     </div>
 </section>
