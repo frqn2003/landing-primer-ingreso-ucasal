@@ -1,12 +1,22 @@
 ---
+import BarraHero from "../react/BarraHero.tsx";
+import { obtenerPromociones } from "../../data/promociones";
+
 interface Props {
     base?: string;
 }
 
 const { base = import.meta.env.BASE_URL } = Astro.props;
+
+// La lista se lee en el build; cuál está vigente y cuántos días quedan lo
+// resuelve la píldora en el navegador. Ver src/data/promociones.ts.
+const promociones = await obtenerPromociones();
 ---
 
-<section class="relative w-full text-white seccion-snap seccion-snap-hero" aria-labelledby="hero-title">
+<section
+    class="relative w-full text-white seccion-snap seccion-snap-hero"
+    aria-labelledby="hero-title"
+>
     <!-- Foto de fondo, ocupa toda la altura de la pantalla -->
     <div class="relative h-full w-full">
         <div
@@ -15,19 +25,23 @@ const { base = import.meta.env.BASE_URL } = Astro.props;
         </div>
 
         <div
-            class="md:mx-12 py-14 h-full mx-5 absolute inset-x-0 bottom-0 flex flex-col items-center gap-4"
+            class="md:mx-12 py-14 h-full mx-5 absolute inset-x-0 bottom-0 flex flex-col items-center"
         >
             <div
                 class="max-w-4xl flex flex-col justify-center my-auto items-center"
             >
                 <h1 class="uppercase">Estudia, conectá, crecé</h1>
                 <p class="text-center">Descripción epicarda</p>
+                <div class="flex flex-row gap-4 mt-24">
+                    <a href={`${base}#carreras`} class="boton-cta-hero"
+                        >Comenzá ahora</a
+                    >
+                </div>
             </div>
-            <div class="flex flex-row gap-4">
-                <a href={`${base}#carreras`} class="boton-cta-hero"
-                    >Comenzá ahora</a
-                >
-            </div>
+            <!-- client:load y no client:only: así los datos institucionales ya
+                 vienen en el HTML del build. La promoción, que depende de la
+                 fecha del visitante, la agrega el hook recién al hidratar. -->
+            <BarraHero promociones={promociones} client:load />
         </div>
     </div>
 </section>

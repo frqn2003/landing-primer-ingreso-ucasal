@@ -3,7 +3,9 @@ let tarjetas: any[] = [];
 let cargando = true;
 
 try {
-    await fetch("/landing/ingreso/assets/datosLanding.json")
+    await fetch(
+        "https://www.ucasal.edu.ar/landing/ingreso/assets/datosLanding.json",
+    )
         .then((r) => r.json())
         .then((data) => {
             const activas: any[] = (data.tarjeta as any[])
@@ -12,27 +14,28 @@ try {
 
             tarjetas = activas;
         });
+    cargando = false;
+    console.log("Cargaron las tarjetas");
 } catch (error) {
     console.error("Error al cargar las tarjetas", error);
-    cargando = true;
 }
 ---
 
 <section
-    class="bg-center bg-cover relative h-full"
+    class="bg-center bg-cover justify-center relative"
     role="region"
     aria-label="Financiación"
 >
     <div
-        class="px-6 py-6 flex flex-col gap-6 z-20 bg-cover bg-center rounded-lg bg-linear-to-r from-(--azul-ucasal) to-(--azul-dark-ucasal) h-full"
+        class="p-6 flex flex-col gap-12 z-20 rounded-lg"
     >
-        <h2
+        <h3
             class="text-2xl md:text-3xl text-center font-semibold"
             style="color:white;"
         >
             Financiá tus aranceles con:
-        </h2>
-        <div class="flex flex-wrap flex-col gap-6 justify-center h-full items-center">
+        </h3>
+        <div class="flex flex-row md:flex-col gap-12 h-full justify-evenly items-center">
             {
                 cargando ? (
                     [1, 2, 3, 4].map(() => (
@@ -41,7 +44,7 @@ try {
                 ) : (
                     <>
                         {tarjetas.map((tarjeta) => (
-                            <div class="flex flex-col items-center gap-3 flex-1 max-w-100 w-full">
+                            <div class="flex flex-col items-center gap-3 max-w-100 w-full">
                                 <div class="bg-white/70 border border-white/80 rounded-xl px-4 py-2 sm:px-6 sm:py-3 flex items-center justify-center">
                                     <img
                                         src={tarjeta.imagen}
@@ -51,7 +54,7 @@ try {
                                         decoding="async"
                                     />
                                 </div>
-                                <p class="text-white text-xs sm:text-sm text-center leading-snug">
+                                <p class="text-white text-xs sm:text-base text-center leading-snug">
                                     {tarjeta.descripcion}
                                 </p>
                             </div>

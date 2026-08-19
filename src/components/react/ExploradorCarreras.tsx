@@ -86,8 +86,12 @@ export default function ExploradorCarreras({ careers, modosDisponibles }: Props)
         return counts
     }, [careers])
 
-    return <section id="carreras" className="bg-white py-20 seccion-snap" aria-labelledby="career-title">
-        <div className="contenedor">
+    return <section id="carreras" className="bg-white py-20 seccion-snap flex-col" aria-labelledby="career-title">
+        {/* En desktop la sección mide exactamente 100dvh (lo pide el snap
+            mandatory), así que el alto que sobra después del encabezado se lo
+            queda el grid, que ya scrollea solo. En mobile la sección crece y
+            el grid conserva su tope de 70vh. */}
+        <div className="contenedor flex w-full min-w-0 flex-col lg:min-h-0 lg:flex-1">
             <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
                 <div><h2 id="career-title" className="mt-3 text-3xl font-black text-(--azul-dark-ucasal) sm:text-4xl">Encontrá tu carrera</h2><p className="mt-4 max-w-2xl text-base text-slate-600">Buscá por nombre o por los filtros</p></div>
                 <div className="grid gap-3 sm:grid-cols-2 lg:w-220">
@@ -136,8 +140,8 @@ export default function ExploradorCarreras({ careers, modosDisponibles }: Props)
             </div>
             <p className="mt-8 text-sm text-slate-500" aria-live="polite">{filtered.length} {filtered.length === 1 ? 'carrera encontrada' : 'carreras encontradas'}</p>
             {filtered.length > 0 ?
-                <div className="relative mt-5">
-                    <div className="max-h-[70vh] overflow-y-auto rounded-2xl border border-slate-200 bg-slate-50 p-4 pr-3 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-slate-300 [&::-webkit-scrollbar-track]:bg-transparent">
+                <div className="relative mt-5 lg:min-h-0 lg:flex-1">
+                    <div className="max-h-[70vh] lg:h-full lg:max-h-none overflow-y-auto rounded-2xl border border-slate-200 bg-slate-50 p-4 pr-3 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-slate-300 [&::-webkit-scrollbar-track]:bg-transparent">
                         <div className="grid gap-5 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4">{filtered.map((career) =>
                             <CartaCarrera key={career.codcar} career={career} base={import.meta.env.BASE_URL} />
                         )}

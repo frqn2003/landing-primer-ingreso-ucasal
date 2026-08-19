@@ -1,0 +1,239 @@
+---
+// Cinta de convenios: una sola línea que se desplaza sin fin, con varios
+// convenios a la vista al mismo tiempo.
+//
+// Por qué una cinta y no un carrusel por pasos: son casi veinte logos y el
+// pedido era que quepan en una línea. Un carrusel obliga a esperar (o a tocar
+// flechas) para ver el resto; la cinta los muestra todos sin intervención, y al
+// no tener estados ni controles no necesita JavaScript.
+//
+// Cómo se logra el "sin fin": la pista lleva la lista dos veces y se desplaza
+// exactamente la mitad de su ancho. Cuando termina, el primer ítem de la copia
+// está justo donde arrancó el original, así que el reinicio no se ve. La copia
+// va aria-hidden para que el lector de pantalla lea la lista una sola vez.
+//
+// El espacio entre ítems es padding de cada ítem y no un `gap` de la pista: con
+// `gap`, el 50% no coincide con el ancho de una copia (queda medio hueco de
+// diferencia) y el salto se nota en cada vuelta.
+import { convenios } from "../../data/convenios";
+
+interface Props {
+    /**
+     * "seccion": banda propia sobre fondo claro, con el título como h2.
+     * "franja": sin fondo ni bordes y con los logos en blanco, para colgarla
+     * dentro de un bloque oscuro (así la usa Testimonios.astro).
+     */
+    variante?: "seccion" | "franja";
+    base?: string;
+}
+
+const { variante = "seccion", base = import.meta.env.BASE_URL } = Astro.props;
+
+const enFranja = variante === "franja";
+
+// Dentro del panel oscuro el título es un rótulo chico arriba de los logos, no
+// el encabezado de la sección: ahí el h2 es el de los testimonios.
+const Titulo = enFranja ? "p" : "h2";
+
+// Ritmo constante: si mañana entran más convenios, la cinta se hace más larga
+// pero se sigue moviendo a la misma velocidad en vez de acelerarse.
+const SEGUNDOS_POR_CONVENIO = 3.2;
+const duracion = `${(convenios.length * SEGUNDOS_POR_CONVENIO).toFixed(1)}s`;
+---
+
+<section
+    id="convenios"
+    class:list={[
+        enFranja ? "franja mt-14" : "border-y border-slate-200 bg-white py-12",
+    ]}
+    aria-labelledby="convenios-titulo"
+>
+    <Titulo
+        id="convenios-titulo"
+        class:list={[
+            "text-center",
+            enFranja
+                ? "text-xs font-bold uppercase tracking-[0.2em] text-white/60 sm:text-sm"
+                : "contenedor text-2xl font-black text-(--azul-dark-ucasal) sm:text-3xl",
+        ]}
+    >
+        Aranceles bonificados con estos convenios
+    </Titulo>
+
+    <!-- La máscara desvanece los bordes: sin ella la cinta se corta de golpe
+         contra los costados de la pantalla. -->
+    <div class:list={["cinta-zona", enFranja ? "mt-6" : "mt-8"]}>
+        <div class="cinta" style={`--duracion: ${duracion}`}>
+            {
+                [false, true].map((esCopia) => (
+                    <ul class="tira" aria-hidden={esCopia ? "true" : undefined}>
+                        {convenios.map((convenio) => (
+                            <li class="convenio">
+                                {convenio.logo ? (
+                                    <img
+                                        src={`${base}${convenio.logo}`}
+                                        alt={convenio.nombre}
+                                        loading="lazy"
+                                        decoding="async"
+                                        class="convenio-logo"
+                                    />
+                                ) : (
+                                    /* Sin archivo de logo todavía: el nombre
+                                       mantiene la cinta completa y legible. */
+                                    <span class="convenio-nombre">{convenio.nombre}</span>
+                                )}
+                            </li>
+                        ))}
+                    </ul>
+                ))
+            }
+        </div>
+    </div>
+</section>
+
+<style>
+    .cinta-zona {
+        /* Cuánto se desvanece cada borde. En mobile va corto a propósito: con
+           6rem por lado, en una pantalla de 375px el desvanecido se comería más
+           de la mitad del ancho. */
+        --desvanecido: 2rem;
+        overflow: hidden;
+        -webkit-mask-image: linear-gradient(
+            to right,
+            transparent,
+            black var(--desvanecido),
+            black calc(100% - var(--desvanecido)),
+            transparent
+        );
+        mask-image: linear-gradient(
+            to right,
+            transparent,
+            black var(--desvanecido),
+            black calc(100% - var(--desvanecido)),
+            transparent
+        );
+    }
+
+    @media (min-width: 768px) {
+        .cinta-zona {
+            --desvanecido: 6rem;
+        }
+    }
+
+    .cinta {
+        display: flex;
+        width: max-content;
+        animation: correr var(--duracion) linear infinite;
+    }
+
+    /* Al pasar el mouse o al llegar con el teclado se detiene, para poder leer
+       un convenio en particular. */
+    .cinta-zona:hover .cinta,
+    .cinta-zona:focus-within .cinta {
+        animation-play-state: paused;
+    }
+
+    @keyframes correr {
+        to {
+            transform: translateX(-50%);
+        }
+    }
+
+    .tira {
+        display: flex;
+        align-items: center;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .convenio {
+        display: flex;
+        height: 3.5rem;
+        flex: none;
+        align-items: center;
+        justify-content: center;
+        padding-inline: 1.25rem;
+    }
+
+    @media (min-width: 768px) {
+        .convenio {
+            height: 4rem;
+            padding-inline: 2rem;
+        }
+    }
+
+    .convenio-logo {
+        max-height: 100%;
+        width: auto;
+        max-width: 9rem;
+        object-fit: contain;
+        /* Los logos vienen de fuentes distintas y con saturaciones que patean
+           entre sí; apagarlos un poco los uniforma y evita que uno se coma la
+           atención. Al pasar el mouse recupera su color. */
+        filter: grayscale(1);
+        opacity: 0.75;
+        transition:
+            filter 0.3s ease,
+            opacity 0.3s ease;
+    }
+
+    .convenio:hover .convenio-logo {
+        filter: none;
+        opacity: 1;
+    }
+
+    .convenio-nombre {
+        display: flex;
+        align-items: center;
+        height: 2.5rem;
+        white-space: nowrap;
+        border: 1px solid var(--ucasal-gray-medium);
+        border-radius: 0.75rem;
+        padding-inline: 1rem;
+        font-size: 0.875rem;
+        font-weight: 700;
+        color: var(--azul-ucasal);
+        background: var(--ucasal-gray-light);
+    }
+
+    /* ── Variante para el panel oscuro ────────────────────────────────────── */
+
+    .franja .convenio-nombre {
+        border-color: rgb(255 255 255 / 0.2);
+        background: rgb(255 255 255 / 0.08);
+        color: var(--ucasal-white);
+    }
+
+    /* brightness(0) aplasta el logo a negro e invert(1) lo pasa a blanco: así
+       cualquier logo queda monocromo sobre el fondo oscuro, sin necesidad de una
+       versión en blanco de cada archivo. */
+    .franja .convenio-logo,
+    .franja .convenio:hover .convenio-logo {
+        filter: brightness(0) invert(1);
+    }
+
+    .franja .convenio-logo {
+        opacity: 0.7;
+    }
+
+    .franja .convenio:hover .convenio-logo {
+        opacity: 1;
+    }
+
+    /* Sin movimiento: la cinta se queda quieta y se recorre a mano. Se muestra
+       una sola copia para no repetir la lista al scrollear. */
+    @media (prefers-reduced-motion: reduce) {
+        .cinta-zona {
+            overflow-x: auto;
+        }
+
+        .cinta {
+            animation: none;
+        }
+
+        .tira[aria-hidden="true"] {
+            display: none;
+        }
+    }
+</style>

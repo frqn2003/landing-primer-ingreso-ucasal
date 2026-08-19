@@ -40,14 +40,19 @@ const enColumna = variante === "columna";
         </h2>
 
         <div
+            data-preguntas
             class:list={[
                 "divide-y divide-slate-200 rounded-2xl border border-slate-200 bg-white px-6",
                 enColumna ? "mt-6" : "mt-10",
             ]}
         >
             {
+                /* El `name` compartido hace que solo una quede abierta: es el
+                   acordeón exclusivo nativo de <details>. El nombre incluye la
+                   variante para que dos Faq en la misma página (la columna de
+                   Sedes y una sección suelta) no terminen en el mismo grupo. */
                 preguntasFrecuentes.map(({ pregunta, respuesta }) => (
-                    <details class="group py-5">
+                    <details name={`preguntas-${variante}`} class="group py-5">
                         <summary class="cursor-pointer list-none pr-8 font-bold text-(--azul-dark-ucasal)">
                             {pregunta}
                             <span class="float-right text-(--rojo-ucasal) transition group-open:rotate-45">
@@ -61,3 +66,29 @@ const enColumna = variante === "columna";
         </div>
     </div>
 </section>
+
+<script>
+    // Respaldo para navegadores sin acordeón exclusivo nativo (el atributo
+    // `name` de <details> llegó a Chrome y Safari a fines de 2023 y a Firefox en
+    // 2024). Donde el navegador ya lo soporta, este script no hace nada.
+    if (!("name" in HTMLDetailsElement.prototype)) {
+        for (const grupo of document.querySelectorAll("[data-preguntas]")) {
+            const preguntas = Array.from(
+                grupo.querySelectorAll<HTMLDetailsElement>("details"),
+            );
+
+            for (const pregunta of preguntas) {
+                pregunta.addEventListener("toggle", () => {
+                    // Solo interesa el momento en que una se abre: ahí se
+                    // cierran las demás. Cerrarlas dispara este mismo evento,
+                    // pero con open en false, así que no se encadena.
+                    if (!pregunta.open) return;
+
+                    for (const otra of preguntas) {
+                        if (otra !== pregunta) otra.open = false;
+                    }
+                });
+            }
+        }
+    }
+</script>

@@ -15,8 +15,7 @@
 
 html {
   scroll-behavior: smooth;
-  /* Móvil: proximity. El snap obligatorio pelea con la barra de URL y con los
-     gestos cortos del touch, así que ahí sugerimos en vez de imponer. */
+  /* Móvil: proximity. */
   scroll-snap-type: y proximity;
 }
 
@@ -42,25 +41,38 @@ html.snap-off {
   }
 }
 
-/* Secciones de pantalla completa. Es opt-in a propósito: como selector de
-   etiqueta alcanzaba a TODOS los <section> del sitio (menú del navbar,
-   CareerDetail, gracias, etc.) y los rompía. */
+/* Secciones de pantalla completa. */
 .seccion-snap {
-  height: 100dvh;
+  /* min-height y no height: con alto fijo, cualquier sección más alta que la
+     pantalla se desborda con overflow visible y se dibuja ENCIMA de la
+     siguiente. Pasaba en mobile con #carreras (+121px), #sedes (+127px) y
+     #contacto (+455px). Con min-height la sección crece y nada se solapa. */
+  min-height: 100dvh;
   display: flex;
   padding-top: var(--alto-navbar);
   scroll-snap-align: start;
   scroll-snap-stop: always;
 }
 
-/* El hero va a sangre: el navbar flota transparente encima */
-.seccion-snap-hero {
-  padding-top: 0;
+/* Desktop: acá el snap es mandatory, así que la sección tiene que medir
+   exactamente una pantalla o el gesto queda atrapado (ver el comentario del
+   script de Layout.astro). Las secciones que no entran resuelven el sobrante
+   adentro, con un área propia de scroll: ver ModalidadesPuerta y el grid de
+   ExploradorCarreras. */
+@media (min-width: 1024px) {
+  .seccion-snap {
+    height: 100dvh;
+  }
 }
 
-/* La zona libre tiene su propio punto de snap arriba: así la salida de la
-   última sección de pantalla completa tiene un destino válido y no queda
-   atrapada aunque el JS todavía no haya corrido. */
+.seccion-snap-hero {
+  padding-top: 0;
+  /* El contenido del hero se posiciona en absolute contra este alto, así que
+     acá sí hace falta que sea definido en todos los tamaños. Nunca crece: es
+     una foto a sangre. */
+  height: 100dvh;
+}
+
 [data-scroll-libre] {
   scroll-snap-align: start;
 }
@@ -100,7 +112,6 @@ h3 {
 
 @supports (animation-timeline: view()) {
   .fondo-blur {
-    backdrop-filter: none;
     animation: blurSeccion linear both;
     animation-timeline: view();
     animation-range: cover 0% cover 35%;

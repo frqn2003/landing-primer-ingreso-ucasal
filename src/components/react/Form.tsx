@@ -328,9 +328,9 @@ export default function Form({ codcarInicial, onSubPage, modosDisponibles }: {
 
             {!onSubPage && (
                 <div className="flex justify-center">
-                    <p className="text-xl my-2 text-black degrade-azul font-bold">
+                    <h4 className="text-xl my-2 text-black degrade-azul font-bold">
                         Consulta sobre nuestras carreras y sus aranceles
-                    </p>
+                    </h4>
                 </div>
             )}
 
