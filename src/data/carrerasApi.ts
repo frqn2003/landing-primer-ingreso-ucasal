@@ -2,17 +2,27 @@ import data from './carreras'
 
 const modosUnicos = [...new Set(data.flatMap(c => c.modalidad))]
 
+/* Clave de sesion por juego de modos: las dos landings pueden convivir en el
+   mismo origen y con una sola clave la cache de la presencial le servia sedes
+   de modo 1 a la online. */
+const claveCache = (modos: number[]) =>
+    `cache_carreras_api_ucasal_${[...modos].sort((a, b) => a - b).join('-')}`
+
 let cache: any[] | null = null
 let promesa: Promise<any[]> | null = null
 
 const DEV_MODE = false
 
-export function getCarrerasApi(): Promise<any[]> {
+/**
+ * @param modos Modos de cursado a pedir. La cascada pasa los de esta landing,
+ * asi que el build online no consulta ni recibe las sedes de modo 1.
+ */
+export function getCarrerasApi(modos: number[] = modosUnicos): Promise<any[]> {
     if (cache) return Promise.resolve(cache)
     if (promesa) return promesa
 
 
-    const stored = sessionStorage.getItem('cache_carreras_api_ucasal')
+    const stored = sessionStorage.getItem(claveCache(modos))
     if (stored) {
         cache = JSON.parse(stored)
         return Promise.resolve(cache as any[])
@@ -29,7 +39,7 @@ export function getCarrerasApi(): Promise<any[]> {
     }
 
     promesa = Promise.allSettled(
-        modosUnicos.map(modo =>
+        modos.map(modo =>
             fetch(`/landing/consultas/getCarrerasJson.php?modo=${modo}&tipcar=Grado,Pregrado,Intermedio`)
                 .then(res => res.json())
         )

@@ -2,6 +2,14 @@
 import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/astro/Navbar.astro';
 import Footer from '../components/astro/Footer.astro';
+import { esOnline } from '../config/modalidad';
+
+// El resumen se arma en el navegador con lo que viene por querystring. Las
+// etiquetas salen de acá para que el build online no lleve la palabra
+// "Presencial" ni en el script: ahí el único modo posible es el 7.
+const etiquetasModo: Record<string, string> = esOnline
+    ? { '7': 'Online' }
+    : { '1': 'Presencial', '7': 'Online' };
 ---
 
 <Layout title="Gracias por contactarnos | Primer ingreso UCASAL" description="Recibimos tu consulta sobre Primer Ingreso en UCASAL.">
@@ -18,12 +26,12 @@ import Footer from '../components/astro/Footer.astro';
     <Footer />
 </Layout>
 
-<script is:inline>
+<script is:inline define:vars={{ etiquetasModo }}>
     const params = new URLSearchParams(window.location.search);
     const campos = [
         ["nombre", "Nombre"],
         ["carrera", "Carrera"],
-        ["modo", "Modalidad", (v) => (v === "7" ? "Online" : "Presencial")],
+        ["modo", "Modalidad", (v) => etiquetasModo[v] ?? "Consultar modalidad"],
         ["sede", "Sede"],
     ];
     const resumen = document.getElementById("resumen-solicitud");

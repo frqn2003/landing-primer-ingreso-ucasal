@@ -2,9 +2,11 @@
 import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/astro/Navbar.astro';
 import Footer from '../components/astro/Footer.astro';
-import data from '../data/carreras';
+import data from '../data/carrerasLanding';
 import CareerDetail from '../components/astro/CareerDetail.astro';
 
+// Solo las carreras de esta landing: en el build online no se genera la
+// subpagina de una carrera que solo se dicta presencial.
 export function getStaticPaths() {
     return data.map((carrera) => ({
         params: { slug: carrera.slug },

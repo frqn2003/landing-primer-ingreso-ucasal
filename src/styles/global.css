@@ -273,6 +273,44 @@ h3 {
   }
 }
 
+/* Entrada del hero.
+ *
+ * Cada pieza aparece en secuencia al cargar: titulo, bajada, boton y la barra
+ * de abajo. La foto de fondo NO se anima, esta desde el primer frame; si
+ * apareciera con fade se veria el degrade oscuro sobre el vacio.
+ *
+ * `both` deja el estado inicial aplicado durante el delay, que es lo que
+ * escalona la entrada. Ojo: mientras la animacion rellena, `transform` gana
+ * sobre cualquier transform declarado en el elemento, asi que el boton y la
+ * barra se animan desde un wrapper y no desde ellos mismos (el hover del boton
+ * usa scale y quedaria pisado).
+ */
+.hero-entra {
+  animation: heroFadeInUp 0.75s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.hero-entra-1 {
+  animation-delay: 0.15s;
+}
+
+.hero-entra-2 {
+  animation-delay: 0.3s;
+}
+
+.hero-entra-3 {
+  animation-delay: 0.45s;
+}
+
+.hero-entra-4 {
+  animation-delay: 0.6s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-entra {
+    animation: heroFadeIn 0.01s both;
+  }
+}
+
 .botoncito {
   position: relative;
   overflow: hidden;

@@ -62,13 +62,16 @@ const total = testimonios.length;
                                             {t.frase}
                                         </blockquote>
 
-                                        <figcaption class="mt-6 text-center text-sm md:text-left">
-                                            <span class="font-bold text-white">
-                                                {t.nombre}
-                                            </span>
+                                        <figcaption class="mt-6 text-center text-sm md:text-left flex flex-row gap-4 items-center">
+                                            <img class="size-12 rounded-full" src={t.imagen} alt={t.nombre} />
+                                            <div>
+                                                <span class="font-bold text-white">
+                                                    {t.nombre}
+                                                </span>
                                             <span class="block text-white/50">
                                                 {t.carrera}
                                             </span>
+                                            </div>
                                         </figcaption>
                                     </figure>
                                 ))
@@ -106,11 +109,13 @@ const total = testimonios.length;
 
 <style>
     .ventana {
-        /* El gesto horizontal cambia de testimonio; el vertical sigue
-           scrolleando la página. */
         touch-action: pan-y;
         cursor: grab;
         user-select: none;
+        border: 1px solid rgb(255 255 255 / 0.75);
+        border-radius: 8px;
+        padding: 2rem 4rem;
+        background: rgba(255, 255, 255, 0.1);
     }
 
     .ventana:active {
@@ -218,12 +223,7 @@ const total = testimonios.length;
 
         let activo = 0;
         let temporizador: number | undefined;
-        // Se pausa al pasar el mouse o al tabular por los puntos, y cuando la
-        // sección no está en pantalla. Se reanuda solo al revés.
-        //
-        // Arranca en true a propósito: pausar fuera de pantalla es solo un
-        // ahorro, así que si el IntersectionObserver no llega a dispararse el
-        // testimonio igual rota. Al revés, el carrusel dependería de él.
+
         let enPantalla = true;
         let detenidoPorUsuario = false;
 

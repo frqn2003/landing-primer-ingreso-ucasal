@@ -269,6 +269,7 @@ export const preguntasFrecuentes = preguntasPorModalidad[modalidad];
 
 interface Testimonio {
     nombre: string;
+    imagen: string;
     carrera: string;
     frase: string;
     /**
@@ -292,6 +293,7 @@ interface Testimonio {
 const todosLosTestimonios: Testimonio[] = [
     {
         nombre: "Benjamin Elizalde",
+        imagen: "/testimonios/benjamin-elizalde.jpg",
         carrera: "Licenciatura en Comercialización",
         frase: "La facultad está siempre a disposición",
         // La carrera figura como modalidad [7] en el catálogo.
@@ -299,6 +301,7 @@ const todosLosTestimonios: Testimonio[] = [
     },
     {
         nombre: "Tania Elizabeth Flores",
+        imagen: "/testimonios/tania-elizabeth-flores.jpg",
         carrera: "Corredor Inmobiliario y Martillero Público",
         frase:
             "El apoyo de los profesores y del equipo UCASAL es fundamental: siempre están para guiarte. Como mamá, valoro mucho esa ayuda para equilibrar familia, trabajo y estudio.",
@@ -307,6 +310,7 @@ const todosLosTestimonios: Testimonio[] = [
     },
     {
         nombre: "Luciana Gennari",
+        imagen: "/testimonios/luciana-gennari.jpg",
         carrera: "Kinesiología",
         frase:
             "Para poder rendir bien académicamente y en entrenamiento, la universidad me da una ayuda gigante",
@@ -314,6 +318,7 @@ const todosLosTestimonios: Testimonio[] = [
     },
     {
         nombre: "Nahuel Agustín Artigas",
+        imagen: "/testimonios/nahuel-agustin-artigas.jpg",
         carrera: "Profesorado en Educación Física",
         frase:
             "Son todos sentimientos de alegría y felicidad porque pude realizar un sueño que tenía, que era recibirme",
@@ -321,6 +326,7 @@ const todosLosTestimonios: Testimonio[] = [
     },
     {
         nombre: "Luciano Marcelo Sato",
+        imagen: "/testimonios/luciano-marcelo-sato.jpg",
         carrera: "Licenciatura en Artes Musicales",
         frase:
             "Nos permite integrarnos muy fácil al mundo laboral en muchos aspectos, capacitándonos mucho en el día a día",
@@ -328,6 +334,7 @@ const todosLosTestimonios: Testimonio[] = [
     },
     {
         nombre: "Ebaneo Valdez Kao",
+        imagen: "/testimonios/ebaneo-valdez-kao.jpg",
         carrera: "Ingeniería en Informática",
         frase: "Puedo ejercer mi profesión desde cualquier parte del mundo",
         // La frase habla de la profesión, no de cómo cursó: sin dato.
@@ -335,6 +342,7 @@ const todosLosTestimonios: Testimonio[] = [
     },
     {
         nombre: "Nicolás Ovejero",
+        imagen: "/testimonios/nicolas-ovejero.jpg",
         carrera: "Licenciatura en Turismo",
         frase:
             "Le agradezco a la universidad por brindarnos una herramienta fundamental: el capital humano, los profesores y sobre todo los compañeros",

@@ -46,6 +46,8 @@ export function useCarrerasCascada({
 }: UseCarrerasCascadaOptions = {}) {
     const modoElegible = (modo: number) =>
         !modosDisponibles || modosDisponibles.includes(Number(modo))
+    /* El fallback trae una sede presencial: en la landing online no entra. */
+    const fallbacks = FALLBACK_CARRERAS.filter(c => modoElegible(c.modo))
     const [carreras, setCarreras] = useState<any[]>([])
     const [apiCargando, setApiCargando] = useState(false)
     const [codcar, setCodcar] = useState(codcarInicial ?? '')
@@ -63,35 +65,43 @@ export function useCarrerasCascada({
 
         if (codcarInicial) {
             const modalidadesCarrera = dataCarreras.find(c => String(c.codcar) === codcarInicial)?.modalidad ?? []
-            const modoInicial = String(modalidadesCarrera.find(modoElegible) ?? modalidadesCarrera[0] ?? 7)
+            /* Si la carrera no tiene ningun modo de esta landing se usa el
+               primero que la landing ofrece, nunca el de la carrera: en el
+               build online eso evitaria pedirle a la API el modo presencial. */
+            const modoInicial = String(
+                modalidadesCarrera.find(modoElegible)
+                ?? modosDisponibles?.[0]
+                ?? modalidadesCarrera[0]
+                ?? 7
+            )
             getCarreraApi(codcarInicial, modoInicial)
                 .then(data => {
                     const resultado = data ? [data] : []
                     const merged = [...resultado]
-                    FALLBACK_CARRERAS.forEach(fallback => {
+                    fallbacks.forEach(fallback => {
                         const existe = resultado.some((c: any) => String(c.codcar) === String(fallback.codcar) && String(c.modo) === String(fallback.modo))
                         if (!existe) merged.push(fallback)
                     })
                     setCarreras(merged)
                     setApiCargando(false)
                 })
-                .catch(() => { setCarreras(FALLBACK_CARRERAS); setApiCargando(false) })
+                .catch(() => { setCarreras(fallbacks); setApiCargando(false) })
             return
         }
 
-        getCarrerasApi().then(data => {
+        getCarrerasApi(modosDisponibles).then(data => {
             const merged = [...data]
-            FALLBACK_CARRERAS.forEach(fallback => {
+            fallbacks.forEach(fallback => {
                 const existe = data.some((c: any) => String(c.codcar) === String(fallback.codcar) && String(c.modo) === String(fallback.modo))
                 if (!existe) merged.push(fallback)
             })
             setCarreras(merged)
             setApiCargando(false)
-        }).catch(() => { setCarreras(FALLBACK_CARRERAS); setApiCargando(false) })
+        }).catch(() => { setCarreras(fallbacks); setApiCargando(false) })
     }
 
     /* Derivados */
-    const carrerasUnicas = dataCarreras
+    const carrerasUnicas = dataCarreras.filter(c => c.modalidad.some(modoElegible))
     /* Cada carrera puede tener varias modalidades (array); se despliega una entrada por modalidad */
     const modos = [
         ...new Map(

@@ -30,9 +30,13 @@ const promociones = await obtenerPromociones();
             <div
                 class="max-w-4xl flex flex-col justify-center my-auto items-center"
             >
-                <h1 class="uppercase">Estudia, conectá, crecé</h1>
-                <p class="text-center">Descripción epicarda</p>
-                <div class="flex flex-row gap-4 mt-24">
+                <h1 class="uppercase hero-entra hero-entra-1">
+                    Estudia, conectá, crecé
+                </h1>
+                <p class="text-center hero-entra hero-entra-2">
+                    Descripción epicarda
+                </p>
+                <div class="flex flex-row gap-4 mt-24 hero-entra hero-entra-3">
                     <a href={`${base}#carreras`} class="boton-cta-hero"
                         >Comenzá ahora</a
                     >
@@ -41,7 +45,11 @@ const promociones = await obtenerPromociones();
             <!-- client:load y no client:only: así los datos institucionales ya
                  vienen en el HTML del build. La promoción, que depende de la
                  fecha del visitante, la agrega el hook recién al hidratar. -->
-            <BarraHero promociones={promociones} client:load />
+            <div
+                class="hero-entra hero-entra-4 flex w-full justify-center"
+            >
+                <BarraHero promociones={promociones} client:load />
+            </div>
         </div>
     </div>
 </section>

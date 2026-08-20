@@ -151,9 +151,23 @@ export default function Form({ codcarInicial, onSubPage, modosDisponibles }: {
     const todosCompletos = !!carreraCompleta && !!nombre && !!email && !!ddiPais && !!codArea && !!tel
     const carreraSeleccionadaLocal = dataCarreras.find(c => String(c.codcar) === String(codcar))
 
+    /* Los modos de una carrera que se ofrecen en esta landing: una carrera que
+       se dicta [1,7] queda solo como [7] en el build online, asi que ni el
+       badge ni el resumen la anuncian como presencial. */
+    const modosDeLaLanding = (modalidadCarrera: number[]) =>
+        modosDisponibles
+            ? modalidadCarrera.filter(m => modosDisponibles.includes(m))
+            : modalidadCarrera
+
+    const etiquetaModalidad = (modalidadCarrera: number[] = []) => {
+        const modos = modosDeLaLanding(modalidadCarrera)
+        if (modos.length > 1) return 'Presencial y Virtual'
+        return modos.includes(7) ? 'Virtual' : 'Presencial'
+    }
+
     /* En la landing online se listan solo las carreras que se venden online */
     const carrerasDisponibles = modosDisponibles
-        ? dataCarreras.filter(c => c.modalidad.some(m => modosDisponibles.includes(m)))
+        ? dataCarreras.filter(c => modosDeLaLanding(c.modalidad).length > 0)
         : dataCarreras
     const sectorCarrera = carreraSeleccionadaLocal?.sector
 
@@ -262,7 +276,7 @@ export default function Form({ codcarInicial, onSubPage, modosDisponibles }: {
     ])
 
     const localidadHabilitada = !!codcar && !!modalidad
-    const labelModalidad = carreraSeleccionadaLocal?.modalidad.length > 1 ? 'Presencial y Virtual' : carreraSeleccionadaLocal?.modalidad.includes(7) ? 'Virtual' : 'Presencial'
+    const labelModalidad = etiquetaModalidad(carreraSeleccionadaLocal?.modalidad)
 
     return (
         <form ref={setFormRef} role="form" id="pedidoinfo" method="post" encType="multipart/form-data" action="/postulantes_mail1.php"
@@ -365,7 +379,8 @@ export default function Form({ codcarInicial, onSubPage, modosDisponibles }: {
                     <fieldset className="flex max-h-50 flex-col gap-2 overflow-y-auto rounded-lg border border-gray-300 bg-white p-2 text-black">
                         {carrerasDisponibles.map((carrera) => {
                             const value = carrera.codcar.toString()
-                            const labelModalidad = carrera.modalidad.length > 1 ? 'Presencial y Virtual' : carrera.modalidad.includes(7) ? 'Virtual' : 'Presencial'
+                            const labelModalidad = etiquetaModalidad(carrera.modalidad)
+                            const modosCarrera = modosDeLaLanding(carrera.modalidad)
                             return (
                                 <div key={carrera.codcar} className='border-b border-gray-200 last:border-b-0 w-full'>
                                     <button
@@ -383,7 +398,7 @@ export default function Form({ codcarInicial, onSubPage, modosDisponibles }: {
                                             {carrera.nombre}
                                             <span className="text-xs text-gray-600">{carrera.duracion}</span>
                                         </span>
-                                        <div className={`items-center h-full justify-end flex text-xs border-gray-200 border rounded text-white py-1 px-2 ${carrera.modalidad.length > 1 ? 'bg-gradient-to-r from-15% from-(--rojo-ucasal) to-(--azul-ucasal) to-70%' : carrera.modalidad.includes(7) ? 'bg-(--azul-ucasal)' : 'bg-(--rojo-ucasal)'}`}>{labelModalidad}</div>
+                                        <div className={`items-center h-full justify-end flex text-xs border-gray-200 border rounded text-white py-1 px-2 ${modosCarrera.length > 1 ? 'bg-gradient-to-r from-15% from-(--rojo-ucasal) to-(--azul-ucasal) to-70%' : modosCarrera.includes(7) ? 'bg-(--azul-ucasal)' : 'bg-(--rojo-ucasal)'}`}>{labelModalidad}</div>
                                     </button>
                                 </div>
                             )
