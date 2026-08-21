@@ -2,7 +2,7 @@
 import { beneficios } from "../../config/contenido";
 
 interface Props {
-    base?: string;
+  base?: string;
 }
 
 const { base = import.meta.env.BASE_URL } = Astro.props;
@@ -11,433 +11,422 @@ const total = beneficios.length;
 ---
 
 <section id="beneficios" class="seccion-snap relative flex-col">
-    <div class="fondo-blur absolute inset-0 z-0"></div>
+  <div class="fondo-blur absolute inset-0 z-0"></div>
+
+  <div
+    class="contenedor relative z-10 flex min-h-0 w-full flex-1 flex-col items-center justify-center gap-4 md:gap-24"
+  >
+    <h2 class="text-center" style="color:white;">
+      Los beneficios de estudiar en UCASAL
+    </h2>
 
     <div
-        class="contenedor relative z-10 flex min-h-0 w-full flex-1 flex-col items-center justify-center gap-4 md:gap-8"
+      class="mazo-zona w-full max-w-5xl"
+      data-mazo
+      role="group"
+      aria-roledescription="carrusel"
+      aria-label="Beneficios de estudiar en UCASAL"
+      tabindex="0"
     >
-        <h2 class="text-center text-white">
-            Los beneficios de estudiar en UCASAL
-        </h2>
-
-        <div
-            class="mazo-zona w-full max-w-3xl"
-            data-mazo
-            role="group"
-            aria-roledescription="carrusel"
-            aria-label="Beneficios de estudiar en UCASAL"
-            tabindex="0"
-        >
-            <ul class="mazo">
-                {
-                    beneficios.map((beneficio, index) => (
-                        <li
-                            class="carta"
-                            style={`--pos: ${index}`}
-                            data-carta
-                            aria-roledescription="tarjeta"
-                            aria-label={`${index + 1} de ${total}`}
-                        >
-                            {/* Las 4 primeras se ven de entrada (el frente y
+      <ul class="mazo">
+        {
+          beneficios.map((beneficio, index) => (
+            <li
+              class="carta"
+              style={`--pos: ${index}`}
+              data-carta
+              aria-roledescription="tarjeta"
+              aria-label={`${index + 1} de ${total}`}
+            >
+              {/* Las 4 primeras se ven de entrada (el frente y
                                 el abanico): si fueran lazy quedarían en blanco. */}
-                            <figure class="carta-foto">
-                                <img
-                                    src={`${base}${beneficio.imagen}`}
-                                    alt={beneficio.titulo}
-                                    loading={index < 4 ? "eager" : "lazy"}
-                                    decoding="async"
-                                    class="size-full object-cover"
-                                />
-                            </figure>
+              <figure class="carta-foto">
+                <img
+                  src={`${base}${beneficio.imagen}`}
+                  alt={beneficio.titulo}
+                  loading={index < 4 ? "eager" : "lazy"}
+                  decoding="async"
+                  class="size-full object-cover"
+                />
+              </figure>
 
-                            <div class="carta-texto">
-                                <span class="carta-numero" aria-hidden="true">
-                                    {String(index + 1).padStart(2, "0")}
-                                </span>
-                                <h3 class="carta-titulo">{beneficio.titulo}</h3>
-                                <p class="carta-descripcion">
-                                    {beneficio.descripcion}
-                                </p>
-                            </div>
-                        </li>
-                    ))
-                }
-            </ul>
-        </div>
-
-        <div class="flex w-full max-w-3xl items-center justify-center gap-4">
-            <button
-                type="button"
-                class="mazo-boton"
-                data-anterior
-                aria-label="Beneficio anterior"
-            >
-                <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    class="size-5"
-                    aria-hidden="true"
-                >
-                    <path d="M15 18l-6-6 6-6"></path>
-                </svg>
-            </button>
-
-            <ol class="flex items-center gap-2" data-puntos>
-                {
-                    beneficios.map((beneficio, index) => (
-                        <li>
-                            <button
-                                type="button"
-                                class="mazo-punto"
-                                data-punto
-                                data-indice={index}
-                                aria-label={`Ver ${beneficio.titulo}`}
-                            />
-                        </li>
-                    ))
-                }
-            </ol>
-
-            <button
-                type="button"
-                class="mazo-boton"
-                data-siguiente
-                aria-label="Beneficio siguiente"
-            >
-                <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    class="size-5"
-                    aria-hidden="true"
-                >
-                    <path d="M9 18l6-6-6-6"></path>
-                </svg>
-            </button>
-        </div>
+              <div class="carta-texto">
+                <span class="carta-numero" aria-hidden="true">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <h3 class="carta-titulo">{beneficio.titulo}</h3>
+                <p class="carta-descripcion">{beneficio.descripcion}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
     </div>
+
+    <div class="flex w-full max-w-3xl items-center justify-center gap-4">
+      <button
+        type="button"
+        class="mazo-boton"
+        data-anterior
+        aria-label="Beneficio anterior"
+      >
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="size-5"
+          aria-hidden="true"
+        >
+          <path d="M15 18l-6-6 6-6"></path>
+        </svg>
+      </button>
+
+      <ol class="flex items-center gap-2" data-puntos>
+        {
+          beneficios.map((beneficio, index) => (
+            <li>
+              <button
+                type="button"
+                class="mazo-punto"
+                data-punto
+                data-indice={index}
+                aria-label={`Ver ${beneficio.titulo}`}
+              />
+            </li>
+          ))
+        }
+      </ol>
+
+      <button
+        type="button"
+        class="mazo-boton"
+        data-siguiente
+        aria-label="Beneficio siguiente"
+      >
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="size-5"
+          aria-hidden="true"
+        >
+          <path d="M9 18l6-6-6-6"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
 </section>
 
 <style>
-    .mazo-zona {
-        /* Cuánto asoma cada carta de atrás y cuántas se ven detrás del frente:
-           el ancho reservado para el abanico sale de multiplicar las dos. */
-        --paso: clamp(1.1rem, 2.6vw, 2.25rem);
-        --profundidad: 3;
-        outline-offset: 8px;
-    }
+  .mazo-zona {
+    --paso: clamp(1.5rem, 3.5vw, 4rem);
+    --profundidad: 4;
+    outline-offset: 8px;
+  }
 
-    /* El mazo se angosta y se pega a la derecha: el hueco que queda a la
+  /* El mazo se angosta y se pega a la derecha: el hueco que queda a la
        izquierda es el que ocupa el abanico. Así nada se sale del contenedor y
        el conjunto igual queda centrado. */
+  .mazo {
+    position: relative;
+    width: calc(100% - var(--paso) * var(--profundidad));
+    height: min(58vh, 30rem);
+    margin: 0 0 0 auto;
+    padding: 0;
+    list-style: none;
+    touch-action: pan-y;
+  }
+
+  @media (min-width: 768px) {
     .mazo {
-        position: relative;
-        width: calc(100% - var(--paso) * var(--profundidad));
-        height: min(58vh, 30rem);
-        margin: 0 0 0 auto;
-        padding: 0;
-        list-style: none;
-        touch-action: pan-y;
+      height: min(52vh, 24rem);
     }
+  }
 
-    @media (min-width: 768px) {
-        .mazo {
-            height: min(52vh, 24rem);
-        }
-    }
-
-    .carta {
-        position: absolute;
-        inset: 0;
-        display: grid;
-        grid-template-rows: 45% 1fr;
-        overflow: hidden;
-        border-radius: 1rem;
-        background: var(--ucasal-white);
-        box-shadow: 0 18px 45px -12px rgb(2 33 48 / 0.55);
-        cursor: pointer;
-        /* Origen a la izquierda: al escalar, el borde izquierdo no se mueve, así
+  .carta {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    grid-template-rows: 45% 1fr;
+    overflow: hidden;
+    border-radius: 1.2rem;
+    background: var(--ucasal-white);
+    box-shadow: 0 18px 45px -12px rgb(2 33 48 / 0.55);
+    cursor: pointer;
+    /* Origen a la izquierda: al escalar, el borde izquierdo no se mueve, así
            que cada carta de atrás asoma exactamente `--paso` y el abanico entra
            siempre en el ancho reservado. */
-        transform-origin: center left;
+    transform-origin: center left;
 
-        /* pos 0 = la de adelante. */
-        z-index: calc(100 - var(--pos));
-        transform: translateX(calc(var(--pos) * var(--paso) * -1))
-            scale(calc(1 - var(--pos) * 0.045))
-            rotate(calc(var(--pos) * -1.1deg));
-        filter: brightness(calc(1 - var(--pos) * 0.1));
-        transition:
-            transform 0.55s cubic-bezier(0.22, 0.61, 0.36, 1),
-            opacity 0.45s ease,
-            filter 0.55s ease;
-        user-select: none;
+    /* pos 0 = la de adelante. */
+    z-index: calc(100 - var(--pos));
+    transform: translateX(calc(var(--pos) * var(--paso) * -1))
+      scale(calc(1 - var(--pos) * 0.075)) rotate(calc(var(--pos) * -1.1deg));
+    filter: brightness(calc(1 - var(--pos) * 0.1));
+    transition:
+      transform 0.55s cubic-bezier(0.22, 0.61, 0.36, 1),
+      opacity 0.45s ease,
+      filter 0.55s ease;
+    user-select: none;
+  }
+
+  @media (min-width: 768px) {
+    .carta {
+      grid-template-rows: none;
+      grid-template-columns: 55% 1fr;
     }
+  }
 
-    @media (min-width: 768px) {
-        .carta {
-            grid-template-rows: none;
-            grid-template-columns: 45% 1fr;
-        }
-    }
+  /* Más allá de la profundidad visible no se dibujan ni se pueden tocar. */
+  .carta[data-oculta] {
+    opacity: 0;
+    pointer-events: none;
+  }
 
-    /* Más allá de la profundidad visible no se dibujan ni se pueden tocar. */
-    .carta[data-oculta] {
-        opacity: 0;
-        pointer-events: none;
-    }
-
-    /* Las de atrás sí reciben clicks: se toca la parte que asoma y esa carta
+  /* Las de atrás sí reciben clicks: se toca la parte que asoma y esa carta
        pasa al frente. La de adelante avanza a la siguiente. */
 
-    .carta-foto {
-        position: relative;
-        margin: 0;
-        overflow: hidden;
-        background: var(--ucasal-gray-medium);
-    }
+  .carta-foto {
+    position: relative;
+    margin: 0;
+    overflow: hidden;
+    background: var(--ucasal-gray-medium);
+  }
 
-    .carta-foto::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(
-            to top,
-            rgb(2 33 48 / 0.35),
-            transparent 60%
-        );
-    }
+  .carta-foto::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgb(2 33 48 / 0.35), transparent 60%);
+  }
 
+  .carta-texto {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1.25rem 1.5rem;
+  }
+
+  @media (min-width: 768px) {
     .carta-texto {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        gap: 0.5rem;
-        padding: 1.25rem 1.5rem;
+      gap: 0.75rem;
+      padding: 2rem 2.5rem;
     }
+  }
 
-    @media (min-width: 768px) {
-        .carta-texto {
-            gap: 0.75rem;
-            padding: 2rem 2.5rem;
-        }
-    }
+  .carta-numero {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    color: var(--rojo-ucasal);
+  }
 
-    .carta-numero {
-        font-size: 0.75rem;
-        font-weight: 700;
-        letter-spacing: 0.2em;
-        color: var(--rojo-ucasal);
-    }
+  .carta-titulo {
+    font-size: clamp(1.15rem, 2.4vw, 1.75rem);
+    font-weight: 700;
+    line-height: 1.15;
+    color: var(--azul-ucasal);
+  }
 
-    .carta-titulo {
-        font-size: clamp(1.15rem, 2.4vw, 1.75rem);
-        font-weight: 700;
-        line-height: 1.15;
-        color: var(--azul-ucasal);
-    }
+  .carta-descripcion {
+    font-size: clamp(0.8rem, 1.4vw, 1rem);
+    line-height: 1.5;
+    color: #4b5563;
+  }
 
-    .carta-descripcion {
-        font-size: clamp(0.8rem, 1.4vw, 1rem);
-        line-height: 1.5;
-        color: #4b5563;
-    }
+  .mazo-boton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    flex-shrink: 0;
+    border-radius: 9999px;
+    border: 1px solid rgb(255 255 255 / 0.5);
+    color: var(--ucasal-white);
+    background: rgb(255 255 255 / 0.1);
+    cursor: pointer;
+    transition:
+      background 0.25s ease,
+      transform 0.25s ease;
+  }
 
-    .mazo-boton {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 2.5rem;
-        height: 2.5rem;
-        flex-shrink: 0;
-        border-radius: 9999px;
-        border: 1px solid rgb(255 255 255 / 0.5);
-        color: var(--ucasal-white);
-        background: rgb(255 255 255 / 0.1);
-        cursor: pointer;
-        transition:
-            background 0.25s ease,
-            transform 0.25s ease;
-    }
+  .mazo-boton:hover {
+    background: var(--rojo-ucasal);
+    border-color: var(--rojo-ucasal);
+    transform: scale(1.08);
+  }
 
-    .mazo-boton:hover {
-        background: var(--rojo-ucasal);
-        border-color: var(--rojo-ucasal);
-        transform: scale(1.08);
-    }
+  .mazo-punto {
+    display: block;
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 9999px;
+    background: rgb(255 255 255 / 0.4);
+    cursor: pointer;
+    transition:
+      width 0.3s ease,
+      background 0.3s ease;
+  }
 
-    .mazo-punto {
-        display: block;
-        width: 0.5rem;
-        height: 0.5rem;
-        border-radius: 9999px;
-        background: rgb(255 255 255 / 0.4);
-        cursor: pointer;
-        transition:
-            width 0.3s ease,
-            background 0.3s ease;
-    }
+  .mazo-punto[data-activo] {
+    width: 1.5rem;
+    background: var(--rojo-ucasal);
+  }
 
-    .mazo-punto[data-activo] {
-        width: 1.5rem;
-        background: var(--rojo-ucasal);
+  @media (prefers-reduced-motion: reduce) {
+    .carta {
+      transition-duration: 0.01ms;
     }
-
-    @media (prefers-reduced-motion: reduce) {
-        .carta {
-            transition-duration: 0.01ms;
-        }
-    }
+  }
 </style>
 
 <script>
-    const zona = document.querySelector<HTMLElement>("[data-mazo]");
-    // Los controles viven fuera del mazo, así que se buscan desde la sección.
-    const seccion = zona?.closest("section");
+  const zona = document.querySelector<HTMLElement>("[data-mazo]");
+  // Los controles viven fuera del mazo, así que se buscan desde la sección.
+  const seccion = zona?.closest("section");
 
-    if (zona && seccion) {
-        const cartas = Array.from(zona.querySelectorAll<HTMLElement>("[data-carta]"));
-        const total = cartas.length;
-        const puntos = Array.from(
-            seccion.querySelectorAll<HTMLElement>("[data-punto]"),
-        );
-        const anterior = seccion.querySelector<HTMLElement>("[data-anterior]");
-        const siguiente = seccion.querySelector<HTMLElement>("[data-siguiente]");
-        // Misma profundidad que usa el CSS para reservar el ancho del abanico.
-        const profundidad =
-            Number(
-                getComputedStyle(zona).getPropertyValue("--profundidad").trim(),
-            ) || 3;
+  if (zona && seccion) {
+    const cartas = Array.from(
+      zona.querySelectorAll<HTMLElement>("[data-carta]"),
+    );
+    const total = cartas.length;
+    const puntos = Array.from(
+      seccion.querySelectorAll<HTMLElement>("[data-punto]"),
+    );
+    const anterior = seccion.querySelector<HTMLElement>("[data-anterior]");
+    const siguiente = seccion.querySelector<HTMLElement>("[data-siguiente]");
+    // Misma profundidad que usa el CSS para reservar el ancho del abanico.
+    const profundidad =
+      Number(getComputedStyle(zona).getPropertyValue("--profundidad").trim()) ||
+      3;
 
-        let activo = 0;
-        let automatico: number | undefined;
-        let usuarioManda = false;
+    let activo = 0;
+    let automatico: number | undefined;
+    let usuarioManda = false;
 
-        // Swipe: el gesto horizontal cambia de carta, el vertical sigue
-        // scrolleando la página.
-        let inicioX: number | null = null;
-        let huboSwipe = false;
+    // Swipe: el gesto horizontal cambia de carta, el vertical sigue
+    // scrolleando la página.
+    let inicioX: number | null = null;
+    let huboSwipe = false;
 
-        const pintar = () => {
-            cartas.forEach((carta, index) => {
-                // Posición en la pila: 0 es la de adelante y va rotando.
-                const pos = (index - activo + total) % total;
-                carta.style.setProperty("--pos", String(pos));
-                carta.toggleAttribute("data-oculta", pos > profundidad);
-                carta.toggleAttribute("data-activa", pos === 0);
-                carta.setAttribute("aria-hidden", pos === 0 ? "false" : "true");
-            });
+    const pintar = () => {
+      cartas.forEach((carta, index) => {
+        // Posición en la pila: 0 es la de adelante y va rotando.
+        const pos = (index - activo + total) % total;
+        carta.style.setProperty("--pos", String(pos));
+        carta.toggleAttribute("data-oculta", pos > profundidad);
+        carta.toggleAttribute("data-activa", pos === 0);
+        carta.setAttribute("aria-hidden", pos === 0 ? "false" : "true");
+      });
 
-            puntos.forEach((punto, index) => {
-                punto.toggleAttribute("data-activo", index === activo);
-                punto.setAttribute(
-                    "aria-current",
-                    index === activo ? "true" : "false",
-                );
-            });
-        };
+      puntos.forEach((punto, index) => {
+        punto.toggleAttribute("data-activo", index === activo);
+        punto.setAttribute("aria-current", index === activo ? "true" : "false");
+      });
+    };
 
-        const ir = (indice: number) => {
-            activo = (indice + total) % total;
-            pintar();
-        };
+    const ir = (indice: number) => {
+      activo = (indice + total) % total;
+      pintar();
+    };
 
-        const pausarAutomatico = () => {
-            if (automatico === undefined) return;
-            clearInterval(automatico);
-            automatico = undefined;
-        };
+    const pausarAutomatico = () => {
+      if (automatico === undefined) return;
+      clearInterval(automatico);
+      automatico = undefined;
+    };
 
-        // A partir del primer gesto manda el usuario: no vuelve a arrancar solo.
-        const detenerAutomatico = () => {
-            usuarioManda = true;
-            pausarAutomatico();
-        };
+    // A partir del primer gesto manda el usuario: no vuelve a arrancar solo.
+    const detenerAutomatico = () => {
+      usuarioManda = true;
+      pausarAutomatico();
+    };
 
-        const arrancarAutomatico = () => {
-            const quieto = matchMedia("(prefers-reduced-motion: reduce)").matches;
-            if (usuarioManda || quieto || automatico !== undefined) return;
-            automatico = window.setInterval(() => ir(activo + 1), 5000);
-        };
+    const arrancarAutomatico = () => {
+      const quieto = matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (usuarioManda || quieto || automatico !== undefined) return;
+      automatico = window.setInterval(() => ir(activo + 1), 5000);
+    };
 
-        zona.addEventListener("click", (evento) => {
-            // Después de un swipe el navegador igual dispara el click: sin esto
-            // el gesto avanzaría dos cartas de una.
-            if (huboSwipe) {
-                huboSwipe = false;
-                return;
-            }
+    zona.addEventListener("click", (evento) => {
+      // Después de un swipe el navegador igual dispara el click: sin esto
+      // el gesto avanzaría dos cartas de una.
+      if (huboSwipe) {
+        huboSwipe = false;
+        return;
+      }
 
-            const carta = (evento.target as HTMLElement).closest<HTMLElement>(
-                "[data-carta]",
-            );
-            if (!carta) return;
+      const carta = (evento.target as HTMLElement).closest<HTMLElement>(
+        "[data-carta]",
+      );
+      if (!carta) return;
 
-            detenerAutomatico();
+      detenerAutomatico();
 
-            // Tocar una carta de atrás la trae al frente; tocar la de adelante
-            // pasa a la siguiente.
-            const indice = cartas.indexOf(carta);
-            ir(indice === activo ? activo + 1 : indice);
-        });
+      // Tocar una carta de atrás la trae al frente; tocar la de adelante
+      // pasa a la siguiente.
+      const indice = cartas.indexOf(carta);
+      ir(indice === activo ? activo + 1 : indice);
+    });
 
-        anterior?.addEventListener("click", () => {
-            detenerAutomatico();
-            ir(activo - 1);
-        });
+    anterior?.addEventListener("click", () => {
+      detenerAutomatico();
+      ir(activo - 1);
+    });
 
-        siguiente?.addEventListener("click", () => {
-            detenerAutomatico();
-            ir(activo + 1);
-        });
+    siguiente?.addEventListener("click", () => {
+      detenerAutomatico();
+      ir(activo + 1);
+    });
 
-        puntos.forEach((punto) => {
-            punto.addEventListener("click", () => {
-                detenerAutomatico();
-                ir(Number(punto.dataset.indice));
-            });
-        });
+    puntos.forEach((punto) => {
+      punto.addEventListener("click", () => {
+        detenerAutomatico();
+        ir(Number(punto.dataset.indice));
+      });
+    });
 
-        zona.addEventListener("keydown", (evento) => {
-            if (evento.key !== "ArrowLeft" && evento.key !== "ArrowRight") return;
-            evento.preventDefault();
-            detenerAutomatico();
-            ir(activo + (evento.key === "ArrowRight" ? 1 : -1));
-        });
+    zona.addEventListener("keydown", (evento) => {
+      if (evento.key !== "ArrowLeft" && evento.key !== "ArrowRight") return;
+      evento.preventDefault();
+      detenerAutomatico();
+      ir(activo + (evento.key === "ArrowRight" ? 1 : -1));
+    });
 
-        zona.addEventListener("pointerdown", (evento) => {
-            inicioX = evento.clientX;
-        });
+    zona.addEventListener("pointerdown", (evento) => {
+      inicioX = evento.clientX;
+    });
 
-        zona.addEventListener("pointerup", (evento) => {
-            if (inicioX === null) return;
-            const desplazamiento = evento.clientX - inicioX;
-            inicioX = null;
-            if (Math.abs(desplazamiento) < 45) return;
-            huboSwipe = true;
-            detenerAutomatico();
-            ir(activo + (desplazamiento < 0 ? 1 : -1));
-        });
+    zona.addEventListener("pointerup", (evento) => {
+      if (inicioX === null) return;
+      const desplazamiento = evento.clientX - inicioX;
+      inicioX = null;
+      if (Math.abs(desplazamiento) < 45) return;
+      huboSwipe = true;
+      detenerAutomatico();
+      ir(activo + (desplazamiento < 0 ? 1 : -1));
+    });
 
-        // Sin sentido girar cartas fuera de pantalla.
-        const observador = new IntersectionObserver(
-            (entradas) => {
-                for (const entrada of entradas) {
-                    if (entrada.isIntersecting) arrancarAutomatico();
-                    else pausarAutomatico();
-                }
-            },
-            { threshold: 0.4 },
-        );
+    // Sin sentido girar cartas fuera de pantalla.
+    const observador = new IntersectionObserver(
+      (entradas) => {
+        for (const entrada of entradas) {
+          if (entrada.isIntersecting) arrancarAutomatico();
+          else pausarAutomatico();
+        }
+      },
+      { threshold: 0.4 },
+    );
 
-        observador.observe(zona);
-        pintar();
-    }
+    observador.observe(zona);
+    pintar();
+  }
 </script>

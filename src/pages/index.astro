@@ -17,47 +17,57 @@ const base = import.meta.env.BASE_URL;
 ---
 
 <Layout
-    title="Primer ingreso | Estudiá en UCASAL"
-    description="Encontrá tu carrera, elegí tu modalidad y comenzá tu camino universitario en UCASAL."
+  title="Primer ingreso | Estudiá en UCASAL"
+  description="Encontrá tu carrera, elegí tu modalidad y comenzá tu camino universitario en UCASAL."
 >
-    <Navbar onSubPage={false} />
-    <div class="relative isolate">
-        <!-- Fondo compartido: una sola imagen para las dos secciones -->
-        <div class="absolute inset-0 -z-10">
-            <picture>
-                <source
-                    media="(min-width: 769px)"
-                    srcset={`${base}encabezados/mundial/desktop.webp`}
-                />
-                <img
-                    src={`${base}encabezados/mundial/mobile.webp`}
-                    alt=""
-                    class="sticky top-0 h-dvh w-full object-cover"
-                />
-            </picture>
-            <div
-                class="absolute inset-0 bg-linear-to-t from-(--azul-dark-ucasal)/90 via-(--azul-dark-ucasal)/25 to-transparent"
-            >
-            </div>
-        </div>
+  <Navbar onSubPage={false} />
+  <div class="relative isolate">
+    <!-- Fondo compartido: una sola imagen para las dos secciones -->
+    <div class="absolute inset-0 -z-10">
+      <picture>
+        <source
+          media="(min-width: 769px)"
+          srcset={`${base}encabezados/portada/desktop.webp`}
+        />
+        <img
+          src={`${base}encabezados/portada/mobile.webp`}
+          alt=""
+          class="sticky left-1/2 right-1/2 top-0 h-dvh w-full object-cover"
+        />
+      </picture>
+      <div class="absolute inset-0 bg-linear-to-t from-transparent to-black/30">
+      </div>
+    </div>
 
-        <Hero base={base} />
-        <BeneficiosCartas base={base} />
-    </div>
-    <ModalidadesPuerta />
-    <ExploradorCarreras
-        careers={carreras}
-        modosDisponibles={modosCarrera}
-        client:visible
-    />
-    <!-- A partir de acá el scroll es normal: el observer del Layout apaga el
+    <Hero base={base} />
+    <BeneficiosCartas base={base} />
+  </div>
+  <ModalidadesPuerta />
+  <ExploradorCarreras
+    careers={carreras}
+    modosDisponibles={modosCarrera}
+    client:visible
+  />
+  <!-- A partir de acá el scroll es normal: el observer del Layout apaga el
          snap mientras esta zona esté en pantalla. -->
-    <Sedes />
-    <div data-scroll-libre>
-        <FormSection />
-        {/* La cinta de convenios ya va adentro de Testimonios, en el mismo
-            panel oscuro. */}
-        <Testimonios />
-        <Footer />
+  <Sedes />
+  <div data-scroll-libre>
+    <!-- Vamos a hacer que compartan el mismo fondo, el que me paso la fer me gustaba banda -->
+    <div class="relative isolate">
+      <div class="absolute inset-0 -z-10">
+        <img
+          src={`${base}fondos/azul.jpg`}
+          alt="Imagen de fondo azul"
+          class="sticky left-1/2 right-1/2 top-0 h-full w-full object-cover"
+        />
+      </div>
+      <FormSection />
+      {
+        /* La cinta de convenios ya va adentro de Testimonios, en el mismo
+                   panel oscuro. */
+      }
+      <Testimonios />
     </div>
+    <Footer />
+  </div>
 </Layout>

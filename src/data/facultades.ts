@@ -1,6 +1,15 @@
 export const facultades = [
+  { id: 'artes-ciencias', label: 'Artes y Ciencias', code: 1 },
   { id: 'economia-administracion', label: 'Economía y Adm.', code: 2 },
   { id: 'ciencias-juridicas', label: 'Cs. Jurídicas', code: 3 },
   { id: 'ingenieria', label: 'Ingeniería', code: 4 },
+  { id: 'arquitectura-urbanismo', label: 'Arquitectura y Urbanismo', code: 5 },
+  { id: 'trabajo-social', label: 'Escuela de Trabajo Social', code: 6 },
+  { id: 'educacion-fisica', label: 'Escuela de Educación Física', code: 7 },
   { id: 'turismo', label: 'Escuela de Turismo', code: 8 },
+  { id: 'ciencias-agrarias-veterinarias', label: 'Cs. Agrarias y Veterinarias', code: 9 },
+  { id: 'teologia-filosofia', label: 'Escuela de Teología y Filosofía', code: 11 },
+  { id: 'ciencias-salud', label: 'Cs. de la Salud', code: 13 },
+  { id: 'musica', label: 'Escuela de Música', code: 20 },
+  { id: 'educacion', label: 'Educación', code: 21 },
 ] as const

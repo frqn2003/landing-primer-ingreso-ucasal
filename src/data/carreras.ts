@@ -387,7 +387,7 @@ const data = [
         slug: "administracion-de-empresas",
         nombre: "Licenciatura en Administración de Empresas",
         descripcion: "La Licenciatura en Administración de Empresas de UCASAL forma profesionales capacitados para gestionar organizaciones de todo tipo y tamaño, con dominio de planificación estratégica, recursos humanos, finanzas, marketing y operaciones. Combina teoría y práctica para desarrollar liderazgo y toma de decisiones en entornos dinámicos, tanto en empresas privadas como en organismos públicos.",
-        duracion: "4 años",
+        duracion: "5 años",
         modalidad: [1,7],
         perfilEgresado: {
             items: [
@@ -635,7 +635,7 @@ const data = [
         slug: "tecnicatura-univ-en-gestion-de-calidad",
         nombre: "Tecnicatura Univ. en Gestión de Calidad",
         descripcion: "La Tecnicatura Universitaria en Gestión de Calidad de UCASAL forma profesionales capacitados para diseñar, implementar y auditar sistemas de gestión de calidad, seguridad y medio ambiente según normas ISO. Incluye control estadístico de procesos, buenas prácticas de manufactura, mejora continua y auditorías internas, con salida laboral en empresas industriales, de servicios y organismos públicos.",
-        duracion: "2 años",
+        duracion: "2½ años",
         modalidad: [7],
         perfilEgresado: {
             items: [
@@ -1366,7 +1366,7 @@ const data = [
         slug: "tecnicatura-univ-en-secretariado-ejecutivo",
         nombre: "Tecnicatura Univ. en Secretariado Ejecutivo",
         descripcion: "La Tecnicatura Universitaria en Secretariado Ejecutivo forma profesionales con capacidad para gestionar de manera integral la comunicación e imagen institucional. Los estudiantes dominan herramientas de administración de agenda, redacción corporativa, relaciones públicas, protocolo y tecnologías digitales. La carrera combina teoría y práctica para desarrollar asistentes clave capaces de optimizar flujos de trabajo en empresas y organismos.",
-        duracion: "2½ años",
+        duracion: "2 años",
         modalidad: [7],
         perfilEgresado: {
             items: [
@@ -1769,18 +1769,13 @@ const data = [
             }
         ],
     },
-
-    // ── CARRERAS PENDIENTES DE COMPLETAR ──
-    // Cargadas con el codcar, el nombre y los modos de cursado. Faltan
-    // sector (0 = sin asignar), descripcion, duracion, perfilEgresado y
-    // planEstudios; tambien la imagen public/cards/<codcar>.webp.
     {
         codcar: 105,
-        sector: 0,
+        sector: 1,
         slug: "licenciatura-en-psicologia",
         nombre: "Licenciatura en Psicología",
         descripcion: "La Licenciatura en Psicología forma profesionales con capacidad para comprender, evaluar e intervenir en el comportamiento humano y la salud mental. Los estudiantes dominan herramientas de psicodiagnóstico, evaluación clínica, psicología social, neurociencias y diversas psicoterapias. La carrera combina teoría y práctica para desarrollar líderes capaces de tomar decisiones estratégicas en los ámbitos clínico, educativo, laboral y comunitario.",
-        duracion: "",
+        duracion: "5 años",
         modalidad: [1],
         perfilEgresado: {
             items: [
@@ -1795,11 +1790,11 @@ const data = [
     },
     {
         codcar: 46,
-        sector: 0,
+        sector: 3,
         slug: "licenciatura-en-criminalistica",
         nombre: "Licenciatura en Criminalística",
         descripcion: "La Licenciatura en Criminalística forma profesionales con capacidad para investigar, analizar y reconstruir hechos delictivos mediante métodos científicos. Los estudiantes dominan herramientas de balística, papiloscopía, accidentología, documentología y ciencias forenses. La carrera combina teoría y práctica para desarrollar líderes capaces de redactar peritajes judiciales y tomar decisiones estratégicas en el ámbito público y privado.",
-        duracion: "",
+        duracion: "4 años",
         modalidad: [1],
         perfilEgresado: {
             items: [
@@ -1814,11 +1809,11 @@ const data = [
     },
     {
         codcar: 26,
-        sector: 0,
+        sector: 5,
         slug: "arquitectura",
         nombre: "Arquitectura",
         descripcion: "La carrera de Arquitectura forma profesionales con capacidad para diseñar, proyectar y dirigir obras que transforman el hábitat y el entorno urbano. Los estudiantes dominan herramientas de diseño arquitectónico, sistemas constructivos, representación digital, sustentabilidad y gestión de proyectos. La carrera combina teoría y práctica para desarrollar líderes capaces de tomar decisiones estratégicas en el ámbito público y privado.",
-        duracion: "",
+        duracion: "5 años",
         modalidad: [1],
         perfilEgresado: {
             items: [
@@ -1833,11 +1828,11 @@ const data = [
     },
     {
         codcar: 123,
-        sector: 0,
+        sector: 9,
         slug: "ciencias-veterinarias",
         nombre: "Ciencias Veterinarias",
         descripcion: "La carrera de Ciencias Veterinarias forma profesionales con capacidad para promover la salud animal, la producción agropecuaria y la salud pública. Los estudiantes dominan herramientas de medicina clínica, cirugía, diagnóstico epidemiológico, bioseguridad y tecnología de los alimentos. La carrera combina teoría y práctica para desarrollar líderes capaces de tomar decisiones estratégicas en el ámbito público y privado.",
-        duracion: "",
+        duracion: "5½ años",
         modalidad: [1],
         perfilEgresado: {
             items: [
@@ -1852,11 +1847,11 @@ const data = [
     },
     {
         codcar: 84,
-        sector: 0,
+        sector: 4,
         slug: "ingenieria-en-informatica",
         nombre: "Ingeniería en Informática",
         descripcion: "La carrera de Ingeniería en Informática forma profesionales con capacidad para diseñar, desarrollar y gestionar sistemas tecnológicos complejos. Los estudiantes dominan herramientas de programación avanzada, arquitectura de software, bases de datos, redes, ciberseguridad e inteligencia artificial. La carrera combina teoría y práctica para desarrollar líderes capaces de tomar decisiones estratégicas en el ámbito público y privado.",
-        duracion: "",
+        duracion: "5 años",
         modalidad: [1],
         perfilEgresado: {
             items: [
@@ -1871,11 +1866,11 @@ const data = [
     },
     {
         codcar: 19,
-        sector: 0,
+        sector: 4,
         slug: "ingenieria-industrial",
         nombre: "Ingeniería Industrial",
         descripcion: "La carrera de Ingeniería Industrial forma profesionales con capacidad para optimizar procesos, recursos e infraestructuras en organizaciones de bienes y servicios. Los estudiantes dominan herramientas de gestión de operaciones, logística, economía, control de calidad y dirección de proyectos. La carrera combina teoría y práctica para desarrollar líderes capaces de tomar decisiones estratégicas en el ámbito público y privado.",
-        duracion: "",
+        duracion: "5 años",
         modalidad: [1],
         perfilEgresado: {
             items: [
@@ -1890,11 +1885,11 @@ const data = [
     },
     {
         codcar: 31,
-        sector: 0,
+        sector: 7,
         slug: "profesorado-en-educacion-fisica",
         nombre: "Profesorado en Educación Física",
         descripcion: "El Profesorado en Educación Física forma profesionales con capacidad para planificar y conducir procesos educativos, deportivos y recreativos. Los estudiantes dominan herramientas de didáctica, pedagogía, anatomía, desarrollo motor, deportes individuales y grupales. La carrera combina teoría y práctica para desarrollar docentes capaces de tomar decisiones pedagógicas estratégicas en ámbitos escolares y comunitarios.",
-        duracion: "",
+        duracion: "4 años",
         modalidad: [1],
         perfilEgresado: {
             items: [
@@ -1908,11 +1903,11 @@ const data = [
     },
     {
         codcar: 323,
-        sector: 0,
+        sector: 21,
         slug: "formacion-docente-para-profesionales",
         nombre: "Formación Docente para Profesionales",
         descripcion: "La Formación Docente para Profesionales capacita a graduados universitarios para la enseñanza pedagógica en el sistema educativo. Los estudiantes dominan herramientas de didáctica, planificación curricular, evaluación de aprendizajes, tecnologías educativas y gestión escolar. La carrera combina teoría y práctica para desarrollar educadores capaces de tomar decisiones estratégicas e impactar en el aula pública y privada.",
-        duracion: "",
+        duracion: "2 años",
         modalidad: [1],
         perfilEgresado: {
             items: [
@@ -1928,11 +1923,11 @@ const data = [
     },
     {
         codcar: 69,
-        sector: 0,
+        sector: 1,
         slug: "licenciatura-en-psicopedagogia",
         nombre: "Licenciatura en Psicopedagogía",
         descripcion: "La Licenciatura en Psicopedagogía forma profesionales con capacidad para diagnosticar, prevenir e intervenir en los procesos de aprendizaje humano en todas las etapas de la vida. Los estudiantes dominan herramientas de evaluación psicopedagógica, neuropsicología, orientación vocacional, inclusión educativa y tecnologías aplicadas.",
-        duracion: "",
+        duracion: "4 años",
         modalidad: [1],
         perfilEgresado: {
             items: [
@@ -1946,11 +1941,11 @@ const data = [
     },
     {
         codcar: 220,
-        sector: 0,
+        sector: 1,
         slug: "licenciatura-en-imagen-y-sonido",
         nombre: "Licenciatura en Imagen y Sonido",
         descripcion: "La Licenciatura en Imagen y Sonido forma profesionales con capacidad para concebir, producir y dirigir realizaciones audiovisuales y multimedia innovadoras. Los estudiantes dominan herramientas de producción cinematográfica, edición de video, diseño sonoro, guión, iluminación y postproducción digital. La carrera combina teoría y práctica para desarrollar líderes capaces de tomar decisiones creativas en el ámbito público y privado.",
-        duracion: "",
+        duracion: "4 años",
         modalidad: [1],
         perfilEgresado: {
             items: [
@@ -1965,11 +1960,11 @@ const data = [
     },
     {
         codcar: 18,
-        sector: 0,
+        sector: 4,
         slug: "ingenieria-civil",
         nombre: "Ingeniería Civil",
         descripcion: "La carrera de Ingeniería Civil forma profesionales con capacidad para planificar, diseñar, construir y mantener infraestructuras esenciales para el desarrollo socioeconómico. Los estudiantes dominan herramientas de cálculo estructural, hidráulica, geotecnia, vías de transporte y gestión de obras. La carrera combina teoría y práctica para desarrollar líderes capaces de tomar decisiones estratégicas en el ámbito público y privado.",
-        duracion: "",
+        duracion: "5 años",
         modalidad: [1],
         perfilEgresado: {
             items: [
@@ -1984,11 +1979,11 @@ const data = [
     },
     {
         codcar: 238,
-        sector: 0,
+        sector: 7,
         slug: "tecnicatura-univ-en-actividad-fisica-y-fitness",
         nombre: "Tecnicatura Univ. en Actividad Física y Fitness",
         descripcion: "La Tecnicatura Universitaria en Actividad Física y Fitness forma profesionales con capacidad para planificar, programar y coordinar entrenamientos orientados a la salud y el rendimiento. Los estudiantes dominan herramientas de preparación física, fisiología del ejercicio, evaluación deportiva, biomecánica y gestión de centros de entrenamiento.",
-        duracion: "",
+        duracion: "2 años",
         modalidad: [1],
         perfilEgresado: {
             items: [
@@ -2003,11 +1998,11 @@ const data = [
     },
     {
         codcar: 17,
-        sector: 0,
+        sector: 3,
         slug: "licenciatura-en-relaciones-internacionales",
         nombre: "Licenciatura en Relaciones Internacionales",
         descripcion: "La Licenciatura en Relaciones Internacionales de UCASAL forma profesionales capacitados para evaluar críticamente los factores que influyen en la política exterior y asesorar a instituciones públicas y empresas privadas sobre la dinámica entre Estados, bloques económicos y organismos internacionales. Habilita para desempeñarse en organismos gubernamentales, ONGs, empresas privadas, docencia e investigación, e ingresar al Servicio Exterior de la Nación.",
-        duracion: "",
+        duracion: "4 años",
         modalidad: [1,7],
         perfilEgresado: {
             items: [
@@ -2022,11 +2017,11 @@ const data = [
     },
     {
         codcar: 173,
-        sector: 0,
+        sector: 5,
         slug: "diseno-industrial",
         nombre: "Diseño Industrial",
         descripcion: "La carrera de Diseño Industrial forma profesionales con capacidad para proyectar, desarrollar e innovar en productos y sistemas de producción sustentables. Los estudiantes dominan herramientas de modelado 3D, ciencia de materiales, procesos de fabricación, ergonomía y gestión del diseño. La carrera combina teoría y práctica para desarrollar líderes capaces de tomar decisiones estratégicas en el ámbito público y privado.",
-        duracion: "",
+        duracion: "4 años",
         modalidad: [1],
         perfilEgresado: {
             items: [
@@ -2040,11 +2035,11 @@ const data = [
     },
     {
         codcar: 179,
-        sector: 0,
+        sector: 5,
         slug: "licenciatura-en-diseno-de-interiores",
         nombre: "Licenciatura en Diseño de Interiores",
         descripcion: "La Licenciatura en Diseño de Interiores forma profesionales con capacidad para proyectar, transformar y optimizar espacios funcionales, estéticos y sostenibles. Los estudiantes dominan herramientas de representación tridimensional, iluminación, teoría del color, selección de materiales y ergonomía. La carrera combina teoría y práctica para desarrollar líderes capaces de tomar decisiones estratégicas.",
-        duracion: "",
+        duracion: "4 años",
         modalidad: [1],
         perfilEgresado: {
             items: [
@@ -2058,11 +2053,11 @@ const data = [
     },
     {
         codcar: 4,
-        sector: 0,
+        sector: 1,
         slug: "profesorado-en-ingles",
         nombre: "Profesorado en Inglés",
         descripcion: "El Profesorado en Inglés forma profesionales con capacidad para planificar, conducir y evaluar procesos de enseñanza del idioma anglosajón. Los estudiantes dominan herramientas de lingüística aplicada, fonética, literatura, didáctica específica y tecnologías de la educación. La carrera combina teoría y práctica para desarrollar docentes capaces de tomar decisiones pedagógicas estratégicas.",
-        duracion: "",
+        duracion: "4 años",
         modalidad: [1],
         perfilEgresado: {
             items: [
@@ -2076,11 +2071,11 @@ const data = [
     },
     {
         codcar: 6,
-        sector: 0,
+        sector: 1,
         slug: "profesorado-en-psicologia",
         nombre: "Profesorado en Psicología",
         descripcion: "El Profesorado en Psicología forma profesionales con capacidad para planificar, conducir y evaluar procesos formativos y de enseñanza de la psicología. Los estudiantes dominan herramientas de didáctica, teorías del aprendizaje, desarrollo psicológico, tecnologías educativas y gestión pedagógica. La carrera combina teoría y práctica para desarrollar docentes capaces de tomar decisiones estratégicas en ámbitos educativos públicos y privados.",
-        duracion: "",
+        duracion: "4 años",
         modalidad: [1],
         perfilEgresado: {
             items: [
@@ -2094,11 +2089,11 @@ const data = [
     },
     {
         codcar: 109,
-        sector: 0,
+        sector: 1,
         slug: "traductor-publico-en-ingles",
         nombre: "Traductor Público en Inglés",
         descripcion: "La carrera de Traductor Público en Inglés forma profesionales con capacidad para brindar fe pública en la traducción e interpretación de documentos legales. Los estudiantes dominan herramientas de traducción jurídica, terminología técnica, lingüística aplicada, derecho comparado y edición. La carrera combina teoría y práctica para desarrollar expertos capaces de tomar decisiones estratégicas e intervenir en el ámbito legal público y privado.",
-        duracion: "",
+        duracion: "4 años",
         modalidad: [1],
         perfilEgresado: {
             items: [
@@ -2113,11 +2108,11 @@ const data = [
     },
     {
         codcar: 142,
-        sector: 0,
+        sector: 6,
         slug: "licenciatura-en-trabajo-social",
         nombre: "Licenciatura en Trabajo Social",
         descripcion: "La Licenciatura en Trabajo Social forma profesionales con capacidad para intervenir en problemáticas sociales y promover los derechos humanos y el bienestar comunitario. Los estudiantes dominan herramientas de diagnóstico social, gestión de políticas públicas, planificación de proyectos, mediación e investigación. La carrera combina teoría y práctica para desarrollar líderes capaces de tomar decisiones estratégicas en el ámbito público y privado.",
-        duracion: "",
+        duracion: "5 años",
         modalidad: [1],
         perfilEgresado: {
             items: [
@@ -2131,11 +2126,11 @@ const data = [
     },
     {
         codcar: 117,
-        sector: 0,
+        sector: 4,
         slug: "ingenieria-en-telecomunicaciones",
         nombre: "Ingeniería en Telecomunicaciones",
         descripcion: "La carrera de Ingeniería en Telecomunicaciones forma profesionales con capacidad para diseñar, implementar y gestionar redes y sistemas de comunicación complejos. Los estudiantes dominan herramientas de transmisión de datos, radiocomunicaciones, procesamiento de señales, telefonía móvil y seguridad en redes. La carrera combina teoría y práctica para desarrollar líderes capaces de tomar decisiones estratégicas en el ámbito público y privado.",
-        duracion: "",
+        duracion: "5 años",
         modalidad: [1],
         perfilEgresado: {
             items: [
@@ -2149,11 +2144,11 @@ const data = [
     },
     {
         codcar: 343,
-        sector: 0,
+        sector: 21,
         slug: "profesorado-universitario-en-educacion-primaria",
         nombre: "Profesorado Universitario en Educación Primaria",
         descripcion: "El Profesorado Universitario en Educación Primaria forma profesionales con capacidad para planificar, conducir y evaluar procesos de enseñanza en el primer nivel del sistema educativo. Los estudiantes dominan herramientas de didáctica general y específica, psicología del desarrollo, gestión pedagógica, inclusión escolar y tecnologías de la educación. La carrera combina teoría y práctica para formar docentes en el ámbito público y privado.",
-        duracion: "",
+        duracion: "4 años",
         modalidad: [1],
         perfilEgresado: {
             items: [
@@ -2167,11 +2162,11 @@ const data = [
     },
     {
         codcar: 320,
-        sector: 0,
+        sector: 11,
         slug: "licenciatura-en-teologia",
         nombre: "Licenciatura en Teología",
         descripcion: "La Licenciatura en Teología forma profesionales con capacidad para investigar, interpretar y reflexionar sobre la fe y el fenómeno religioso en el contexto socio-cultural actual. Los estudiantes dominan herramientas de exégesis bíblica, teología sistemática, historia de la Iglesia, filosofía y diálogo ecuménico e interreligioso.",
-        duracion: "",
+        duracion: "5 años",
         modalidad: [1],
         perfilEgresado: {
             items: [
@@ -2186,11 +2181,11 @@ const data = [
     },
     {
         codcar: 385,
-        sector: 0,
+        sector: 1,
         slug: "licenciatura-en-comunicaciones",
         nombre: "Licenciatura en Comunicaciones",
         descripcion: "La Licenciatura en Comunicaciones forma profesionales con capacidad para planificar, gestionar y ejecutar estrategias de comunicación efectivas e innovadoras. Los estudiantes dominan herramientas de gestión de medios, producción de contenidos, comunicación institucional, marketing digital y opinión pública. La carrera combina teoría y práctica para desarrollar líderes capaces de tomar decisiones estratégicas en el ámbito público y privado.",
-        duracion: "",
+        duracion: "4 años",
         modalidad: [1],
         perfilEgresado: {
             items: [
@@ -2206,11 +2201,11 @@ const data = [
     },
     {
         codcar: 47,
-        sector: 0,
+        sector: 21,
         slug: "profesorado-universitario-en-educacion-inicial",
         nombre: "Profesorado Universitario en Educación Inicial",
         descripcion: "El Profesorado Universitario en Educación Inicial forma profesionales con capacidad para planificar, conducir y evaluar procesos de enseñanza en las primeras etapas de la infancia. Los estudiantes dominan herramientas de didáctica, desarrollo infantil, juego pedagógico, inclusión escolar y expresión artística.",
-        duracion: "",
+        duracion: "4 años",
         modalidad: [1],
         perfilEgresado: {
             items: [
@@ -2224,11 +2219,11 @@ const data = [
     },
     {
         codcar: 68,
-        sector: 0,
+        sector: 3,
         slug: "perito-en-accidentologia",
         nombre: "Perito en Accidentología",
         descripcion: "La carrera de Perito en Accidentología forma profesionales capacitados para investigar, analizar y reconstruir siniestros viales mediante el método científico. Los estudiantes dominan herramientas de física aplicada a colisiones, fotogrametría, mecánica vehicular, legislación de tránsito y criminología. Su formación busca esclarecer hechos complejos para aportar evidencia técnica determinante en procesos judiciales e investigaciones de aseguradoras.",
-        duracion: "",
+        duracion: "2 años",
         modalidad: [1],
         perfilEgresado: {
             items: [
@@ -2243,11 +2238,11 @@ const data = [
     },
     {
         codcar: 86,
-        sector: 0,
+        sector: 8,
         slug: "licenciatura-en-turismo",
         nombre: "Licenciatura en Turismo",
         descripcion: "La Licenciatura en Turismo forma profesionales con capacidad para planificar, gestionar y desarrollar proyectos turísticos sostenibles. Los estudiantes dominan herramientas de gestión hotelera, administración de agencias, patrimonio cultural, marketing turístico y políticas públicas. La carrera combina teoría y práctica para desarrollar líderes capaces de impulsar destinos competitivos e innovar en el sector público y privado.",
-        duracion: "",
+        duracion: "4 años",
         modalidad: [1,7],
         perfilEgresado: {
             items: [
@@ -2262,11 +2257,11 @@ const data = [
     },
     {
         codcar: 222,
-        sector: 0,
+        sector: 1,
         slug: "licenciatura-en-publicidad",
         nombre: "Licenciatura en Publicidad",
         descripcion: "La Licenciatura en Publicidad forma profesionales capaces de diseñar, implementar y liderar campañas creativas de comunicación estratégica. Los estudiantes dominan herramientas de branding, comportamiento del consumidor, dirección de arte, planificación de medios digitales y redacción publicitaria. La propuesta fomenta una visión innovadora enfocada en posicionar marcas de manera efectiva en entornos altamente competitivos.",
-        duracion: "",
+        duracion: "4 años",
         modalidad: [1],
         perfilEgresado: {
             items: [
@@ -2281,11 +2276,11 @@ const data = [
     },
     {
         codcar: 223,
-        sector: 0,
+        sector: 1,
         slug: "licenciatura-en-periodismo",
         nombre: "Licenciatura en Periodismo",
         descripcion: "La Licenciatura en Periodismo forma profesionales capacitados para investigar, redactar y difundir información rigurosa en múltiples plataformas analógicas y digitales. Los estudiantes dominan herramientas de producción narrativa, investigación periodística, gestión de contenidos, ética de los medios y análisis geopolítico. Su formación impulsa un pensamiento crítico capaz de interpretar la realidad y generar impacto en la opinión pública.",
-        duracion: "",
+        duracion: "4 años",
         modalidad: [1],
         perfilEgresado: {
             items: [
@@ -2300,11 +2295,11 @@ const data = [
     },
     {
         codcar: 231,
-        sector: 0,
+        sector: 9,
         slug: "licenciatura-en-produccion-animal",
         nombre: "Licenciatura en Producción Animal",
         descripcion: "La Licenciatura en Producción Animal forma profesionales capacitados para optimizar la cría, nutrición y manejo integral del ganado mediante la aplicación de criterios científicos y tecnológicos. Los estudiantes dominan herramientas de genética, bioseguridad, reproducción, bienestar animal y eficiencia operativa. Su perfil responde a la creciente demanda de sistemas agropecuarios sostenibles, rentables y respetuosos con el medio ambiente.",
-        duracion: "",
+        duracion: "4 años",
         modalidad: [1],
         perfilEgresado: {
             items: [
@@ -2318,11 +2313,11 @@ const data = [
     },
     {
         codcar: 32,
-        sector: 0,
+        sector: 7,
         slug: "licenciatura-en-educacion-fisica",
         nombre: "Licenciatura en Educación Física",
         descripcion: "La Licenciatura en Educación Física forma profesionales capacitados para diseñar, dirigir y evaluar programas de formación motriz, entrenamiento deportivo y promoción de la salud. Los estudiantes dominan herramientas de fisiología del ejercicio, biomecánica, pedagogía, gestión deportiva y preparación física avanzada. Su perfil busca liderar proyectos educativos y de alto rendimiento que mejoren la calidad de vida de las personas.",
-        duracion: "",
+        duracion: "4 años",
         modalidad: [1],
         perfilEgresado: {
             items: [
@@ -2336,11 +2331,11 @@ const data = [
     },
     {
         codcar: 139,
-        sector: 0,
+        sector: 20,
         slug: "licenciatura-en-artes-musicales",
         nombre: "Licenciatura en Artes Musicales",
         descripcion: "La Licenciatura en Artes Musicales forma profesionales capacitados para la ejecución, composición, análisis e interpretación en diversos lenguajes y estilos sonoros. Los estudiantes dominan herramientas de armonía, contrapunto, entrenamiento auditivo, producción musical, tecnología aplicada e historia de la música. Su perfil fomenta la innovación artística y la excelencia técnica para destacar en la creación e industria cultural.",
-        duracion: "",
+        duracion: "5 años",
         modalidad: [1],
         perfilEgresado: {
             items: [
@@ -2355,11 +2350,11 @@ const data = [
     },
     {
         codcar: 30,
-        sector: 0,
+        sector: 2,
         slug: "licenciatura-en-relaciones-publicas-e-institucionales",
         nombre: "Licenciatura en Relaciones Públicas e Institucionales",
         descripcion: "La Licenciatura en Relaciones Públicas e Institucionales forma profesionales capaces de diseñar y gestionar estrategias de comunicación integral para diversas organizaciones. Su plan de estudios integra la gestión de imagen corporativa, la resolución de crisis, la organización de eventos y las relaciones con los medios digitales. Propone un espacio académico para comprender el vínculo institucional y construir puentes de diálogo transparentes.",
-        duracion: "",
+        duracion: "4 años",
         modalidad: [1,7],
         perfilEgresado: {
             items: [
@@ -2375,11 +2370,11 @@ const data = [
     },
     {
         codcar: 100,
-        sector: 0,
+        sector: 1,
         slug: "licenciatura-en-filosofia",
         nombre: "Licenciatura en Filosofía",
         descripcion: "La Licenciatura en Filosofía forma profesionales capacitados para examinar, cuestionar y comprender de manera rigurosa los grandes dilemas del pensamiento humano y la sociedad. Los estudiantes dominan herramientas de lógica, epistemología, ética, metafísica, historia de las ideas y análisis del discurso. Esta propuesta impulsa una sólida capacidad analítica y argumentativa clave para abordar las problemáticas contemporáneas.",
-        duracion: "",
+        duracion: "4 años",
         modalidad: [1],
         perfilEgresado: {
             items: [
@@ -2393,11 +2388,11 @@ const data = [
     },
     {
         codcar: 132,
-        sector: 0,
+        sector: 3,
         slug: "ciencias-politicas",
         nombre: "Ciencias Políticas",
         descripcion: "La Licenciatura en Ciencias Políticas forma profesionales capacitados para analizar, interpretar y gestionar los procesos de poder, las instituciones públicas y la dinámica social. Los estudiantes dominan herramientas de teoría política, relaciones internacionales, políticas públicas, opinión pública y análisis legislativo. Esta formación impulsa la toma de decisiones estratégicas en el diseño e implementación de proyectos gubernamentales y sociales.",
-        duracion: "",
+        duracion: "4 años",
         modalidad: [1],
         perfilEgresado: {
             items: [
@@ -2411,11 +2406,11 @@ const data = [
     },
     {
         codcar: 372,
-        sector: 0,
+        sector: 3,
         slug: "tecnicatura-en-administracion-y-gestion-judicial",
         nombre: "Tecnicatura en Administración y Gestión Judicial",
         descripcion: "La Tecnicatura en Administración y Gestión Judicial forma profesionales capacitados para coordinar, optimizar y modernizar los procedimientos operativos dentro del sistema de justicia. Los estudiantes dominan herramientas de derecho procesal, expediente digital, gestión documental, organización de la oficina judicial y atención al usuario. Esta titulación fortalece la eficiencia institucional para agilizar la tramitación de causas.",
-        duracion: "",
+        duracion: "2 años",
         modalidad: [1],
         perfilEgresado: {
             items: [
@@ -2430,11 +2425,11 @@ const data = [
     },
     {
         codcar: 7,
-        sector: 0,
+        sector: 1,
         slug: "locutor-nacional",
         nombre: "Locutor Nacional",
         descripcion: "La carrera de Locutor Nacional forma profesionales capacitados para dominar el uso de la voz, la comunicación oral y la conducción en medios de difusión tradicionales y digitales. Los estudiantes dominan herramientas de foniatría, locución comercial, oratoria, lectura interpretativa, doblaje y articulación periodística. Esta propuesta fortalece la versatilidad sonora y el rigor comunicacional para liderar producciones audiovisuales.",
-        duracion: "",
+        duracion: "3 años",
         modalidad: [1],
         perfilEgresado: {
             items: [
@@ -2449,11 +2444,11 @@ const data = [
     },
     {
         codcar: 54,
-        sector: 0,
+        sector: 1,
         slug: "productor-y-director-para-radio-y-television",
         nombre: "Productor y Director para Radio y Televisión",
         descripcion: "La carrera de Productor y Director para Radio y Televisión forma profesionales capacitados para diseñar, realizar y coordinar contenidos audiovisuales y sonoros en múltiples plataformas. Los estudiantes dominan herramientas de guion, dirección de cámaras, edición digital, diseño de producción, puesta en aire y gestión de proyectos. Esta propuesta fomenta la innovación narrativa e impulsa la creación de formatos de alto impacto comunicacional.",
-        duracion: "",
+        duracion: "3 años",
         modalidad: [1],
         perfilEgresado: {
             items: [
@@ -2468,11 +2463,11 @@ const data = [
     },
     {
         codcar: 348,
-        sector: 0,
+        sector: 2,
         slug: "tecnicatura-univ-en-administracion-y-gestion-universitaria",
         nombre: "Tecnicatura Univ. en Administración y Gestión Universitaria",
         descripcion: "La Tecnicatura Universitaria en Administración y Gestión Universitaria forma profesionales capacitados para coordinar, planificar y optimizar los procesos institucionales del ámbito académico superior. Los estudiantes dominan herramientas de legislación universitaria, gestión contable, administración de recursos humanos, archivos y procedimientos presupuestarios. Esta titulación promueve la modernización técnica para garantizar una atención y gobernanza eficiente.",
-        duracion: "",
+        duracion: "2½ años",
         modalidad: [1],
         perfilEgresado: {
             items: [
@@ -2487,11 +2482,11 @@ const data = [
     },
     {
         codcar: 249,
-        sector: 0,
+        sector: 21,
         slug: "profesorado-universitario-campo-disciplinar-segun-titulacion-de-base-ccc",
         nombre: "Profesorado Universitario (Campo Disciplinar según Titulación de Base) - CCC",
         descripcion: "El Profesorado Universitario para Titulados de Base forma profesionales capacitados para planificar, conducir y evaluar procesos de enseñanza en el nivel superior y universitario. Los estudiantes dominan herramientas de pedagogía, didáctica general y específica, psicología del aprendizaje, diseño curricular y tecnologías educativas. Esta propuesta brinda la fundamentación docente necesaria para transformar el saber disciplinar de origen en una práctica pedagógica de excelencia.",
-        duracion: "",
+        duracion: "2 años",
         modalidad: [1],
         perfilEgresado: {
             items: [
@@ -2506,11 +2501,11 @@ const data = [
     },
     {
         codcar: 332,
-        sector: 0,
+        sector: 6,
         slug: "licenciatura-en-trabajo-social-ccc",
         nombre: "Licenciatura en Trabajo Social - CCC",
         descripcion: "La Licenciatura en Trabajo Social (Ciclo de Complementación Curricular) forma profesionales capacitados para diseñar, gestionar y evaluar intervenciones comunitarias y políticas públicas orientadas al bienestar social. Los estudiantes dominan herramientas de diagnóstico territorial, mediación de conflictos, derechos humanos, metodologías participativas y formulación de proyectos sociales. Esta propuesta profundiza la práctica técnica previa con un marco teórico avanzado.",
-        duracion: "",
+        duracion: "2 años",
         modalidad: [1],
         perfilEgresado: {
             items: [
@@ -2525,11 +2520,11 @@ const data = [
     },
     {
         codcar: 113,
-        sector: 0,
+        sector: 21,
         slug: "licenciatura-en-gestion-educativa-ciclo-de-licenciatura",
         nombre: "Licenciatura en Gestión Educativa - Ciclo de Licenciatura",
         descripcion: "La Licenciatura en Gestión Educativa forma profesionales con capacidad para liderar y transformar instituciones en los distintos niveles del sistema. Los estudiantes dominan herramientas de planificación curricular, evaluación institucional, legislación escolar, gestión de equipos y política educativa. La carrera combina teoría y práctica para desarrollar líderes capaces de tomar decisiones estratégicas en contextos diversos.",
-        duracion: "",
+        duracion: "2 años",
         modalidad: [1,7],
         perfilEgresado: {
             items: [
@@ -2545,20 +2540,20 @@ const data = [
     },
     {
         codcar: 94,
-        sector: 0,
+        sector: 1,
         slug: "licenciatura-en-ingles-ciclo-de-licenciatura",
         nombre: "Licenciatura en Inglés - Ciclo de Licenciatura",
         descripcion: "La Licenciatura en Inglés (Ciclo de Licenciatura) forma profesionales capacitados para abordar la lengua inglesa desde una perspectiva lingüística, literaria e intercultural avanzada. Los estudiantes dominan herramientas de análisis del discurso, crítica literaria, traducción, lingüística aplicada y producción académica especializada. Esta propuesta profundiza los conocimientos previos para impulsar la investigación, la edición y la consultoría lingüística internacional.",
-        duracion: "",
+        duracion: "2 años",
         modalidad: [1],
     },
     {
         codcar: 186,
-        sector: 0,
+        sector: 7,
         slug: "licenciatura-en-entrenamiento-deportivo-ccc",
         nombre: "Licenciatura en Entrenamiento Deportivo - CCC",
         descripcion: "La Licenciatura en Entrenamiento Deportivo forma profesionales con capacidad para planificar y optimizar procesos de alto rendimiento e iniciación atlética. Los estudiantes dominan herramientas de preparación física, fisiología del ejercicio, biomecánica, nutrición aplicada y tecnología deportiva. La carrera combina teoría y práctica para desarrollar líderes capaces de tomar decisiones estratégicas en instituciones, clubes y federaciones.",
-        duracion: "",
+        duracion: "1½ años",
         modalidad: [1,7],
         perfilEgresado: {
             items: [
@@ -2574,11 +2569,11 @@ const data = [
     },
     {
         codcar: 146,
-        sector: 0,
+        sector: 3,
         slug: "escribania-ccc",
         nombre: "Escribanía - CCC",
         descripcion: "La carrera de Escribanía forma profesionales con capacidad para ejercer la fe pública y brindar asesoramiento en actos jurídicos y notariales. Los estudiantes dominan herramientas de derecho notarial, registral, inmobiliario, contractual, tributario y técnica de redacción de escrituras. La carrera combina teoría y práctica para desarrollar líderes capaces de tomar decisiones estratégicas e intervenir con rigor ético en el ámbito legal.",
-        duracion: "",
+        duracion: "1 año",
         modalidad: [1,7],
         perfilEgresado: {
             items: [
@@ -2593,11 +2588,11 @@ const data = [
     },
     {
         codcar: 104,
-        sector: 0,
+        sector: 7,
         slug: "licenciatura-en-educacion-fisica-ciclo-de-licenciatura",
         nombre: "Licenciatura en Educación Física - Ciclo de Licenciatura",
         descripcion: "La Licenciatura en Educación Física (Ciclo de Licenciatura) forma profesionales capacitados para conducir, investigar y gestionar programas complejos de actividad física, salud y entrenamiento de alto rendimiento. Los estudiantes dominan herramientas de fisiología avanzada, biomecánica aplicada, planificación deportiva, metodología de la investigación y gestión institucional. Esta propuesta complementa la titulación previa con un enfoque científico y directivo.",
-        duracion: "",
+        duracion: "1½ años",
         modalidad: [1],
         perfilEgresado: {
             items: [
@@ -2612,11 +2607,11 @@ const data = [
     },
     {
         codcar: 148,
-        sector: 0,
+        sector: 5,
         slug: "licenciatura-en-diseno-de-interiores-ciclo-de-licenciatura",
         nombre: "Licenciatura en Diseño de Interiores - Ciclo de Licenciatura",
         descripcion: "La Licenciatura en Diseño de Interiores (Ciclo de Licenciatura) forma profesionales capacitados para proyectar, transformar y gestionar espacios habitables, comerciales e institucionales con rigor técnico y estético. Los estudiantes dominan herramientas de arquitectura interior, tecnología de materiales, iluminación avanzada, modelado tridimensional y gestión de obras. Esta propuesta profundiza la formación previa para liderar proyectos conceptuales e innovadores.",
-        duracion: "",
+        duracion: "1 año",
         modalidad: [1],
         perfilEgresado: {
             items: [
@@ -2631,11 +2626,11 @@ const data = [
     },
     {
         codcar: 187,
-        sector: 0,
+        sector: 7,
         slug: "licenciatura-en-lenguajes-expresivos-ccc",
         nombre: "Licenciatura en Lenguajes Expresivos - CCC",
         descripcion: "La Licenciatura en Lenguajes Expresivos forma profesionales con capacidad para integrar el arte, la comunicación y el cuerpo en proyectos educativos y socio-culturales. Los estudiantes dominan herramientas de expresión corporal, semiótica, producción artística, dinámicas grupales y gestión cultural. La carrera combina teoría y práctica para desarrollar líderes capaces de tomar decisiones estratégicas en instituciones públicas y privadas.",
-        duracion: "",
+        duracion: "1½ años",
         modalidad: [1,7],
         perfilEgresado: {
             items: [
@@ -2650,11 +2645,11 @@ const data = [
     },
     {
         codcar: 340,
-        sector: 0,
+        sector: 13,
         slug: "licenciatura-en-kinesiologia-y-fisioterapia",
         nombre: "Licenciatura en Kinesiología y Fisioterapia",
         descripcion: "La Licenciatura en Kinesiología y Fisioterapia forma profesionales capacitados para evaluar, prevenir, rehabilitar y optimizar el movimiento humano y la funcionalidad física. Los estudiantes dominan herramientas de biomecánica, anatomía clínica, fisioterapia aplicada, rehabilitación deportiva, kinesioterapia y técnicas manuales avanzadas. Esta propuesta potencia la atención integral de la salud para restaurar la calidad de vida de las personas.",
-        duracion: "",
+        duracion: "5 años",
         modalidad: [1],
         perfilEgresado: {
             items: [
@@ -2669,11 +2664,11 @@ const data = [
     },
     {
         codcar: 232,
-        sector: 0,
+        sector: 13,
         slug: "tecnicatura-univ-en-produccion-de-bio-imagenes",
         nombre: "Tecnicatura Univ. en Producción de Bio-Imágenes",
         descripcion: "La Tecnicatura Universitaria en Producción de Bio-Imágenes forma profesionales capacitados para obtener, procesar y gestionar imágenes de diagnóstico y tratamiento médico con alta precisión. Los estudiantes dominan herramientas de radiología digital, tomografía computada, resonancia magnética, ecografía y protocolos de protección radiológica. Esta propuesta promueve la excelencia técnica en la asistencia diagnóstica e interdisciplinaria.",
-        duracion: "",
+        duracion: "3 años",
         modalidad: [1],
         perfilEgresado: {
             items: [
@@ -2688,11 +2683,11 @@ const data = [
     },
     {
         codcar: 342,
-        sector: 0,
+        sector: 13,
         slug: "licenciatura-en-fonoaudiologia",
         nombre: "Licenciatura en Fonoaudiología",
         descripcion: "La Licenciatura en Fonoaudiología forma profesionales capacitados para evaluar, diagnosticar y rehabilitar los trastornos de la comunicación humana, la voz, el habla, el lenguaje y la audición. Los estudiantes dominan herramientas de audiología clínica, terapia vocal, motricidad orofacial, neurofisiología y estimulación temprana. Esta propuesta promueve el bienestar integrativo y la reinserción comunicativa del paciente.",
-        duracion: "",
+        duracion: "5 años",
         modalidad: [1],
         perfilEgresado: {
             items: [
@@ -2707,11 +2702,11 @@ const data = [
     },
     {
         codcar: 56,
-        sector: 0,
+        sector: 13,
         slug: "tecnicatura-univ-en-podologia",
         nombre: "Tecnicatura Univ. en Podología",
         descripcion: "La Tecnicatura Universitaria en Podología forma profesionales capacitados para prevenir, diagnosticar y tratar las afecciones biomecánicas y dérmicas del pie. Los estudiantes dominan herramientas de anatomía clínica, ortopodología, quiropodología, biomecánica de la marcha, cuidado del pie de riesgo y asepsia médica. Esta propuesta fortalece la atención primaria e interdisciplinaria para garantizar la movilidad y salud integral.",
-        duracion: "",
+        duracion: "3 años",
         modalidad: [1],
         perfilEgresado: {
             items: [
@@ -2726,11 +2721,11 @@ const data = [
     },
     {
         codcar: 341,
-        sector: 0,
+        sector: 13,
         slug: "licenciatura-en-podologia-ccc",
         nombre: "Licenciatura en Podología - CCC",
         descripcion: "La Licenciatura en Podología (Ciclo de Complementación Curricular) forma profesionales capacitados para investigar, dirigir y profundizar el abordaje clínico de patologías complejas del pie. Los estudiantes dominan herramientas de pie diabético avanzado, cirugía menor podológica, gestión hospitalaria, biomecánica clínica y metodología de la investigación. Esta propuesta fortalece el perfil de grado para integrar equipos médicos multidisciplinarios.",
-        duracion: "",
+        duracion: "1½ años",
         modalidad: [1],
         perfilEgresado: {
             items: [
@@ -2744,11 +2739,11 @@ const data = [
     },
     {
         codcar: 70,
-        sector: 0,
+        sector: 13,
         slug: "licenciatura-en-terapia-ocupacional",
         nombre: "Licenciatura en Terapia Ocupacional",
         descripcion: "La Licenciatura en Terapia Ocupacional forma profesionales capacitados para evaluar, promover y rehabilitar la autonomía de personas con limitaciones físicas, cognitivas o sociales. Los estudiantes dominan herramientas de adaptación del entorno, tecnología asistiva, ergonomía, análisis de la ocupación y salud mental. Esta propuesta impulsa la inclusión e independencia para mejorar la calidad de vida en cada etapa vital.",
-        duracion: "",
+        duracion: "5 años",
         modalidad: [1],
         perfilEgresado: {
             items: [
@@ -2763,11 +2758,11 @@ const data = [
     },
     {
         codcar: 371,
-        sector: 0,
+        sector: 13,
         slug: "licenciatura-en-produccion-de-bioimagenes-ccc",
         nombre: "Licenciatura en Producción de Bioimágenes - CCC",
         descripcion: "La Licenciatura en Producción de Bioimágenes (Ciclo de Complementación Curricular) forma profesionales capacitados para dirigir, investigar y gestionar servicios de diagnóstico y tratamiento por imágenes de alta complejidad. Los estudiantes dominan herramientas de tomografía avanzada, resonancia magnética funcional, medicina nuclear, gestión hospitalaria y seguridad radiológica. Esta propuesta profundiza la práctica previa para liderar equipos técnicos.",
-        duracion: "",
+        duracion: "2 años",
         modalidad: [1],
         perfilEgresado: {
             items: [
@@ -2782,11 +2777,11 @@ const data = [
     },
     {
         codcar: 358,
-        sector: 0,
+        sector: 13,
         slug: "licenciatura-en-psicomotricidad",
         nombre: "Licenciatura en Psicomotricidad",
         descripcion: "La Licenciatura en Psicomotricidad forma profesionales capacitados para evaluar, prevenir, diagnosticar y abordar las manifestaciones corporales en relación con el desarrollo global del sujeto. Los estudiantes dominan herramientas de observación psicomotriz, técnicas corporales, juego terapéutico, neurodesarrollo y estimulación temprana. Esta propuesta promueve el bienestar integrativo y la inclusión en los ámbitos de salud, educación y comunidad.",
-        duracion: "",
+        duracion: "5 años",
         modalidad: [1],
         perfilEgresado: {
             items: [
@@ -2800,11 +2795,11 @@ const data = [
     },
     {
         codcar: 292,
-        sector: 0,
+        sector: 8,
         slug: "licenciatura-en-gastronomia",
         nombre: "Licenciatura en Gastronomía",
         descripcion: "La Licenciatura en Gastronomía forma profesionales capacitados para dirigir, diseñar y optimizar proyectos culinarios e industrias de la alimentación a nivel internacional. Los estudiantes dominan herramientas de alta cocina, enología, química de los alimentos, gestión de restaurantes, seguridad e higiene y administración financiera. Esta propuesta combina el arte culinario con la innovación empresarial para liderar la cultura gastronómica.",
-        duracion: "",
+        duracion: "4 años",
         modalidad: [1],
         perfilEgresado: {
             items: [
@@ -2818,11 +2813,11 @@ const data = [
     },
     {
         codcar: 393,
-        sector: 0,
+        sector: 3,
         slug: "licenciatura-en-criminologia",
         nombre: "Licenciatura en Criminología",
         descripcion: "La Licenciatura en Criminología forma profesionales con capacidad para analizar, prevenir y comprender el fenómeno delictivo en la sociedad actual. Los estudiantes dominan herramientas de victimología, política criminal, investigación delictiva, psicología forense y sociología de la desviación. La carrera combina teoría y práctica para desarrollar líderes capaces de diseñar estrategias de seguridad pública y privada en diversos organismos.",
-        duracion: "",
+        duracion: "4 años",
         modalidad: [7],
         perfilEgresado: {
             items: [
@@ -2837,11 +2832,11 @@ const data = [
     },
     {
         codcar: 185,
-        sector: 0,
+        sector: 5,
         slug: "licenciatura-en-gestion-eficiente-de-la-energia",
         nombre: "Licenciatura en Gestión Eficiente de la Energía",
         descripcion: "La Licenciatura en Gestión Eficiente de la Energía forma profesionales con capacidad para optimizar el consumo energético en organizaciones y procesos productivos. Los estudiantes dominan herramientas de auditoría energética, fuentes renovables, legislación ambiental, sustentabilidad y costos. La carrera combina teoría y práctica para desarrollar líderes capaces de diseñar proyectos sustentables e implementar soluciones eficientes en empresas y organismos.",
-        duracion: "",
+        duracion: "4 años",
         modalidad: [7],
         perfilEgresado: {
             items: [
@@ -2854,11 +2849,11 @@ const data = [
     },
     {
         codcar: 361,
-        sector: 0,
+        sector: 3,
         slug: "licenciatura-en-criminologia-ccc",
         nombre: "Licenciatura en Criminología - CCC",
         descripcion: "La Licenciatura en Criminología forma profesionales con capacidad para profundizar en el análisis, prevención y abordaje integral del fenómeno delictivo. Los estudiantes dominan herramientas de política criminal, investigación avanzada, victimología, psicología forense y seguridad pública. La carrera combina teoría y práctica para desarrollar líderes capaces de tomar decisiones estratégicas en instituciones del sistema penal y gubernamental.",
-        duracion: "",
+        duracion: "2 años",
         modalidad: [7],
         perfilEgresado: {
             items: [
@@ -2873,11 +2868,11 @@ const data = [
     },
     {
         codcar: 194,
-        sector: 0,
+        sector: 7,
         slug: "licenciatura-en-educacion-fisica-ccc",
         nombre: "Licenciatura en Educación Física - CCC",
         descripcion: "La Licenciatura en Educación Física forma profesionales con capacidad para liderar y optimizar programas de actividad física, deporte y salud. Los estudiantes dominan herramientas de entrenamiento deportivo, rendimiento corporal, gestión de instituciones deportivas e investigación en ciencias del movimiento. La carrera combina teoría y práctica para desarrollar líderes capaces de tomar decisiones estratégicas en el ámbito educativo y deportivo.",
-        duracion: "",
+        duracion: "1½ años",
         modalidad: [7],
         perfilEgresado: {
             items: [
@@ -2892,11 +2887,11 @@ const data = [
     },
     {
         codcar: 395,
-        sector: 0,
+        sector: 7,
         slug: "licenciatura-en-recreacion-y-ocio-educativo-ccc",
         nombre: "Licenciatura en Recreación y Ocio Educativo - CCC",
         descripcion: "La Licenciatura en Recreación y Ocio Educativo forma profesionales con capacidad para diseñar e implementar proyectos socioeducativos, comunitarios y de tiempo libre. Los estudiantes dominan herramientas de animación sociocultural, dinámicas lúdicas, pedagogía del ocio, políticas públicas y gestión comunitaria. La carrera combina teoría y práctica para desarrollar líderes capaces de tomar decisiones estratégicas en instituciones diversas.",
-        duracion: "",
+        duracion: "1½ años",
         modalidad: [7],
         perfilEgresado: {
             items: [
@@ -2912,11 +2907,11 @@ const data = [
     },
     {
         codcar: 374,
-        sector: 0,
+        sector: 2,
         slug: "licenciatura-en-comercio-internacional-ccc",
         nombre: "Licenciatura en Comercio Internacional - CCC",
         descripcion: "La Licenciatura en Comercio Internacional forma profesionales con capacidad para optimizar la inserción estratégica de organizaciones en mercados globales. Los estudiantes dominan herramientas de logística internacional, legislación aduanera, finanzas de comercio exterior, negociación e inteligencia comercial. La carrera combina teoría y práctica para desarrollar líderes capaces de tomar decisiones estratégicas en empresas e instituciones.",
-        duracion: "",
+        duracion: "2 años",
         modalidad: [7],
         perfilEgresado: {
             items: [

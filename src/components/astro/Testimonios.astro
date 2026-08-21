@@ -15,333 +15,352 @@ const total = testimonios.length;
 ---
 
 <section
-    id="testimonios"
-    class="bg-white py-14 md:py-20"
-    aria-labelledby="testimonios-titulo"
+  id="testimonios"
+  class="py-14 md:py-2 relative"
+  aria-labelledby="testimonios-titulo"
 >
-    <div class="contenedor w-full">
-        <div
-            class="overflow-hidden rounded-3xl bg-(--azul-dark-ucasal) px-5 py-12 sm:px-8 md:px-14 md:py-16"
-        >
-            <h2
-                id="testimonios-titulo"
-                class="text-center text-3xl leading-tight font-black text-white sm:text-4xl md:text-5xl"
+  <div class="contenedor w-full">
+    <div class="overflow-hidden px-5 py-12 sm:px-8 md:px-14 md:py-16">
+      <h2
+        id="testimonios-titulo"
+        class="text-center text-3xl leading-tight font-black  sm:text-4xl md:text-5xl" style="color:white;"
+      >
+        Lo que dicen nuestros estudiantes
+      </h2>
+
+      <div
+        class="mt-10 md:mt-24"
+        data-rotador
+        role="group"
+        aria-roledescription="carrusel"
+        aria-label="Testimonios de estudiantes"
+      >
+      <div class="flex items-center justify-center">
+
+          <div class="relative w-fit">
+            <span
+              class="absolute -bottom-6 -left-6 md:-bottom-20 md:-left-30 text-(--rojo-ucasal)/30 -z-10"
+              aria-hidden="true"
             >
-                Lo que dicen
-                <span class="block text-(--rojo-ucasal)">nuestros estudiantes</span>
-            </h2>
-
-            <div
-                class="mt-10 md:mt-14"
-                data-rotador
-                role="group"
-                aria-roledescription="carrusel"
-                aria-label="Testimonios de estudiantes"
-            >
-                <div class="flex items-center justify-center gap-4 md:gap-10">
-                    <span class="comilla" aria-hidden="true">“</span>
-
-                    {/* La ventana recorta lo que se arrastra fuera de la caja. */}
-                    <div class="ventana relative w-full max-w-2xl" data-ventana>
-                        {/* Las fichas se apilan en la misma celda del grid: el
-                            alto lo fija la frase más larga y no salta al
-                            cambiar. */}
-                        <div class="pista">
-                            {
-                                testimonios.map((t, i) => (
-                                    <figure
-                                        class="ficha"
-                                        data-ficha
-                                        data-activa={i === 0 ? "" : undefined}
-                                        aria-hidden={i === 0 ? "false" : "true"}
-                                        aria-label={`${i + 1} de ${total}`}
-                                    >
-                                        <blockquote
-                                            class="text-center text-base leading-relaxed text-white/85 md:text-left md:text-xl md:leading-[1.7]"
-                                        >
-                                            {t.frase}
-                                        </blockquote>
-
-                                        <figcaption class="mt-6 text-center text-sm md:text-left flex flex-row gap-4 items-center">
-                                            <img class="size-12 rounded-full" src={t.imagen} alt={t.nombre} />
-                                            <div>
-                                                <span class="font-bold text-white">
-                                                    {t.nombre}
-                                                </span>
-                                            <span class="block text-white/50">
-                                                {t.carrera}
-                                            </span>
-                                            </div>
-                                        </figcaption>
-                                    </figure>
-                                ))
-                            }
+              <svg
+                viewBox="0 0 349.078 349.078"
+                fill="currentColor"
+                class="size-40"
+                aria-hidden="true"
+              >
+                <path
+                  d="M150.299,26.634v58.25c0,7.9-6.404,14.301-14.304,14.301c-28.186,0-43.518,28.909-45.643,85.966h45.643
+          c7.9,0,14.304,6.407,14.304,14.304v122.992c0,7.896-6.404,14.298-14.304,14.298H14.301C6.398,336.745,0,330.338,0,322.447V199.455
+          c0-27.352,2.754-52.452,8.183-74.611c5.568-22.721,14.115-42.587,25.396-59.048c11.608-16.917,26.128-30.192,43.16-39.44
+          C93.886,17.052,113.826,12.333,136,12.333C143.895,12.333,150.299,18.734,150.299,26.634z M334.773,99.186
+          c7.896,0,14.305-6.407,14.305-14.301v-58.25c0-7.9-6.408-14.301-14.305-14.301c-22.165,0-42.108,4.72-59.249,14.023
+          c-17.035,9.248-31.563,22.523-43.173,39.44c-11.277,16.461-19.824,36.328-25.393,59.054c-5.426,22.166-8.18,47.266-8.18,74.605
+          v122.992c0,7.896,6.406,14.298,14.304,14.298h121.69c7.896,0,14.299-6.407,14.299-14.298V199.455
+          c0-7.896-6.402-14.304-14.299-14.304h-44.992C291.873,128.095,306.981,99.186,334.773,99.186z"
+                ></path>
+              </svg>
+            </span>
+            {/* La ventana recorta lo que se arrastra fuera de la caja. */}
+            <div class="ventana relative w-full max-w-2xl" data-ventana>
+              {
+                /* Las fichas se apilan en la misma celda del grid: el
+                              alto lo fija la frase más larga y no salta al
+                              cambiar. */
+              }
+              <div class="pista">
+                {
+                  testimonios.map((t, i) => (
+                    <figure
+                      class="ficha"
+                      data-ficha
+                      data-activa={i === 0 ? "" : undefined}
+                      aria-hidden={i === 0 ? "false" : "true"}
+                      aria-label={`${i + 1} de ${total}`}
+                    >
+                      <blockquote class="text-center text-base leading-relaxed text-white/85 md:text-left md:text-xl md:leading-[1.7]">
+                        {t.frase}
+                      </blockquote>
+  
+                      <figcaption class="mt-6 text-center text-sm md:text-left flex flex-row gap-4 items-center">
+                        <img
+                          class="size-12 rounded-full"
+                          src={t.imagen}
+                          alt={t.nombre}
+                        />
+                        <div>
+                          <span class="font-bold text-white">{t.nombre}</span>
+                          <span class="block text-white/50">{t.carrera}</span>
                         </div>
-                    </div>
-
-                    <span class="comilla" aria-hidden="true">”</span>
-                </div>
-
-                <ol
-                    class="mt-8 flex items-center justify-center gap-2"
-                    data-puntos
-                >
-                    {
-                        testimonios.map((t, i) => (
-                            <li>
-                                <button
-                                    type="button"
-                                    class="punto"
-                                    data-punto
-                                    data-indice={i}
-                                    aria-label={`Ver el testimonio de ${t.nombre}`}
-                                />
-                            </li>
-                        ))
-                    }
-                </ol>
+                      </figcaption>
+                    </figure>
+                  ))
+                }
+              </div>
             </div>
+  
+            <span
+              class="absolute -top-6 -right-6 md:-top-20 md:-right-30 text-(--rojo-ucasal)/30 rotate-180 -z-10"
+              aria-hidden="true"
+            >
+              <svg
+                viewBox="0 0 349.078 349.078"
+                fill="currentColor"
+                class="size-40"
+                aria-hidden="true"
+              >
+                <path
+                  d="M150.299,26.634v58.25c0,7.9-6.404,14.301-14.304,14.301c-28.186,0-43.518,28.909-45.643,85.966h45.643
+          c7.9,0,14.304,6.407,14.304,14.304v122.992c0,7.896-6.404,14.298-14.304,14.298H14.301C6.398,336.745,0,330.338,0,322.447V199.455
+          c0-27.352,2.754-52.452,8.183-74.611c5.568-22.721,14.115-42.587,25.396-59.048c11.608-16.917,26.128-30.192,43.16-39.44
+          C93.886,17.052,113.826,12.333,136,12.333C143.895,12.333,150.299,18.734,150.299,26.634z M334.773,99.186
+          c7.896,0,14.305-6.407,14.305-14.301v-58.25c0-7.9-6.408-14.301-14.305-14.301c-22.165,0-42.108,4.72-59.249,14.023
+          c-17.035,9.248-31.563,22.523-43.173,39.44c-11.277,16.461-19.824,36.328-25.393,59.054c-5.426,22.166-8.18,47.266-8.18,74.605
+          v122.992c0,7.896,6.406,14.298,14.304,14.298h121.69c7.896,0,14.299-6.407,14.299-14.298V199.455
+          c0-7.896-6.402-14.304-14.299-14.304h-44.992C291.873,128.095,306.981,99.186,334.773,99.186z"
+                ></path>
+              </svg>
+            </span>
+          </div>
+      </div>
 
-            <Convenios variante="franja" />
-        </div>
+        <ol class="mt-8 flex items-center justify-center gap-2" data-puntos>
+          {
+            testimonios.map((t, i) => (
+              <li>
+                <button
+                  type="button"
+                  class="punto"
+                  data-punto
+                  data-indice={i}
+                  aria-label={`Ver el testimonio de ${t.nombre}`}
+                />
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+
+      <Convenios variante="franja" />
     </div>
+  </div>
 </section>
 
 <style>
-    .ventana {
-        touch-action: pan-y;
-        cursor: grab;
-        user-select: none;
-        border: 1px solid rgb(255 255 255 / 0.75);
-        border-radius: 8px;
-        padding: 2rem 4rem;
-        background: rgba(255, 255, 255, 0.1);
-    }
+  .ventana {
+    touch-action: pan-y;
+    cursor: grab;
+    user-select: none;
+    border: 1px solid rgb(255 255 255 / 0.75);
+    background: url(/fondos/azul.jpg);
+    background-repeat: no-repeat;
+    background-position: center left;
+    border-radius: 8px;
+    padding: 2rem 4rem;
+    box-shadow: 10px 10px 30px rgba(0, 0, 0, 1);
+  }
 
-    .ventana:active {
-        cursor: grabbing;
-    }
+  .ventana:active {
+    cursor: grabbing;
+  }
 
-    .pista {
-        display: grid;
-    }
+  .pista {
+    display: grid;
+  }
 
-    /* Todas en la misma celda, una encima de la otra. */
-    .ficha {
-        grid-area: 1 / 1;
-        margin: 0;
-        opacity: 0;
-        /* visibility en vez de display: sigue ocupando lugar, así el alto del
+  /* Todas en la misma celda, una encima de la otra. */
+  .ficha {
+    grid-area: 1 / 1;
+    margin: 0;
+    opacity: 0;
+    /* visibility en vez de display: sigue ocupando lugar, así el alto del
            contenedor es el de la frase más larga y no hay salto. */
-        visibility: hidden;
-        /* --arrastre lo escribe el JS mientras se arrastra, para que la ficha
+    visibility: hidden;
+    /* --arrastre lo escribe el JS mientras se arrastra, para que la ficha
            siga al mouse. En reposo vale 0. */
-        transform: translateX(var(--arrastre, 0px)) translateY(0.5rem);
-        transition:
-            opacity 0.5s ease,
-            transform 0.5s ease;
-    }
+    transform: translateX(var(--arrastre, 0px)) translateY(0.5rem);
+    transition:
+      opacity 0.5s ease,
+      transform 0.5s ease;
+  }
 
-    .ficha[data-activa] {
-        opacity: 1;
-        visibility: visible;
-        transform: translateX(var(--arrastre, 0px));
-    }
+  .ficha[data-activa] {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(var(--arrastre, 0px));
+  }
 
-    /* Durante el arrastre no hay transición: la ficha tiene que seguir al
+  /* Durante el arrastre no hay transición: la ficha tiene que seguir al
        puntero 1 a 1. Y no se selecciona el texto al pasar por encima. */
-    [data-arrastrando] .ficha {
-        transition: none;
-    }
+  [data-arrastrando] .ficha {
+    transition: none;
+  }
 
-    [data-arrastrando] .ventana {
-        user-select: none;
-    }
+  [data-arrastrando] .ventana {
+    user-select: none;
+  }
 
-    /* Las comillas enmarcan la frase. Se esconden en mobile: ahí el ancho lo
-       necesita el texto, y a un tamaño chico dejan de leerse como recurso
-       gráfico. */
-    .comilla {
-        display: none;
-        flex: none;
-        font-size: clamp(6rem, 11vw, 11rem);
-        line-height: 0.7;
-        font-weight: 900;
-        color: var(--rojo-ucasal);
-        opacity: 0.55;
-        user-select: none;
-        /* La comilla se dibuja arriba de su caja; este corrimiento la baja al
-           centro óptico de la frase. */
-        transform: translateY(0.22em);
-    }
+  .punto {
+    display: block;
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 9999px;
+    background: rgb(255 255 255 / 0.25);
+    cursor: pointer;
+    transition:
+      width 0.3s ease,
+      background 0.3s ease;
+  }
 
-    @media (min-width: 768px) {
-        .comilla {
-            display: block;
-        }
-    }
+  .punto[data-activo] {
+    width: 1.5rem;
+    background: var(--rojo-ucasal);
+  }
 
-    .punto {
-        display: block;
-        width: 0.5rem;
-        height: 0.5rem;
-        border-radius: 9999px;
-        background: rgb(255 255 255 / 0.25);
-        cursor: pointer;
-        transition:
-            width 0.3s ease,
-            background 0.3s ease;
+  @media (prefers-reduced-motion: reduce) {
+    .ficha {
+      transition-duration: 0.01ms;
     }
-
-    .punto[data-activo] {
-        width: 1.5rem;
-        background: var(--rojo-ucasal);
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-        .ficha {
-            transition-duration: 0.01ms;
-        }
-    }
+  }
 </style>
 
 <script>
-    const rotador = document.querySelector<HTMLElement>("[data-rotador]");
-    const ventana = rotador?.querySelector<HTMLElement>("[data-ventana]");
+  const rotador = document.querySelector<HTMLElement>("[data-rotador]");
+  const ventana = rotador?.querySelector<HTMLElement>("[data-ventana]");
 
-    if (rotador && ventana) {
-        const fichas = Array.from(
-            rotador.querySelectorAll<HTMLElement>("[data-ficha]"),
-        );
-        const puntos = Array.from(
-            rotador.querySelectorAll<HTMLElement>("[data-punto]"),
-        );
-        const total = fichas.length;
-        const ESPERA = 6000;
-        /* Cuánto hay que arrastrar para que cambie de testimonio. */
-        const UMBRAL = 60;
+  if (rotador && ventana) {
+    const fichas = Array.from(
+      rotador.querySelectorAll<HTMLElement>("[data-ficha]"),
+    );
+    const puntos = Array.from(
+      rotador.querySelectorAll<HTMLElement>("[data-punto]"),
+    );
+    const total = fichas.length;
+    const ESPERA = 6000;
+    /* Cuánto hay que arrastrar para que cambie de testimonio. */
+    const UMBRAL = 60;
 
-        let activo = 0;
-        let temporizador: number | undefined;
+    let activo = 0;
+    let temporizador: number | undefined;
 
-        let enPantalla = true;
-        let detenidoPorUsuario = false;
+    let enPantalla = true;
+    let detenidoPorUsuario = false;
 
-        const pintar = () => {
-            fichas.forEach((ficha, i) => {
-                const esActiva = i === activo;
-                ficha.toggleAttribute("data-activa", esActiva);
-                ficha.setAttribute("aria-hidden", esActiva ? "false" : "true");
-            });
+    const pintar = () => {
+      fichas.forEach((ficha, i) => {
+        const esActiva = i === activo;
+        ficha.toggleAttribute("data-activa", esActiva);
+        ficha.setAttribute("aria-hidden", esActiva ? "false" : "true");
+      });
 
-            puntos.forEach((punto, i) => {
-                punto.toggleAttribute("data-activo", i === activo);
-                punto.setAttribute("aria-current", i === activo ? "true" : "false");
-            });
-        };
+      puntos.forEach((punto, i) => {
+        punto.toggleAttribute("data-activo", i === activo);
+        punto.setAttribute("aria-current", i === activo ? "true" : "false");
+      });
+    };
 
-        const ir = (indice: number) => {
-            activo = ((indice % total) + total) % total;
-            pintar();
-        };
+    const ir = (indice: number) => {
+      activo = ((indice % total) + total) % total;
+      pintar();
+    };
 
-        const pausar = () => {
-            if (temporizador === undefined) return;
-            clearInterval(temporizador);
-            temporizador = undefined;
-        };
+    const pausar = () => {
+      if (temporizador === undefined) return;
+      clearInterval(temporizador);
+      temporizador = undefined;
+    };
 
-        const arrancar = () => {
-            const quieto = matchMedia("(prefers-reduced-motion: reduce)").matches;
-            if (quieto || total < 2) return;
-            if (detenidoPorUsuario || !enPantalla || temporizador !== undefined) return;
-            temporizador = window.setInterval(() => ir(activo + 1), ESPERA);
-        };
+    const arrancar = () => {
+      const quieto = matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (quieto || total < 2) return;
+      if (detenidoPorUsuario || !enPantalla || temporizador !== undefined)
+        return;
+      temporizador = window.setInterval(() => ir(activo + 1), ESPERA);
+    };
 
-        puntos.forEach((punto) => {
-            punto.addEventListener("click", () => {
-                ir(Number(punto.dataset.indice));
-                // Reinicia la cuenta para que el elegido no dure menos.
-                pausar();
-                arrancar();
-            });
-        });
-
-        // Mientras se lee (mouse encima o foco adentro) no cambia solo.
-        for (const evento of ["mouseenter", "focusin"] as const) {
-            rotador.addEventListener(evento, () => {
-                detenidoPorUsuario = true;
-                pausar();
-            });
-        }
-
-        for (const evento of ["mouseleave", "focusout"] as const) {
-            rotador.addEventListener(evento, () => {
-                detenidoPorUsuario = false;
-                arrancar();
-            });
-        }
-
-        /* Arrastre con mouse o dedo: la ficha sigue al puntero y al soltar
-           cambia de testimonio si se pasó el umbral, o vuelve a su lugar. */
-        let arrastrando = false;
-        let inicioX = 0;
-        let desplazamiento = 0;
-
-        ventana.addEventListener("pointerdown", (evento) => {
-            // Solo botón principal del mouse; touch y lápiz siempre.
-            if (evento.pointerType === "mouse" && evento.button !== 0) return;
-            arrastrando = true;
-            inicioX = evento.clientX;
-            desplazamiento = 0;
-            rotador.setAttribute("data-arrastrando", "");
-            // Capturar el puntero es solo para no perder el gesto si el mouse se
-            // va de la caja; si falla, el arrastre funciona igual.
-            try {
-                ventana.setPointerCapture(evento.pointerId);
-            } catch {}
-            pausar();
-        });
-
-        ventana.addEventListener("pointermove", (evento) => {
-            if (!arrastrando) return;
-            desplazamiento = evento.clientX - inicioX;
-            fichas[activo].style.setProperty("--arrastre", `${desplazamiento}px`);
-        });
-
-        const soltar = () => {
-            if (!arrastrando) return;
-            arrastrando = false;
-            rotador.removeAttribute("data-arrastrando");
-
-            // Se limpia antes de cambiar: si no, la ficha que sale se queda
-            // corrida y vuelve así la próxima vez que le toque.
-            fichas[activo].style.removeProperty("--arrastre");
-
-            if (Math.abs(desplazamiento) > UMBRAL) {
-                ir(activo + (desplazamiento < 0 ? 1 : -1));
-            }
-
-            desplazamiento = 0;
-            arrancar();
-        };
-
-        ventana.addEventListener("pointerup", soltar);
-        ventana.addEventListener("pointercancel", soltar);
-
-        const observador = new IntersectionObserver(
-            (entradas) => {
-                for (const entrada of entradas) {
-                    enPantalla = entrada.isIntersecting;
-                    if (enPantalla) arrancar();
-                    else pausar();
-                }
-            },
-            { threshold: 0.3 },
-        );
-
-        observador.observe(rotador);
-        pintar();
+    puntos.forEach((punto) => {
+      punto.addEventListener("click", () => {
+        ir(Number(punto.dataset.indice));
+        // Reinicia la cuenta para que el elegido no dure menos.
+        pausar();
         arrancar();
+      });
+    });
+
+    // Mientras se lee (mouse encima o foco adentro) no cambia solo.
+    for (const evento of ["mouseenter", "focusin"] as const) {
+      rotador.addEventListener(evento, () => {
+        detenidoPorUsuario = true;
+        pausar();
+      });
     }
+
+    for (const evento of ["mouseleave", "focusout"] as const) {
+      rotador.addEventListener(evento, () => {
+        detenidoPorUsuario = false;
+        arrancar();
+      });
+    }
+
+    /* Arrastre con mouse o dedo: la ficha sigue al puntero y al soltar
+           cambia de testimonio si se pasó el umbral, o vuelve a su lugar. */
+    let arrastrando = false;
+    let inicioX = 0;
+    let desplazamiento = 0;
+
+    ventana.addEventListener("pointerdown", (evento) => {
+      // Solo botón principal del mouse; touch y lápiz siempre.
+      if (evento.pointerType === "mouse" && evento.button !== 0) return;
+      arrastrando = true;
+      inicioX = evento.clientX;
+      desplazamiento = 0;
+      rotador.setAttribute("data-arrastrando", "");
+      // Capturar el puntero es solo para no perder el gesto si el mouse se
+      // va de la caja; si falla, el arrastre funciona igual.
+      try {
+        ventana.setPointerCapture(evento.pointerId);
+      } catch {}
+      pausar();
+    });
+
+    ventana.addEventListener("pointermove", (evento) => {
+      if (!arrastrando) return;
+      desplazamiento = evento.clientX - inicioX;
+      fichas[activo].style.setProperty("--arrastre", `${desplazamiento}px`);
+    });
+
+    const soltar = () => {
+      if (!arrastrando) return;
+      arrastrando = false;
+      rotador.removeAttribute("data-arrastrando");
+
+      // Se limpia antes de cambiar: si no, la ficha que sale se queda
+      // corrida y vuelve así la próxima vez que le toque.
+      fichas[activo].style.removeProperty("--arrastre");
+
+      if (Math.abs(desplazamiento) > UMBRAL) {
+        ir(activo + (desplazamiento < 0 ? 1 : -1));
+      }
+
+      desplazamiento = 0;
+      arrancar();
+    };
+
+    ventana.addEventListener("pointerup", soltar);
+    ventana.addEventListener("pointercancel", soltar);
+
+    const observador = new IntersectionObserver(
+      (entradas) => {
+        for (const entrada of entradas) {
+          enPantalla = entrada.isIntersecting;
+          if (enPantalla) arrancar();
+          else pausar();
+        }
+      },
+      { threshold: 0.3 },
+    );
+
+    observador.observe(rotador);
+    pintar();
+    arrancar();
+  }
 </script>

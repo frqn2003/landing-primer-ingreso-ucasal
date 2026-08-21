@@ -324,7 +324,7 @@ export default function Form({ codcarInicial, onSubPage, modosDisponibles }: {
                 (_errors) => {
                     clarityEvent('formulario-invalido')
                 })}
-            className={`bg-white rounded-lg shadow-2xl ${onSubPage ? 'px-6 py-4' : 'p-6'}`}>
+            className={`bg-white rounded-lg shadow-2xl w-full min-w-0 ${onSubPage ? 'px-6 py-4' : 'p-6'}`}>
             <input type="hidden" value="4" name="id_origen" />
             <input type="hidden" name="cbx_sede" value={idSedeReal} />
             <input type="hidden" name="sector" value={sectorCarrera} />
@@ -352,13 +352,13 @@ export default function Form({ codcarInicial, onSubPage, modosDisponibles }: {
             <div className="border-b border-black/10 pb-4 mb-4">
                 <p className="text-xs font-bold text-(--azul-ucasal) tracking-wide uppercase mb-2">Elegí tu carrera</p>
                 {carreraBloqueada ? (
-                    <div className="flex items-center justify-between rounded-lg border border-gray-300 bg-white p-3 text-black">
-                        <span className="text-base text-black flex flex-col max-w-[45%]">
+                    <div className="flex flex-wrap items-center justify-between gap-2 rounded-lg border border-gray-300 bg-white p-3 text-black">
+                        <span className="text-base text-black flex flex-col min-w-0 flex-1 basis-full sm:basis-auto break-words pr-2">
                             {carreraSeleccionadaLocal?.nombre}
                             <span className="text-xs text-gray-600">{carreraSeleccionadaLocal?.duracion}</span>
                         </span>
-                        <div className="flex flex-row items-center gap-2 md:gap-6">
-                            <div className={`items-center h-full justify-end flex text-xs border-gray-200 border rounded text-white py-1 px-2 ${carreraSeleccionadaLocal?.modalidad.length > 1 ? 'bg-gradient-to-r from-15% from-(--rojo-ucasal) to-(--azul-ucasal) to-70%' : carreraSeleccionadaLocal?.modalidad.includes(7) ? 'bg-(--azul-ucasal)' : 'bg-(--rojo-ucasal)'}`}>{labelModalidad}</div>
+                        <div className="flex w-full flex-row items-center justify-end gap-2 sm:w-auto md:gap-6">
+                            <div className={`items-center h-full justify-end flex shrink-0 whitespace-nowrap text-xs border-gray-200 border rounded text-white py-1 px-2 ${carreraSeleccionadaLocal?.modalidad.length > 1 ? 'bg-gradient-to-r from-15% from-(--rojo-ucasal) to-(--azul-ucasal) to-70%' : carreraSeleccionadaLocal?.modalidad.includes(7) ? 'bg-(--azul-ucasal)' : 'bg-(--rojo-ucasal)'}`}>{labelModalidad}</div>
                             <div className='h-6 border border-black'></div>
                             <button
                                 type="button"
@@ -376,7 +376,7 @@ export default function Form({ codcarInicial, onSubPage, modosDisponibles }: {
                         </div>
                     </div>
                 ) : (
-                    <fieldset className="flex max-h-50 flex-col gap-2 overflow-y-auto rounded-lg border border-gray-300 bg-white p-2 text-black">
+                    <fieldset className="flex max-h-50 min-w-0 flex-col gap-2 overflow-y-auto rounded-lg border border-gray-300 bg-white p-2 text-black">
                         {carrerasDisponibles.map((carrera) => {
                             const value = carrera.codcar.toString()
                             const labelModalidad = etiquetaModalidad(carrera.modalidad)
@@ -394,11 +394,11 @@ export default function Form({ codcarInicial, onSubPage, modosDisponibles }: {
                                         }}
                                         className="text-left w-full p-2 cursor-pointer flex flex-row items-center justify-between hover:bg-black/10"
                                     >
-                                        <span className="text-base text-black flex flex-col max-w-[45%]">
+                                        <span className="text-base text-black flex flex-col min-w-0 flex-1 break-words pr-2">
                                             {carrera.nombre}
                                             <span className="text-xs text-gray-600">{carrera.duracion}</span>
                                         </span>
-                                        <div className={`items-center h-full justify-end flex text-xs border-gray-200 border rounded text-white py-1 px-2 ${modosCarrera.length > 1 ? 'bg-gradient-to-r from-15% from-(--rojo-ucasal) to-(--azul-ucasal) to-70%' : modosCarrera.includes(7) ? 'bg-(--azul-ucasal)' : 'bg-(--rojo-ucasal)'}`}>{labelModalidad}</div>
+                                        <div className={`items-center h-full justify-end flex shrink-0 whitespace-nowrap text-xs border-gray-200 border rounded text-white py-1 px-2 ${modosCarrera.length > 1 ? 'bg-gradient-to-r from-15% from-(--rojo-ucasal) to-(--azul-ucasal) to-70%' : modosCarrera.includes(7) ? 'bg-(--azul-ucasal)' : 'bg-(--rojo-ucasal)'}`}>{labelModalidad}</div>
                                     </button>
                                 </div>
                             )
@@ -422,12 +422,12 @@ export default function Form({ codcarInicial, onSubPage, modosDisponibles }: {
                                     setValue('cbx_modo', String(m.modalidad), { shouldValidate: true })
                                     seleccionarModalidad(String(m.modalidad))
                                 }}
-                                className={`flex flex-row items-start gap-2 rounded-lg border p-3 text-left w-full transition-colors ${!codcar ? 'cursor-not-allowed bg-gray-100 border-gray-200' : seleccionado && esOnline ? 'border-(--azul-ucasal) bg-blue-50 cursor-pointer' : seleccionado && !esOnline ? 'border-(--rojo-ucasal) bg-red-50 cursor-pointer' : 'border-gray-300 bg-white hover:bg-gray-50 cursor-pointer'}`}
+                                className={`flex flex-row items-start gap-2 rounded-lg border p-3 text-left flex-1 min-w-0 transition-colors ${!codcar ? 'cursor-not-allowed bg-gray-100 border-gray-200' : seleccionado && esOnline ? 'border-(--azul-ucasal) bg-blue-50 cursor-pointer' : seleccionado && !esOnline ? 'border-(--rojo-ucasal) bg-red-50 cursor-pointer' : 'border-gray-300 bg-white hover:bg-gray-50 cursor-pointer'}`}
                             >
-                                <span className={`flex items-center justify-center w-9 h-9 rounded-md ${seleccionado && esOnline ? 'bg-(--azul-ucasal) text-white' : seleccionado && !esOnline ? 'bg-(--rojo-ucasal) text-white' : 'bg-gray-100 text-gray-500'}`}>
+                                <span className={`flex shrink-0 items-center justify-center w-9 h-9 rounded-md ${seleccionado && esOnline ? 'bg-(--azul-ucasal) text-white' : seleccionado && !esOnline ? 'bg-(--rojo-ucasal) text-white' : 'bg-gray-100 text-gray-500'}`}>
                                     {esOnline ? <IconoOnline /> : <IconoPresencial />}
                                 </span>
-                                <div className="flex flex-col">
+                                <div className="flex flex-col min-w-0">
                                     <span className="text-sm font-semibold text-black">{esOnline ? 'Online' : 'Presencial'}</span>
                                     <span className="text-xs text-gray-500">{esOnline ? 'Desde donde estés' : 'Cursás en una sede'}</span>
                                 </div>
@@ -542,12 +542,12 @@ export default function Form({ codcarInicial, onSubPage, modosDisponibles }: {
                     </div>
                 )}
 
-                <div className={`flex flex-row gap-2 mt-3 ${!carreraCompleta ? 'pointer-events-none opacity-75' : ''}`}>
+                <div className={`flex flex-row flex-wrap gap-2 mt-3 ${!carreraCompleta ? 'pointer-events-none opacity-75' : ''}`}>
                     <div className={`rounded-lg border shrink-0 ${!carreraCompleta ? 'bg-gray-100 border-gray-200' : 'bg-white border-gray-300'}`}>
                         <input name="tipo_tel" type="hidden" value="cel" />
                         <input type="hidden" name="ddi_pais" value={ddiPais} />
                         <input type="tel" ref={phoneRef} id="phone" autoComplete="off"
-                            className="p-2 text-sm text-gray-900 bg-transparent rounded-md appearance-none focus:outline-none caret-transparent disabled:cursor-not-allowed"
+                            className="w-24 min-w-0 p-2 text-sm text-gray-900 bg-transparent rounded-md appearance-none focus:outline-none caret-transparent disabled:cursor-not-allowed"
                             disabled={!carreraCompleta}
                             onKeyDown={e => e.preventDefault()}
                             onPaste={e => e.preventDefault()}
@@ -564,7 +564,7 @@ export default function Form({ codcarInicial, onSubPage, modosDisponibles }: {
                             {...register('cod_area')} />
                     </div>
                     <span className="text-[0.8rem] text-gray-700 px-1 border border-gray-500 flex justify-center items-center my-auto w-fit h-fit rounded shrink-0">15</span>
-                    <div className={`rounded-lg border flex-1 ${!carreraCompleta ? 'bg-gray-100 border-gray-200' : `bg-white ${claseBorde(carreraCompleta, !!tel && !errors.tel)}`}`}>
+                    <div className={`rounded-lg border grow basis-full sm:basis-0 ${!carreraCompleta ? 'bg-gray-100 border-gray-200' : `bg-white ${claseBorde(carreraCompleta, !!tel && !errors.tel)}`}`}>
                         <input type="tel" id="tel" size={8} maxLength={8} inputMode="numeric" pattern="[0-9]+"
                             className="block w-full p-2 text-sm text-gray-900 bg-transparent rounded-md appearance-none focus:outline-none disabled:cursor-not-allowed placeholder:text-gray-400"
                             placeholder="Número sin 0 ni 15"

@@ -11,7 +11,7 @@ const claveCache = (modos: number[]) =>
 let cache: any[] | null = null
 let promesa: Promise<any[]> | null = null
 
-const DEV_MODE = false
+const DEV_MODE = true
 
 /**
  * @param modos Modos de cursado a pedir. La cascada pasa los de esta landing,
@@ -29,7 +29,7 @@ export function getCarrerasApi(modos: number[] = modosUnicos): Promise<any[]> {
     }
 
     if (DEV_MODE) {
-        promesa = fetch(`${import.meta.env.BASE_URL}/assets/mock-carreras.json`)
+        promesa = fetch(`${import.meta.env.BASE_URL}src/assets/mock-carreras.json`)
             .then(res => res.json())
             .then(data => {
                 cache = data

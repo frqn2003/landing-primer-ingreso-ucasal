@@ -185,6 +185,7 @@ h3 {
   flex-direction: row;
   align-items: center;
   gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.175);
 
   @media (max-width: 1024px) {
     display: none;
@@ -517,7 +518,7 @@ h3 {
   padding: 11px 1.4em;
   background: linear-gradient(135deg, var(--rojo-ucasal) 10%, var(--rojo-dark-ucasal) 60%);
   color: white;
-  outline: 2px solid #374151;
+  outline: 2px solid #b6b6b6;
   outline-offset: 8px;
   font-weight: 600;
   --boton-size: 22px;
