@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import { beneficios } from "../../config/contenido";
 
 interface Props {
@@ -8,6 +9,22 @@ interface Props {
 const { base = import.meta.env.BASE_URL } = Astro.props;
 
 const total = beneficios.length;
+
+// Las fotos viven en src/assets para que Astro las comprima y les genere los
+// tamaños en el build: lo que está en /public se copia tal cual. El campo
+// `imagen` de contenido.ts sigue siendo un string, así que se resuelve acá.
+const fotos = import.meta.glob<{ default: ImageMetadata }>(
+  "../../assets/beneficios/*.webp",
+  { eager: true },
+);
+
+// Las que todavía no están en src/assets caen al <img> de antes contra
+// /public. Sin esto un `imagen` sin archivo rompe el build entero (hoy pasa
+// con becas.webp en presencial y con las 8 de online).
+const cartas = beneficios.map((beneficio) => ({
+  ...beneficio,
+  foto: fotos[`../../assets/${beneficio.imagen}`]?.default,
+}));
 ---
 
 <section id="beneficios" class="seccion-snap relative flex-col">
@@ -30,7 +47,7 @@ const total = beneficios.length;
     >
       <ul class="mazo">
         {
-          beneficios.map((beneficio, index) => (
+          cartas.map((beneficio, index) => (
             <li
               class="carta"
               style={`--pos: ${index}`}
@@ -41,19 +58,26 @@ const total = beneficios.length;
               {/* Las 4 primeras se ven de entrada (el frente y
                                 el abanico): si fueran lazy quedarían en blanco. */}
               <figure class="carta-foto">
-                <img
-                  src={`${base}${beneficio.imagen}`}
-                  alt={beneficio.titulo}
-                  loading={index < 4 ? "eager" : "lazy"}
-                  decoding="async"
-                  class="size-full object-cover"
-                />
+                {beneficio.foto ? (
+                  <Image
+                    src={beneficio.foto}
+                    alt={beneficio.titulo}
+                    loading={index < 4 ? "eager" : "lazy"}
+                    decoding="async"
+                    class="size-full object-cover"
+                  />
+                ) : (
+                  <img
+                    src={`${base}${beneficio.imagen}`}
+                    alt={beneficio.titulo}
+                    loading={index < 4 ? "eager" : "lazy"}
+                    decoding="async"
+                    class="size-full object-cover"
+                  />
+                )}
               </figure>
 
               <div class="carta-texto">
-                <span class="carta-numero" aria-hidden="true">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
                 <h3 class="carta-titulo">{beneficio.titulo}</h3>
                 <p class="carta-descripcion">{beneficio.descripcion}</p>
               </div>
@@ -219,13 +243,6 @@ const total = beneficios.length;
       gap: 0.75rem;
       padding: 2rem 2.5rem;
     }
-  }
-
-  .carta-numero {
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 0.2em;
-    color: var(--rojo-ucasal);
   }
 
   .carta-titulo {

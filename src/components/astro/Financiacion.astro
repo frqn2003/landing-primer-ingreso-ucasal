@@ -1,4 +1,20 @@
 ---
+interface Props {
+    /**
+     * "columna" (por defecto) es la de la home: una tira vertical al lado del
+     * formulario. "grilla" la usa el detalle de carrera, donde la banda es
+     * ancha y cuatro tarjetas apiladas la estiran de más.
+     */
+    disposicion?: "columna" | "grilla";
+}
+
+const { disposicion = "columna" } = Astro.props;
+
+const claseLista =
+    disposicion === "grilla"
+        ? "grid grid-cols-2 gap-8"
+        : "flex flex-row md:flex-col gap-12 h-full justify-evenly items-center";
+
 let tarjetas: any[] = [];
 let cargando = true;
 
@@ -35,7 +51,7 @@ try {
         >
             Financiá tus aranceles con:
         </h3>
-        <div class="flex flex-row md:flex-col gap-12 h-full justify-evenly items-center">
+        <div class={claseLista}>
             {
                 cargando ? (
                     [1, 2, 3, 4].map(() => (

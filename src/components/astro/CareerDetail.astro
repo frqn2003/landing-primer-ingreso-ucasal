@@ -1,121 +1,303 @@
 ---
+import { existsSync } from "node:fs";
+import {
+  MODO_ONLINE,
+  MODO_PRESENCIAL,
+  esOnline,
+  modosCarrera,
+} from "../../config/modalidad";
 import { getNombreModalidades, getNombreFacultad } from "../../lib/utils";
+import BeneficiosCartas from "./BeneficiosCartas.astro";
+import ModalidadesPuerta from "./ModalidadesPuerta.astro";
+import Financiacion from "./Financiacion.astro";
+import Sedes from "./Sedes.astro";
+import Form from "../react/Form.tsx";
+
+type PlanEstudios = { semestre: string; materias: string[] }[];
 
 interface Career {
-    nombre: string;
-    descripcion: string;
-    duracion: string;
-    modalidad: number[];
-    sector: number;
-    perfilEgresado?: { items: string[] };
-    planEstudios?: { semestre: string; materias: string[] }[];
+  codcar: number;
+  slug: string;
+  nombre: string;
+  descripcion: string;
+  duracion: string;
+  modalidad: number[];
+  sector: number;
+  perfilEgresado?: { items: string[] };
+  planEstudios?: PlanEstudios;
+  planEstudiosPorModalidad?: {
+    1?: PlanEstudios;
+    7?: PlanEstudios;
+  };
 }
 
 interface Props {
-    carrera: Career;
+  carrera: Career;
 }
+
 const { carrera } = Astro.props;
+const base = import.meta.env.BASE_URL;
+
 const modalidad = getNombreModalidades(carrera.modalidad);
 const facultad = getNombreFacultad(carrera.sector);
+const planesPorModalidad = carrera.planEstudiosPorModalidad;
+const modoActivo = esOnline ? MODO_ONLINE : MODO_PRESENCIAL;
+const planEstudios =
+  planesPorModalidad?.[modoActivo] ??
+  carrera.planEstudios ??
+  planesPorModalidad?.[MODO_PRESENCIAL] ??
+  planesPorModalidad?.[MODO_ONLINE];
+
+// Cómo se cursa ESTA carrera en ESTA landing. `carrera.modalidad` ya viene
+// recortado a los modos del build (ver src/data/carrerasLanding.ts), así que
+// alcanza con mirarlo para saber si es presencial, online o las dos.
+const cursaPresencial = carrera.modalidad.includes(MODO_PRESENCIAL);
+const cursaOnline = carrera.modalidad.includes(MODO_ONLINE);
+const mixta = cursaPresencial && cursaOnline;
+
+// Los encabezados por carrera existen solo para algunas (ver /public/encabezados).
+// Las que no tienen caen a su foto de /cards, que está para todas: sin este
+// chequeo el hero de esas subpáginas quedaba en negro.
+const tieneEncabezado = existsSync(
+  new URL(
+    `../../../public/encabezados/${carrera.codcar}-desktop.webp`,
+    import.meta.url,
+  ),
+);
+const fotoDesktop = tieneEncabezado
+  ? `${base}encabezados/${carrera.codcar}-desktop.webp`
+  : `${base}cards/${carrera.codcar}.webp`;
+const fotoMobile = tieneEncabezado
+  ? `${base}encabezados/${carrera.codcar}-mobile.webp`
+  : `${base}cards/${carrera.codcar}.webp`;
+
+const parrafos = carrera.descripcion.split("\\n").filter(Boolean);
 ---
 
-<main>
-    <section class="bg-(--azul-dark-ucasal) py-16 text-white">
-        <div class="contenedor">
-            <a
-                href={`${import.meta.env.BASE_URL}#carreras`}
-                class="text-sm font-semibold text-white/70 hover:text-white"
-                >← Volver a carreras</a
-            ><p
-                class="mt-8 text-sm font-bold uppercase tracking-[0.2em] text-(--rojo-ucasal)"
-            >
-                Carrera universitaria
-            </p><h1
-                class="mt-3 max-w-4xl text-4xl font-black leading-tight sm:text-6xl"
-            >
-                {carrera.nombre}
-            </h1><p class="mt-3 text-sm font-semibold uppercase tracking-wide text-white/60">{facultad}</p><div class="mt-7 flex flex-wrap gap-3">
-                <span class="rounded-full bg-white/10 px-4 py-2 text-sm">Duración: {carrera.duracion}</span>
-                <span class="rounded-full bg-white/10 px-4 py-2 text-sm">Modalidad: {modalidad}</span>
-            </div>
-        </div>
-    </section>
-    <section
-        class="contenedor mx-auto grid gap-12 py-16 lg:grid-cols-[1fr_0.7fr]"
+<!-- data-scroll-libre desde el arranque: acá no hay snap. El detalle y el plan
+     de estudios son más altos que la pantalla, y con snap obligatorio no hay
+     punto intermedio (ver el comentario del script de Layout.astro). El hero
+     igual ocupa el alto completo, que es lo que se buscaba. -->
+<main data-scroll-libre>
+  <!-- ──────────────────────────── Encabezado ───────────────────────────── -->
+  <section
+    class="seccion-snap-hero relative isolate flex w-full text-white"
+    aria-labelledby="carrera-titulo"
+  >
+    <div class="absolute inset-0 -z-10">
+      <picture>
+        <source media="(min-width: 769px)" srcset={fotoDesktop} />
+        <img src={fotoMobile} alt="" class="h-full w-full object-cover" />
+      </picture>
+      <div
+        class="absolute inset-0 bg-linear-to-t from-black/85 via-black/45 to-black/35"
+      >
+      </div>
+    </div>
+
+    <!-- Mismo velo de arriba que la home: la navbar transparente tiene que
+             leerse sobre cualquier foto. -->
+    <div
+      class="pointer-events-none absolute inset-x-0 top-0 h-32 bg-linear-to-b from-black/55 to-transparent lg:h-40"
     >
-        <div>
-            <h2 class="text-3xl font-black text-(--azul-dark-ucasal)">
-                Sobre la carrera
-            </h2><div class="mt-5 space-y-4 text-lg leading-8 text-slate-600">
-                {
-                    carrera.descripcion
-                        .split("\\n")
-                        .map((paragraph) => <p>{paragraph}</p>)
-                }
-            </div>{
-                carrera.perfilEgresado && (
-                    <>
-                        <>
-                            <h2 class="mt-12 text-3xl font-black text-(--azul-dark-ucasal)">
-                                Perfil del egresado
-                            </h2>
-                            <ul class="mt-5 grid gap-3 text-slate-600">
-                                {carrera.perfilEgresado.items.map((item) => (
-                                    <li class="flex gap-3">
-                                        <span class="font-bold text-(--rojo-ucasal)">
-                                            ✓
-                                        </span>
-                                        <span>{item}</span>
-                                    </li>
-                                ))}
-                            </ul>
-                        </>
-                    </>
-                )
-            }
-        </div><aside
-            id="contacto"
-            class="h-fit rounded-3xl bg-slate-50 p-7 shadow-sm"
+    </div>
+
+    <div
+      class="contenedor relative flex h-full w-full flex-col justify-end pb-16 pt-28 md:pb-24"
+    >
+      <a
+        href={`${base}#carreras`}
+        class="hero-entra hero-entra-1 w-fit text-sm font-semibold text-white/70 transition-colors hover:text-white"
+        >← Volver a carreras</a
+      >
+
+      <p
+        class="hero-entra hero-entra-1 mt-8 text-xs font-bold uppercase tracking-[0.2em] text-white/80"
+      >
+        {facultad}
+      </p>
+
+      <h1
+        id="carrera-titulo"
+        class="hero-entra hero-entra-2 mt-3 max-w-4xl uppercase"
+      >
+        {carrera.nombre}
+      </h1>
+
+      <div class="hero-entra hero-entra-3 mt-6 flex flex-wrap gap-3">
+        <span class="ficha-hero">Duración: {carrera.duracion}</span>
+        <span class="ficha-hero">Título universitario</span>
+        <span
+          class="ficha-hero ficha-modalidad"
+          style={mixta
+            ? "background:linear-gradient(90deg,var(--rojo-ucasal) 10%,var(--azul-ucasal) 90%);border-color:transparent"
+            : `background:${cursaOnline ? "var(--azul-ucasal)" : "var(--rojo-ucasal)"};border-color:transparent`}
         >
-            <h2 class="text-2xl font-black text-(--azul-dark-ucasal)">
-                ¿Querés saber más?
-            </h2><p class="mt-3 leading-7 text-slate-600">
-                Recibí información sobre esta carrera y los próximos pasos para
-                ingresar.
-            </p><a
-                href="https://www.ucasal.edu.ar/inscripciones/?utm_source=landing_primer_ingreso"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="mt-6 inline-flex w-full justify-center rounded-xl bg-(--rojo-ucasal) px-5 py-3 font-bold text-white hover:bg-(--rojo-dark-ucasal)"
-                >Quiero información</a
+          {modalidad}
+        </span>
+      </div>
+
+      <div class="hero-entra hero-entra-4 mt-10 flex flex-wrap gap-4">
+        <a href="#contacto" class="boton-cta-hero">Pedí información</a>
+        {
+          planEstudios && (
+            <a
+              href="#plan-de-estudios"
+              class="flex w-fit items-center justify-center rounded-[10px] border border-white/60 px-6 py-3 text-sm font-semibold uppercase text-white transition-colors hover:bg-white/15"
             >
-        </aside>
-    </section>
-    {
-        carrera.planEstudios && (
-            <section class="bg-slate-50 py-16">
-                <div class="contenedor">
-                    <>
-                        <h2 class="text-3xl font-black text-(--azul-dark-ucasal)">
-                            Plan de estudios
-                        </h2>
-                        <div class="mt-8 grid gap-4 md:grid-cols-2">
-                            {carrera.planEstudios.map((year) => (
-                                <article class="rounded-2xl border border-slate-200 bg-white p-6">
-                                    <h3 class="font-bold text-(--rojo-ucasal)">
-                                        {year.semestre}
-                                    </h3>
-                                    <ul class="mt-4 space-y-2 text-sm leading-6 text-slate-600">
-                                        {year.materias.map((subject) => (
-                                            <li>• {subject}</li>
-                                        ))}
-                                    </ul>
-                                </article>
-                            ))}
-                        </div>
-                    </>
-                </div>
-            </section>
-        )
-    }
+              Ver plan de estudios
+            </a>
+          )
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────────── Detalle + formulario (sticky a la derecha) ─────────── -->
+  <!-- Ojo con el id: `pedidoinfo` ya lo usa el <form> del componente Form y
+         lo busca por getElementById para enviarse. -->
+  <section id="detalle" class="bg-white py-16 md:py-20">
+    <div
+      class="contenedor grid items-start gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,26rem)] lg:gap-14"
+    >
+      <div class="min-w-0">
+        <h2 class="text-(--azul-dark-ucasal)">Sobre la carrera</h2>
+        <div class="mt-5 space-y-4 text-lg leading-8 text-slate-600">
+          {parrafos.map((parrafo) => <p>{parrafo}</p>)}
+        </div>
+
+        {
+          carrera.perfilEgresado && (
+            <>
+              <h2 class="mt-14 text-(--azul-dark-ucasal)">
+                Perfil del egresado
+              </h2>
+              <ul class="mt-6 grid gap-3 text-slate-600">
+                {carrera.perfilEgresado.items.map((item) => (
+                  <li class="flex gap-3 leading-7">
+                    <span class="font-bold text-(--rojo-ucasal)">✓</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </>
+          )
+        }
+
+        <!-- ──────────────────────────── Modalidades ────────────────────────────
+         Solo las de ESTA carrera, y el CTA manda al formulario de arriba en vez
+         de al explorador (que no existe en esta página). -->
+        <ModalidadesPuerta
+          modosCarrera={carrera.modalidad}
+          titulo={mixta
+            ? "Elegí cómo cursarla"
+            : cursaOnline
+              ? "Esta carrera se cursa online"
+              : "Esta carrera se cursa en el campus"}
+          destinoCta="#contacto"
+          textoCta="Consultar por esta modalidad"
+        />
+        {
+          planEstudios && (
+            <div id="plan-de-estudios" class="scroll-mt-24">
+              <h2 class="mt-14 text-(--azul-dark-ucasal)">Plan de estudios</h2>
+              <div class="mt-6 grid gap-4 md:grid-cols-2">
+                {planEstudios.map((anio) => (
+                  <article class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+                    <h3 class="text-lg font-bold text-(--rojo-ucasal)">
+                      {anio.semestre}
+                    </h3>
+                    <ul class="mt-4 space-y-2 text-sm leading-6 text-slate-600">
+                      {anio.materias.map((materia) => (
+                        <li class="flex gap-2">
+                          <span class="text-slate-400">•</span>
+                          <span>{materia}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </article>
+                ))}
+              </div>
+            </div>
+          )
+        }
+      </div>
+
+      <!-- El formulario acompaña todo el detalle: sticky en desktop y,
+                 en mobile, arriba de todo para que no quede tapado por el plan. -->
+      <aside
+        id="contacto"
+        class="order-first min-w-0 scroll-mt-24 lg:order-0 lg:sticky lg:top-24"
+      >
+        <Form
+          codcarInicial={String(carrera.codcar)}
+          onSubPage={true}
+          modosDisponibles={modosCarrera}
+          client:visible
+        />
+      </aside>
+    </div>
+  </section>
+
+  <!-- ───────────────────────────── Beneficios ──────────────────────────── -->
+  <div class="relative isolate">
+    <div class="absolute inset-0 -z-10">
+      <picture>
+        <source media="(min-width: 769px)" srcset={fotoDesktop} />
+        <img
+          src={fotoMobile}
+          alt=""
+          class="sticky top-0 h-dvh w-full object-cover"
+        />
+      </picture>
+      <div class="absolute inset-0 bg-(--azul-dark-ucasal)/45"></div>
+    </div>
+    <BeneficiosCartas base={base} />
+  </div>
+
+  <!-- ─────────────────────────── Financiación ──────────────────────────── -->
+  <section class="relative isolate overflow-hidden py-16 md:py-20">
+    <div class="absolute inset-0 -z-10">
+      <img
+        src={`${base}fondos/azul.jpg`}
+        alt=""
+        class="h-full w-full object-cover"
+      />
+      <div class="absolute inset-0 bg-(--azul-dark-ucasal)/40"></div>
+    </div>
+    <div class="contenedor grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
+      <div class="min-w-0 text-white">
+        <h2 style="color:white;">Estudiar es más fácil de lo que creés</h2>
+        <p class="mt-5 max-w-[45ch] text-lg leading-8 text-white/85">
+          {carrera.nombre} tiene planes de pago, becas y descuentos por convenio.
+          Consultá los aranceles vigentes y financiá la cuota con tu tarjeta.
+        </p>
+        <a href="#contacto" class="boton-cta-hero mt-8 inline-flex"
+          >Quiero que me contacten</a
+        >
+      </div>
+      <div class="min-w-0">
+        <Financiacion disposicion="grilla" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ────────────────────────── Campus / Sedes ─────────────────────────── -->
+  <Sedes />
 </main>
+
+<style>
+  .ficha-hero {
+    border-radius: 9999px;
+    border: 1px solid rgb(255 255 255 / 0.35);
+    background: rgb(255 255 255 / 0.12);
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    backdrop-filter: blur(4px);
+  }
+
+  .ficha-modalidad {
+    text-transform: capitalize;
+  }
+</style>

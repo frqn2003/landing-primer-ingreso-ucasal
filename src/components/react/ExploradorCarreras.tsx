@@ -56,12 +56,13 @@ export default function ExploradorCarreras({ careers, modosDisponibles }: Props)
     /* Preselección de modalidad desde el CTA de la sección "Modalidades" */
     useEffect(() => {
         function handlePreselectModalidad(e: Event) {
+            if (modalidades.length <= 1) return /* el filtro está oculto: no dejar estado sin forma de limpiarlo */
             const { code } = (e as CustomEvent).detail
             setModalities([code])
         }
         window.addEventListener('preselect-modalidad', handlePreselectModalidad)
         return () => window.removeEventListener('preselect-modalidad', handlePreselectModalidad)
-    }, [])
+    }, [modalidades])
 
     const filtered = useMemo(() => careers.filter((career) => {
         const matchesQuery = `${career.nombre} ${career.descripcion}`.toLowerCase().includes(query.toLowerCase())
@@ -85,6 +86,10 @@ export default function ExploradorCarreras({ careers, modosDisponibles }: Props)
         }
         return counts
     }, [careers])
+    /* Facultades sin carreras en este build no aparecen en el filtro */
+    const facultadesVisibles = useMemo(
+        () => facultades.filter((f) => (facultadCounts.get(f.code) ?? 0) > 0),
+        [facultadCounts])
 
     return <section id="carreras" className="bg-white py-20 seccion-snap flex-col" aria-labelledby="career-title">
         {/* En desktop la sección mide exactamente 100dvh (lo pide el snap
@@ -96,26 +101,29 @@ export default function ExploradorCarreras({ careers, modosDisponibles }: Props)
                 <div><h2 id="career-title" className="mt-3 text-3xl font-black text-(--azul-dark-ucasal) sm:text-4xl">Encontrá tu carrera</h2><p className="mt-4 max-w-2xl text-base text-slate-600">Buscá por nombre o por los filtros</p></div>
                 <div className="grid gap-3 sm:grid-cols-2 lg:w-220">
                     <label className="sr-only" htmlFor="career-search">Buscar carrera</label><input id="career-search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Buscar carrera..." className="rounded-xl border border-slate-300 px-4 py-3 outline-none focus:border-(--azul-ucasal) focus:ring-2 focus:ring-(--azul-ucasal)/20" />
-                    <div className="flex flex-row w-full max-md:grid max-md:grid-cols-2 gap-4">
-                        <div className="relative w-full" ref={modalidadRef}>
-                            <button type="button" onClick={() => setModalidadAbierta((v) => !v)} aria-expanded={modalidadAbierta} className="w-full rounded-xl border border-slate-300 px-4 py-3 text-left text-sm">
-                                Modalidad{modalities.length > 0 ? ` (${modalities.length})` : ''}
-                            </button>
-                            {modalidadAbierta && (
-                                <fieldset className="absolute z-10 mt-1 w-full rounded-xl border border-slate-300 bg-white px-4 py-3 shadow-lg">
-                                    <legend className="sr-only">Modalidad</legend>
-                                    {modalidades.map((m) => (
-                                        <label key={m.code} className="flex items-center justify-between gap-2 text-sm">
-                                            <span className="flex items-center gap-2">
-                                                <input type="checkbox" checked={modalities.includes(m.code)} onChange={() => toggleModalidad(m.code)} />
-                                                {m.label}
-                                            </span>
-                                            <span className="text-slate-400">{modalidadCounts.get(m.code) ?? 0}</span>
-                                        </label>
-                                    ))}
-                                </fieldset>
-                            )}
-                        </div>
+                    <div className={`flex flex-row w-full max-md:grid gap-4 ${modalidades.length > 1 ? 'max-md:grid-cols-2' : 'max-md:grid-cols-1'}`}>
+                        {/* Con una sola modalidad disponible (build online) el filtro no aporta nada */}
+                        {modalidades.length > 1 && (
+                            <div className="relative w-full" ref={modalidadRef}>
+                                <button type="button" onClick={() => setModalidadAbierta((v) => !v)} aria-expanded={modalidadAbierta} className="w-full rounded-xl border border-slate-300 px-4 py-3 text-left text-sm">
+                                    Modalidad{modalities.length > 0 ? ` (${modalities.length})` : ''}
+                                </button>
+                                {modalidadAbierta && (
+                                    <fieldset className="absolute z-10 mt-1 w-full rounded-xl border border-slate-300 bg-white px-4 py-3 shadow-lg">
+                                        <legend className="sr-only">Modalidad</legend>
+                                        {modalidades.map((m) => (
+                                            <label key={m.code} className="flex items-center justify-between gap-2 text-sm">
+                                                <span className="flex items-center gap-2">
+                                                    <input type="checkbox" checked={modalities.includes(m.code)} onChange={() => toggleModalidad(m.code)} />
+                                                    {m.label}
+                                                </span>
+                                                <span className="text-slate-400">{modalidadCounts.get(m.code) ?? 0}</span>
+                                            </label>
+                                        ))}
+                                    </fieldset>
+                                )}
+                            </div>
+                        )}
                         <div className="relative w-full" ref={facultadRef}>
                             <button type="button" onClick={() => setFacultadAbierta((v) => !v)} aria-expanded={facultadAbierta} className="w-full rounded-xl border border-slate-300 px-4 py-3 text-left text-sm">
                                 Facultad{faculties.length > 0 ? ` (${faculties.length})` : ''}
@@ -123,7 +131,7 @@ export default function ExploradorCarreras({ careers, modosDisponibles }: Props)
                             {facultadAbierta && (
                                 <fieldset className="absolute z-10 mt-1 w-full rounded-xl border border-slate-300 bg-white px-4 py-3 shadow-lg">
                                     <legend className="sr-only">Facultad</legend>
-                                    {facultades.map((f) => (
+                                    {facultadesVisibles.map((f) => (
                                         <label key={f.code} className="flex items-center justify-between gap-2 text-sm">
                                             <span className="flex items-center gap-2">
                                                 <input type="checkbox" checked={faculties.includes(f.code)} onChange={() => toggleFacultad(f.code)} />

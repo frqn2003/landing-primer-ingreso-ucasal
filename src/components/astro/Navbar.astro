@@ -5,8 +5,14 @@ import { etiquetaSedes } from "../../config/contenido";
 
 interface Props {
   onSubPage?: boolean;
+  /**
+   * La página abre con un hero a sangre de alto completo, así que la navbar
+   * puede flotar transparente encima hasta que se scrollea. Lo usa el detalle
+   * de carrera, que tiene el mismo encabezado que la Home.
+   */
+  heroCompleto?: boolean;
 }
-const { onSubPage } = Astro.props;
+const { onSubPage, heroCompleto } = Astro.props;
 
 // Equivalente a useParams()
 const { slug } = Astro.params;
@@ -20,8 +26,9 @@ const urlInscripcion = carrerasConCCC
 
 const base = import.meta.env.BASE_URL;
 
-// Solo en la Home la navbar flota transparente dentro del hero; en subpáginas mantiene el comportamiento sólido de siempre.
-const flotarSobreHero = !onSubPage;
+// La navbar flota transparente mientras haya un hero a sangre debajo: siempre
+// en la Home, y en las subpáginas que lo pidan con `heroCompleto`.
+const flotarSobreHero = !onSubPage || !!heroCompleto;
 ---
 
 <nav

@@ -251,6 +251,24 @@ export default function Form({ codcarInicial, onSubPage, modosDisponibles }: {
         return () => observer.disconnect()
     }, [])
 
+    /* En el detalle de carrera las puertas de "Modalidades" apuntan a este
+       formulario: la carrera ya viene fija, así que el CTA solo tiene que dejar
+       marcado el modo elegido. En la Home este evento lo escucha el explorador
+       de carreras, no el form. */
+    useEffect(() => {
+        if (!onSubPage) return
+        const handler = (evento: Event) => {
+            const codigo = (evento as CustomEvent).detail?.code
+            if (!codigo || !codcar) return
+            const modosCarrera = modosDeLaLanding(carreraSeleccionadaLocal?.modalidad ?? [])
+            if (!modosCarrera.includes(Number(codigo))) return
+            setValue('cbx_modo', String(codigo), { shouldValidate: true })
+            seleccionarModalidad(String(codigo))
+        }
+        window.addEventListener('preselect-modalidad', handler)
+        return () => window.removeEventListener('preselect-modalidad', handler)
+    }, [onSubPage, codcar, carreraSeleccionadaLocal, seleccionarModalidad, setValue])
+
     /* Cerrar el buscador de localidad al hacer click afuera */
     useEffect(() => {
         const handler = (e: MouseEvent) => {
@@ -325,7 +343,7 @@ export default function Form({ codcarInicial, onSubPage, modosDisponibles }: {
                     clarityEvent('formulario-invalido')
                 })}
             className={`bg-white rounded-lg shadow-2xl w-full min-w-0 ${onSubPage ? 'px-6 py-4' : 'p-6'}`}>
-            <input type="hidden" value="4" name="id_origen" />
+            <input type="hidden" value={modalidad === '7' ? '103' : '4'} name="id_origen" />
             <input type="hidden" name="cbx_sede" value={idSedeReal} />
             <input type="hidden" name="sector" value={sectorCarrera} />
             <input type="hidden" value="postulantes" name="tabla" />
@@ -350,7 +368,7 @@ export default function Form({ codcarInicial, onSubPage, modosDisponibles }: {
 
             {/* 1 · CARRERA */}
             <div className="border-b border-black/10 pb-4 mb-4">
-                <p className="text-xs font-bold text-(--azul-ucasal) tracking-wide uppercase mb-2">Elegí tu carrera</p>
+                <p className="text-xs font-bold text-(--azul-ucasal) tracking-wide uppercase mb-2">{onSubPage ? 'La carrera' : 'Elegí tu carrera'}</p>
                 {carreraBloqueada ? (
                     <div className="flex flex-wrap items-center justify-between gap-2 rounded-lg border border-gray-300 bg-white p-3 text-black">
                         <span className="text-base text-black flex flex-col min-w-0 flex-1 basis-full sm:basis-auto break-words pr-2">
@@ -359,20 +377,26 @@ export default function Form({ codcarInicial, onSubPage, modosDisponibles }: {
                         </span>
                         <div className="flex w-full flex-row items-center justify-end gap-2 sm:w-auto md:gap-6">
                             <div className={`items-center h-full justify-end flex shrink-0 whitespace-nowrap text-xs border-gray-200 border rounded text-white py-1 px-2 ${carreraSeleccionadaLocal?.modalidad.length > 1 ? 'bg-gradient-to-r from-15% from-(--rojo-ucasal) to-(--azul-ucasal) to-70%' : carreraSeleccionadaLocal?.modalidad.includes(7) ? 'bg-(--azul-ucasal)' : 'bg-(--rojo-ucasal)'}`}>{labelModalidad}</div>
-                            <div className='h-6 border border-black'></div>
-                            <button
-                                type="button"
-                                onClick={() => {
-                                    setValue('cbx_carrera', '')
-                                    seleccionarCodcar('')
-                                    setBuscarLocalidad('')
-                                    setLocalidadAbierta(false)
-                                    setCarreraBloqueada(false)
-                                }}
-                                className="rounded border border-gray-300 bg-white px-3 py-1 text-sm text-black cursor-pointer border"
-                            >
-                                Cambiar
-                            </button>
+                            {/* En la subpágina de una carrera no se puede
+                                cambiar: la página ES esa carrera. */}
+                            {!onSubPage && (
+                                <>
+                                    <div className='h-6 border border-black'></div>
+                                    <button
+                                        type="button"
+                                        onClick={() => {
+                                            setValue('cbx_carrera', '')
+                                            seleccionarCodcar('')
+                                            setBuscarLocalidad('')
+                                            setLocalidadAbierta(false)
+                                            setCarreraBloqueada(false)
+                                        }}
+                                        className="rounded border border-gray-300 bg-white px-3 py-1 text-sm text-black cursor-pointer border"
+                                    >
+                                        Cambiar
+                                    </button>
+                                </>
+                            )}
                         </div>
                     </div>
                 ) : (

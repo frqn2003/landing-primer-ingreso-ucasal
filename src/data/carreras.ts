@@ -98,7 +98,7 @@ const data = [
         slug: "corredor-inmobiliario-y-martillero-publico",
         nombre: "Corredor Inmobiliario y Martillero Público",
         descripcion: "La carrera de Corredor Inmobiliario y Martillero Público de UCASAL forma profesionales capacitados para gestionar operaciones inmobiliarias, realizar tasaciones y peritajes, y actuar como auxiliares de la justicia en remates y ejecuciones de sentencias, además de gestionar trámites de inscripción registral.",
-        duracion: "2½ años",
+        duracion: "2 años",
         modalidad: [1,7],
         perfilEgresado: {
             items: [
@@ -387,7 +387,7 @@ const data = [
         slug: "administracion-de-empresas",
         nombre: "Licenciatura en Administración de Empresas",
         descripcion: "La Licenciatura en Administración de Empresas de UCASAL forma profesionales capacitados para gestionar organizaciones de todo tipo y tamaño, con dominio de planificación estratégica, recursos humanos, finanzas, marketing y operaciones. Combina teoría y práctica para desarrollar liderazgo y toma de decisiones en entornos dinámicos, tanto en empresas privadas como en organismos públicos.",
-        duracion: "5 años",
+        duracion: "4 años",
         modalidad: [1,7],
         perfilEgresado: {
             items: [
@@ -652,34 +652,47 @@ const data = [
             {
                 semestre: "1° Año",
                 materias: [
-                    "Filosofía I",
-                    "Filosofía II",
-                    "Sistema de Gestión Ambiental",
+                    "Filosofía",
                     "Análisis Matemático",
-                    "Análisis de Costos Costos Relacionados con la Calidad",
-                    "Estadística I (Descriptiva)",
+                    "Análisis de Costos",
                     "Administración Estratégica",
-                    "Fomentos de la Calidad",
-                    "Gestión de Calidad",
-                    "Organización Empresarial",
-                    "Introducción a la Calidad"
+                    "Introducción a la Calidad",
+                    "Buenas Prácticas de Manufactura",
+                    "Teología",
+                    "Buenas Prácticas Agrícolas",
+                    "Sistema de Gestión Ambiental",
+                    "Costos Relacionados con la Calidad",
+                    "Estadística I (Descriptiva)",
+                    "Sistema de Gestión de Salud y Seguridad"
                 ]
             },
             {
                 semestre: "2° Año",
                 materias: [
-                    "Teología I",
-                    "Teología II",
+                    "Informática",
                     "Estadística II (Inferencial)",
-                    "Métodos Estadísticos para la Toma de Decisiones",
-                    "Calidad Total",
-                    "Análisis del Cliente Interno y Externo",
                     "Auditoría Operativa",
-                    "Calidad Estratégica",
-                    "Normas sobre Gestión ISO 9000/2000",
-                    "Control de Calidad",
-                    "Aseguramiento de Calidad",
-                    "Calibraciones ISO25"
+                    "Herramientas de Calidad I",
+                    "Sistema de Gestión de Calidad",
+                    "Derecho del Consumidor",
+                    "Inglés",
+                    "Requisitos Laborales y de Ensayo",
+                    "Herramientas de Calidad II",
+                    "Normas IRAM Sector I",
+                    "Satisfacción del Cliente",
+                    "Sistema Integrado de Gestión"
+                ]
+            },
+            {
+                semestre: "3° Año",
+                materias: [
+                    "Trabajo Final Integrador",
+                    "Seminario de Trabajo Final",
+                    "Responsabilidad Social Empresaria",
+                    "Normas IRAM Sector II",
+                    "Normas IRAM Sector III",
+                    "Mejora Continua",
+                    "HACCP"
                 ]
             }
         ]
@@ -1787,6 +1800,92 @@ const data = [
                 "Desarrollar investigaciones científicas para el avance de las ciencias del comportamiento.",
             ]
         },
+        planEstudiosPorModalidad: {
+            1: [
+                {
+                    "semestre": "1° Año",
+                    "materias": [
+                        "Filosofía I",
+                        "Neuropsicología",
+                        "Metodología de la Investigación en Psicología I",
+                        "Historia de la Psicología",
+                        "Psicología General",
+                        "Historia del Pensamiento Sociopolítico",
+                        "Antropología Cultural",
+                        "Lingüística"
+                    ]
+                },
+                {
+                    "semestre": "2° Año",
+                    "materias": [
+                        "Teología I",
+                        "Psicología Evolutiva y Cultura (Niño y Adolescente)",
+                        "Psicología Profunda",
+                        "Estadística (Descriptiva y Muestral)",
+                        "Filosofía II",
+                        "Psicolingüística",
+                        "Sociología",
+                        "Antropología Filosófica",
+                        "Psicología Experimental",
+                        "Psicología de la Personalidad",
+                        "Introducción al Psicodiagnóstico"
+                    ]
+                },
+                {
+                    "semestre": "3° Año",
+                    "materias": [
+                        "Psicología Educacional",
+                        "Suficiencia Idiomática",
+                        "Teología II",
+                        "Psicometría",
+                        "Psicología Social",
+                        "Psicología Evolutiva y Cultura de Adultez y Senectud",
+                        "Psicología del Deporte",
+                        "Psicopatología Infanto Juvenil (General y Especial)",
+                        "Dinámica de Grupo",
+                        "Técnicas Proyectivas I",
+                        "Psicopatología del Adulto (General Especial)",
+                        "Seminario I"
+                    ]
+                },
+                {
+                    "semestre": "4° Año",
+                    "materias": [
+                        "Psicología Laboral",
+                        "Doctrina Social",
+                        "Orientación Vocacional y Profesional",
+                        "Técnicas Proyectivas II",
+                        "Psicología Especial y de la Diversidad",
+                        "Seminario II",
+                        "Ética Profesional",
+                        "Psicología de las Relaciones Humanas",
+                        "Psicodiagnóstico",
+                        "Psicología Comunitaria",
+                        "Psicología Clínica I (Psicoanálisis)",
+                        "Drogodependencia y Abordajes Transdisciplinarios"
+                    ]
+                },
+                {
+                    "semestre": "5° Año",
+                    "materias": [
+                        "Psicología Clínica II",
+                        "Psicología de las Organizaciones",
+                        "Psicoterapia de Grupo",
+                        "Psicología Forense",
+                        "Metodología de la Investigación en Psicología II",
+                        "Salud Pública",
+                        "Trabajo Integrador Final",
+                        "Práctica Pre Profesional Jurídico Forense",
+                        "Práctica Pre Profesional Socio Comunitaria",
+                        "Práctica Pre-Profesional Educacional",
+                        "Práctica Pre-Profesional Laboral",
+                        "Práctica Pre-Profesional Clínica"
+                    ]
+                }
+            ]
+        },
+
+
     },
     {
         codcar: 46,
@@ -1806,6 +1905,69 @@ const data = [
                 "Coordinar equipos multidisciplinarios en investigaciones judiciales y policiales.",
             ]
         },
+        planEstudiosPorModalidad: {
+            1: [
+                {
+                    "semestre": "1° Año",
+                    "materias": [
+                        "Método y Técnica de Investigación Científica y Estadística Aplicada",
+                        "Análisis Matemático I",
+                        "Química I (General e Inorgánica)",
+                        "Inspecciones Oculares y Levantamiento de Rastros",
+                        "Tecnografía Pericial I",
+                        "Filosofía",
+                        "Derecho Penal",
+                        "Teología",
+                        "Derecho Procesal Penal (General)"
+                    ]
+                },
+                {
+                    "semestre": "2° Año",
+                    "materias": [
+                        "Identidad Humana",
+                        "Análisis Matemático II",
+                        "Química II (Orgánica)",
+                        "Fototécnicas Audiovisuales",
+                        "Documentología I",
+                        "Física I",
+                        "Balística I",
+                        "Tecnografía Pericial II",
+                        "Pasantías en el Registro Nacional de Reincidencia y Prácticas en la Dirección de Policía Científica",
+                        "Derecho Procesal Penal",
+                        "Derecho Procesal Civil, Comercial y Laboral"
+                    ]
+                },
+                {
+                    "semestre": "3° Año",
+                    "materias": [
+                        "Deontología Pericial",
+                        "Química Analítica",
+                        "Informática I",
+                        "Documentología II",
+                        "Física II",
+                        "Probabilidades y Estadística",
+                        "Balística II",
+                        "Accidentología I"
+                    ]
+                },
+                {
+                    "semestre": "4° Año",
+                    "materias": [
+                        "Análisis Químico Instrumental",
+                        "Química Legal",
+                        "Informática II",
+                        "Medicina Legal",
+                        "Tecnología Aplicada",
+                        "Accidentología II",
+                        "Toxicología",
+                        "Psicología General y Criminal",
+                        "Criminología General"
+                    ]
+                }
+            ]
+        },
+
+
     },
     {
         codcar: 26,
@@ -1825,6 +1987,116 @@ const data = [
                 "Desarrollar proyectos urbanísticos y ordenamiento territorial sustentable.",
             ]
         },
+        planEstudiosPorModalidad: {
+            1: [
+                {
+                    "semestre": "1° Año",
+                    "materias": [
+                        "Filosofía",
+                        "Matemática",
+                        "Construcciones I",
+                        "Medios de Expresión I",
+                        "Diseño I",
+                        "Sistemas de Representación",
+                        "Teoría de la Arquitectura",
+                        "Introducción a la Cultura",
+                        "Física"
+                    ]
+                },
+                {
+                    "semestre": "2° Año",
+                    "materias": [
+                        "Teología",
+                        "Historia de la Arquitectura I",
+                        "Construcciones II",
+                        "Medios de Expresión II",
+                        "Diseño II",
+                        "Instalaciones I",
+                        "Estructuras I",
+                        "Dibujo Asistido por Computadora I",
+                        "Crítica de la Arquitectura",
+                        "Doctrina Social de la Iglesia"
+                    ]
+                },
+                {
+                    "semestre": "3° Año",
+                    "materias": [
+                        "Historia de la Arquitectura II",
+                        "Planeamiento I",
+                        "Construcciones III",
+                        "Medios de Expresión III",
+                        "Diseño III",
+                        "Instalaciones II",
+                        "Estructuras II",
+                        "Dibujo Asistido por Computadora II"
+                    ]
+                },
+                {
+                    "semestre": "4° Año",
+                    "materias": [
+                        "Historia de la Arquitectura III",
+                        "Organización de Obras",
+                        "Planeamiento II",
+                        "Ambiente y Arquitectura",
+                        "Diseño IV",
+                        "Estructuras III",
+                        "Tecnología de la Información (Electiva)",
+                        "Emprendedurismo (Electiva)",
+                        "Patologías de la Construcción (Electiva)",
+                        "Topografía (Electiva)",
+                        "Paisaje I (Electiva)",
+                        "Paisajismo (Electiva)",
+                        "Arquitectura del Turismo (Electiva)",
+                        "Paisaje II (Electiva)",
+                        "Arquitectura Latinoamericana del Siglo XXI (Electiva)",
+                        "Proceso de Diseño Digital (Electiva)",
+                        "Planificación del Territorio: Medición y Catastro (Electiva)",
+                        "Arquitectura Sustentable y Edificios Inteligentes Domótica (Electiva)",
+                        "Turismo Accesible - Parques Accesibilidades (Electiva)",
+                        "Prueba de Nivelación de Idiomas",
+                        "Planificación y Gestión de Proyectos (Electiva)",
+                        "Preservación Urbana (Electiva)",
+                        "Accesibilidad al Medio Físico (Electiva)",
+                        "Construcciones de Madera (Electiva)",
+                        "Diseño y Gestión de la Ciudad Sustentable (Electiva)",
+                        "Sistemas de Información Geográfica para la Gestión Territorial (Electiva)",
+                        "REVIT I (Electiva)",
+                        "Diseño Inclusivo y Emocional (Electiva)",
+                        "Taller de Composición Plástica (Electiva)",
+                        "Storytelling (Electiva)",
+                        "Electiva I"
+                    ]
+                },
+                {
+                    "semestre": "5° Año",
+                    "materias": [
+                        "Trabajo Final Integrador",
+                        "Legal",
+                        "Seguridad en la Construcción",
+                        "Diseño V",
+                        "Estructuras IV",
+                        "Ética",
+                        "Psicología (Electiva)",
+                        "Croquis y Perspectiva (Electiva)",
+                        "Arquitectura Solar (Electiva)",
+                        "Materiales y Técnicas Regionales (Electiva)",
+                        "Plantas y Jardines (Electiva)",
+                        "Resoluciones Constructivas No Convencionales (Electiva)",
+                        "Modelado BIM con Archicad (Electiva)",
+                        "Metodología de la Investigación",
+                        "Energías Renovables Aplicadas a la Arquitectura (Electiva)",
+                        "Interiores Comerciales y Diseño Temporario (Electiva)",
+                        "Diseño Arquitectónico para una Modernidad Apropiada (Electiva)",
+                        "Inteligencia Artificial Aplicada al Diseño (Electiva)",
+                        "Gestión de Emprendimientos Arquitectónicos (Electiva)",
+                        "Práctica Profesional Supervisada",
+                        "Electiva II"
+                    ]
+                }
+            ]
+        },
+
+
     },
     {
         codcar: 123,
@@ -1844,6 +2116,95 @@ const data = [
                 "Liderar investigaciones biomédicas y administrar clínicas o centros veterinarios.",
             ]
         },
+        planEstudiosPorModalidad: {
+            1: [
+                {
+                    "semestre": "1° Año",
+                    "materias": [
+                        "Bioquímica",
+                        "Biofísica",
+                        "Histología y Embriología",
+                        "Anatomía Comparada",
+                        "Filosofía",
+                        "Bioestadística"
+                    ]
+                },
+                {
+                    "semestre": "2° Año",
+                    "materias": [
+                        "Fisiología",
+                        "Patología Básica y Anatomía Patológica",
+                        "Microbiología",
+                        "Genética",
+                        "Parasitología",
+                        "Teología",
+                        "Economía y Administración Rural"
+                    ]
+                },
+                {
+                    "semestre": "3° Año",
+                    "materias": [
+                        "Zootecnia General",
+                        "Semiología",
+                        "Ética Profesional",
+                        "Seminario I",
+                        "Farmacología",
+                        "Nutrición y Alimentación Animal",
+                        "Inmunología"
+                    ]
+                },
+                {
+                    "semestre": "4° Año",
+                    "materias": [
+                        "Enfermedades Infecciosas",
+                        "Obstetricia y Reproducción",
+                        "Patología Médica",
+                        "Patología Quirúrgica",
+                        "Cirugía y Anestesiología",
+                        "Producción de Rumiantes Menores",
+                        "Seminario II",
+                        "Enfermedades Parasitarias",
+                        "Producción Porcina"
+                    ]
+                },
+                {
+                    "semestre": "5° Año",
+                    "materias": [
+                        "Práctica Hospitalaria de Animales de Compañía",
+                        "Práctica Hospitalaria de Grandes Animales",
+                        "Producción de Aves y Especies No Tradicionales",
+                        "Salud Pública y Epidemiología",
+                        "Bromatología",
+                        "Producción Bovina",
+                        "Recursos Faunísticos, Medicina de Fauna y Animales Exóticos",
+                        "Tecnología de los Alimentos",
+                        "Producción Equina"
+                    ]
+                },
+                {
+                    "semestre": "6° Año",
+                    "materias": [
+                        "Residencia en Tecnología de los Alimentos y Salud Pública",
+                        "Residencia",
+                        "Taller de Integración de Práctica Profesional",
+                        "Taller de Integración del Ciclo Básico",
+                        "Pasturas y Forrajes (Optativa)",
+                        "Piscicultura (Optativa)",
+                        "Producción y Tecnología de los Derivados Lácteos (Optativa)",
+                        "Producción y Tecnología de los Derivados Cárnicos (Optativa)",
+                        "Microbiología de los Alimentos (Optativa)",
+                        "Análisis Clínicos (Optativa)",
+                        "Etología (Optativa)",
+                        "Camélidos Americanos (Optativa)",
+                        "Producción Canina (Optativa)",
+                        "Marketing Agropecuario (Optativa)",
+                        "Diagnóstico por Imágenes (Optativa)"
+                    ]
+                }
+            ]
+        },
+
+
     },
     {
         codcar: 84,
@@ -1863,6 +2224,98 @@ const data = [
                 "Auditar sistemas informáticos y asesorar a empresas en la optimización de sus procesos.",
             ]
         },
+        planEstudiosPorModalidad: {
+            1: [
+                {
+                    "semestre": "1° Año",
+                    "materias": [
+                        "Filosofía",
+                        "Álgebra Lineal I",
+                        "Análisis Matemático I",
+                        "Química para Ingenieros",
+                        "Fundamentos de Informática",
+                        "Prueba de Suficiencia en Comunicación Oral y Escrita",
+                        "Prueba de Suficiencia de Idioma Inglés",
+                        "Álgebra Lineal II",
+                        "Análisis Matemático II",
+                        "Introducción a la Informática",
+                        "Física I"
+                    ]
+                },
+                {
+                    "semestre": "2° Año",
+                    "materias": [
+                        "Teología",
+                        "Estructura de Datos y Algoritmos",
+                        "Arquitectura de Computadores",
+                        "Análisis Matemático III",
+                        "Lenguajes I",
+                        "Física II",
+                        "Economía de la Empresa",
+                        "Probabilidad y Estadística I",
+                        "Cálculo Avanzado",
+                        "Lenguajes II",
+                        "Sistemas I",
+                        "Introducción a los Sistemas Operativos",
+                        "Física Aplicada",
+                        "Economía y Finanzas",
+                        "Probabilidad y Estadística II"
+                    ]
+                },
+                {
+                    "semestre": "3° Año",
+                    "materias": [
+                        "Sistemas Operativos",
+                        "Sistemas II",
+                        "Redes I",
+                        "Doctrina Social de la Iglesia",
+                        "Análisis Numérico",
+                        "Lenguajes III",
+                        "Bases de Datos I",
+                        "Proyectos Informáticos I",
+                        "Práctica Profesional Supervisada Técnico",
+                        "Ética Profesional",
+                        "Lenguajes IV",
+                        "Bases de Datos II",
+                        "Proyectos Informáticos II",
+                        "Higiene y Seguridad"
+                    ]
+                },
+                {
+                    "semestre": "4° Año",
+                    "materias": [
+                        "Ingeniería de Software",
+                        "Sistemas III",
+                        "Redes II",
+                        "Bases de Datos III",
+                        "Investigación Operativa I",
+                        "Dirección de Proyectos",
+                        "Compiladores",
+                        "Análisis de Datos",
+                        "Investigación Operativa II"
+                    ]
+                },
+                {
+                    "semestre": "5° Año",
+                    "materias": [
+                        "Modelos y Simulación",
+                        "Sistemas Inteligentes",
+                        "Auditoría de Sistemas",
+                        "Técnicas Avanzadas de Análisis de Datos",
+                        "Recursos Humanos",
+                        "Ingeniería Legal",
+                        "Práctica Profesional Supervisada Ingeniero",
+                        "Proyecto de Grado",
+                        "Seguridad Informática",
+                        "Estrategia e Informática",
+                        "Redes III",
+                        "Legislación Informática"
+                    ]
+                }
+            ]
+        },
+
+
     },
     {
         codcar: 19,
@@ -1882,6 +2335,110 @@ const data = [
                 "Liderar equipos de trabajo y procesos de innovación industrial.",
             ]
         },
+        planEstudiosPorModalidad: {
+            1: [
+                {
+                    "semestre": "1° Año",
+                    "materias": [
+                        "Filosofía",
+                        "Álgebra Lineal I",
+                        "Análisis Matemático I",
+                        "Química para Ingenieros",
+                        "Prueba de Suficiencia en Ofimática",
+                        "Fundamentos de Informática",
+                        "Organización y Administración",
+                        "Prueba de Suficiencia en Comunicación Oral y Escrita",
+                        "Prueba de Suficiencia de Idioma Inglés",
+                        "Álgebra Lineal II",
+                        "Análisis Matemático II",
+                        "Química para Ingenieros II",
+                        "Física I",
+                        "Dibujo y Sistemas de Representación"
+                    ]
+                },
+                {
+                    "semestre": "2° Año",
+                    "materias": [
+                        "Teología",
+                        "Estabilidad y Resistencia de Materiales",
+                        "Análisis Matemático III",
+                        "Física II",
+                        "Economía de la Empresa",
+                        "Probabilidad y Estadística",
+                        "Análisis Matemático IV",
+                        "Física III",
+                        "Economía y Finanzas",
+                        "Probabilidad y Estadística II",
+                        "Conocimiento y Estudio de Materiales"
+                    ]
+                },
+                {
+                    "semestre": "3° Año",
+                    "materias": [
+                        "Mecánica y Mecanismos",
+                        "Doctrina Social de la Iglesia",
+                        "Análisis Numérico",
+                        "Termodinámica",
+                        "Investigación Operativa I",
+                        "Organización Industrial",
+                        "Electrotecnia",
+                        "Práctica Profesional Supervisada Técnico",
+                        "Ética Profesional",
+                        "Costos Industriales",
+                        "Investigación Operativa II",
+                        "Máquinas Térmicas",
+                        "Máquinas Eléctricas",
+                        "Mecánica de Fluidos",
+                        "Higiene y Seguridad"
+                    ]
+                },
+                {
+                    "semestre": "4° Año",
+                    "materias": [
+                        "Construcciones Industriales",
+                        "Comercialización y Análisis de Mercados",
+                        "Planeamiento y Control de Gestión",
+                        "Instalaciones Termomecánicas",
+                        "Instalaciones Eléctricas",
+                        "Higiene y Seguridad Industrial",
+                        "Operaciones Industriales I",
+                        "Formulación y Evaluación de Proyectos",
+                        "Planeamiento y Control de las Operaciones",
+                        "Logística",
+                        "Gestión de Activos Físicos (Optativa)",
+                        "Operaciones Industriales II",
+                        "Instalaciones Auxiliares"
+                    ]
+                },
+                {
+                    "semestre": "5° Año",
+                    "materias": [
+                        "Diseño Asistido por Computadora (Optativa)",
+                        "Sistemas I (Optativa)",
+                        "Costos para la Gestión (Optativa)",
+                        "Auditoría (Optativa)",
+                        "Recursos Humanos",
+                        "Instrumentación, Control y Automatización",
+                        "Gestión de Calidad",
+                        "Formación de Emprendedores (Optativa)",
+                        "Estrategias de Negociación y Resolución de Conflictos (Optativa)",
+                        "Escenarios de Negocios (Optativa)",
+                        "Administración de PYMES (Optativa)",
+                        "Ingeniería Legal",
+                        "Derecho del Trabajo (Optativa)",
+                        "Derecho Colectivo del Trabajo y de la Seguridad Social (Optativa)",
+                        "Ingeniería Ambiental",
+                        "Tecnologías y Procesos de Producción",
+                        "Práctica Profesional Supervisada Ingeniero",
+                        "Proyecto de Grado",
+                        "Emprendedurismo y Planes de Negocios (Optativa)",
+                        "Legislación Industrial"
+                    ]
+                }
+            ]
+        },
+
+
     },
     {
         codcar: 31,
@@ -1900,6 +2457,74 @@ const data = [
                 "Asesorar a clubes, centros deportivos e instituciones públicas o privadas.",
             ]
         },
+        planEstudiosPorModalidad: {
+            1: [
+                {
+                    "semestre": "1° Año",
+                    "materias": [
+                        "Gimnasia Formativa",
+                        "Recreación",
+                        "Atletismo I",
+                        "Filosofía",
+                        "Desarrollo Psico-Motriz",
+                        "Psicología General y Evolutiva",
+                        "Juegos Motores",
+                        "Anatomía Funcional",
+                        "Didáctica General I",
+                        "Comunicación y Expresión",
+                        "Currículum I"
+                    ]
+                },
+                {
+                    "semestre": "2° Año",
+                    "materias": [
+                        "Teología",
+                        "Natación y Deportes Acuáticos I",
+                        "Gimnasia Artística y Deportiva",
+                        "Fútbol",
+                        "Atletismo II",
+                        "Psicología de la Actividad Física y del Deporte",
+                        "Didáctica Específica y Currículum II",
+                        "Metodología del Aprendizaje Motor",
+                        "Vida con la Naturaleza y Medio Ambiente",
+                        "Fisiología de la Actividad Física",
+                        "Handbol",
+                        "Historia y Fundamentos de la Educación Física"
+                    ]
+                },
+                {
+                    "semestre": "3° Año",
+                    "materias": [
+                        "Natación y Deportes Acuáticos II",
+                        "Básquetbol",
+                        "Gimnasia Rítmica y Aeróbica",
+                        "Hockey",
+                        "Voleibol",
+                        "Evaluación Educativa y Estadística",
+                        "Introducción a la Metodología de la Investigación",
+                        "Informática Aplicada",
+                        "Práctica I",
+                        "Doctrina Social"
+                    ]
+                },
+                {
+                    "semestre": "4° Año",
+                    "materias": [
+                        "Análisis Biomecánico en la Actividad Física y el Deporte",
+                        "Educación Rítmica y Danza",
+                        "Rugby",
+                        "Educación Física Especial",
+                        "Política, Gestión y Administración Educativa",
+                        "Educación y Nutrición para la Salud",
+                        "Práctica III: Entrenamiento Deportivo",
+                        "Práctica II",
+                        "Ética Profesional"
+                    ]
+                }
+            ]
+        },
+
+
     },
     {
         codcar: 323,
@@ -1920,6 +2545,39 @@ const data = [
                 "Participar en investigaciones y proyectos de mejora institucional.",
             ]
         },
+        planEstudiosPorModalidad: {
+            1: [
+                {
+                    "semestre": "1° Año",
+                    "materias": [
+                        "Práctica I",
+                        "Filosofía de la Educación",
+                        "Didáctica",
+                        "Currículum",
+                        "Sujetos Educativos en Educación Secundaria",
+                        "Psicología Educacional",
+                        "Evaluación de los Aprendizajes",
+                        "Programación Curricular",
+                        "Problemáticas Educativas Contemporáneas"
+                    ]
+                },
+                {
+                    "semestre": "2° Año",
+                    "materias": [
+                        "Práctica II",
+                        "Taller de Sistematización de las Prácticas Docentes",
+                        "Humanismo y Doctrina Social de la Iglesia",
+                        "Estratégias Didácticas y de Aprendizaje",
+                        "Sujetos Educativos en Educación Superior",
+                        "Ética y Deontología Profesional",
+                        "Política Educativa",
+                        "TIC en el Aula"
+                    ]
+                }
+            ]
+        },
+
+
     },
     {
         codcar: 69,
@@ -1938,6 +2596,76 @@ const data = [
                 "Integrar equipos interdisciplinarios para promover la inclusión y la diversidad en contextos de aprendizaje.",
             ]
         },
+        planEstudiosPorModalidad: {
+            1: [
+                {
+                    "semestre": "1° Año",
+                    "materias": [
+                        "Filosofía",
+                        "Introducción a la Psicopedagogía",
+                        "Bases Neurofisiológicas del Aprendizaje",
+                        "Metodología de la Investigación",
+                        "Historia Social de la Educación Argentina",
+                        "Antropología",
+                        "Psicología General",
+                        "Pedagogía General",
+                        "TIC",
+                        "Lingüística"
+                    ]
+                },
+                {
+                    "semestre": "2° Año",
+                    "materias": [
+                        "Teología",
+                        "Neuropsicología",
+                        "Psicolingüística",
+                        "Diagnóstico Psicopedagógico",
+                        "Psicología del Desarrollo en el Niño y el Adolescente",
+                        "Teorías del Aprendizaje",
+                        "Estadística Aplicada",
+                        "Psicología Profunda",
+                        "Psicopedagogía Institucional",
+                        "Didáctica General"
+                    ]
+                },
+                {
+                    "semestre": "3° Año",
+                    "materias": [
+                        "Psicopatología",
+                        "Psicopedagogía en las Organizaciones",
+                        "Tratamiento y Orientación Psicopedagógico",
+                        "Técnicas de Evaluación Diagnóstica",
+                        "Doctrina Social",
+                        "Psicología del Desarrollo del Adulto y el Geronte",
+                        "Neuropsicopedagogía (Evaluación e Intervenciones)",
+                        "Ética y Deontología Profesional",
+                        "Intervenciones Psicopedagógicas en Lengua y Matemática",
+                        "Mediación Educacional y Resolución de Conflictos",
+                        "Inglés"
+                    ]
+                },
+                {
+                    "semestre": "4° Año",
+                    "materias": [
+                        "Psicopedagogía en Contextos Sociales Complejos",
+                        "Psicopedagogía y Atención Primaria de la Salud",
+                        "Dinámica de Grupos y Educación",
+                        "Práctica Preprofesional Supervisada en el Campo Educacional",
+                        "Práctica Pre-Profesional Supervisada en el Campo de la Atención",
+                        "Con Orientación Clínica y Neuropsicológica Escritura Académica (Seminario Electivo I)",
+                        "Seminario Electivo I",
+                        "Psicopedagogía e Inclusión del Sujeto con Discapacidad",
+                        "Orientación Vocacional, Ocupacional y Profesional",
+                        "Práctica Preprofesional Supervisada en el Campo de la Salud y",
+                        "Sociocomunitario",
+                        "Práctica Preprofesional Supervisada en el Campo Laboral y Organizacional Seminario II - Práctica de Investigación en Psicopedagogía",
+                        "Seminario Electivo II"
+                    ]
+                }
+            ]
+        },
+
+
     },
     {
         codcar: 220,
@@ -1957,6 +2685,83 @@ const data = [
                 "Desarrollar narrativas transmediáticas, guiones y propuestas de comunicación audiovisual integral.",
             ]
         },
+        planEstudiosPorModalidad: {
+            1: [
+                {
+                    "semestre": "1° Año",
+                    "materias": [
+                        "Lengua Inglesa Elemental",
+                        "Pensamiento Filosófico I",
+                        "Sistemas Operativos de Computación y Edición Audio Visuales",
+                        "Electroacústica",
+                        "Electrónica Análoga y Digital",
+                        "Operación de Estudio de Radio I",
+                        "Fundamentos de Tecnología",
+                        "Pensamiento Filosófico II",
+                        "Electrónica de la Imagen y Sonido",
+                        "Electricidad y Electrónica de las Telecomunicaciones I",
+                        "Composición y Fotografía",
+                        "Operación de Estudio de TV I",
+                        "Introducción a la Edición y Post-Producción de AV"
+                    ]
+                },
+                {
+                    "semestre": "2° Año",
+                    "materias": [
+                        "Lengua Inglesa Intermedia",
+                        "Teología I",
+                        "Historia de la Cultura I",
+                        "Semiótica General y Aplicada",
+                        "Audio Perceptiva y Lenguaje Acústico Musical I",
+                        "Sistemas de Digitalización de Audio",
+                        "Lenguajes y Sistemas Audio Visuales I",
+                        "Teología II",
+                        "Historia de la Cultura II",
+                        "Electricidad y Electrónica de las Telecomunicaciones II",
+                        "Electrónica Aplicada a Plantas Transmisoras",
+                        "Audio Perceptiva y Lenguaje Acústico Musical II",
+                        "Diseño de Imagen y Sonido I"
+                    ]
+                },
+                {
+                    "semestre": "3° Año",
+                    "materias": [
+                        "Metodología de la Investigación en Comunicaciones",
+                        "Sistemas de Edición Digital",
+                        "Operación de Sistemas de Audio Profesional",
+                        "Semiología de la Publicidad",
+                        "Generación Electrónica de Imágenes",
+                        "Lenguajes y Sistemas Audio Visuales II",
+                        "Diseño de Imagen y Sonido II",
+                        "Doctrina Social de la Iglesia",
+                        "Régimen Legal de las Comunicaciones",
+                        "Electricidad y Electrónica de las Telecomunicaciones III",
+                        "Práctica Electrónica de Equipamientos de Radio y TV",
+                        "Audio Perceptiva y Lenguaje Acústico Musical III",
+                        "Operación de Estudio de Radio II y Televisión II",
+                        "Postproducción"
+                    ]
+                },
+                {
+                    "semestre": "4° Año",
+                    "materias": [
+                        "Diseño Arquitectónico",
+                        "Dibujo Técnico",
+                        "Práctica y Producción de Montaje",
+                        "Proyecto de Tesis",
+                        "Higiene y Seguridad en Telecomunicación",
+                        "Acústica Preventiva y Forense",
+                        "Análisis de Señales",
+                        "Ética Profesional",
+                        "Práctica Profesional",
+                        "Taller de Tesis",
+                        "Medio Ambiente y EIAS"
+                    ]
+                }
+            ]
+        },
+
+
     },
     {
         codcar: 18,
@@ -1976,6 +2781,93 @@ const data = [
                 "Realizar peritajes, tasaciones y auditorías técnicas en proyectos de ingeniería.",
             ]
         },
+        planEstudiosPorModalidad: {
+            1: [
+                {
+                    "semestre": "1° Año",
+                    "materias": [
+                        "Filosofía",
+                        "Álgebra Lineal I",
+                        "Análisis Matemático I",
+                        "Química para Ingenieros",
+                        "Fundamentos de Informática",
+                        "Prueba de Suficiencia en Comunicación Oral y Escrita",
+                        "Geología y Mineralogía",
+                        "Prueba de Suficiencia de Idioma Inglés",
+                        "Álgebra Lineal II",
+                        "Análisis Matemático II",
+                        "Física I",
+                        "Dibujo y Sistemas de Representación"
+                    ]
+                },
+                {
+                    "semestre": "2° Año",
+                    "materias": [
+                        "Teología",
+                        "Estabilidad y Resistencia de Materiales",
+                        "Análisis Matemático III",
+                        "Física II",
+                        "Economía de la Empresa",
+                        "Probabilidad y Estadística",
+                        "Dibujo Asistido por Computadora",
+                        "Análisis Matemático IV",
+                        "Física III",
+                        "Economía y Finanzas",
+                        "Conocimiento y Estudio de Materiales",
+                        "Instalaciones en Edificios",
+                        "Planeamiento y Urbanismo"
+                    ]
+                },
+                {
+                    "semestre": "3° Año",
+                    "materias": [
+                        "Estabilidad II",
+                        "Topografía",
+                        "Construcción de Edificios",
+                        "Hidráulica General",
+                        "Elementos de Arquitectura",
+                        "Doctrina Social de la Iglesia",
+                        "Análisis Numérico",
+                        "Administración de Obras",
+                        "Ética Profesional",
+                        "Higiene y Seguridad",
+                        "Práctica Profesional Supervisada Técnico"
+                    ]
+                },
+                {
+                    "semestre": "4° Año",
+                    "materias": [
+                        "Estabilidad III",
+                        "Hormigón Armado",
+                        "Recursos Humanos",
+                        "Mecánica de Suelos",
+                        "Dinámica Estructural",
+                        "Fundaciones",
+                        "Hidrología",
+                        "Instalaciones Complementarias",
+                        "Vías de Comunicación"
+                    ]
+                },
+                {
+                    "semestre": "5° Año",
+                    "materias": [
+                        "Construcciones Metálicas y de Madera",
+                        "Construcción de Carreteras",
+                        "Auditoría de Sistemas",
+                        "Ingeniería Legal",
+                        "Construcciones de Hormigón Armado",
+                        "Hidráulica Aplicada",
+                        "Proyecto Final",
+                        "Contratación de Obras",
+                        "Puentes",
+                        "Ingeniería Sanitaria",
+                        "Práctica Profesional Supervisada Ingeniero"
+                    ]
+                }
+            ]
+        },
+
+
     },
     {
         codcar: 238,
@@ -1995,6 +2887,47 @@ const data = [
                 "Gestionar y coordinar espacios o emprendimientos vinculados al área del fitness.",
             ]
         },
+        planEstudiosPorModalidad: {
+            1: [
+                {
+                    "semestre": "1° Año",
+                    "materias": [
+                        "Aeróbica y STEP",
+                        "Gimnasia Formativa y Correctiva Postural",
+                        "Anatomía y Fisiología del Ejercicio",
+                        "Localizada y Spinning",
+                        "Pilates",
+                        "Filosofía",
+                        "Didáctica General",
+                        "Teología",
+                        "Psicología de la Actividad Física y el Fitness",
+                        "Informática Aplicada al Fitness",
+                        "Estética Corporal, Masoterapia y Reflexología",
+                        "Práctica I"
+                    ]
+                },
+                {
+                    "semestre": "2° Año",
+                    "materias": [
+                        "Introducción a la Metodología de la Investigación",
+                        "Musculación",
+                        "Educación y Nutrición para la Salud",
+                        "Prevención y Rehabilitación de Lesiones",
+                        "Aerobox y Ritmos",
+                        "Gimnasia Especial",
+                        "Stretching y Gimnasias Blandas",
+                        "Marketing y Gestión",
+                        "Doctrina Social",
+                        "Yoga",
+                        "Gimnasia Acuática y Tercera Edad",
+                        "Análisis Biomecánico",
+                        "Práctica II: Entrenamiento del Fitness y Personal Trainer"
+                    ]
+                }
+            ]
+        },
+
+
     },
     {
         codcar: 17,
@@ -2014,6 +2947,71 @@ const data = [
                 "Representar a organizaciones en foros internacionales, cumbres y organismos de cooperación.",
             ]
         },
+        planEstudios: [
+            {
+                semestre: "1° Año",
+                materias: [
+                    "Historia Universal Contemporánea",
+                    "Introducción al Derecho",
+                    "Introducción a las Ciencias Políticas",
+                    "Introducción a las Relaciones Internacionales",
+                    "Historia Constitucional Argentina",
+                    "Filosofía I",
+                    "Economía I",
+                    "Metodología y Técnicas de la Investigación I",
+                    "Computación I",
+                    "Inglés I"
+                ]
+            },
+            {
+                semestre: "2° Año",
+                materias: [
+                    "Historia Contemporánea de América",
+                    "Derecho Constitucional",
+                    "Relaciones Internacionales I",
+                    "Ciencias Políticas I",
+                    "Derecho Internacional Público I",
+                    "Filosofía II",
+                    "Economía II",
+                    "Metodología y Técnica de la Investigación II",
+                    "Derecho de los Recursos Naturales y Medio Ambiente",
+                    "Computación II",
+                    "Inglés II"
+                ]
+            },
+            {
+                semestre: "3° Año",
+                materias: [
+                    "Sociología General y Argentina",
+                    "Economía III",
+                    "Teoría de las Relaciones Internacionales",
+                    "Elementos del Derecho Civil, Comercial y Empresarial en las RR. II.",
+                    "Ciencias Políticas II",
+                    "Derecho Internacional Público II",
+                    "Derecho Internacional",
+                    "Teología I",
+                    "Teología II",
+                    "Inglés III",
+                    "Portugués I"
+                ]
+            },
+            {
+                semestre: "4° Año",
+                materias: [
+                    "Relaciones Internacionales II",
+                    "Política Exterior Argentina",
+                    "Derecho Internacional Privado",
+                    "Geopolítica",
+                    "Doctrina Social de la Iglesia",
+                    "Estrategia I",
+                    "Estrategia II",
+                    "Portugués II",
+                    "Seminario: Problemática Económica Argentina Contemporánea",
+                    "Seminario: Problemática Política Exterior Actual en la Argentina",
+                    "Trabajo Final (Tesis)"
+                ]
+            }
+        ]
     },
     {
         codcar: 173,
@@ -2032,6 +3030,93 @@ const data = [
                 "Elaborar peritajes, tasaciones y presupuestos en el ámbito del diseño y la producción.",
             ]
         },
+        planEstudiosPorModalidad: {
+            1: [
+                {
+                    "semestre": "1° Año",
+                    "materias": [
+                        "Filosofía",
+                        "Introducción al Proceso de Diseño",
+                        "Introducción a la Tecnología",
+                        "Dibujo I",
+                        "Introducción al Lenguaje Visual I",
+                        "Doctrina Social de la Iglesia",
+                        "Historia del Arte y del Diseño",
+                        "Diseño de Productos I",
+                        "Diseño de Productos II",
+                        "Materiales y Procesos I",
+                        "Morfología I",
+                        "Dibujo II"
+                    ]
+                },
+                {
+                    "semestre": "2° Año",
+                    "materias": [
+                        "Historia del Diseño I",
+                        "Inglés I",
+                        "Materiales y Procesos II",
+                        "Morfología II",
+                        "Dibujo III",
+                        "Historia del Diseño II",
+                        "Inglés II",
+                        "Diseño de Productos III",
+                        "Diseño de Productos IV",
+                        "Materiales y Procesos III",
+                        "Morfología III",
+                        "Dibujo IV"
+                    ]
+                },
+                {
+                    "semestre": "3° Año",
+                    "materias": [
+                        "Semiótica",
+                        "Resoluciones Constructivas No Convencionales (Electiva)",
+                        "Materiales y Procesos IV",
+                        "Morfología IV",
+                        "Teoría y Crítica del Diseño I",
+                        "Ergonomía (Electiva)",
+                        "Biomateriales (Electiva)",
+                        "Investigación en Diseño",
+                        "Diseño UX-UI",
+                        "Animación 3D",
+                        "Factor Local (Electiva)",
+                        "Dibujo y Renderizado Digital de Productos (Electiva)",
+                        "Gestión Empresarial y Comercialización",
+                        "Diseño de Productos V",
+                        "Diseño de Productos VI",
+                        "Materiales y Procesos V",
+                        "Teoría y Crítica del Diseño II",
+                        "Diseño y Fabricación de Espacios Expositivos (Electiva)",
+                        "Mobiliario Urbano (Electiva)",
+                        "Equipamiento (Electiva)",
+                        "Diseño de Señalética (Electiva)",
+                        "Diseño Universal (Electiva)",
+                        "Diseño Social (Electiva)",
+                        "Comunicación de Producto (Electiva)",
+                        "Textiles Experimentales (Electiva)",
+                        "Diseño Gráfico y Comunicación"
+                    ]
+                },
+                {
+                    "semestre": "4° Año",
+                    "materias": [
+                        "Teología",
+                        "Legislación",
+                        "Empresa de Diseño I",
+                        "Diseño de Mobiliario (Electiva)",
+                        "Ética",
+                        "Práctica Profesional",
+                        "Diseño de Productos VII",
+                        "Diseño de Productos VIII",
+                        "Empresa de Diseño II",
+                        "Renderizado Digital (Electiva)",
+                        "Diseño de Packaging (Electiva)"
+                    ]
+                }
+            ]
+        },
+
+
     },
     {
         codcar: 179,
@@ -2050,6 +3135,91 @@ const data = [
                 "Desarrollar propuestas sustentables y accesibles priorizando el bienestar del usuario.",
             ]
         },
+        planEstudiosPorModalidad: {
+            1: [
+                {
+                    "semestre": "1° Año",
+                    "materias": [
+                        "Filosofía",
+                        "Diseño I",
+                        "Introducción al Proceso de Diseño",
+                        "Introducción a la Tecnología",
+                        "Introducción al Lenguaje Visual",
+                        "Dibujo I",
+                        "Teología",
+                        "Historia del Arte y el Diseño I",
+                        "Diseño II",
+                        "Materiales y Procesos I",
+                        "Morfología I",
+                        "Dibujo II"
+                    ]
+                },
+                {
+                    "semestre": "2° Año",
+                    "materias": [
+                        "Historia del Arte y el Diseño II",
+                        "Diseño III",
+                        "Instalaciones I",
+                        "Materiales y Procesos II",
+                        "Morfología II",
+                        "Dibujo III",
+                        "Historia del Arte y el Diseño III",
+                        "Diseño IV",
+                        "Instalaciones II",
+                        "Materiales y Procesos III",
+                        "Morfología III",
+                        "Dibujo IV"
+                    ]
+                },
+                {
+                    "semestre": "3° Año",
+                    "materias": [
+                        "Doctrina Social de la Iglesia",
+                        "Historia del Arte y el Diseño IV",
+                        "Semiótica",
+                        "Inglés I",
+                        "Cómputo y Presupuesto",
+                        "Diseño V",
+                        "Dibujo V",
+                        "Ética",
+                        "Metodología de la Investigación",
+                        "Inglés II",
+                        "Gestión Empresarial y Comercialización",
+                        "Diseño VI",
+                        "Resoluciones Constructivas No Convencionales - RCNC (Electiva)",
+                        "Diseño de Señalética (Electiva)",
+                        "Renderizado Digital (Electiva)",
+                        "Diseño Universal (Electiva)",
+                        "Inteligencia Artificial Aplicada al Diseño (Electiva)",
+                        "Taller de Creatividad (Electiva)",
+                        "Textiles Experimentales (Electiva)",
+                        "Storytelling (Electiva)",
+                        "Diseño Gráfico y Comunicación"
+                    ]
+                },
+                {
+                    "semestre": "4° Año",
+                    "materias": [
+                        "Legislación",
+                        "Paisajismo",
+                        "Diseño VII",
+                        "Luminotecnia",
+                        "Patrimonio Cultural",
+                        "Ergonomía (Electiva)",
+                        "Modelado BIM con Archicad (Electiva)",
+                        "Biomateriales (Electiva)",
+                        "Factor Local (Electiva)",
+                        "Diseño VIII",
+                        "Desarrollo y Estratégias del Diseño Comercial",
+                        "Workshops Multidisciplinarios",
+                        "Equipamiento (Electiva)",
+                        "Práctica Profesional Supervisada"
+                    ]
+                }
+            ]
+        },
+
+
     },
     {
         codcar: 4,
@@ -2068,6 +3238,88 @@ const data = [
                 "Asesorar y coordinar departamentos de lenguas extranjeras en instituciones públicas y privadas.",
             ]
         },
+        planEstudiosPorModalidad: {
+            1: [
+                {
+                    "semestre": "1° Año",
+                    "materias": [
+                        "Filosofía I",
+                        "Pedagogía I",
+                        "Historia de la Cultura I",
+                        "Lengua Castellana I",
+                        "Lengua Inglesa I",
+                        "Gramática Inglesa I",
+                        "Fonética y Práctica de Laboratorio Dirigido I",
+                        "Filosofía II",
+                        "Pedagogía II",
+                        "Historia de la Cultura II",
+                        "Lengua Castellana II",
+                        "Lengua Inglesa II",
+                        "Gramática Inglesa II",
+                        "Fonética y Práctica de Laboratorio Dirigido II"
+                    ]
+                },
+                {
+                    "semestre": "2° Año",
+                    "materias": [
+                        "Teología I",
+                        "Psicología Evolutiva I",
+                        "Lengua Castellana III",
+                        "Literatura Inglesa I",
+                        "Lengua Inglesa III",
+                        "Gramática Inglesa III",
+                        "Fonética y Práctica de Laboratorio Dirigido III",
+                        "Legislación y Organización Escolar",
+                        "Teología II",
+                        "Psicología Evolutiva II",
+                        "Lengua Castellana IV",
+                        "Literatura Inglesa II",
+                        "Lengua Inglesa IV",
+                        "Gramática Inglesa IV",
+                        "Fonética y Práctica de Laboratorio Dirigido IV",
+                        "Planeamiento Institucional"
+                    ]
+                },
+                {
+                    "semestre": "3° Año",
+                    "materias": [
+                        "Doctrina Social de la Iglesia",
+                        "Psicología Educacional",
+                        "Literatura Inglesa III",
+                        "Lingüística I",
+                        "Lengua Inglesa V",
+                        "Composición Escrita I",
+                        "Administración y Conducción Escolar",
+                        "Didáctica General",
+                        "Investigación Educativa",
+                        "Literatura Inglesa IV",
+                        "Lingüística II",
+                        "Lengua Inglesa VI",
+                        "Composición Escrita II"
+                    ]
+                },
+                {
+                    "semestre": "4° Año",
+                    "materias": [
+                        "Didáctica Especial",
+                        "Evaluación de los Aprendizajes",
+                        "Estructuras Lingüísticas Comparadas (Seminario)",
+                        "Literatura Inglesa V",
+                        "Composición Escrita III",
+                        "Composición Oral I",
+                        "Lengua Inglesa y Práctica de Laboratorio Avanzado I",
+                        "Ética Profesional",
+                        "Metodología y Práctica de la Enseñanza",
+                        "Literatura Inglesa VI",
+                        "Composición Escrita IV",
+                        "Composición Oral II",
+                        "Lengua Inglesa y Práctica de Laboratorio Avanzado II"
+                    ]
+                }
+            ]
+        },
+
+
     },
     {
         codcar: 6,
@@ -2086,6 +3338,75 @@ const data = [
                 "Promover la inclusión, la convivencia escolar y la prevención en salud mental dentro del aula.",
             ]
         },
+        planEstudiosPorModalidad: {
+            1: [
+                {
+                    "semestre": "1° Año",
+                    "materias": [
+                        "Filosofía",
+                        "Neuropsicología",
+                        "Sistema Educativo y Currículum",
+                        "Metodología de la Investigación",
+                        "Historia de la Psicología",
+                        "Psicología General",
+                        "Instituciones Educativas",
+                        "Introducción a la Educación y Sujeto del Aprendizaje",
+                        "Práctica I: Contexto Comunidad-Escuela Análisis Institucional",
+                        "Lingüística"
+                    ]
+                },
+                {
+                    "semestre": "2° Año",
+                    "materias": [
+                        "Teología",
+                        "Psicología Evolutiva y Cultura (Niño y Adolescente)",
+                        "Psicología Profunda",
+                        "Historia de la Educación Latinoamericana y Argentina",
+                        "Estadística (Descriptiva y Muestral)",
+                        "Filosofía y Epistemología de la Educación",
+                        "Planeamiento, Programación y Diseño de Proyectos Educativos",
+                        "Práctica II: Gestión Institucional, Currículum, Enseñanza y",
+                        "Programación Educativa Psicología Experimental",
+                        "Psicología de la Personalidad",
+                        "Didáctica General"
+                    ]
+                },
+                {
+                    "semestre": "3° Año",
+                    "materias": [
+                        "Psicología Educacional",
+                        "Psicometría",
+                        "Psicología Social",
+                        "Psicología Evolutiva y Cultura de Adultez y Senectud",
+                        "Psicopatología Infanto Juvenil (General y Especial)",
+                        "Dinámica de Grupo",
+                        "Técnicas Proyectivas",
+                        "Psicopatología del Adulto (General Especial)",
+                        "Didáctica Especial de la Psicología",
+                        "Práctica III: Observaciones y Prácticas de la Enseñanza en Contextos de Nivel Medio o Secundario"
+                    ]
+                },
+                {
+                    "semestre": "4° Año",
+                    "materias": [
+                        "Doctrina Social",
+                        "Orientación Vocacional",
+                        "Psicología Especial y de la Diversidad",
+                        "Evaluación Educativa",
+                        "Mediación Educativa y Resolución de Conflictos",
+                        "Trastornos Escolares y Problemas de Aprendizaje",
+                        "Ética Profesional",
+                        "Psicología de las Relaciones Humanas",
+                        "Práctica IV: Observaciones y Prácticas de la Enseñanza en",
+                        "Contextos de Nivel Superior Prueba de Suficiencia Idiomática",
+                        "Tecnología de la Comunicación y la Información",
+                        "Drogodependencia y Abordajes Transdisciplinarios"
+                    ]
+                }
+            ]
+        },
+
+
     },
     {
         codcar: 109,
@@ -2105,6 +3426,91 @@ const data = [
                 "Asesorar a empresas y organismos en proyectos de localización y comunicación intercultural.",
             ]
         },
+        planEstudiosPorModalidad: {
+            1: [
+                {
+                    "semestre": "1° Año",
+                    "materias": [
+                        "Filosofía I",
+                        "Lengua Castellana I",
+                        "Lengua Inglesa I",
+                        "Gramática Inglesa I",
+                        "Fonética y Práctica de Laboratorio Dirigido I",
+                        "Introducción a la Traducción I",
+                        "Filosofía II",
+                        "Lengua Castellana II",
+                        "Lengua Inglesa II",
+                        "Gramática Inglesa II",
+                        "Fonética y Práctica de Laboratorio Dirigido II",
+                        "Introducción a la Traducción II",
+                        "Derecho I"
+                    ]
+                },
+                {
+                    "semestre": "2° Año",
+                    "materias": [
+                        "Teología I",
+                        "Lengua Castellana III",
+                        "Literatura Inglesa I",
+                        "Lengua Inglesa III",
+                        "Gramática Inglesa III",
+                        "Traducción Científico-Técnica",
+                        "Fonética y Práctica de Laboratorio Dirigido III",
+                        "Derecho II",
+                        "Teología II",
+                        "Lengua Castellana IV",
+                        "Literatura Inglesa II",
+                        "Lengua Inglesa IV",
+                        "Gramática Inglesa IV",
+                        "Traducción Jurídica",
+                        "Fonética y Práctica de Laboratorio Dirigido IV",
+                        "Derecho III"
+                    ]
+                },
+                {
+                    "semestre": "3° Año",
+                    "materias": [
+                        "Suficiencia Idiomática",
+                        "Suficiencia Informática",
+                        "Doctrina Social de la Iglesia",
+                        "Literatura Inglesa III",
+                        "Lingüística I",
+                        "Lengua Inglesa V",
+                        "Composición Escrita I",
+                        "Traducción Literaria",
+                        "Derecho IV",
+                        "Ética Profesional",
+                        "Seminario de Traducción I",
+                        "Literatura Inglesa IV",
+                        "Lingüística II",
+                        "Lengua Inglesa VI",
+                        "Composición Escrita II",
+                        "Traducción Literaria y Periodística"
+                    ]
+                },
+                {
+                    "semestre": "4° Año",
+                    "materias": [
+                        "Seminario de Traducción II",
+                        "Estructuras Lingüísticas Comparadas (Seminario)",
+                        "Terminología",
+                        "Composición Escrita III",
+                        "Lengua Inglesa y Práctica de Laboratorio Dirigido Avanzado I",
+                        "Composición Oral I",
+                        "Derecho Comparado",
+                        "Seminario de Traducción III",
+                        "Seminario de Derecho",
+                        "Trabajo Final",
+                        "Composición Escrita IV",
+                        "Lengua Inglesa y Práctica de Laboratorio Dirigido Avanzado II",
+                        "Composición Oral II",
+                        "Régimen Legal del Traductor Público"
+                    ]
+                }
+            ]
+        },
+
+
     },
     {
         codcar: 142,
@@ -2123,6 +3529,84 @@ const data = [
                 "Asesorar y gestionar recursos para la atención de situaciones de vulnerabilidad y vulneración de derechos.",
             ]
         },
+        planEstudiosPorModalidad: {
+            1: [
+                {
+                    "semestre": "1° Año",
+                    "materias": [
+                        "Filosofía",
+                        "Psicología del Desarrollo y de la Subjetividad",
+                        "Sociología",
+                        "Fundamentos del Trabajo Social",
+                        "Práctica Profesionalizante I: Introducción a la Intervención",
+                        "Epistemología de las Ciencias Sociales y del Trabajo Social",
+                        "Historia Social y Política Latinoamericana",
+                        "Comprensión y Producción de Textos",
+                        "Historia Social y Política Argentina",
+                        "Trabajo Social y Procesos Grupales e Instituciones I",
+                        "Derecho y Trabajo Social I"
+                    ]
+                },
+                {
+                    "semestre": "2° Año",
+                    "materias": [
+                        "Teología",
+                        "Antropología Sociocultural",
+                        "Metodología de la Investigación en las Ciencias Sociales",
+                        "Teoría Social",
+                        "Trabajo Social y Procesos Grupales e Instituciones II",
+                        "Práctica Profesionalizante II: Grupo",
+                        "Técnicas, Instrumentos y Procedimientos del Trabajo Social",
+                        "Informática",
+                        "Economía Social y Política",
+                        "Estado y Políticas Públicas",
+                        "Trabajo Social, Territorio y Comunidad I",
+                        "Estudios Socio Demográficos I"
+                    ]
+                },
+                {
+                    "semestre": "3° Año",
+                    "materias": [
+                        "Psicología Social e Institucional",
+                        "Metodología de la Investigación Aplicada al Trabajo Social",
+                        "Planificación y Trabajo Social",
+                        "Trabajo Social, Territorio y Comunidad II",
+                        "Práctica Profesionalizante III: Comunidad",
+                        "Doctrina Social de la Iglesia I",
+                        "Prácticas Discursivas en Trabajo Social",
+                        "Estudios Socio Demográficos II",
+                        "Políticas Sociales Contemporáneas",
+                        "Doctrina Social de la Iglesia II",
+                        "Trabajo Social con Familias I"
+                    ]
+                },
+                {
+                    "semestre": "4° Año",
+                    "materias": [
+                        "Trabajo Social con Familias II",
+                        "Prácticas Profesionalizantes IV: Familia",
+                        "Ética",
+                        "Seminario Actualización I",
+                        "Idioma",
+                        "Derecho y Trabajo Social II",
+                        "Seminario Actualización II",
+                        "Gestión de las Organizaciones Sociales",
+                        "Trabajo Social y Perspectiva de Género",
+                        "Práctica Integradora"
+                    ]
+                },
+                {
+                    "semestre": "5° Año",
+                    "materias": [
+                        "Taller de Trabajo Integrador Final (TIF)",
+                        "Normativas del Ejercicio Profesional",
+                        "Práctica Integradora II"
+                    ]
+                }
+            ]
+        },
+
+
     },
     {
         codcar: 117,
@@ -2141,6 +3625,102 @@ const data = [
                 "Dirigir y auditar proyectos tecnológicos e integración de IoT.",
             ]
         },
+        planEstudiosPorModalidad: {
+            1: [
+                {
+                    "semestre": "1° Año",
+                    "materias": [
+                        "Filosofía",
+                        "Álgebra Lineal I",
+                        "Análisis Matemático I",
+                        "Química para Ingenieros",
+                        "Fundamentos de Informática",
+                        "Prueba de Suficiencia en Comunicación Oral y Escrita",
+                        "Prueba de Suficiencia de Idioma Inglés",
+                        "Álgebra Lineal II",
+                        "Análisis Matemático II",
+                        "Introducción a la Programación",
+                        "Física I",
+                        "Sistemas de Representación"
+                    ]
+                },
+                {
+                    "semestre": "2° Año",
+                    "materias": [
+                        "Teología",
+                        "Arquitectura de Computadores",
+                        "Análisis Matemático III",
+                        "Estructura de Datos y Algoritmos",
+                        "Lenguajes",
+                        "Física II",
+                        "Economía de la Empresa",
+                        "Probabilidad y Estadística I",
+                        "Análisis Matemático IV",
+                        "Comunicaciones Básicas",
+                        "Programación Aplicada",
+                        "Física III",
+                        "Economía y Finanzas",
+                        "Probabilidad y Estadística II"
+                    ]
+                },
+                {
+                    "semestre": "3° Año",
+                    "materias": [
+                        "Propagación y Radiación Electromagnética",
+                        "Doctrina Social de la Iglesia",
+                        "Análisis Numérico",
+                        "Redes I",
+                        "Sistemas y Señales",
+                        "Teoría de Circuitos I",
+                        "Práctica Profesional Supervisada Técnico",
+                        "Ética Profesional",
+                        "Sistemas Operativos",
+                        "Redes II",
+                        "Electrónica I",
+                        "Teoría de Circuitos II",
+                        "Teoría de la Información y Comunicación"
+                    ]
+                },
+                {
+                    "semestre": "4° Año",
+                    "materias": [
+                        "Medidas Eléctricas y Electrónicas",
+                        "Comunicaciones Digitales",
+                        "Sistemas de Comunicaciones",
+                        "Investigación Operativa",
+                        "Gestión de Proyectos",
+                        "Electrónica II",
+                        "Antenas",
+                        "Sistemas de Conmutación",
+                        "Sistemas de Transmisión",
+                        "Técnicas Digitales",
+                        "Redes III",
+                        "Sistemas Inalámbricos",
+                        "Higiene y Seguridad"
+                    ]
+                },
+                {
+                    "semestre": "5° Año",
+                    "materias": [
+                        "Sistemas de Telecomunicaciones",
+                        "Sistemas de Ayuda a la Navegación",
+                        "Seguridad y Criptografía",
+                        "Recursos Humanos",
+                        "Ingeniería Legal",
+                        "Comunicaciones Móviles",
+                        "Medios Ópticos",
+                        "Práctica Profesional Supervisada Ingeniero",
+                        "Proyecto de Grado",
+                        "Redes Inteligentes",
+                        "Sistemas de Entornos",
+                        "Legislación Específica",
+                        "T.V. Digital y Procesamiento de Imágenes"
+                    ]
+                }
+            ]
+        },
+
+
     },
     {
         codcar: 343,
@@ -2159,6 +3739,73 @@ const data = [
                 "Promover la inclusión, la diversidad y el acompañamiento integral en el ámbito escolar.",
             ]
         },
+        planEstudiosPorModalidad: {
+            1: [
+                {
+                    "semestre": "1° Año",
+                    "materias": [
+                        "Didáctica General",
+                        "Práctica I: Contexto, Comunidad y Escuela",
+                        "Didáctica de las Matemáticas I",
+                        "Historia y Geografía Argentina y Latinoamericana",
+                        "Didáctica de las Ciencias Naturales I",
+                        "Taller de Lectura y Escritura Académica",
+                        "Didáctica de Lengua y Literatura I",
+                        "Didáctica de las Ciencias Sociales I",
+                        "Humanismo y Doctrina",
+                        "Taller de Educación Artística I (Comunicación y Expresión",
+                        "Corporal) Sociología de la Educación",
+                        "Antropología Filosófica",
+                        "Psicología Educacional"
+                    ]
+                },
+                {
+                    "semestre": "2° Año",
+                    "materias": [
+                        "Didáctica de la Matemática II",
+                        "Sujeto de la Educación Primaria",
+                        "Práctica II: Gestión Institucional, Currículum y Enseñanza",
+                        "Taller de Educación Artística II (Teatro y Música)",
+                        "Didáctica de las Ciencias Naturales II",
+                        "Didáctica de la Lengua y Literatura II",
+                        "Didáctica de las Ciencias Sociales II",
+                        "Pedagogía",
+                        "Evaluación de los Aprendizajes",
+                        "Educación Sexual Integral",
+                        "Taller de Juegos, Objetos Lúdicos y Aprendizaje"
+                    ]
+                },
+                {
+                    "semestre": "3° Año",
+                    "materias": [
+                        "Práctica III: Coordinación de Grupos y Enseñanza",
+                        "Problemática de la Educación Primaria",
+                        "Taller de Educación Artística III (Plástica y Folklore)",
+                        "Inglés",
+                        "Taller de Pedagogía y Didáctica del Juego",
+                        "Taller de Alfabetización",
+                        "Filosofía de la Educación",
+                        "Elaboración y Evaluación de Proyectos Educativos",
+                        "Taller de Literatura para el Nivel Primario"
+                    ]
+                },
+                {
+                    "semestre": "4° Año",
+                    "materias": [
+                        "Taller de Tecnología y su Didáctica",
+                        "Práctica y Residencia IV: Residencia Taller Integrado (Diseño,",
+                        "Enseñanza y Evaluación de la Matemática, la Lengua y Literatura, las Ciencias Sociales y las Ciencias Naturales - Taller de Sistematización de Experiencias Pedagogías Contemporáneas",
+                        "Taller: Mediación Escolar y Resolución de Conflictos",
+                        "Inclusión Escolar",
+                        "Ética y Deontología Profesional",
+                        "Formación Ética, Ciudadana y su Didáctica",
+                        "Educación Rural e Intercultural"
+                    ]
+                }
+            ]
+        },
+
+
     },
     {
         codcar: 320,
@@ -2178,6 +3825,117 @@ const data = [
                 "Brindar orientación espiritual y ética a instituciones y comunidades.",
             ]
         },
+        planEstudiosPorModalidad: {
+            1: [
+                {
+                    "semestre": "1° Año",
+                    "materias": [
+                        "Teología Fundamental I: Teología de la Revelación",
+                        "Introducción a las Sagradas Escrituras I: Hermenéutica Bíblica",
+                        "Introducción a la Patrología I: Padres Prenicenos",
+                        "Lógica",
+                        "Introducción a la Filosofía",
+                        "Historia de la Filosofía I: Antigua",
+                        "Latin I",
+                        "Teología Fundamental II: Introducción a la Teología",
+                        "Introducción a las Sagradas Escrituras II: Historia y Arqueología Bíblica",
+                        "Introducción a la Patrología II: Padres Postnicenos",
+                        "Filosofía de la Naturaleza",
+                        "Filosofía de la Religión",
+                        "Seminario: Filosofía Social y Política",
+                        "Historia de la Filosofía II: Medieval",
+                        "Latin II"
+                    ]
+                },
+                {
+                    "semestre": "2° Año",
+                    "materias": [
+                        "Teología Dogmática I a: Dios Uno y Trino I",
+                        "Exégesis Bíblica I: Evangelios Sinópticos-Hechos",
+                        "Introducción a la Teología Litúrgica",
+                        "Antropología Filosófica",
+                        "Gnoseología y Filosofía del Lenguaje",
+                        "Taller de Metodología de Investigación Científica I",
+                        "Historia de la Filosofía III: Moderna y Contemporánea",
+                        "Griego Bíblico I",
+                        "Teología Dogmática I B: Dios Uno y Trino II",
+                        "Exégesis Bíblica II: Corpus Joánico",
+                        "Sacramentos en General",
+                        "Metafísica",
+                        "Ética Filosófica",
+                        "Taller de Metodología de Investigación Científica II",
+                        "Seminario: Animación Bíblica de la Pastoral",
+                        "Historia de la Iglesia Antigua",
+                        "Griego Bíblico II"
+                    ]
+                },
+                {
+                    "semestre": "3° Año",
+                    "materias": [
+                        "Exégesis Bíblica III: Pentateuco",
+                        "Teología Dogmática II a: Cristología I",
+                        "Teología Dogmática III a: Teología de la Creación",
+                        "Teología Moral I: Moral Fundamental",
+                        "Sacramentos en Especial I: Iniciación Cristiana, Bautismo- Confirmación-Eucaristía",
+                        "Teología Pastoral I: Fundamental",
+                        "Historia de la Iglesia Medieval",
+                        "Hebreo Bíblico I",
+                        "Exégesis Bíblica IV: Libros Históricos",
+                        "Teología Moral II: Virtudes-Mandamientos",
+                        "Sacramentos en Especial II: Curación, Reconciliación-Unción de los Enfermos",
+                        "Teología Pastoral II: Especial",
+                        "Teología Dogmática II B: Cristología II",
+                        "Teología Dogmática III B: Antropología Teológica",
+                        "Seminario: Pensamiento Teológico Latinoamericano",
+                        "Historia de la Iglesia Moderna y Contemporánea",
+                        "Hebreo Bíblico II"
+                    ]
+                },
+                {
+                    "semestre": "4° Año",
+                    "materias": [
+                        "Exégesis Bíblica V: San Pablo",
+                        "Teología Dogmática IV a: Gracia I",
+                        "Teología Dogmática V a: Eclesiología I",
+                        "Teología Moral III: Bioética",
+                        "Sacramentos en Especial III: al Servicio de la Comunidad, Matrimonio-Orden Sagrado",
+                        "Catequética I: Fundamental",
+                        "Historia de la Iglesia Latinoamericana y Argentina",
+                        "Idioma Extranjero: Inglés I",
+                        "Derecho Canónico I",
+                        "Exégesis Bíblica VI: Cartas Apostólicas-Hebreos",
+                        "Teología Moral IV: Moral Sexual",
+                        "Teología Dogmática IV B: Gracia II",
+                        "Teología Dogmática V B: Eclesiología II",
+                        "Catequética II: Especial",
+                        "Síntesis Teológica I",
+                        "Idioma Extranjero: Inglés II",
+                        "Derecho Canónico II"
+                    ]
+                },
+                {
+                    "semestre": "5° Año",
+                    "materias": [
+                        "Doctrina Social de la Iglesia",
+                        "Teología Espiritual",
+                        "Síntesis Teológica II",
+                        "Teología Dogmática VI: Pneumatología",
+                        "Exégesis Bíblica VII: Libros Sapienciales y Poéticos",
+                        "Mariología",
+                        "Idioma Extranjero: Inglés III",
+                        "Derecho Canónico III",
+                        "Teología Dogmática VII: Escatología",
+                        "Exégesis Bíblica VIII: Libros Proféticos",
+                        "Eucaristía",
+                        "Seminario: Ecumenismo",
+                        "Idioma Extranjero: Inglés IV",
+                        "Derecho Canónico IV"
+                    ]
+                }
+            ]
+        },
+
+
     },
     {
         codcar: 385,
@@ -2198,6 +3956,79 @@ const data = [
                 "Liderar proyectos de transformación digital y gestión de medios en organizaciones públicas o privadas.",
             ]
         },
+        planEstudiosPorModalidad: {
+            1: [
+                {
+                    "semestre": "1° Año",
+                    "materias": [
+                        "Filosofía",
+                        "Taller de Locución",
+                        "Historia Contemporánea I",
+                        "Herramientas Digitales I",
+                        "Taller de Cámara e Iluminación",
+                        "Administración y Educación Financiera",
+                        "Taller de Redacción para Medios Digitales",
+                        "Formatos y Narrativas",
+                        "Historia Contemporánea II",
+                        "Herramientas Digitales II",
+                        "Teoría de la Comunicación",
+                        "Diseño Visual"
+                    ]
+                },
+                {
+                    "semestre": "2° Año",
+                    "materias": [
+                        "Teología",
+                        "Community Management",
+                        "Taller de Comunicación Multimedia y Transmedia I",
+                        "Comunicación Interpersonal",
+                        "Semiótica de la Comunicación",
+                        "Principios de Programación",
+                        "Pensamiento Social Cristiano I",
+                        "Psicología de la Comunicación",
+                        "Taller de Realización Audiovisual",
+                        "Taller de Comunicación Multimedia y Transmedia II",
+                        "Comunicación Institucional",
+                        "Análisis y Elaboración de Discursos"
+                    ]
+                },
+                {
+                    "semestre": "3° Año",
+                    "materias": [
+                        "Pensamiento Social Cristiano II",
+                        "Comunicación en Crisis",
+                        "Planificación de la Comunicación",
+                        "Ciencia de Datos",
+                        "Métrica y Analítica Digital",
+                        "Práctica Pre-Profesional",
+                        "Publicidad Online",
+                        "Sociedad y Cultura Digital",
+                        "Comunicación Política y Gubernamental",
+                        "Técnicas de Investigación",
+                        "Oratoria",
+                        "Mercadotecnia Aplicada"
+                    ]
+                },
+                {
+                    "semestre": "4° Año",
+                    "materias": [
+                        "Ética y Deontología Profesional",
+                        "Diseño Editorial I",
+                        "Crítica Literaria y Audiovisual I",
+                        "Audiencias e Innovación",
+                        "Tendencias Tecnológicas",
+                        "Trabajo Integrador Final I (*)",
+                        "Diseño Editorial II",
+                        "Crítica Literaria y Audiovisual II",
+                        "Modelos de Negocios",
+                        "Taller de Aplicación de Datos",
+                        "Opinión Pública",
+                        "Trabajo Integrador Final II"
+                    ]
+                }
+            ]
+        },
+
     },
     {
         codcar: 47,
@@ -2216,6 +4047,76 @@ const data = [
                 "Promover la inclusión, la diversidad y el bienestar integral de los niños desde sus primeros años.",
             ]
         },
+        planEstudiosPorModalidad: {
+            1: [
+                {
+                    "semestre": "1° Año",
+                    "materias": [
+                        "Didáctica General",
+                        "Sujeto del Aprendizaje",
+                        "Práctica I: Contexto, Comunidad y Escuela",
+                        "Problemática de la Educación Inicial",
+                        "Taller de Dinámica de Grupos",
+                        "Historia y Geografía Argentina y Latinoamericana I",
+                        "Taller de Lectura y Escritura Académica",
+                        "Humanismo y Doctrina",
+                        "Taller de Educación Artística I (Comunicación y Expresión Corporal)",
+                        "Sociología de la Educación",
+                        "Antropología Filosófica",
+                        "Psicología Educacional"
+                    ]
+                },
+                {
+                    "semestre": "2° Año",
+                    "materias": [
+                        "Psicología del Desarrollo Infantil",
+                        "Taller Psicomotricidad de la Educacíon Inicial",
+                        "Práctica II: Currículum, Organizadores Escolares y Programación de la Enseñanza",
+                        "Didáctica de la Educación Inicial",
+                        "Ciencias Sociales y su Didáctica",
+                        "Ciencias Naturales y su Didáctica",
+                        "Taller de Educación Artística II (Teatro y Música)",
+                        "Lengua y Literatura y su Didáctica",
+                        "Matemática y su Didáctica",
+                        "Psicolingüística",
+                        "Pedagogía",
+                        "Evaluación de Aprendizajes",
+                        "Educación Sexual Integral",
+                        "Taller de Juegos, Objetos Lúdicos y Aprendizaje"
+                    ]
+                },
+                {
+                    "semestre": "3° Año",
+                    "materias": [
+                        "Neuropsicología Infantil",
+                        "Taller de Educación Artística III (Artes Visuales y Técnicas)",
+                        "Práctica III: Práctica de la Enseñanza en Jardín Maternal, 2 y 3",
+                        "Año Inglés",
+                        "Taller de Alfabetización Inicial",
+                        "Educación Temprana",
+                        "Taller de Pedagogía y Didáctica del Juego",
+                        "Filosofía de la Educación",
+                        "Elaboración y Evaluación de Proyectos Educativos",
+                        "Taller de Literatura Infantil"
+                    ]
+                },
+                {
+                    "semestre": "4° Año",
+                    "materias": [
+                        "Taller de Tecnología y su Didáctica",
+                        "Práctica IV: Residencia e Intercambio de Experiencias. Jardín",
+                        "Inicial. Sala de 4 y 5 Años. Pedagogías Contemporáneas",
+                        "Taller: Mediación Escolar y Resolución de Conflictos",
+                        "Inclusión Escolar",
+                        "Ética y Deontología Profesional",
+                        "Investigación Educativa",
+                        "Educación Rural e Intercultural"
+                    ]
+                }
+            ]
+        },
+
+
     },
     {
         codcar: 68,
@@ -2235,6 +4136,47 @@ const data = [
                 "Participar en inspecciones oculares, levantamiento de huellas y análisis de evidencias en la escena.",
             ]
         },
+        planEstudiosPorModalidad: {
+            1: [
+                {
+                    "semestre": "1° Año",
+                    "materias": [
+                        "Análisis Matemático I",
+                        "Química I",
+                        "Derecho Procesal Penal",
+                        "Medicina Legal",
+                        "Tecnografía Pericial I",
+                        "Filosofía I",
+                        "Física I",
+                        "Derecho Penal",
+                        "Accidentología I",
+                        "Filosofía II",
+                        "Física II",
+                        "Accidentología II"
+                    ]
+                },
+                {
+                    "semestre": "2° Año",
+                    "materias": [
+                        "Deontología Pericial",
+                        "Análisis Matemático II",
+                        "Química Aplicada",
+                        "Tecnografía Pericial II",
+                        "Teología I",
+                        "Fotografía I",
+                        "Física III",
+                        "Accidentología III",
+                        "Teología II",
+                        "Fotografía Aplicada",
+                        "Física IV",
+                        "Derecho Procesal Civil, Comercial y Laboral",
+                        "Accidentología IV"
+                    ]
+                }
+            ]
+        },
+
+
     },
     {
         codcar: 86,
@@ -2254,6 +4196,159 @@ const data = [
                 "Aplicar tecnologías de la información y marketing digital.",
             ]
         },
+        planEstudiosPorModalidad: {
+            1: [
+                {
+                    "semestre": "1° Año",
+                    "materias": [
+                        "Filosofía",
+                        "Inglés Turístico I",
+                        "Italiano",
+                        "Geografía del Turismo I",
+                        "Antropología Cultural",
+                        "Historia I",
+                        "Estructura del Mercado Turístico",
+                        "Marketing Turístico",
+                        "Economía del Turismo",
+                        "Geografía del Turismo II",
+                        "Epistemología del Turismo",
+                        "Historia II",
+                        "Administración de Empresas Turísticas"
+                    ]
+                },
+                {
+                    "semestre": "2° Año",
+                    "materias": [
+                        "Teología",
+                        "Inglés Turístico II",
+                        "Francés",
+                        "Metodología de la Investigación",
+                        "Creatividad, Innovación y Tecnologías Digitales",
+                        "Estadística Aplicada al Turismo",
+                        "Seminario: Habilidades de Comunicación",
+                        "Destinos Turísticos I",
+                        "Empresas de Servicios de Alojamiento",
+                        "Costos y Análisis Financiero",
+                        "Organización Turística",
+                        "Investigación de Mercados",
+                        "Destinos Turísticos II",
+                        "Empresas de Servicio de Alimentación"
+                    ]
+                },
+                {
+                    "semestre": "3° Año",
+                    "materias": [
+                        "Inglés Turístico III",
+                        "Ética Profesional",
+                        "Canales de Distribución Turística",
+                        "Macroeconomía del Turismo",
+                        "Creatividad y Diseño de Productos Innovadores",
+                        "Relaciones Públicas",
+                        "Diseño de Circuitos Turísticos",
+                        "Doctrina Social de la Iglesia",
+                        "Organización de Congresos Eventos y Protocolo",
+                        "Derecho del Turismo",
+                        "Agencias de Viajes",
+                        "Turismo Activo"
+                    ]
+                },
+                {
+                    "semestre": "4° Año",
+                    "materias": [
+                        "Práctica Profesional",
+                        "Trabajo Final de Licenciatura",
+                        "Inglés Turístico IV",
+                        "Pastoral del Turismo",
+                        "Gestión de Recursos Humanos",
+                        "Promoción y Publicidad",
+                        "Planificación para el Desarrollo Turístico Sostenible",
+                        "Consultoría Turística",
+                        "Marketing Internacional",
+                        "Gestión de Calidad",
+                        "Dirección Estratégica",
+                        "Formulación de Proyectos Turísticos",
+                        "Liderazgo e Innovación en las Organizaciones"
+                    ]
+                }
+            ],
+            7: [
+                {
+                    "semestre": "1° Año",
+                    "materias": [
+                        "Filosofía",
+                        "Inglés Turístico I",
+                        "Italiano",
+                        "Geografía del Turismo I",
+                        "Antropología Cultural",
+                        "Historia I",
+                        "Estructura del Mercado Turístico",
+                        "Marketing Turístico",
+                        "Economía del Turismo",
+                        "Geografía del Turismo II",
+                        "Epistemología del Turismo",
+                        "Historia II",
+                        "Administración de Empresas Turísticas"
+                    ]
+                },
+                {
+                    "semestre": "2° Año",
+                    "materias": [
+                        "Teología",
+                        "Inglés Turístico II",
+                        "Francés",
+                        "Metodología de la Investigación Aplicada al Turismo",
+                        "Creatividad, Innovación y Tecnologías Digitales",
+                        "Estadística Aplicada al Turismo",
+                        "Seminario: Habilidades de Comunicación",
+                        "Destinos Turísticos I",
+                        "Empresas de Servicios de Alojamiento",
+                        "Costos y Análisis Financiero",
+                        "Organización Turística",
+                        "Investigación de Mercados",
+                        "Destinos Turísticos II",
+                        "Empresas de Servicio de Alimentación"
+                    ]
+                },
+                {
+                    "semestre": "3° Año",
+                    "materias": [
+                        "Inglés Turístico III",
+                        "Ética Profesional",
+                        "Canales de Distribución Turística",
+                        "Macroeconomía del Turismo",
+                        "Creatividad y Diseño de Productos Innovadores",
+                        "Relaciones Públicas",
+                        "Diseño de Circuitos Turísticos",
+                        "Pensamiento Social Cristiano",
+                        "Organización de Congresos Eventos y Protocolo",
+                        "Planificación de Marketing",
+                        "Derecho del Turismo",
+                        "Agencias de Viajes",
+                        "Turismo Activo"
+                    ]
+                },
+                {
+                    "semestre": "4° Año",
+                    "materias": [
+                        "Práctica Profesional",
+                        "Trabajo Final de Licenciatura",
+                        "Inglés Turístico IV",
+                        "Pastoral del Turismo",
+                        "Gestión de Recursos Humanos",
+                        "Promoción y Publicidad Turística",
+                        "Planificación para el Desarrollo Turístico Sostenible",
+                        "Consultoría Turística",
+                        "Marketing Internacional",
+                        "Gestión de Calidad",
+                        "Dirección Estratégica",
+                        "Formulación de Proyectos Turísticos",
+                        "Liderazgo e Innovación Organizacional"
+                    ]
+                }
+            ]
+        },
+
+
     },
     {
         codcar: 222,
@@ -2273,6 +4368,83 @@ const data = [
                 "Dirigir proyectos en agencias de publicidad, departamentos de marketing y emprendimientos propios.",
             ]
         },
+        planEstudiosPorModalidad: {
+            1: [
+                {
+                    "semestre": "1° Año",
+                    "materias": [
+                        "Lengua Inglesa Elemental",
+                        "Taller de Redacción",
+                        "Pensamiento Filosófico I",
+                        "Psicología Social",
+                        "Teoría de la Comunicación I",
+                        "Diseño en Comunicación Visual",
+                        "Expresión Oral y Escrita",
+                        "Pensamiento Filosófico II",
+                        "Psicología de la Motivación",
+                        "Informática",
+                        "Estadística",
+                        "Teoría de la Comunicación II"
+                    ]
+                },
+                {
+                    "semestre": "2° Año",
+                    "materias": [
+                        "Lengua Inglesa Intermedia",
+                        "Teología I",
+                        "Semiótica General y Aplicada",
+                        "Taller de Fotografía",
+                        "Introducción a la Comunicación Publicitaria",
+                        "Diseño y Producción Audiovisual",
+                        "Pensamiento y Producción Creativa I",
+                        "Teología II",
+                        "Mercadotecnia",
+                        "Estética e Historia del Arte",
+                        "Pensamiento y Producción Creativa II",
+                        "Comunicación Publicitaria",
+                        "Taller de Producción Audiovisual"
+                    ]
+                },
+                {
+                    "semestre": "3° Año",
+                    "materias": [
+                        "Metodología de la Investigación en Comunicaciones",
+                        "Comportamiento del Consumidor",
+                        "Administración de la Empresa de Comunicación",
+                        "Semiología de la Publicidad",
+                        "Planificación de Medios I",
+                        "Comunicaciones Integradas",
+                        "Doctrina Social de la Iglesia",
+                        "Comunicación Digital",
+                        "Dirección y Atención de Cuentas",
+                        "Marketing Social y Político",
+                        "Régimen Legal de las Comunicaciones",
+                        "Planificación de Medios II"
+                    ]
+                },
+                {
+                    "semestre": "4° Año",
+                    "materias": [
+                        "Educomunicación",
+                        "Proyecto de Tesis",
+                        "Sociología",
+                        "Comunicaciones Comerciales",
+                        "Comunicación en las Organizaciones",
+                        "Análisis del Discurso",
+                        "Agencia de Publicidad",
+                        "Ética Profesional",
+                        "Taller de Tesis",
+                        "Historia de los Movimientos Sociales y Políticos",
+                        "Planificación",
+                        "Comunicación Política",
+                        "Opinión Pública",
+                        "Práctica Profesional Asistida"
+                    ]
+                }
+            ]
+        },
+
+
     },
     {
         codcar: 223,
@@ -2292,6 +4464,80 @@ const data = [
                 "Gestionar la comunicación informativa y de prensa en instituciones públicas, privadas u organizaciones.",
             ]
         },
+        planEstudiosPorModalidad: {
+            1: [
+                {
+                    "semestre": "1° Año",
+                    "materias": [
+                        "Filosofía",
+                        "Historia Contemporánea I",
+                        "Administración y Educación Financiera",
+                        "Taller de Locución",
+                        "Taller de Cámara e Iluminación",
+                        "Herramientas Digitales I",
+                        "Historia Contemporánea II",
+                        "Formatos y Narrativas",
+                        "Teoría de la Comunicación",
+                        "Herramientas Digitales II",
+                        "Diseño Visual",
+                        "Taller de Redacción e Investigación Periodística"
+                    ]
+                },
+                {
+                    "semestre": "2° Año",
+                    "materias": [
+                        "Teología",
+                        "Historia de las Ideas Políticas",
+                        "Principios de Programación",
+                        "Semiótica de la Comunicación",
+                        "Taller de Creación de Contenidos Multimedia y Transmedia I",
+                        "Taller de Periodismo de Actualidad",
+                        "Pensamiento Social Cristiano I",
+                        "Psicología de la Comunicación",
+                        "Taller de Creación de Contenidos Multimedia y Transmedia II",
+                        "Análisis y Elaboración de Discursos",
+                        "Taller de Periodismo Interpretativo",
+                        "Taller de Periodismo Audiovisual"
+                    ]
+                },
+                {
+                    "semestre": "3° Año",
+                    "materias": [
+                        "Pensamiento Social Cristiano II",
+                        "Ciencia de Datos",
+                        "Economía Política",
+                        "Periodismo Especializado I",
+                        "Métrica y Analítica Digital",
+                        "Práctica Pre-Profesional",
+                        "Técnicas de Investigación",
+                        "Oratoria",
+                        "Periodismo Especializado II",
+                        "Sociedad y Cultura Digital",
+                        "Comunicación Política y Gubernamental",
+                        "Periodismo de Investigación"
+                    ]
+                },
+                {
+                    "semestre": "4° Año",
+                    "materias": [
+                        "Ética y Deontología Profesional",
+                        "Trabajo Integrador Final I",
+                        "Crítica Literaria y Audiovisual I",
+                        "Diseño Editorial I",
+                        "Audiencias e Innovación",
+                        "Tendencias Tecnológicas",
+                        "Trabajo Integrador Final II",
+                        "Crítica Literaria y Audiovisual II",
+                        "Diseño Editorial II",
+                        "Modelos de Negocios",
+                        "Opinión Pública",
+                        "Periodismo de Datos"
+                    ]
+                }
+            ]
+        },
+
+
     },
     {
         codcar: 231,
@@ -2310,6 +4556,78 @@ const data = [
                 "Asesorar a empresas agropecuarias, dirigir proyectos productivos y aplicar innovaciones tecnológicas en el sector.",
             ]
         },
+        planEstudiosPorModalidad: {
+            1: [
+                {
+                    "semestre": "1° Año",
+                    "materias": [
+                        "Filosofía",
+                        "Fundamentos de Química",
+                        "Fundamentos de Física Aplicada",
+                        "Introducción a la Economía",
+                        "Fundamentos de Biología",
+                        "Instalaciones y Mecanización Rural",
+                        "Teología",
+                        "Anatomía y Fisiología",
+                        "Sistemas Agroproductivos Regionales",
+                        "Inglés Técnico I",
+                        "Bioestadística",
+                        "Administración de Empresas"
+                    ]
+                },
+                {
+                    "semestre": "2° Año",
+                    "materias": [
+                        "Doctrina Social de la Iglesia",
+                        "Pasturas y Forrajes",
+                        "Fundamentos de Salud Animal",
+                        "Nutrición y Alimentación Animal",
+                        "Introducción a la Producción Bovina",
+                        "Genética y Mejoramiento",
+                        "Taller de Integración",
+                        "Manejo Sanitario",
+                        "Reproducción Animal",
+                        "Introducción a Producciones Menores",
+                        "Ética Profesional I",
+                        "Planificación y Proyectos I"
+                    ]
+                },
+                {
+                    "semestre": "3° Año",
+                    "materias": [
+                        "Producción Bovina de Carne",
+                        "Comercialización Pecuaria I",
+                        "Gestión Empresarial",
+                        "Legislación Agropecuaria",
+                        "Microbiología Aplicada",
+                        "Conservación de Forrajes y Alimentos",
+                        "Nociones de Sanidad y Terapéutica Vegetal",
+                        "Inglés Técnico II",
+                        "Producción Equina",
+                        "Producción de Rumiantes Menores"
+                    ]
+                },
+                {
+                    "semestre": "4° Año",
+                    "materias": [
+                        "Producciones de Granja",
+                        "Producción Porcina",
+                        "Piscicultura",
+                        "Producción Bovina de Leche",
+                        "Ética Profesional II",
+                        "Producción Agropecuaria Sustentable",
+                        "Apicultura",
+                        "Informática Aplicada",
+                        "Comercialización Pecuaria II",
+                        "Planificación y Proyectos II",
+                        "Agroindustrias",
+                        "Práctica Profesional Supervisada"
+                    ]
+                }
+            ]
+        },
+
+
     },
     {
         codcar: 32,
@@ -2328,6 +4646,72 @@ const data = [
                 "Formular y ejecutar proyectos de investigación en el campo de la motricidad humana.",
             ]
         },
+        planEstudiosPorModalidad: {
+            1: [
+                {
+                    "semestre": "1° Año",
+                    "materias": [
+                        "Gimnasia Formativa",
+                        "Recreación",
+                        "Atletismo I",
+                        "Filosofía",
+                        "Desarrollo Psico-Motriz",
+                        "Psicología General y Evolutiva",
+                        "Juegos Motores",
+                        "Anatomía Funcional",
+                        "Didáctica General",
+                        "Comunicación y Expresión"
+                    ]
+                },
+                {
+                    "semestre": "2° Año",
+                    "materias": [
+                        "Teología",
+                        "Natación y Deportes Acuáticos I",
+                        "Gimnasia Artística y Deportiva",
+                        "Fútbol",
+                        "Atletismo II",
+                        "Psicología de la Actividad Física y del Deporte",
+                        "Metodología del Aprendizaje Motor",
+                        "Didáctica Específica",
+                        "Vida con la Naturaleza y Medio Ambiente",
+                        "Fisiología de la Actividad Física",
+                        "Handbol",
+                        "Historia y Fundamentos de la Educación Física"
+                    ]
+                },
+                {
+                    "semestre": "3° Año",
+                    "materias": [
+                        "Natación y Deportes Acuáticos II",
+                        "Básquetbol",
+                        "Gimnasia Rítmica y Aeróbica",
+                        "Hockey",
+                        "Voleibol",
+                        "Introducción a la Metodología de la Investigación",
+                        "Informática Aplicada",
+                        "Estadística",
+                        "Doctrina Social"
+                    ]
+                },
+                {
+                    "semestre": "4° Año",
+                    "materias": [
+                        "Nutrición Deportiva",
+                        "Descripción, Estadística y Metrología Deportiva",
+                        "Análisis de la Estrategia de los Deportes",
+                        "Planeamiento y Gestión de Políticas en Educación Física y Deporte",
+                        "Gimnasia y Deportes para Personas con Necesidades Especiales",
+                        "Metodología de la Investigación",
+                        "Tesis",
+                        "Organización, Planificación y Control del Deporte y la Actividad Física",
+                        "Fisiología de la Actividad Física y Entrenamiento Deportivo"
+                    ]
+                }
+            ]
+        },
+
+
     },
     {
         codcar: 139,
@@ -2347,6 +4731,116 @@ const data = [
                 "Ejercer la docencia y la formación artística en instituciones educativas y comunitarias.",
             ]
         },
+        planEstudiosPorModalidad: {
+            1: [
+                {
+                    "semestre": "1° Año",
+                    "materias": [
+                        "Filosofía",
+                        "Historia de la Música I",
+                        "Contrapunto y Armonía I",
+                        "Instrumento Principal I / Canto I (Guitarra)",
+                        "Instrumento Principal I / Canto I (Piano)",
+                        "Instrumento Principal I / Canto I (Violín)",
+                        "Instrumento Principal I / Canto I (Violoncello)",
+                        "Instrumento Principal I / Canto I (Análisis Musical)",
+                        "Instrumento Principal I / Canto I (Flauta Dulce)",
+                        "Instrumento Principal I / Canto I (Clarinete)",
+                        "Instrumento Principal I / Canto I (Canto)",
+                        "Instrumento de Teclado Complementario I (Piano u Órgano)",
+                        "Práctica de Conjunto I (Coral)"
+                    ]
+                },
+                {
+                    "semestre": "2° Año",
+                    "materias": [
+                        "Teología",
+                        "Historia de la Música II",
+                        "Contrapunto y Armonía II",
+                        "Instrumento Principal II / Canto II (Guitarra)",
+                        "Instrumento Principal II / Canto II (Piano)",
+                        "Instrumento Principal II / Canto II (Violín)",
+                        "Instrumento Principal II / Canto II (Violoncello)",
+                        "Instrumento Principal II / Canto II (Introducción a la Instrumentación y Composición)",
+                        "Instrumento Principal II / Canto II (Técnica de Dirección y Repertorio)",
+                        "Instrumento Principal II / Canto II (Flauta Dulce)",
+                        "Instrumento Principal II / Canto II (Clarinete)",
+                        "Instrumento Principal II / Canto II (Canto)",
+                        "Instrumento de Teclado Complementario II (Piano)",
+                        "Práctica de Conjunto II (Coral)",
+                        "Acústica Musical y Organología General"
+                    ]
+                },
+                {
+                    "semestre": "3° Año",
+                    "materias": [
+                        "Historia de la Música III",
+                        "Contrapunto y Armonía III",
+                        "Instrumento Principal III / Canto III (Guitarra)",
+                        "Instrumento Principal III / Canto III (Piano)",
+                        "Instrumento Principal III / Canto III (Violín)",
+                        "Instrumento Principal III / Canto III (Violoncello)",
+                        "Instrumento Principal III / Canto III (Introducción a la Instrumentación y Composición)",
+                        "Instrumento Principal III / Canto III (Técnica de Dirección y Repertorio)",
+                        "Instrumento Principal III / Canto III (Flauta Dulce)",
+                        "Instrumento Principal III / Canto III (Clarinete)",
+                        "Instrumento Principal III / Canto III (Canto)",
+                        "Instrumento de Teclado Complementario III (Piano u Órgano)",
+                        "Práctica de Conjunto III (Instrumental)",
+                        "Formas y Géneros Musicales I",
+                        "Doctrina Social de la Iglesia",
+                        "Ética Profesional",
+                        "Dirección I: Introducción a la Dirección Coral"
+                    ]
+                },
+                {
+                    "semestre": "4° Año",
+                    "materias": [
+                        "Dirección II: Coral y Orquestal",
+                        "Formas y Géneros Musicales II",
+                        "Contrapunto y Armonía IV: Estudio de la Fuga",
+                        "Instrumentación y Orquestación I",
+                        "Instrumento Principal IV / Canto IV (Guitarra)",
+                        "Instrumento Principal IV / Canto IV (Piano)",
+                        "Instrumento Principal IV / Canto IV (Violín)",
+                        "Instrumento Principal IV / Canto IV (Violoncello)",
+                        "Instrumento Principal IV / Canto IV (Flauta Dulce)",
+                        "Instrumento Principal IV / Canto IV (Clarinete)",
+                        "Instrumento Principal IV / Canto IV (Canto)",
+                        "Composición I",
+                        "Filosofía del Arte",
+                        "Historia de la Música Sacra",
+                        "Bajo Cifrado y Continuo",
+                        "Historia de la Música IV: Sudamericana y Argentina",
+                        "Estética Musical",
+                        "Canto Gregoriano I",
+                        "Canto Gregoriano II"
+                    ]
+                },
+                {
+                    "semestre": "5° Año",
+                    "materias": [
+                        "Dirección III: Coral y Orquestal",
+                        "Contrapunto y Armonía V",
+                        "Instrumentación y Orquestación II",
+                        "Instrumento Principal V / Canto V (Guitarra)",
+                        "Instrumento Principal V / Canto V (Piano)",
+                        "Instrumento Principal V / Canto V (Violín)",
+                        "Instrumento Principal V / Canto V (Violoncello)",
+                        "Instrumento Principal V / Canto V (Flauta Dulce)",
+                        "Instrumento Principal V / Canto V (Clarinete)",
+                        "Instrumento Principal V / Canto V (Canto)",
+                        "Composición II",
+                        "Metodología de la Investigación",
+                        "Recital de Cámara o con Coro y/u Orquesta",
+                        "Transcripción y Reducción de Partituras",
+                        "Seminario (Tesis)"
+                    ]
+                }
+            ]
+        },
+
+
     },
     {
         codcar: 30,
@@ -2367,6 +4861,132 @@ const data = [
                 "Asesorar a directivos en el relacionamiento estratégico con organismos públicos y privados.",
             ]
         },
+        planEstudiosPorModalidad: {
+            1: [
+                {
+                    "semestre": "1° Año",
+                    "materias": [
+                        "Filosofía",
+                        "Comprensión y Producción de Textos",
+                        "Principios de Economía",
+                        "Introducción a la Administración de las Organizaciones",
+                        "Introducción a las Relaciones Públicas",
+                        "Psicología Social y Organizacional",
+                        "Historia Social y Económica",
+                        "Tecnología de la Información y de la Comunicación I",
+                        "Redacción y Estilo",
+                        "Teoría de la Comunicación"
+                    ]
+                },
+                {
+                    "semestre": "2° Año",
+                    "materias": [
+                        "Introducción al Pensamiento Cristiano",
+                        "Lengua Inglesa I",
+                        "Marketing",
+                        "Comunicación Organizacional",
+                        "Ceremonial y Protocolo",
+                        "Lengua Inglesa II",
+                        "Tecnología de la Información y de la Comunicación II",
+                        "Estadística",
+                        "Oratoria",
+                        "Publicidad y Promoción"
+                    ]
+                },
+                {
+                    "semestre": "3° Año",
+                    "materias": [
+                        "Doctrina Social Cristiana",
+                        "Medios Digitales",
+                        "Producción y Organización de Eventos",
+                        "Identidad e Imagen Corporativa",
+                        "Diseño Gráfico",
+                        "Gestión del Personal",
+                        "Administración de las Relaciones Públicas",
+                        "Opinión Pública",
+                        "Gestión Comunitaria y Cultural"
+                    ]
+                },
+                {
+                    "semestre": "4° Año",
+                    "materias": [
+                        "Trabajo Final de Graduación",
+                        "Ética y Responsabilidad Social",
+                        "Metodología de la Investigación",
+                        "Semiótica",
+                        "Taller de Community Manager",
+                        "Relaciones Internacionales",
+                        "Seminarios de Actualización y Tendencias Profesionales",
+                        "Estrategias de Negociación",
+                        "Dirección Estratégica de las Relaciones Públicas",
+                        "Asuntos Públicos"
+                    ]
+                }
+            ],
+            7: [
+                {
+                    "semestre": "1° Año",
+                    "materias": [
+                        "Filosofía",
+                        "Comprensión y Producción de Textos",
+                        "Principios de Economía",
+                        "Introducción a la Administración de las Organizaciones",
+                        "Introducción a las Relaciones Públicas",
+                        "Psicología Social y Organizacional",
+                        "Historia Social y Económica",
+                        "Tecnologías de la Información y Comunicación I",
+                        "Redacción y Estilo",
+                        "Teoría de la Comunicación"
+                    ]
+                },
+                {
+                    "semestre": "2° Año",
+                    "materias": [
+                        "Introducción al Pensamiento Cristiano",
+                        "Lengua Inglesa I",
+                        "Marketing",
+                        "Comunicación Organizacional",
+                        "Ceremonial y Protocolo",
+                        "Lengua Inglesa II",
+                        "Tecnologías de la Información y Comunicación II",
+                        "Estadística",
+                        "Oratoria",
+                        "Publicidad y Promoción"
+                    ]
+                },
+                {
+                    "semestre": "3° Año",
+                    "materias": [
+                        "Doctrina Social Cristiana",
+                        "Medios Digitales",
+                        "Producción y Organización de Eventos",
+                        "Identidad e Imagen Corporativa",
+                        "Diseño Gráfico",
+                        "Gestión del Personal",
+                        "Administración de las Relaciones Públicas",
+                        "Opinión Pública",
+                        "Gestión Comunitaria y Cultural"
+                    ]
+                },
+                {
+                    "semestre": "4° Año",
+                    "materias": [
+                        "Trabajo Final de Graduación",
+                        "Ética y Responsabilidad Social",
+                        "Metodología de la Investigación",
+                        "Semiótica",
+                        "Taller de Community Manager",
+                        "Relaciones Internacionales",
+                        "Seminarios de Actualización y Tendencias Profesionales",
+                        "Estrategias de Negociación",
+                        "Dirección Estratégica de las Relaciones Públicas",
+                        "Asuntos Públicos"
+                    ]
+                }
+            ]
+        },
+
+
     },
     {
         codcar: 100,
@@ -2385,6 +5005,81 @@ const data = [
                 "Ejercer la docencia e integrar equipos interdisciplinarios.",
             ]
         },
+        planEstudiosPorModalidad: {
+            1: [
+                {
+                    "semestre": "1° Año",
+                    "materias": [
+                        "Introducción a la Filosofía",
+                        "Lógica y Pensamiento Crítico",
+                        "Introducción a la Psicología",
+                        "Historia de la Filosofía Antigua y Lectura e Interpretación de",
+                        "Autores de Textos de la Filosofía Antigua Lengua Clásica I",
+                        "Pedagogía General",
+                        "Política Educativa",
+                        "Institución y Gestión Escolar"
+                    ]
+                },
+                {
+                    "semestre": "2° Año",
+                    "materias": [
+                        "Teología I",
+                        "Filosofía de la Naturaleza",
+                        "Antropología Filosófica",
+                        "Práctica Docente I (Contexto y Escuela)",
+                        "Historia de la Filosofía Medieval y Lectura e Interpretación de",
+                        "Autores de Textos de la Filosofía Antigua Medieval Lengua Clásica II",
+                        "Filosofía de la Educación",
+                        "Psicología del Adolescente y del Adulto",
+                        "Psicología Educacional",
+                        "Didáctica General"
+                    ]
+                },
+                {
+                    "semestre": "3° Año",
+                    "materias": [
+                        "Teología II",
+                        "Filosofía de la Historia",
+                        "Ética",
+                        "Gnoseología",
+                        "Práctica Docente II (Diseño Curricular Institucional)",
+                        "Historia de la Filosofía Moderna Lectura e Interpretación de",
+                        "Autores de Textos de la Filosofía Antigua Moderna Estética",
+                        "Didáctica Especial",
+                        "Seminario sobre el Uso de las Tecnologías de la Información y las Comunicaciones en Educación"
+                    ]
+                },
+                {
+                    "semestre": "4° Año",
+                    "materias": [
+                        "Doctrina Social de la Iglesia",
+                        "Metafísica I",
+                        "Filosofía de la Ciencia",
+                        "Filosofía del Lenguaje",
+                        "Práctica Docente III (Proyectos Áulicos)",
+                        "Historia de la Filosofía Contemporánea y Lectura e Interpretación de Autores de Textos de la Filosofía Antigua Contemporánea",
+                        "Currículum y Evaluación Educativa",
+                        "Investigación Educativa"
+                    ]
+                },
+                {
+                    "semestre": "5° Año",
+                    "materias": [
+                        "Metafísica II",
+                        "Filosofía de la Religión",
+                        "Filosofía Social y Política",
+                        "Pensamiento Argentino y Latinoamericano",
+                        "Ética Aplicada",
+                        "Tesis",
+                        "Taller de Diseño de Tesis (Metodología de la Investigación Científica)",
+                        "Espacio Curricular de Configuración Alternativa I",
+                        "Espacio Curricular de Configuración Alternativa II"
+                    ]
+                }
+            ]
+        },
+
+
     },
     {
         codcar: 132,
@@ -2403,6 +5098,73 @@ const data = [
                 "Investigar y redactar informes sobre la realidad sociopolítica.",
             ]
         },
+        planEstudiosPorModalidad: {
+            1: [
+                {
+                    "semestre": "1° Año",
+                    "materias": [
+                        "Filosofía I",
+                        "Historia del Pensamiento Político",
+                        "Taller de Lectura y Escritura Académica",
+                        "Introducción a las Ciencias Políticas",
+                        "Introducción al Derecho y Sistema Constitucional",
+                        "Filosofía II",
+                        "Sociología",
+                        "Relaciones Internacionales I",
+                        "Teoría Política I",
+                        "Oratoria y Argumentación I"
+                    ]
+                },
+                {
+                    "semestre": "2° Año",
+                    "materias": [
+                        "Teología I",
+                        "Relaciones Internacionales II",
+                        "Teoría Política II",
+                        "Oratoria y Argumentación II",
+                        "Metodología de la Investigación Social",
+                        "Teología II",
+                        "Economía Política",
+                        "Comunicación Política",
+                        "Políticas Públicas I",
+                        "Derecho Electoral y Partidos Políticos"
+                    ]
+                },
+                {
+                    "semestre": "3° Año",
+                    "materias": [
+                        "Pensamiento Social Cristiano I",
+                        "Tecnologías de la Información y Comunicación",
+                        "Políticas Públicas II",
+                        "Sistemas Políticos Comparados",
+                        "Opinión Pública y Análisis de Encuestas",
+                        "Pensamiento Social Cristiano II",
+                        "Estadística Aplicada a las Ciencias Políticas",
+                        "Gestión de Proyectos Políticos y Sociales",
+                        "Gobierno y Administración Pública",
+                        "Técnica Documental y Legislativa"
+                    ]
+                },
+                {
+                    "semestre": "4° Año",
+                    "materias": [
+                        "Geopolítica y Estrategia",
+                        "Ética Profesional",
+                        "Integración y Cooperación Internacional",
+                        "Teoría y Práctica de la Negociación",
+                        "Derechos Humanos",
+                        "Psicología Política",
+                        "Práctica Profesional",
+                        "Liderazgo Político y Gestión de Crisis",
+                        "Marketing y Diseño de Campañas Políticas",
+                        "Seguridad y Defensa",
+                        "Política y Medio Ambiente"
+                    ]
+                }
+            ]
+        },
+
+
     },
     {
         codcar: 372,
@@ -2422,6 +5184,42 @@ const data = [
                 "Integrar equipos de trabajo en la función pública u organismos afines.",
             ]
         },
+        planEstudiosPorModalidad: {
+            1: [
+                {
+                    "semestre": "1° Año",
+                    "materias": [
+                        "Recursos Humanos y Gestión de Calidad",
+                        "Introducción al Derecho",
+                        "Lógica y Argumentación Jurídica",
+                        "Gestión Judicial I",
+                        "Estructura y Funcionamiento del Poder Judicial y Ministerio",
+                        "Público Teología",
+                        "Gestión Judicial II",
+                        "Bases del Derecho Constitucional y Derechos Humanos",
+                        "Bases del Derecho Civil",
+                        "Bases del Derecho Penal y Contravencional"
+                    ]
+                },
+                {
+                    "semestre": "2° Año",
+                    "materias": [
+                        "Doctrina Social de la Iglesia",
+                        "Recursos Tecnológicos Aplicados a la Administración de Justicia",
+                        "Bases del Derecho de Familia",
+                        "Bases del Derecho Laboral",
+                        "Bases del Derecho Administrativo",
+                        "Taller de Ética y Práctica Profesional",
+                        "Trabajo Final Integrador",
+                        "Métodos Alternativos de Resolución de Conflictos",
+                        "Teoría General del Proceso Civil",
+                        "Teoría General del Proceso Penal"
+                    ]
+                }
+            ]
+        },
+
+
     },
     {
         codcar: 7,
@@ -2441,6 +5239,63 @@ const data = [
                 "Gestionar proyectos de comunicación sonora y podcasts independientes.",
             ]
         },
+        planEstudios: [
+            {
+                semestre: "1° Año",
+                materias: [
+                    "Historia Americana y Argentina",
+                    "Inglés I",
+                    "Cuerpo y Voz",
+                    "Práctica Integral de Radio I",
+                    "Locución I",
+                    "Foniatría I",
+                    "Práctica Integral de Televisión I",
+                    "Fundamentos de Tecnología",
+                    "Libretos y Guiones",
+                    "Introducción a los Medios de Comunicación Social",
+                    "Pronunciación de Francés",
+                    "Pronunciación de Alemán"
+                ]
+            },
+            {
+                semestre: "2° Año",
+                materias: [
+                    "Historia Argentina y Contemporánea",
+                    "Literatura",
+                    "Inglés II",
+                    "Actuación Dramática",
+                    "Principios de Estética e Historia del Arte",
+                    "Práctica Integral de Radio II",
+                    "Locución II",
+                    "Foniatría II",
+                    "Práctica Integral de Televisión II",
+                    "Oratoria",
+                    "Pronunciación de Italiano",
+                    "Redacción Periodística",
+                    "Taller de Investigación Periodística",
+                    "Programa para Niño"
+                ]
+            },
+            {
+                semestre: "3° Año",
+                materias: [
+                    "Historia de la Radiodifusión",
+                    "Inglés III",
+                    "Portugués",
+                    "Informática",
+                    "Asuntos Legales",
+                    "Práctica Integral de Radio III",
+                    "Locución III",
+                    "Foniatría III",
+                    "Práctica Integral de Televisión III",
+                    "Doblaje",
+                    "Interpretación Radial",
+                    "Música Popular",
+                    "Música Clásica",
+                    "Examen de Habilitación: Locutor Nacional"
+                ]
+            }
+        ]
     },
     {
         codcar: 54,
@@ -2460,6 +5315,46 @@ const data = [
                 "Liderar emprendimientos independientes, productoras audiovisuales y contenidos digitales.",
             ]
         },
+        planEstudiosPorModalidad: {
+            1: [
+                {
+                    "semestre": "1° Año",
+                    "materias": [
+                        "Dirección de Arte",
+                        "Producción y Realización Audiovisual I",
+                        "Producción y Realización Radiofónica I",
+                        "Taller de Libretos y Guiones",
+                        "Fundamentos de Tecnología",
+                        "Sonido y Musicalización"
+                    ]
+                },
+                {
+                    "semestre": "2° Año",
+                    "materias": [
+                        "Régimen Legal de la Radiodifusión",
+                        "Producción y Realización Audiovisual II",
+                        "Producción y Realización Radiofónica II",
+                        "Edición y Montaje",
+                        "Guión Audiovisual",
+                        "Producción Ejecutiva"
+                    ]
+                },
+                {
+                    "semestre": "3° Año",
+                    "materias": [
+                        "Literatura",
+                        "Radio y Televisión Educativa",
+                        "Gestión y Administración de la Producción",
+                        "Postproducción",
+                        "Producción y Realización Audiovisual III",
+                        "Producción y Realización Radiofónica III",
+                        "Examen de Habilitación: Productor y Director para Radio y TV"
+                    ]
+                }
+            ]
+        },
+
+
     },
     {
         codcar: 348,
@@ -2479,6 +5374,48 @@ const data = [
                 "Colaborar en la planificación, autoevaluación y mejora continua de proyectos educativos.",
             ]
         },
+        planEstudiosPorModalidad: {
+            1: [
+                {
+                    "semestre": "1° Año",
+                    "materias": [
+                        "Situación y Problemática de la Educación Superior",
+                        "Estrategias de Comprensión y Producción de Textos",
+                        "Introducción a la Administración de Organizaciones",
+                        "Instituciones del Derecho",
+                        "Análisis y Comportamiento Organizacional",
+                        "Sistemas Informáticos",
+                        "Administración de Organizaciones Universitarias",
+                        "Política y Legislación de la Educación Superior"
+                    ]
+                },
+                {
+                    "semestre": "2° Año",
+                    "materias": [
+                        "Tecnologías de la Información Aplicadas a la Gestión Universitaria",
+                        "Estadística",
+                        "Marketing de Servicios Educativos",
+                        "Sistemas y Procedimientos Administrativos",
+                        "Comunicación Organizacional",
+                        "Antropología Teológica",
+                        "Gestión de Costos y Presupuestos",
+                        "Gestión del Personal",
+                        "Planeamiento Estratégico"
+                    ]
+                },
+                {
+                    "semestre": "3° Año",
+                    "materias": [
+                        "Taller de Análisis y Resolución de Problemas",
+                        "Trabajo Final de Aplicación",
+                        "Identidad y Organización de las Universidades Católicas",
+                        "Responsabilidad Social Universitaria"
+                    ]
+                }
+            ]
+        },
+
+
     },
     {
         codcar: 249,
@@ -2498,6 +5435,40 @@ const data = [
                 "Producir materiales educativos y contenidos para diversos entornos de aprendizaje.",
             ]
         },
+        planEstudiosPorModalidad: {
+            1: [
+                {
+                    "semestre": "1° Año",
+                    "materias": [
+                        "Práctica I. Análisis de Contextos y de las Instituciones Educativas",
+                        "Taller de Lectura y Escritura Académica",
+                        "Filosofía de la Educación",
+                        "Didáctica",
+                        "Currículum",
+                        "Sujetos del Aprendizaje I",
+                        "Psicología Educacional",
+                        "Evaluación de los Aprendizajes",
+                        "Programación de la Enseñanza",
+                        "Nuevas Tecnologías en Educación"
+                    ]
+                },
+                {
+                    "semestre": "2° Año",
+                    "materias": [
+                        "Práctica II. Diseño, Práctica y Reflexión de la Enseñanza en el Nivel Secundario y Superior",
+                        "Taller de Sistematización de las Prácticas Docentes",
+                        "Humanismo y Doctrina Social de la Iglesia",
+                        "Ética y Deontología Profesional",
+                        "Sujetos del Aprendizaje II",
+                        "Estratégias Didácticas y de Aprendizaje",
+                        "Pedagogía",
+                        "Política de la Educación Argentina"
+                    ]
+                }
+            ]
+        },
+
+
     },
     {
         codcar: 332,
@@ -2517,6 +5488,36 @@ const data = [
                 "Desarrollar investigaciones académicas sobre la realidad y las dinámicas sociales.",
             ]
         },
+        planEstudiosPorModalidad: {
+            1: [
+                {
+                    "semestre": "1° Año",
+                    "materias": [
+                        "Historia Social y Política de América Latina y Argentina",
+                        "Teoría Social",
+                        "Investigación en Trabajo Social I",
+                        "Estado y Políticas Públicas",
+                        "Humanismo y Doctrina Social",
+                        "Procesos Sociales Contemporáneos en América Latina",
+                        "Gestión de Organizaciones Sociales",
+                        "Investigación en Trabajo Social II",
+                        "Técnicas de Intervención Complementarias",
+                        "Economía Social y Política"
+                    ]
+                },
+                {
+                    "semestre": "2° Año",
+                    "materias": [
+                        "Ética Profesional y Trabajo Social",
+                        "Seminario de Actualización Profesional",
+                        "Seminario de Investigación Aplicada",
+                        "Taller de Tutoría de Sistematización y Trabajo Final"
+                    ]
+                }
+            ]
+        },
+
+
     },
     {
         codcar: 113,
@@ -2537,6 +5538,41 @@ const data = [
                 "Implementar programas de inclusión, orientación y vinculación comunitaria.",
             ]
         },
+        planEstudiosPorModalidad: {
+            7: [
+                {
+                    "semestre": "1° Año",
+                    "materias": [
+                        "Introducción a la Filosofía",
+                        "Pensamiento Científico",
+                        "Sujeto y Sociedad",
+                        "Mediación y Conflicto",
+                        "Humanismo y Doctrina Social",
+                        "Metodología de la Investigación I",
+                        "Diseño y Gestión Curricular",
+                        "Relaciones Humanas e Institucionales"
+                    ]
+                },
+                {
+                    "semestre": "2° Año",
+                    "materias": [
+                        "Metodología de la Investigación II",
+                        "Seminario de Tesis I",
+                        "Gestión de TICS",
+                        "Planeamiento Estratégico",
+                        "Modelos de Organización y Administración",
+                        "Ética y Deontología Profesional",
+                        "Política Educativa",
+                        "Evaluación y Calidad Educativa",
+                        "Gestión de Recursos Humanos (Sem. OPT.)",
+                        "Seminario de Tesis II",
+                        "Economía de la Educación"
+                    ]
+                }
+            ]
+        },
+
+
     },
     {
         codcar: 94,
@@ -2546,6 +5582,33 @@ const data = [
         descripcion: "La Licenciatura en Inglés (Ciclo de Licenciatura) forma profesionales capacitados para abordar la lengua inglesa desde una perspectiva lingüística, literaria e intercultural avanzada. Los estudiantes dominan herramientas de análisis del discurso, crítica literaria, traducción, lingüística aplicada y producción académica especializada. Esta propuesta profundiza los conocimientos previos para impulsar la investigación, la edición y la consultoría lingüística internacional.",
         duracion: "2 años",
         modalidad: [1],
+        planEstudiosPorModalidad: {
+            1: [
+                {
+                    "semestre": "1° Año",
+                    "materias": [
+                        "Civilización de los Pueblos de Habla Inglesa I",
+                        "Literatura Inglesa I",
+                        "Ensayo",
+                        "Composición Oral Avanzada I",
+                        "Tesina en Inglés",
+                        "Civilización de los Pueblos de Habla Inglesa II",
+                        "Literatura Inglesa II",
+                        "Composición Oral Avanzada II",
+                        "Lingüística",
+                        "Orientaciones Curriculares",
+                        "Didáctica de la Lengua Inglesa",
+                        "Seminario de Metodología para la Investigación Científica",
+                        "Humanismo y Doctrina Social de la Iglesia",
+                        "Tecnología Educativa",
+                        "Lengua Castellana",
+                        "Composición Escrita Avanzada"
+                    ]
+                }
+            ]
+        },
+
+
     },
     {
         codcar: 186,
@@ -2566,6 +5629,30 @@ const data = [
                 "Gestionar centros de entrenamiento, academias y programas deportivos.",
             ]
         },
+        planEstudiosPorModalidad: {
+            7: [
+                {
+                    "semestre": "1° Año",
+                    "materias": [
+                        "Ética Profesional",
+                        "Metodología de la Investigación",
+                        "Suplementación Deportiva",
+                        "Entrenamiento Deportivo General y Específico",
+                        "Evaluaciones Deportivas",
+                        "Nutrición Aplicada al Entrenamiento Deportivo",
+                        "Fisiología y Bioquímica Aplicada a la Nutrición y el Deporte",
+                        "Organización, Planificación y Control del Entrenamiento Deportivo",
+                        "Endocrinología Aplicada al Entrenamiento Deportivo",
+                        "Informática Aplicada al Entrenamiento Deportivo",
+                        "Legislación Deportiva",
+                        "Psicología Deportiva",
+                        "Neurociencias y Entrenamiento Deportivo",
+                        "Trabajo Final Integrador"
+                    ]
+                }
+            ]
+        },
+
     },
     {
         codcar: 146,
@@ -2585,6 +5672,25 @@ const data = [
                 "Dirigir y administrar la gestión operativa de una escribanía o registro notarial.",
             ]
         },
+        planEstudiosPorModalidad: {
+            1: [
+                {
+                    "semestre": "1° Año",
+                    "materias": [
+                        "Práctica Registral",
+                        "Práctica Notarial",
+                        "Redacción Documental y Notarial",
+                        "Derecho de las Nuevas Tecnologías",
+                        "Derecho Notarial",
+                        "Derecho Registral",
+                        "Doctrina Social de la Iglesia",
+                        "Derecho Societario"
+                    ]
+                }
+            ]
+        },
+
+
     },
     {
         codcar: 104,
@@ -2604,6 +5710,25 @@ const data = [
                 "Coordinar equipos interdisciplinarios en el ámbito de la salud, el deporte y la educación.",
             ]
         },
+        planEstudios: [
+            {
+                semestre: "1° Año",
+                materias: [
+                    "Humanismo y Doctrina Social",
+                    "Sistema Educativo",
+                    "Corrientes Didácticas y Contemporáneas",
+                    "Nutrición Deportiva",
+                    "Descripción, Estadística y Metrología Deportiva",
+                    "Análisis de la Estrategia de los Deportes",
+                    "Planeamiento y Gestión de Políticas en Educación Física y Deporte",
+                    "Gimnasia y Deportes para Personas con Necesidades Especiales",
+                    "Metodología de la Investigación",
+                    "Tesis",
+                    "Organización, Planificación y Control del Deporte y la Actividad Física",
+                    "Fisiología de la Actividad Física y Entrenamiento Deportivo"
+                ]
+            }
+        ]
     },
     {
         codcar: 148,
@@ -2623,6 +5748,26 @@ const data = [
                 "Gestionar presupuestos, cronogramas de obra y emprendimientos creativos propios.",
             ]
         },
+        planEstudiosPorModalidad: {
+            1: [
+                {
+                    "semestre": "1° Año",
+                    "materias": [
+                        "Computación Avanzada",
+                        "Diseño de Interiores IV",
+                        "Gerenciamiento y Marketing Aplicado",
+                        "Patrimonio Cultural",
+                        "Técnicas de Restauración",
+                        "Metodología de la Investigación",
+                        "Luminotecnia",
+                        "Interiores Comerciales y Diseño Temporario (Electiva)",
+                        "Práctica Profesional Supervisada"
+                    ]
+                }
+            ]
+        },
+
+
     },
     {
         codcar: 187,
@@ -2642,6 +5787,36 @@ const data = [
                 "Desarrollar investigaciones interdisciplinarias sobre la expresión y la comunicación.",
             ]
         },
+        planEstudiosPorModalidad: {
+            7: [
+                {
+                    "semestre": "1° Año",
+                    "materias": [
+                        "Antropología Filosófica",
+                        "Investigación Socio Antropológica",
+                        "Cuerpo, Educación y Sociedad",
+                        "Artística Interdisciplinaria el Circo",
+                        "Pedagogía del Juego",
+                        "Metodología de la Investigación",
+                        "Arte Expresión Corporal Danza",
+                        "Arte, Comunicación y Expresión Literaria"
+                    ]
+                },
+                {
+                    "semestre": "2° Año",
+                    "materias": [
+                        "Recreación Educación y Cultural",
+                        "La Creatividad en el Aprendizaje",
+                        "Trabajo Final Integrador",
+                        "Arte y Expresión Musical",
+                        "Arte y Expresión Teatral",
+                        "Juegoteca y Espacios de Infancias"
+                    ]
+                }
+            ]
+        },
+
+
     },
     {
         codcar: 340,
@@ -2661,6 +5836,71 @@ const data = [
                 "Desarrollar investigaciones clínicas e innovaciones en el campo de la motricidad humana.",
             ]
         },
+        planEstudiosPorModalidad: {
+            1: [
+                {
+                    "semestre": "1° Año",
+                    "materias": [
+                        "Biofísica",
+                        "Anatomía",
+                        "Fisiología",
+                        "Histología",
+                        "Filosofía",
+                        "Introducción a la Kinesiología y Fisioterapia",
+                        "Psicología",
+                        "Informática",
+                        "Historia de la Medicina y de Rehabilitación"
+                    ]
+                },
+                {
+                    "semestre": "2° Año",
+                    "materias": [
+                        "Introducción al Pensamiento Cristiano",
+                        "Neurología",
+                        "Fisiología del Ejercicio",
+                        "Biomecánica y Anatomía Funcional",
+                        "Fisioterapia",
+                        "Kinesioterapia"
+                    ]
+                },
+                {
+                    "semestre": "3° Año",
+                    "materias": [
+                        "Doctrina Social",
+                        "Semiopatología",
+                        "Kinefilaxia",
+                        "Semiopatología Quirúrgica",
+                        "Clínica Fisiátrica Médica",
+                        "Diagnóstico por Imágenes. Imagenología"
+                    ]
+                },
+                {
+                    "semestre": "4° Año",
+                    "materias": [
+                        "Técnicas Kinésicas I. Rehabilitación Traumatológica y Reumatológica",
+                        "Técnicas Kinésicas II. Rehabilitación Cardíaca y Respiratorias",
+                        "Técnicas Kinésicas III. Rehabilitación Neurológica",
+                        "Kinesiología Deportiva",
+                        "Evaluaciones Kinésicas",
+                        "Psicomotricidad",
+                        "Ortesis y Prótesis",
+                        "Kinefisiatría Estética"
+                    ]
+                },
+                {
+                    "semestre": "5° Año",
+                    "materias": [
+                        "Ética Profesional",
+                        "Prácticas Hospitalaria Institucional y de Centros de Rehabilitación",
+                        "Metodología de la Investigación Científica",
+                        "Kinesiología Legal y Deontología",
+                        "Trabajo Final de Graduación"
+                    ]
+                }
+            ]
+        },
+
+
     },
     {
         codcar: 232,
@@ -2680,6 +5920,50 @@ const data = [
                 "Integrar equipos interdisciplinarios en centros de salud, hospitales y clínicas.",
             ]
         },
+        planEstudiosPorModalidad: {
+            1: [
+                {
+                    "semestre": "1° Año",
+                    "materias": [
+                        "Pensamiento Cristiano",
+                        "Inglés Técnico",
+                        "Anatomía Humana I",
+                        "Radiología I (Ósea)",
+                        "Práctica Obligatoria I",
+                        "Química Biológica",
+                        "Física y Electroradiología"
+                    ]
+                },
+                {
+                    "semestre": "2° Año",
+                    "materias": [
+                        "Doctrina Social de la Iglesia",
+                        "Anatomía Humana II",
+                        "Radiología II (Esplácnica)",
+                        "Práctica Obligatoria II",
+                        "Fisiología Humana",
+                        "Laboratorio Radiológico",
+                        "Informática",
+                        "Farmacología Radiológica"
+                    ]
+                },
+                {
+                    "semestre": "3° Año",
+                    "materias": [
+                        "Ética",
+                        "Seminario",
+                        "Tomografía Computada",
+                        "Resonancia Magnética",
+                        "Ecografía",
+                        "Hemodinamia y Angiología",
+                        "Medicina Nuclear",
+                        "Radioterapia y Radioprotección"
+                    ]
+                }
+            ]
+        },
+
+
     },
     {
         codcar: 342,
@@ -2699,6 +5983,86 @@ const data = [
                 "Desarrollar investigaciones científicas y asesorar en proyectos de comunicación humana.",
             ]
         },
+        planEstudiosPorModalidad: {
+            1: [
+                {
+                    "semestre": "1° Año",
+                    "materias": [
+                        "Práctica Profesional I",
+                        "Filosofía",
+                        "Lingüística I",
+                        "Anatomía",
+                        "Introducción a la Fonoaudiología",
+                        "Psicología",
+                        "Lingüística II",
+                        "Física Acústica",
+                        "Fisiología"
+                    ]
+                },
+                {
+                    "semestre": "2° Año",
+                    "materias": [
+                        "Práctica Profesional II",
+                        "Teología",
+                        "Neurología",
+                        "Inglés I",
+                        "Biología Celular, Embriología y Genética",
+                        "Metodología de la Investigación I",
+                        "Fisiopatología de la Audición",
+                        "Fisiopatología de la Voz",
+                        "Neurodesarrollo"
+                    ]
+                },
+                {
+                    "semestre": "3° Año",
+                    "materias": [
+                        "Práctica Profesional III",
+                        "Audiometría y Audiología",
+                        "Metodología de la Investigación II",
+                        "Patología del Lenguaje I",
+                        "Psicomotricidad y Fonoaudiología",
+                        "Inglés II",
+                        "Patología del Lenguaje II",
+                        "Salud Pública I",
+                        "Atención Temprana"
+                    ]
+                },
+                {
+                    "semestre": "4° Año",
+                    "materias": [
+                        "Práctica Profesional IV",
+                        "Educación Vocal",
+                        "Electiva I (Evaluación Neuropsicológica)",
+                        "Corrientes Didácticas",
+                        "Laberintología",
+                        "Audiología Infantil",
+                        "Doctrina Social",
+                        "Psicolingüística",
+                        "Terapéutica Vocal",
+                        "Terapéutica Audiológica",
+                        "Electiva I (Epidemiología para Fonoaudiólogos)"
+                    ]
+                },
+                {
+                    "semestre": "5° Año",
+                    "materias": [
+                        "Taller de Trabajo Final",
+                        "Salud Pública II",
+                        "Terapéutica del Lenguaje",
+                        "Fonoestomatología",
+                        "Deontología y Ética Profesional",
+                        "Trabajo Final",
+                        "Electiva II (Intervención Fonoaudiológica en Disfagia del Niño y el Adulto)",
+                        "Gerontología y Fonoaudilogía",
+                        "Trastornos Lingüísticos y Aprendizaje Escolar",
+                        "Electiva II (Fonoaudiología en UTI)",
+                        "Práctica Profesional Supervisada"
+                    ]
+                }
+            ]
+        },
+
+
     },
     {
         codcar: 56,
@@ -2718,6 +6082,48 @@ const data = [
                 "Administrar y gestionar consultorios podológicos o centros de atención de la salud.",
             ]
         },
+        planEstudiosPorModalidad: {
+            1: [
+                {
+                    "semestre": "1° Año",
+                    "materias": [
+                        "Morfofisiología",
+                        "Fundamentos de Podología",
+                        "Patología Podológica I",
+                        "Filosofía",
+                        "Introducción a la Informática",
+                        "Terapéutica Podológica I"
+                    ]
+                },
+                {
+                    "semestre": "2° Año",
+                    "materias": [
+                        "Teología",
+                        "Patología Podológica II",
+                        "Terapéutica Podológica II",
+                        "Dermatología y Farmacología",
+                        "Doctrina Social",
+                        "Patología Médica",
+                        "Ortopodología Protésica I"
+                    ]
+                },
+                {
+                    "semestre": "3° Año",
+                    "materias": [
+                        "Fundamentos de Psicología",
+                        "Rol del Podólogo en el Equipo Multidisciplinario de Salud",
+                        "Ortopodología Protésica II",
+                        "Epidemiología y Salud Pública",
+                        "Inglés Técnico",
+                        "Fundamentos de Administración en Podología",
+                        "Patología Quirúrgica",
+                        "Patología Podológica III"
+                    ]
+                }
+            ]
+        },
+
+
     },
     {
         codcar: 341,
@@ -2736,6 +6142,32 @@ const data = [
                 "Asesorar en el diseño de programas de prevención, salud pública y ergonomía biomecánica.",
             ]
         },
+        planEstudiosPorModalidad: {
+            1: [
+                {
+                    "semestre": "1° Año",
+                    "materias": [
+                        "Humanismo y Doctrina Social de la Iglesia",
+                        "Podología Integral",
+                        "Biomecánica",
+                        "Farmacología Aplicada",
+                        "Estudio Funcional Podológico en Patologías Ortopédicas y Traumatológicas",
+                        "Terapia Física Podológica"
+                    ]
+                },
+                {
+                    "semestre": "2° Año",
+                    "materias": [
+                        "Ética y Deontología Profesional",
+                        "Trabajo Integrador",
+                        "Metodología de la Investigación",
+                        "Marketing Aplicado a Podología"
+                    ]
+                }
+            ]
+        },
+
+
     },
     {
         codcar: 70,
@@ -2755,6 +6187,78 @@ const data = [
                 "Desarrollar proyectos de investigación y gestionar programas de salud pública y bienestar ocupacional.",
             ]
         },
+        planEstudiosPorModalidad: {
+            1: [
+                {
+                    "semestre": "1° Año",
+                    "materias": [
+                        "Filosofía y Antropología Social",
+                        "Introducción a la Terapia Ocupacional",
+                        "Anátomo-Fisiología I",
+                        "Ocupaciones Terapéuticas I",
+                        "Psicología General",
+                        "Salud Pública",
+                        "Anátomo-Fisiología II",
+                        "Ocupaciones Terapéuticas II",
+                        "Terapia Ocupacional y Contextos de Intervención"
+                    ]
+                },
+                {
+                    "semestre": "2° Año",
+                    "materias": [
+                        "Teología",
+                        "Neurología",
+                        "Psicología del Desarrollo I",
+                        "Biomecánica y Patologías del Movimiento",
+                        "Clínica Médica",
+                        "Psicología del Desarrollo II",
+                        "Ortesis y Ayudas Técnicas",
+                        "Ocupaciones Terapéuticas III",
+                        "Terapia Ocupacional en Traumatología y Neurología",
+                        "Práctica Pre-Profesional: Observación en Campo"
+                    ]
+                },
+                {
+                    "semestre": "3° Año",
+                    "materias": [
+                        "Psiquiatría y Psicopatología",
+                        "Ocupaciones Terapéuticas IV",
+                        "Terapia Ocupacional en Salud Mental",
+                        "Terapia Ocupacional y Neurodesarrollo",
+                        "Práctica Pre-Profesional: Traumatología y Neurología",
+                        "Inglés Técnico",
+                        "Teoría y Técnica de los Grupos",
+                        "Terapia Ocupacional Laboral",
+                        "Práctica Pre-Profesional: Salud Mental"
+                    ]
+                },
+                {
+                    "semestre": "4° Año",
+                    "materias": [
+                        "Deontología y Bioética",
+                        "Metodología y Ética de la Investigación",
+                        "Informática Aplicada",
+                        "Práctica Pre-Profesional Laboral",
+                        "Doctrina Social",
+                        "Seminario I: Interdisciplina",
+                        "Investigación en Terapia Ocupacional",
+                        "Estadística Aplicada",
+                        "Organización y Administración de Servicios de Terapia Ocupacional"
+                    ]
+                },
+                {
+                    "semestre": "5° Año",
+                    "materias": [
+                        "Seminario II: Razonamiento Clínico",
+                        "Práctica Pre-Profesional: Comunitaria",
+                        "Seminario III: Conductas Adictivas",
+                        "Trabajo de Investigación Final"
+                    ]
+                }
+            ]
+        },
+
+
     },
     {
         codcar: 371,
@@ -2774,6 +6278,39 @@ const data = [
                 "Liderar e integrar equipos de trabajo interdisciplinarios en el área de la salud.",
             ]
         },
+        planEstudiosPorModalidad: {
+            1: [
+                {
+                    "semestre": "1° Año",
+                    "materias": [
+                        "Aplicación de Radiología Convencional (Radiología Ósea/Esplágnologica, Principios Farmacológicos Práctica Hospitalaria)",
+                        "Práctica Hospitalaria (Psicología General-Informática-Salud Pública Práctica Hospitalaria)",
+                        "Inglés Técnico",
+                        "Anátomo - Fisiología (Anatomía Descriptiva/Anatomía Topográfica/Fisiología Humana)",
+                        "Fundamentos de Radiología Convencional (Física/Química/Lab. Radiológico)",
+                        "Doctrina Social de la Iglesia",
+                        "Metodología de la Investigación Científica",
+                        "Relaciones Anatomo-Radiológicas",
+                        "Arquitectura Hospitalaria"
+                    ]
+                },
+                {
+                    "semestre": "2° Año",
+                    "materias": [
+                        "Medicina Nuclear",
+                        "Hemodinamia y Angiografía",
+                        "Tomografía Axial Computarizada",
+                        "Resonancia Nuclear Magnética",
+                        "Radioterapia y Radio Protección (Radiodensitometría Ósea, Mamografía y Digitalización Radiológica)",
+                        "Trabajo Final",
+                        "Seminario Bioética Legal",
+                        "Seminario (Manejo del Personal y del Paciente)"
+                    ]
+                }
+            ]
+        },
+
+
     },
     {
         codcar: 358,
@@ -2792,6 +6329,81 @@ const data = [
                 "Desarrollar investigaciones científicas y ejercer la docencia universitaria.",
             ]
         },
+        planEstudiosPorModalidad: {
+            1: [
+                {
+                    "semestre": "1° Año",
+                    "materias": [
+                        "Filosofía y Antropología",
+                        "Psicología General",
+                        "Introducción a la Psicomotricidad",
+                        "Neurología y Neurociencias",
+                        "Anatomía y Fisiología Humana y del Movimiento",
+                        "Teología",
+                        "Psicología del Desarrollo I",
+                        "Modelos y Corrientes Psicológicas",
+                        "Atención Temprana para la Primera Infancia I"
+                    ]
+                },
+                {
+                    "semestre": "2° Año",
+                    "materias": [
+                        "Psicopatología I",
+                        "Psicología del Desarrollo II",
+                        "Evolución Psicomotriz",
+                        "Formación Corporal Personal I",
+                        "Alteraciones del Neurodesarrollo y Patologías del Aparato",
+                        "Locomotor Psicopatología II",
+                        "Teoría y Técnica de los Grupos",
+                        "Atención Temprana para la Primera Infancia II",
+                        "Formación Corporal Personal II",
+                        "Práctica Pre-Profesional I: Observación en Campo"
+                    ]
+                },
+                {
+                    "semestre": "3° Año",
+                    "materias": [
+                        "Modelos y Enfoques en Psicomotricidad",
+                        "Formación Corporal Personal III",
+                        "Neurofisiopatología",
+                        "Práctica Preprofesional II: Conocimiento de las Instituciones",
+                        "Psicomotricidad en Educación",
+                        "Evaluación Psicomotriz I",
+                        "Inglés o Francés Técnico",
+                        "Formación Corporal Personal IV",
+                        "Práctica Preprofesional III: Comunitaria"
+                    ]
+                },
+                {
+                    "semestre": "4° Año",
+                    "materias": [
+                        "Doctrina Social",
+                        "Evaluación Psicomotriz II",
+                        "Formación Corporal Personal V",
+                        "Trastornos Psicomotores",
+                        "Metodología de la Investigación I",
+                        "Terapia y Clínica Psicomotriz",
+                        "Formación Corporal Personal VI",
+                        "Práctica Preprofesional IV: Gerontopsicomotricidad"
+                    ]
+                },
+                {
+                    "semestre": "5° Año",
+                    "materias": [
+                        "Ética y Deontología",
+                        "Informática y Estadística Aplicada",
+                        "Formación Corporal Personal VII",
+                        "Elaboración del Rol del Psicomotricista",
+                        "Bioética",
+                        "Metodología de la Investigación II",
+                        "Trabajo de Investigación Final",
+                        "Taller de Tesina"
+                    ]
+                }
+            ]
+        },
+
+
     },
     {
         codcar: 292,
@@ -2810,6 +6422,83 @@ const data = [
                 "Asesorar a empresas del sector en diseño de menús, optimización de procesos y experiencias culinarias.",
             ]
         },
+        planEstudiosPorModalidad: {
+            1: [
+                {
+                    "semestre": "1° Año",
+                    "materias": [
+                        "Filosofía",
+                        "Antropología de la Alimentación",
+                        "Química de los Alimentos",
+                        "Economía del Sector Turístico",
+                        "Turismo y Gastronomía",
+                        "Análisis Sensorial y Físico de los Alimentos",
+                        "Cocina I: Técnicas y Procesos Fundamentales",
+                        "Historia Cultural de la Gastronomía",
+                        "Bromatología, Higiene y Seguridad en Gastrronomía",
+                        "Materias Primas, Equipamientos e Insumos Gastronómicos",
+                        "Práctica de Cocina I",
+                        "Taller de Cocina Regional",
+                        "Fundamentos de Administración Gastronómica"
+                    ]
+                },
+                {
+                    "semestre": "2° Año",
+                    "materias": [
+                        "Teología",
+                        "Elaboración de Costos y Presupuestos",
+                        "Nutrición Humana",
+                        "Cocina II: Técnicas y Procesos Avanzados",
+                        "Territorio y Patrimonio Cultural Gastronómico",
+                        "Panificación",
+                        "Pensamiento Social Cristiano I",
+                        "Control y Gestión de Stock",
+                        "Práctica de Cocina II",
+                        "Cocina Dulce: Repostería Básica",
+                        "Taller de Cocina Internacional",
+                        "Creatividad y Diseño de Productos Gastronómicos Innovadores",
+                        "Arte y Gastronomía"
+                    ]
+                },
+                {
+                    "semestre": "3° Año",
+                    "materias": [
+                        "Pensamiento Social Cristiano II",
+                        "Gestión de Ingresos y Rendimientos",
+                        "Legislación",
+                        "Relaciones Públicas",
+                        "Fermentación Alimentaria",
+                        "Enología, Cata y Degustación de Vinos",
+                        "Informática Aplicada a la Gestión Gastronómica",
+                        "Gestión de Recursos Humanos",
+                        "Marketing y Desarrollo de Marca",
+                        "Organización y Gestión de Eventos",
+                        "Bar y Coctelería",
+                        "Taller: Servicio y Atención al Cliente"
+                    ]
+                },
+                {
+                    "semestre": "4° Año",
+                    "materias": [
+                        "Ética",
+                        "Técnicas de Investigación",
+                        "Modelo de Negocio y Emprendimientos Gastronómicos",
+                        "Gestión de Calidad",
+                        "Servicio de Catering y Banquetes",
+                        "Trabajo Integrador",
+                        "Prueba de Suficiencia Idiomática: Italiano",
+                        "Prueba de Suficiencia Idiomática: Francés",
+                        "Proyecto de Inversión",
+                        "Fundamentos de Diseño para Gastronomía",
+                        "Gestión y Dirección de Alimentos y Bebidas",
+                        "Gestión Sostenible de Gastronomía",
+                        "Prácticas Profesionales"
+                    ]
+                }
+            ]
+        },
+
+
     },
     {
         codcar: 393,
@@ -2829,6 +6518,72 @@ const data = [
                 "Desarrollar estrategias de asistencia y apoyo integral a víctimas.",
             ]
         },
+        planEstudiosPorModalidad: {
+            7: [
+                {
+                    "semestre": "1° Año",
+                    "materias": [
+                        "Filosofía I",
+                        "Antropología Social y Forense",
+                        "Psicología Criminológica",
+                        "Corrientes Criminológicas",
+                        "Delito, Contexto Social y Comunicación",
+                        "Filosofía II",
+                        "Seminario: Inglés",
+                        "Derecho Penal",
+                        "Sociología del Delito",
+                        "Violencia, Control y Exclusión Social"
+                    ]
+                },
+                {
+                    "semestre": "2° Año",
+                    "materias": [
+                        "Teología I",
+                        "Seminario: Técnicas de Comunicación Científica - Criminológica",
+                        "Derecho Procesal Penal",
+                        "Seguridad Pública",
+                        "Psiquiatría y Psicología Forense",
+                        "Teología II",
+                        "Victimología",
+                        "Psicopatología Criminal",
+                        "Criminología",
+                        "Técnicas de Investigación Criminal"
+                    ]
+                },
+                {
+                    "semestre": "3° Año",
+                    "materias": [
+                        "Pensamiento Social Cristiano I",
+                        "Medicina Legal",
+                        "Análisis Criminal",
+                        "Principios Constitucionales y Criminología",
+                        "Derechos Humanos",
+                        "Pensamiento Social Cristiano II",
+                        "Estadística Aplicada",
+                        "Delincuencia Organizada y Narcocriminalidad",
+                        "Criminología Vial",
+                        "Ejecución Penal y Tratamiento de Internos"
+                    ]
+                },
+                {
+                    "semestre": "4° Año",
+                    "materias": [
+                        "Ética Profesional",
+                        "Metodología de la Investigación",
+                        "Seminario: Investigación Criminal en Lavado de Activos",
+                        "Seminario: Delitos Asistidos Tecnológicamente",
+                        "Delincuencia Juvenil",
+                        "Trabajo Final",
+                        "Seminario: Elaboración de Perfiles Criminales",
+                        "Política Criminal",
+                        "Métodos Alternativos para la Resolución de Conflictos",
+                        "Taller: Informe Criminológico"
+                    ]
+                }
+            ]
+        },
+
+
     },
     {
         codcar: 185,
@@ -2846,6 +6601,74 @@ const data = [
                 "Optimizar costos operativos y asegurar el cumplimiento de normas ambientales.",
             ]
         },
+        planEstudiosPorModalidad: {
+            7: [
+                {
+                    "semestre": "1° Año",
+                    "materias": [
+                        "Filosofía",
+                        "Energía y Sostenibilidad",
+                        "Introducción a la Matemática",
+                        "Fundamentos de Física",
+                        "Ingeniería Energética",
+                        "Teología",
+                        "Procesos de Cambio Social",
+                        "Introducción a la Energía",
+                        "Análisis de Ciclo de Vida (Materiales y Energía)",
+                        "Práctica de Integración: Gestión Energética en Distintos Establecimientos"
+                    ]
+                },
+                {
+                    "semestre": "2° Año",
+                    "materias": [
+                        "Introducción a los Mecanismos de Conservación y Uso Eficiente de la Energía",
+                        "Enfoques y Herramientas de Modelación Energética y de Materiales",
+                        "Tecnologías de Eficiencia Energética",
+                        "Energías Renovables",
+                        "Introducción a los Métodos de Diseño, Cálculo y Evaluación de Eficiencia Energética",
+                        "Eficiencia Energética en Sistemas de Transporte",
+                        "Eficiencia Energética y Optimización de Procesos Productivos",
+                        "Eficiencia Energética en Edificios",
+                        "Eficiencia Energética en el Sector Agropecuario",
+                        "Práctica de Integración: Planes de Eficiencia Energ. para Distintos Tipos de Establecimientos e Instituciones",
+                        "Estratégias y Herramientas de Comunicación"
+                    ]
+                },
+                {
+                    "semestre": "3° Año",
+                    "materias": [
+                        "Economía y Mercados Energéticos",
+                        "Seminario de Cálculo y Evaluación de Eficiencia Energética",
+                        "Formulación de Proyectos",
+                        "Legislación Energética",
+                        "Seminario de Diseño de Edificios Sustentables",
+                        "Doctrina Social de la Iglesia",
+                        "Integración de la Eficiencia Energética en el Diseño Urbanístico",
+                        "Práctica de Integración: Asistencia Técnica a Municipios Provinciales",
+                        "Diseño de Sistemas Eficientes",
+                        "Gestión de Cadenas de Valor",
+                        "Evaluación Económica, Ambiental y Social de Proyectos",
+                        "Estándares y Sistemas de Certificación"
+                    ]
+                },
+                {
+                    "semestre": "4° Año",
+                    "materias": [
+                        "Ética",
+                        "Metodología de la Investigación",
+                        "Planificación Urbana Sustentable",
+                        "Integración de Eficiencia Energética y Energía Renovable",
+                        "Práctica de Integración: Proyectos en Parques Industriales,",
+                        "Instituciones Educativas y Zonas Turísticas Locales Gestión de Proyectos",
+                        "Prácticas de Divulgación Social",
+                        "Trabajo Final de Graduación",
+                        "Práctica Pre Profesional Supervisada"
+                    ]
+                }
+            ]
+        },
+
+
     },
     {
         codcar: 361,
@@ -2865,6 +6688,47 @@ const data = [
                 "Implementar modelos de asistencia y protección a víctimas de delitos.",
             ]
         },
+        planEstudios: [
+            {
+                semestre: "1° Año",
+                materias: [
+                    "Sociología del Delito",
+                    "Doctrina Social de la Iglesia",
+                    "Psicología Social Aplicada",
+                    "Corrientes Criminológicas",
+                    "Ciencias Sociales y Jurídicas Aplicadas a la Criminología",
+                    "Psiquiatría y Psicología Forense",
+                    "Delito, Contexto Social y Medios de Comunicación",
+                    "Victimología",
+                    "Estadística",
+                    "Criminología",
+                    "Violencia, Control y Exclusión Social",
+                    "Metodología en la Investigación Criminal",
+                    "Delincuencia Organizada y Narcocriminalidad",
+                    "Medicina Legal y Ciencias Forenses"
+                ]
+            },
+            {
+                semestre: "2° Año",
+                materias: [
+                    "Psicopatología Criminal",
+                    "Ética Profesional",
+                    "Delincuencia Informática",
+                    "Sistemas de Seguridad Policial y Penitenciario",
+                    "Análisis Criminal",
+                    "Principios Constitucionales y Criminología",
+                    "Derechos Humanos",
+                    "Trabajo Final Integrador",
+                    "Diseño, Planificación y Evaluación de Programas y Proyectos",
+                    "Seminario Trabajo Integrador",
+                    "Elaboración de Perfiles Criminológicos",
+                    "Drogadicción Social y Toxicología",
+                    "Mediación y Resolución de Conflictos",
+                    "Política Criminal",
+                    "Metodología de la Investigación Social"
+                ]
+            }
+        ]
     },
     {
         codcar: 194,
@@ -2884,6 +6748,35 @@ const data = [
                 "Liderar equipos multidisciplinarios en el ámbito de la gestión deportiva.",
             ]
         },
+        planEstudiosPorModalidad: {
+            7: [
+                {
+                    "semestre": "1° Año",
+                    "materias": [
+                        "Humanismo y Doctrina Social",
+                        "Planeamiento y Gestión de Políticas en Educación Física y Deporte",
+                        "Sistema Educativo",
+                        "Metodología de la Investigación",
+                        "Fisiología de la Actividad Física y Entrenamiento Deportivo",
+                        "Gimnasia y Deportes para Personas con Necesidades Especiales",
+                        "Corrientes Didácticas Contemporáneas",
+                        "Proyecto de Tesis",
+                        "Organización, Planificación y Control del Deporte y la Actividad Física"
+                    ]
+                },
+                {
+                    "semestre": "2° Año",
+                    "materias": [
+                        "Nutrición Deportiva",
+                        "Descripción, Estadística y Metrología Deportiva",
+                        "Análisis de la Estrategia de los Deportes",
+                        "Tesis (Trabajo Final)"
+                    ]
+                }
+            ]
+        },
+
+
     },
     {
         codcar: 395,
@@ -2904,6 +6797,40 @@ const data = [
                 "Formular programas de ocio saludable para distintas etapas del ciclo vital.",
             ]
         },
+        planEstudiosPorModalidad: {
+            7: [
+                {
+                    "semestre": "1° Año",
+                    "materias": [
+                        "Recreación Educativa",
+                        "Antropología Filosófica",
+                        "Juego y Cultura",
+                        "Pedagogía de la Recreación",
+                        "Sociología de la Recreación",
+                        "Ocio Ciudadanía y Desarrollo Social",
+                        "Lúdica",
+                        "Recreación y Prácticas Cuidadas",
+                        "Antropología Teológica",
+                        "Educación Popular y Social",
+                        "Metodología de la Investigación",
+                        "Trabajo Final Integrador I"
+                    ]
+                },
+                {
+                    "semestre": "2° Año",
+                    "materias": [
+                        "Humanismo y Pensamiento Social Cristiano",
+                        "Recreación Comunitaria",
+                        "Animación Sociocultural e Interculturalidad",
+                        "Pensamiento Crítico Latinoamericano",
+                        "Trabajo Final Integrador II",
+                        "Ocio, Inclusión y Diversidad"
+                    ]
+                }
+            ]
+        },
+
+
     },
     {
         codcar: 374,
@@ -2924,6 +6851,42 @@ const data = [
                 "Liderar departamentos de comercio exterior e integración en cadenas de valor.",
             ]
         },
+        planEstudios: [
+            {
+                semestre: "1° Año",
+                materias: [
+                    "Doctrina Social de la Iglesia",
+                    "Metodología de la Investigación",
+                    "Portugués I",
+                    "Costos y Presupuestos",
+                    "Economía Internacional",
+                    "Clasificación Arancelaria y Valoración Aduanera",
+                    "Marketing Internacional",
+                    "Trabajo de Aplicación",
+                    "Portugués II",
+                    "Integración y Cooperación Internacional",
+                    "Régimen Tributario del Comercio Exterior",
+                    "Aspectos Financieros y Bancarios",
+                    "Marketing Digital"
+                ]
+            },
+            {
+                semestre: "2° Año",
+                materias: [
+                    "Ética Profesional",
+                    "Alianzas Estratégicas para el Comercio Exterior",
+                    "Agronegocios",
+                    "Formulación y Evaluación de Proyectos de Comercio Exterior",
+                    "Logística Comercial",
+                    "Derecho Penal y Contencioso Aduanero",
+                    "Seminario de Actualización",
+                    "Taller de Investigación",
+                    "Negociación Internacional",
+                    "Taller de Emprendedurismo",
+                    "Práctica Profesional Supervisada"
+                ]
+            }
+        ]
     },
 ]
 export default data;

@@ -15,7 +15,30 @@
 // El espacio entre ítems es padding de cada ítem y no un `gap` de la pista: con
 // `gap`, el 50% no coincide con el ancho de una copia (queda medio hueco de
 // diferencia) y el salto se nota en cada vuelta.
-import { convenios } from "../../data/convenios";
+import { convenios, type Convenio } from "../../data/convenios";
+
+// Los logos vectoriales van en `src/assets/convenios/` y entran acá como texto,
+// para pegarlos dentro del HTML en vez de pedirlos como imagen: así el CSS
+// llega a las figuras de adentro. Los rasters siguen en `public/` y se sirven
+// como `<img>`. La clave del mapa es el nombre del archivo, que es lo último
+// de `logo` en el dato, así `convenios.ts` no cambia de forma.
+const svgsCrudos = import.meta.glob<string>("../../assets/convenios/*.svg", {
+    query: "?raw",
+    import: "default",
+    eager: true,
+});
+
+const svgPorArchivo = new Map(
+    Object.entries(svgsCrudos).map(([ruta, crudo]) => [
+        ruta.split("/").pop() as string,
+        // El prólogo XML sólo vale cuando el SVG es un archivo suelto; en medio
+        // del HTML sobra.
+        crudo.replace(/<\?xml[\s\S]*?\?>/i, "").trim(),
+    ]),
+);
+
+const svgInline = (convenio: Convenio) =>
+    svgPorArchivo.get(convenio.logo?.split("/").pop() ?? "");
 
 interface Props {
     /**
@@ -63,27 +86,32 @@ const duracion = `${(convenios.length * SEGUNDOS_POR_CONVENIO).toFixed(1)}s`;
     <!-- La máscara desvanece los bordes: sin ella la cinta se corta de golpe
          contra los costados de la pantalla. -->
     <div class:list={["cinta-zona", enFranja ? "mt-6" : "mt-8"]}>
-        <div class="cinta" style={`--duracion: ${duracion}`}>
+        <div class="cinta bg-white/10 p-4 border border-white/50" style={`--duracion: ${duracion}`}>
             {
                 [false, true].map((esCopia) => (
                     <ul class="tira" aria-hidden={esCopia ? "true" : undefined}>
-                        {convenios.map((convenio) => (
-                            <li class="convenio">
-                                {convenio.logo ? (
-                                    <img
-                                        src={`${base}${convenio.logo}`}
-                                        alt={convenio.nombre}
-                                        loading="lazy"
-                                        decoding="async"
-                                        class="convenio-logo"
-                                    />
-                                ) : (
-                                    /* Sin archivo de logo todavía: el nombre
-                                       mantiene la cinta completa y legible. */
-                                    <span class="convenio-nombre">{convenio.nombre}</span>
-                                )}
-                            </li>
-                        ))}
+                        {convenios.map((convenio) => {
+                            const svg = svgInline(convenio);
+                            return (
+                                <li class="convenio">
+                                    {svg ? (
+                                        <Fragment set:html={svg} />
+                                    ) : convenio.logo ? (
+                                        <img
+                                            src={`${base}${convenio.logo}`}
+                                            alt={convenio.nombre}
+                                            loading="lazy"
+                                            decoding="async"
+                                            class="convenio-logo"
+                                        />
+                                    ) : (
+                                        /* Sin archivo de logo todavía: el nombre
+                                           mantiene la cinta completa y legible. */
+                                        <span class="convenio-nombre">{convenio.nombre}</span>
+                                    )}
+                                </li>
+                            );
+                        })}
                     </ul>
                 ))
             }
@@ -163,24 +191,21 @@ const duracion = `${(convenios.length * SEGUNDOS_POR_CONVENIO).toFixed(1)}s`;
         }
     }
 
-    .convenio-logo {
+    /* El `<svg>` pegado se nombra con `:global` porque entra por `set:html` y
+       Astro no le pone la marca del estilo con ámbito. El `.convenio` de
+       adelante sí la lleva, así que la regla no se escapa del componente. */
+    .convenio-logo,
+    .convenio :global(svg) {
         max-height: 100%;
         width: auto;
         max-width: 9rem;
         object-fit: contain;
-        /* Los logos vienen de fuentes distintas y con saturaciones que patean
-           entre sí; apagarlos un poco los uniforma y evita que uno se coma la
-           atención. Al pasar el mouse recupera su color. */
-        filter: grayscale(1);
-        opacity: 0.75;
-        transition:
-            filter 0.3s ease,
-            opacity 0.3s ease;
+        color: white;
     }
 
-    .convenio:hover .convenio-logo {
-        filter: none;
-        opacity: 1;
+    /* El alto lo pone la cinta y el ancho sale de la proporción del viewBox. */
+    .convenio :global(svg) {
+        height: 100%;
     }
 
     .convenio-nombre {
@@ -205,19 +230,9 @@ const duracion = `${(convenios.length * SEGUNDOS_POR_CONVENIO).toFixed(1)}s`;
         color: var(--ucasal-white);
     }
 
-    /* brightness(0) aplasta el logo a negro e invert(1) lo pasa a blanco: así
-       cualquier logo queda monocromo sobre el fondo oscuro, sin necesidad de una
-       versión en blanco de cada archivo. */
-    .franja .convenio-logo,
-    .franja .convenio:hover .convenio-logo {
-        filter: brightness(0) invert(1);
-    }
 
-    .franja .convenio-logo {
-        opacity: 0.7;
-    }
-
-    .franja .convenio:hover .convenio-logo {
+    .franja .convenio:hover .convenio-logo,
+    .franja .convenio:hover :global(svg) {
         opacity: 1;
     }
 

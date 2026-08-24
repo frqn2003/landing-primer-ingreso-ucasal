@@ -20,6 +20,47 @@ const etiquetasSedes: Record<Modalidad, string> = {
 
 export const etiquetaSedes = etiquetasSedes[modalidad];
 
+/* ─────────────────────────────── Hero ─────────────────────────────────── */
+
+/** El párrafo que acompaña al título del hero. */
+const descripcionesHero: Record<Modalidad, string> = {
+    presencial:
+        "Transformá tu futuro profesional en nuestra universidad, alcanzá tu título con validez nacional, cursá con la modalidad que prefieras y accedé a todos los beneficios.",
+    online:
+        "Estudiá online respaldado por una universidad con trayectoria y una red nacional que te acompaña.",
+};
+
+export const descripcionHero = descripcionesHero[modalidad];
+
+interface DatoHero {
+    numero: string;
+    etiqueta: string;
+}
+
+/**
+ * Los datos institucionales de la barra del hero. La landing online suma los
+ * dos propios del online (trayectoria virtual y red de sedes).
+ *
+ * Los consume BarraHero.tsx, que es React: llegan por props desde Hero.astro
+ * para no arrastrar este módulo al bundle del navegador.
+ */
+const datosHeroPorModalidad: Record<Modalidad, DatoHero[]> = {
+    presencial: [
+        { numero: "+60", etiqueta: "Años enseñando" },
+        { numero: "+40.000", etiqueta: "Estudiantes" },
+        { numero: "+5.000", etiqueta: "Becados" },
+    ],
+    online: [
+        { numero: "+35", etiqueta: "Años de educación virtual" },
+        { numero: "+120", etiqueta: "Sedes" },
+        { numero: "+60", etiqueta: "Años enseñando" },
+        { numero: "+40.000", etiqueta: "Estudiantes" },
+        { numero: "+5.000", etiqueta: "Becados" },
+    ],
+};
+
+export const datosHero = datosHeroPorModalidad[modalidad];
+
 /* ────────────────────────────── Beneficios ────────────────────────────── */
 
 interface Beneficio {
@@ -40,49 +81,49 @@ const beneficiosPorModalidad: Record<Modalidad, Beneficio[]> = {
             titulo: "Campus en Castañares",
             descripcion:
                 "45 hectáreas al pie del cerro: aulas, laboratorios, comedor y espacios verdes para estudiar y quedarte.",
-            imagen: "beneficios/pile.webp",
+            imagen: "beneficios/campus.webp",
         },
         {
             codigo: "edificios-nuevos",
             titulo: "Edificios nuevos y modernos",
             descripcion:
                 "Aulas equipadas, wifi en todo el predio y laboratorios pensados para la práctica desde el primer año.",
-            imagen: "cards/9.webp",
+            imagen: "beneficios/edificios-nuevos.webp",
         },
         {
             codigo: "becas",
             titulo: "Becas y ayudas económicas",
             descripcion:
                 "Hay una beca para cada situación: por mérito, por hermanos, por deporte o por convenio con tu empresa.",
-            imagen: "cards/10.webp",
+            imagen: "beneficios/becas.webp",
         },
         {
             codigo: "biblioteca",
             titulo: "Biblioteca y biblioteca digital",
             descripcion:
                 "Retirá material en sala o accedé desde tu casa a bases de datos y libros digitales, las 24 horas.",
-            imagen: "cards/11.webp",
+            imagen: "beneficios/biblioteca.webp",
         },
         {
             codigo: "deportes",
             titulo: "Deportes y actividades recreativas",
             descripcion:
                 "Natación, fútbol, vóley y talleres culturales: la vida universitaria también pasa fuera del aula.",
-            imagen: "cards/14.webp",
+            imagen: "beneficios/pile.webp",
         },
         {
             codigo: "practicas",
             titulo: "Prácticas profesionales y pasantías",
             descripcion:
                 "Sumás experiencia real antes de recibirte, con intercambios y bolsa de trabajo para dar el primer paso.",
-            imagen: "cards/15.webp",
+            imagen: "beneficios/practicas.webp",
         },
         {
             codigo: "validez",
             titulo: "Título con validez nacional",
             descripcion:
                 "Carreras oficiales reconocidas por el Ministerio de Educación, habilitadas para ejercer en todo el país.",
-            imagen: "cards/16.webp",
+            imagen: "beneficios/titulos.webp",
         },
     ],
     online: [
@@ -91,56 +132,56 @@ const beneficiosPorModalidad: Record<Modalidad, Beneficio[]> = {
             titulo: "Empezá donde te quedaste",
             descripcion:
                 "Convalidá materias aprobadas en otras instituciones y avanzá más rápido en tu carrera.",
-            imagen: "cards/57.webp",
+            imagen: "beneficios/convalidacion.webp",
         },
         {
-            codigo: "a-tu-ritmo",
-            titulo: "Capacitate a tu ritmo",
+            codigo: "becas",
+            titulo: "Becas y ayudas económicas",
             descripcion:
-                "Accedé a las clases cuando quieras y repasalas las veces que necesites.",
-            imagen: "cards/58.webp",
+                "Hay una beca para cada situación: por mérito, por hermanos, por deporte o por convenio con tu empresa.",
+            imagen: "beneficios/becas.webp",
         },
         {
-            codigo: "desde-donde-estes",
+            codigo: "cursar",
             titulo: "Cursá desde donde estés",
             descripcion:
                 "Tu carrera de manera totalmente online, sin desplazamientos ni horarios fijos.",
-            imagen: "cards/96.webp",
+            imagen: "beneficios/cursar.webp",
         },
         {
             codigo: "sin-costos-extra",
             titulo: "Rendí sin costos extra",
             descripcion:
                 "El derecho de examen ya está incluido, sin cargos adicionales.",
-            imagen: "cards/133.webp",
+            imagen: "beneficios/sin-costos-extra.webp",
         },
         {
             codigo: "tecnologia",
             titulo: "Potenciá tu aprendizaje con tecnología",
             descripcion:
                 "Una plataforma con inteligencia artificial que acompaña y mejora tu experiencia de estudio.",
-            imagen: "cards/138.webp",
+            imagen: "beneficios/tecnologia.webp",
         },
         {
             codigo: "validez",
             titulo: "Estudiá con validez nacional",
             descripcion:
-                "Formate online con la misma validez que la modalidad presencial.",
-            imagen: "cards/161.webp",
+                "Formate online con la misma validez que la modalidad presencial. Carreras oficiales reconocidas por el Ministerio de Educación.",
+            imagen: "beneficios/titulos.webp",
         },
         {
             codigo: "bibliografia",
             titulo: "Adquirí tu bibliografía, a un clic",
             descripcion:
                 "Material de estudio digitalizado, disponible desde cualquier dispositivo.",
-            imagen: "cards/175.webp",
+            imagen: "beneficios/bibliografia.webp",
         },
         {
             codigo: "sedes",
             titulo: "Conocé tu sede más cercana",
             descripcion:
                 "Contamos con sedes en distintos puntos para acompañarte cuando lo necesites.",
-            imagen: "cards/196.webp",
+            imagen: "beneficios/sedes.webp",
         },
     ],
 };
@@ -204,61 +245,66 @@ interface Pregunta {
 const preguntasPorModalidad: Record<Modalidad, Pregunta[]> = {
     presencial: [
         {
-            pregunta: "¿Dónde curso?",
+            pregunta: "¿Cuándo empiezan las clases?",
             respuesta:
-                "En el campus de Castañares, en Salta. Las clases, los laboratorios y la biblioteca están en el mismo predio.",
+                "Las clases del ciclo lectivo 2027 empiezan entre la primera y segunda semana de marzo dependiendo tu carrera. Inscribite ahora y asegurá tu lugar en UCASAL.",
         },
         {
-            pregunta: "¿Cómo elijo una carrera?",
+            pregunta:
+                "¿Qué medios de pago están disponibles y qué tipo de becas ofrecen?",
             respuesta:
-                "Explorá el catálogo, mirá el plan de estudios de cada propuesta y escribinos antes de decidir.",
+                "UCASAL ofrece planes de financiamiento a partir de las cuotas sin interés, además de tener un amplio sistema de becas para cada situación particular. Consultá con un asesor y accedé a distintas opciones para empezar tu carrera universitaria.",
         },
         {
-            pregunta: "¿Qué necesito para inscribirme?",
+            pregunta: "¿Tengo que pagar derecho de exámen para rendir?",
             respuesta:
-                "El título secundario o el certificado de alumno del último año, tu DNI y completar la inscripción online.",
+                "No, en UCASAL solo se abona la matrícula de inscripción y una cuota mensual. Los exámenes parciales y finales son sin cargo.",
         },
         {
-            pregunta: "¿Hay becas disponibles?",
+            pregunta:
+                "¿Puedo solicitar equivalencias si ya cursé en otra universidad?",
             respuesta:
-                "Sí, hay becas por mérito, por hermanos, deportivas y por convenio. Consultanos cuál te corresponde.",
+                "Sí, en UCASAL podés solicitar equivalencias de materias cursadas en otras instituciones, consultá en nuestra web o contactá a un asesor para validarlas.",
         },
         {
-            pregunta: "¿Cómo recibo asesoramiento?",
+            pregunta:
+                "¿Hay laboratorios, talleres o clínicas donde pueda poner en práctica mi carrera?",
             respuesta:
-                "Completá el formulario y nuestro equipo se pone en contacto para orientarte.",
+                "Sí, UCASAL cuenta con espacios equipados para que te formes en tu área a partir de la práctica y no solo con la teoría.",
         },
     ],
     online: [
         {
-            pregunta: "¿Cómo se cursa online?",
+            pregunta: "¿Cuándo empiezan las clases?",
             respuesta:
-                "Accedés a las clases cuando quieras y las repasás las veces que necesites, sin horarios fijos.",
+                "Las clases del ciclo lectivo 2027 empiezan entre la primera y segunda semana de marzo dependiendo tu carrera. Inscribite ahora y asegurá tu lugar en UCASAL.",
         },
         {
-            pregunta: "¿Tengo que viajar a Salta?",
+            pregunta:
+                "¿Qué medios de pago están disponibles y qué tipo de becas ofrecen?",
             respuesta:
-                "No. Rendís en la sede o centro de apoyo más cercano a tu ciudad; en el mapa podés ver dónde está.",
+                "UCASAL ofrece planes de financiamiento a partir de las cuotas sin interés, además de tener un amplio sistema de becas para cada situación particular. Consultá con un asesor y accedé a distintas opciones para empezar tu carrera universitaria.",
         },
         {
-            pregunta: "¿Puedo convalidar materias que ya aprobé?",
+            pregunta: "¿Tengo que pagar derecho de exámen para rendir?",
             respuesta:
-                "Sí. Si cursaste en otra institución, convalidás las materias aprobadas y avanzás más rápido.",
+                "No, en UCASAL solo se abona la matrícula de inscripción y una cuota mensual. Los exámenes parciales y finales son sin cargo.",
         },
         {
-            pregunta: "¿El título es el mismo que el presencial?",
+            pregunta: "¿Cómo es la modalidad online?",
             respuesta:
-                "Sí. Es un título oficial con validez nacional, con la misma validez que la modalidad presencial.",
+                "El cursado online se realiza a través del campus virtual de UCASAL, donde podés acceder a clases grabadas, foros y material de estudio las 24 horas. Además contás a partir de la plataforma el contacto directo con docentes y compañeros.",
         },
         {
-            pregunta: "¿Qué necesito para inscribirme?",
+            pregunta:
+                "¿Puedo solicitar equivalencias si ya cursé en otra universidad?",
             respuesta:
-                "El título secundario o el certificado de alumno del último año, tu DNI y completar la inscripción online.",
+                "Sí, en UCASAL podés solicitar equivalencias de materias cursadas en otras instituciones, consultá en nuestra web o contactá a un asesor para validarlas.",
         },
         {
-            pregunta: "¿Cómo recibo asesoramiento?",
+            pregunta: "¿Cómo y dónde se rinden los exámenes?",
             respuesta:
-                "Completá el formulario y nuestro equipo se pone en contacto para orientarte.",
+                "Los trabajos prácticos y parciales se realizan a través de la plataforma virtual. Los exámenes finales pueden ser virtuales si vivís lejos de una sede o presenciales en la sede más cercana a tu localidad.",
         },
     ],
 };

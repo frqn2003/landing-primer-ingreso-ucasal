@@ -1,6 +1,7 @@
 ---
 import BarraHero from "../react/BarraHero.tsx";
 import { obtenerPromociones } from "../../data/promociones";
+import { datosHero, descripcionHero } from "../../config/contenido";
 
 interface Props {
     base?: string;
@@ -33,8 +34,8 @@ const promociones = await obtenerPromociones();
                 <h1 class="uppercase p-4 hero-entra text-center hero-entra-1">
                     Estudia, conectá, crecé
                 </h1>
-                <p class="text-center hero-entra hero-entra-2">
-                    Descripción epicarda
+                <p class="text-center hero-entra hero-entra-2 text-lg md:text-xl">
+                    {descripcionHero}
                 </p>
                 <div class="flex flex-row gap-4 mt-24 hero-entra hero-entra-3">
                     <a href={`${base}#carreras`} class="boton-cta-hero"
@@ -48,7 +49,11 @@ const promociones = await obtenerPromociones();
             <div
                 class="hero-entra hero-entra-4 flex w-full justify-center"
             >
-                <BarraHero promociones={promociones} client:load />
+                <BarraHero
+                    promociones={promociones}
+                    datos={datosHero}
+                    client:load
+                />
             </div>
         </div>
     </div>

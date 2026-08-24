@@ -17,18 +17,10 @@ const enColumna = variante === "columna";
 
 <section
     id="preguntas"
-    class:list={[!enColumna && "bg-slate-50 py-20"]}
+    class:list={[!enColumna && "bg-slate-50"]}
     aria-labelledby="preguntas-titulo"
 >
     <div class:list={[!enColumna && "contenedor"]}>
-        <p
-            class:list={[
-                "text-sm font-bold uppercase tracking-[0.2em] text-(--rojo-ucasal)",
-                !enColumna && "text-center",
-            ]}
-        >
-            Preguntas frecuentes
-        </p>
         <h2
             id="preguntas-titulo"
             class:list={[
@@ -36,7 +28,7 @@ const enColumna = variante === "columna";
                 enColumna ? "text-2xl sm:text-3xl" : "text-center text-3xl sm:text-4xl",
             ]}
         >
-            Todo lo que necesitás saber para empezar
+            Preguntas frecuentes
         </h2>
 
         <div

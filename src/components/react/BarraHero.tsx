@@ -17,16 +17,23 @@ import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from "
 import type { Promocion } from "../../data/promociones";
 import { usePromocionVigente } from "../../hooks/usePromocionVigente";
 
-interface Props {
-    promociones: Promocion[];
-}
-
 interface Dato {
     numero: string;
     etiqueta: string;
 }
 
-const DATOS: Dato[] = [
+interface Props {
+    promociones: Promocion[];
+    /**
+     * Los datos institucionales, que cambian según el build: la landing online
+     * suma los suyos (trayectoria virtual y red de sedes). Llegan por props
+     * desde Hero.astro porque viven en src/config/contenido.ts, que no viaja al
+     * bundle del navegador.
+     */
+    datos?: Dato[];
+}
+
+const DATOS_POR_DEFECTO: Dato[] = [
     { numero: "+60", etiqueta: "Años enseñando" },
     { numero: "+40.000", etiqueta: "Estudiantes" },
     { numero: "+5.000", etiqueta: "Becados" },
@@ -123,10 +130,10 @@ function CeldaPromocion({
 }
 
 /** Los tres datos, uno al lado del otro. Es lo que se ve en escritorio. */
-function DatosFijos() {
+function DatosFijos({ datos }: { datos: Dato[] }) {
     return (
         <div className="flex flex-1 items-center divide-x divide-white/15">
-            {DATOS.map((dato) => (
+            {datos.map((dato) => (
                 <div
                     key={dato.numero}
                     className="flex flex-1 flex-col items-center px-3 text-center"
@@ -145,13 +152,13 @@ function DatosFijos() {
  * Un dato a la vez, escribiéndose y borrándose. Con "prefers-reduced-motion" no
  * se anima: el dato entra completo y rota igual.
  */
-function DatoEscribiendo() {
+function DatoEscribiendo({ datos }: { datos: Dato[] }) {
     const [indice, setIndice] = useState(0);
     const [largo, setLargo] = useState(0);
     const [borrando, setBorrando] = useState(false);
     const sinMovimiento = useMediaQuery("(prefers-reduced-motion: reduce)");
 
-    const dato = DATOS[indice];
+    const dato = datos[indice];
     const texto = `${dato.numero} ${dato.etiqueta}`;
 
     // El timeout se reprograma en cada paso: escribir una letra, sostener el
@@ -162,7 +169,7 @@ function DatoEscribiendo() {
         if (sinMovimiento) {
             setLargo(texto.length);
             temporizador.current = window.setTimeout(
-                () => setIndice((i) => (i + 1) % DATOS.length),
+                () => setIndice((i) => (i + 1) % datos.length),
                 MS_SOSTENIDO,
             );
             return () => clearTimeout(temporizador.current);
@@ -183,13 +190,13 @@ function DatoEscribiendo() {
             espera = MS_ENTRE_DATOS;
             paso = () => {
                 setBorrando(false);
-                setIndice((i) => (i + 1) % DATOS.length);
+                setIndice((i) => (i + 1) % datos.length);
             };
         }
 
         temporizador.current = window.setTimeout(paso, espera);
         return () => clearTimeout(temporizador.current);
-    }, [borrando, largo, texto, sinMovimiento]);
+    }, [borrando, largo, texto, sinMovimiento, datos.length]);
 
     const visible = texto.slice(0, largo);
     const numero = visible.slice(0, dato.numero.length);
@@ -215,7 +222,7 @@ function DatoEscribiendo() {
             </span>
 
             <ul className="sr-only">
-                {DATOS.map((d) => (
+                {datos.map((d) => (
                     <li key={d.numero}>{`${d.numero} ${d.etiqueta}`}</li>
                 ))}
             </ul>
@@ -223,7 +230,10 @@ function DatoEscribiendo() {
     );
 }
 
-export default function BarraHero({ promociones }: Props) {
+export default function BarraHero({
+    promociones,
+    datos = DATOS_POR_DEFECTO,
+}: Props) {
     const { promocion, dias } = usePromocionVigente(promociones);
     const escritorio = useMediaQuery(CONSULTA_ESCRITORIO);
 
@@ -233,7 +243,11 @@ export default function BarraHero({ promociones }: Props) {
                 {promocion && <CeldaPromocion promocion={promocion} dias={dias} />}
 
                 <div className="flex min-w-0 flex-1 items-center rounded-xl ring-2 ring-gray-600 bg-white/10 backdrop-blur-xl px-3 py-2.5 text-white">
-                    {escritorio ? <DatosFijos /> : <DatoEscribiendo />}
+                    {escritorio ? (
+                        <DatosFijos datos={datos} />
+                    ) : (
+                        <DatoEscribiendo datos={datos} />
+                    )}
                 </div>
             </div>
         </div>
