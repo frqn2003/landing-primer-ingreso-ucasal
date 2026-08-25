@@ -15,13 +15,18 @@
 // El espacio entre ítems es padding de cada ítem y no un `gap` de la pista: con
 // `gap`, el 50% no coincide con el ancho de una copia (queda medio hueco de
 // diferencia) y el salto se nota en cada vuelta.
+import { Image } from "astro:assets";
 import { convenios, type Convenio } from "../../data/convenios";
 
 // Los logos vectoriales van en `src/assets/convenios/` y entran acá como texto,
 // para pegarlos dentro del HTML en vez de pedirlos como imagen: así el CSS
-// llega a las figuras de adentro. Los rasters siguen en `public/` y se sirven
-// como `<img>`. La clave del mapa es el nombre del archivo, que es lo último
-// de `logo` en el dato, así `convenios.ts` no cambia de forma.
+// llega a las figuras de adentro. Ojo con esto: solo sirve para vectores de
+// verdad. Catorce de estos "SVG" eran en realidad un PNG de 8333px en base64
+// adentro de un wrapper `<svg>`, y pegarlos inline metía 153 MB de texto en
+// cada página (por dos, por la copia de la cinta): el build terminaba en 26 GB.
+// Ahora esos son `.webp` en la misma carpeta y salen por `<Image>`.
+// La clave de los mapas es el nombre del archivo, que es lo último de `logo` en
+// el dato, así `convenios.ts` no cambia de forma.
 const svgsCrudos = import.meta.glob<string>("../../assets/convenios/*.svg", {
     query: "?raw",
     import: "default",
@@ -39,6 +44,23 @@ const svgPorArchivo = new Map(
 
 const svgInline = (convenio: Convenio) =>
     svgPorArchivo.get(convenio.logo?.split("/").pop() ?? "");
+
+// Los logos que son foto y no vector. Van por el pipeline de imágenes de Astro
+// (avif/webp y srcset), no inline.
+const rasters = import.meta.glob<ImageMetadata>(
+    "../../assets/convenios/*.webp",
+    { import: "default", eager: true },
+);
+
+const rasterPorArchivo = new Map(
+    Object.entries(rasters).map(([ruta, imagen]) => [
+        ruta.split("/").pop() as string,
+        imagen,
+    ]),
+);
+
+const rasterLocal = (convenio: Convenio) =>
+    rasterPorArchivo.get(convenio.logo?.split("/").pop() ?? "");
 
 interface Props {
     /**
@@ -86,16 +108,26 @@ const duracion = `${(convenios.length * SEGUNDOS_POR_CONVENIO).toFixed(1)}s`;
     <!-- La máscara desvanece los bordes: sin ella la cinta se corta de golpe
          contra los costados de la pantalla. -->
     <div class:list={["cinta-zona", enFranja ? "mt-6" : "mt-8"]}>
-        <div class="cinta bg-white/10 p-4 border border-white/50" style={`--duracion: ${duracion}`}>
+        <div class="cinta bg-white/45 p-4 border border-white/50" style={`--duracion: ${duracion}`}>
             {
                 [false, true].map((esCopia) => (
                     <ul class="tira" aria-hidden={esCopia ? "true" : undefined}>
                         {convenios.map((convenio) => {
                             const svg = svgInline(convenio);
+                            const raster = rasterLocal(convenio);
                             return (
                                 <li class="convenio">
                                     {svg ? (
                                         <Fragment set:html={svg} />
+                                    ) : raster ? (
+                                        <Image
+                                            src={raster}
+                                            alt={convenio.nombre}
+                                            widths={[144, 288, 432]}
+                                            sizes="9rem"
+                                            loading="lazy"
+                                            class="convenio-logo"
+                                        />
                                     ) : convenio.logo ? (
                                         <img
                                             src={`${base}${convenio.logo}`}

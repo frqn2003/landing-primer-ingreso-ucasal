@@ -586,47 +586,50 @@ h3 {
 
 .flecha-carrera {
   font-weight: bold;
-  border-radius: 100%;
+  border-radius: 10px;
   background-color: var(--rojo-ucasal);
   color: white;
   font-size: 1rem;
-  width: 40px;
+  width: 100%;
   height: 40px;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-
-  @media (max-width: 768px) {
-    font-size: 0.9rem;
-    width: 35px;
-    height: 35px;
-  }
 }
 
-.flecha-carrera:hover {
+.flecha-carrera-mobile {
+  font-size: 1.1rem;
+  width: 40px;
+  border-radius: 100%;
+  height: 40px;
+  font-weight: bold;
+  background-color: var(--rojo-ucasal);
+  color: white;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.flecha-carrera-mobile:active {
   transition: all 0.2s ease;
   transform: translateX(5px);
-  width: 100px;
+  width: 120px;
   border-radius: 10px;
-  gap: 6px;
-  padding-inline: 50px;
+  gap: 10px;
+  padding: inline 25px;
 }
 
-.flecha-carrera:hover>span {
-  rotate: 90deg;
+.flecha-carrera-mobile:active>span {
+  rotate: 45deg;
   transition: all 0.4s ease;
 }
 
-.flecha-carrera:hover::before {
-  content: 'Explorar';
-  font-size: 0.9rem;
-}
 
+.flecha-carrera-mobile:active::before {
+  content: "Explorar";
+  font-size: 0.8rem;
+}
 
 @theme {
   --font-museo: "Museo", sans-serif;
 }
-
-/* Las @font-face viven en Layout.astro, no acá: la ruta de los .woff2 depende
-   del `base` del build (cambia según la modalidad) y el CSS plano no puede
-   leerlo. */

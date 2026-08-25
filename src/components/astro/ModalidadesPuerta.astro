@@ -1,5 +1,9 @@
 ---
+import { Image } from "astro:assets";
 import { MODO_HOME, MODO_ONLINE, modosPuerta } from "../../config/modalidad";
+import imgPresencial from "../../assets/modalidades/presencial.webp";
+import imgOnline from "../../assets/modalidades/online.webp";
+import imgHome from "../../assets/modalidades/home.webp";
 
 interface Props {
   /**
@@ -9,10 +13,7 @@ interface Props {
    */
   modosCarrera?: number[];
   titulo?: string;
-  /**
-   * A dónde va el CTA de cada puerta. En la Home al explorador de carreras
-   * (que escucha `preselect-modalidad`); en el detalle, al formulario.
-   */
+  onSubPage?: boolean;
   destinoCta?: string;
   textoCta?: string;
 }
@@ -20,6 +21,7 @@ interface Props {
 const {
   modosCarrera,
   titulo = "Modalidades",
+  onSubPage = false,
   destinoCta = "#carreras",
   textoCta = "Explorar carreras de esta modalidad",
 } = Astro.props;
@@ -36,12 +38,12 @@ const todasLasModalidades = [
       "Prácticas Presenciales",
     ],
     description: "Clases en vivo, acceso a laboratorios y biblioteca",
-    imagen: "https://www.placehold.co/600x400?text=Presencial",
+    imagen: imgPresencial,
   },
   {
     id: 2,
     codigo: 7,
-    nombre: "virtual",
+    nombre: "Online",
     color: "--azul-ucasal",
     caracteristicas: [
       "Clases en la plataforma virtual",
@@ -50,7 +52,7 @@ const todasLasModalidades = [
     ],
     description:
       "Clases en plataforma virtual y acceso a material las 24 horas",
-    imagen: "https://www.placehold.co/600x400?text=Virtual",
+    imagen: imgOnline,
   },
   {
     id: 3,
@@ -64,7 +66,7 @@ const todasLasModalidades = [
     ],
     description:
       "Clases en plataforma virtual y acceso a material las 24 horas",
-    imagen: "https://www.placehold.co/600x400?text=Home",
+    imagen: imgHome,
   },
 ];
 
@@ -88,18 +90,30 @@ const modalidades = todasLasModalidades.filter(
 
 <section id="modalidades" class="seccion-snap flex flex-col">
   <h2 class="text-3xl font-bold text-center mb-8">{titulo}</h2>
-  <div class="contenedor mx-auto flex-1 w-full flex flex-col min-h-0">
+  <div class={`${!onSubPage ? 'contenedor' : ''} mx-auto flex-1 w-full flex flex-col min-h-0`}>
     <div class="flex max-md:flex-col flex-1 min-h-0 overflow-hidden pb-16">
       {
         modalidades.map((modalidad, i) => (
           <article
             {/* Sin `capitalize` en el panel: ponía en mayúscula cada palabra
                 de la descripción. Solo el nombre de la modalidad lo necesita. */}
-            class="puerta-panel relative overflow-hidden bg-cover bg-center"
-            style={`background-image:url(${modalidad.imagen})`}
+            class="puerta-panel relative overflow-hidden"
             data-index={i}
             data-active={i === 0 ? "true" : "false"}
           >
+            {/* La foto va como <Image> y no como `background-image`: el panel
+                cambia de ancho al expandirse (ver .puerta-panel en el <style>)
+                y un background no tiene srcset con el que acompañar eso.
+                Queda primera en el DOM, así que el degradé y los botones que
+                siguen pintan encima sin necesidad de z-index. */}
+            <Image
+              src={modalidad.imagen}
+              alt=""
+              widths={[640, 1024, 1200]}
+              sizes="(min-width: 768px) 50vw, 100vw"
+              class="absolute inset-0 h-full w-full object-cover"
+            />
+
             <div class="absolute inset-0 bg-linear-to-t from-(--azul-dark-ucasal)/95 via-(--azul-dark-ucasal)/35 to-(--azul-dark-ucasal)/10" />
 
             <button class={`puerta-colapsado absolute inset-0 flex flex-col items-center justify-between py-7 cursor-pointer bg-(${modalidad.color}) ${modalidad.codigo === 7 ? "bg-[#1c4d86]" : ""}`}>

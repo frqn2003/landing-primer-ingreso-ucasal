@@ -2,10 +2,15 @@
  * Convenios con los que el arancel sale bonificado.
  *
  * Los logos se nombran en `logo` con la ruta relativa al `base` del build
- * (ej. "convenios/enacom.svg"). El `.svg` va en `src/assets/convenios/` y
- * Convenios.astro lo pega dentro del HTML, así el CSS llega a las figuras de
- * adentro; el `.png` o `.jpg` va en `public/convenios/` y se sirve como `<img>`.
- * El valor de `logo` se escribe igual en los dos casos.
+ * (ej. "convenios/enacom.svg"). Hay tres casos y el valor de `logo` se escribe
+ * igual en los tres; Convenios.astro decide por la extensión:
+ *
+ * - `.svg` en `src/assets/convenios/`: se pega dentro del HTML, así el CSS
+ *   llega a las figuras de adentro. Solo para vectores de verdad.
+ * - `.webp` en `src/assets/convenios/`: logos que son foto, no vector. Salen
+ *   por `<Image>` con srcset. Acá están los que venían como un PNG gigante
+ *   embebido en un SVG, que inline hacían un build de 26 GB.
+ * - `.png` o `.jpg` en `public/convenios/`: se sirven como `<img>` tal cual.
  *
  * Mientras un convenio no tenga logo, la cinta muestra su nombre en un chip:
  * así la sección ya funciona y cada logo aparece a medida que se suben los
@@ -32,27 +37,27 @@ export interface Convenio {
 }
 
 export const convenios: Convenio[] = [
-    { nombre: "ENACOM", logo: "convenios/ENACOM.png" },
-    { nombre: "UPSAFIP", logo: "convenios/AFIP.png" }, // (confirmar) sigla del gremio del personal superior de AFIP
-    { nombre: "ARCA", logo: "convenios/ARCA.png" },
-    { nombre: "A.E.F.I.P.", logo: "convenios/aefip.png" },
-    { nombre: "ICA", logo: "convenios/ICA.png" }, // (confirmar) Instituto de Capacitación
-    { nombre: "Servicio Penitenciario Federal", logo: "convenios/federal.png" },
-    { nombre: "Fundación Bomberos de Argentina", logo: "convenios/bomberos.png" },
-    { nombre: "FAGE", logo: "convenios/gastroenterología.png" }, // (confirmar) Federación Argentina de Gastroenterología
-    { nombre: "Fundación Unión", logo: "convenios/union.png" },
-    { nombre: "SUPARA", logo: "convenios/hsbc.svg" },
-    { nombre: "UTEDYC", logo: "convenios/hsbc.svg" },
-    { nombre: "UTI C.G.T.R.A.", logo: "convenios/hsbc.svg" }, // (confirmar)
-    { nombre: "Ledesma", logo: "convenios/hsbc.svg" },
+    { nombre: "ENACOM", logo: "convenios/ENACOM.svg" },
+    { nombre: "UPSAFIP", logo: "convenios/usp.webp" }, // (confirmar) sigla del gremio del personal superior de AFIP
+    { nombre: "ARCA", logo: "convenios/ARCA.webp" },
+    { nombre: "A.E.F.I.P.", logo: "convenios/eafip.webp" },
+    { nombre: "ICA", logo: "convenios/ica.webp" }, // (confirmar) Instituto de Capacitación
+    { nombre: "Servicio Penitenciario Federal", logo: "convenios/federal.webp" },
+    { nombre: "Fundación Bomberos de Argentina", logo: "convenios/bomberos.webp" },
+    { nombre: "FAGE", logo: "convenios/gastroenterologia.webp" }, // (confirmar) Federación Argentina de Gastroenterología
+    { nombre: "Fundación Unión", logo: "convenios/union.webp" },
+    { nombre: "SUPARA", logo: "convenios/supara.webp" },
+    { nombre: "UTEDYC", logo: "convenios/Utedyc.webp" },
+    { nombre: "UTI C.G.T.R.A.", logo: "convenios/Uti.webp" }, // (confirmar)
+    { nombre: "Ledesma", logo: "convenios/ledesma.svg" },
     { nombre: "HSBC", logo: "convenios/hsbc.svg" },
-    { nombre: "Seaboard", logo: "convenios/SEABOARD.png" },
-    { nombre: "OSDE", logo: "convenios/OSDE.jpg" },
-    { nombre: "SanCor Salud", logo: "convenios/SanCorSalud.png" },
-    { nombre: "Banco Macro", logo: "convenios/Macro.jpg" },
-    { nombre: "Keller Williams", logo: "convenios/Keller.jpg" },
-    { nombre: "AMUGENAL", logo: "convenios/Amugenal.png" },
-    { nombre: "Ejército Argentino", logo: "convenios/Ejército Argentino.png" },
-    { nombre: "LC", logo: "convenios/LC.jpg" },
-    { nombre: "Policía", logo: "convenios/policia.png" },
+    { nombre: "Seaboard", logo: "convenios/seabord.svg" },
+    { nombre: "OSDE", logo: "convenios/osde.svg" },
+    { nombre: "SanCor Salud", logo: "convenios/sancor.svg" },
+    { nombre: "Banco Macro", logo: "convenios/macro.svg" },
+    { nombre: "Keller Williams", logo: "convenios/Keller.webp" },
+    { nombre: "AMUGENAL", logo: "convenios/amugenal.webp" },
+    { nombre: "Ejército Argentino", logo: "convenios/Ejército.webp" },
+    { nombre: "LC", logo: "convenios/LC.webp" },
+    { nombre: "Policía", logo: "convenios/policia.webp" },
 ];

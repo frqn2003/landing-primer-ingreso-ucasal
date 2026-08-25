@@ -5,11 +5,6 @@ import { etiquetaSedes } from "../../config/contenido";
 
 interface Props {
   onSubPage?: boolean;
-  /**
-   * La página abre con un hero a sangre de alto completo, así que la navbar
-   * puede flotar transparente encima hasta que se scrollea. Lo usa el detalle
-   * de carrera, que tiene el mismo encabezado que la Home.
-   */
   heroCompleto?: boolean;
 }
 const { onSubPage, heroCompleto } = Astro.props;

@@ -132,7 +132,7 @@ const beneficiosPorModalidad: Record<Modalidad, Beneficio[]> = {
             titulo: "Empezá donde te quedaste",
             descripcion:
                 "Convalidá materias aprobadas en otras instituciones y avanzá más rápido en tu carrera.",
-            imagen: "beneficios/convalidacion.webp",
+            imagen: "beneficios/online/empeza.webp",
         },
         {
             codigo: "becas",
@@ -146,21 +146,21 @@ const beneficiosPorModalidad: Record<Modalidad, Beneficio[]> = {
             titulo: "Cursá desde donde estés",
             descripcion:
                 "Tu carrera de manera totalmente online, sin desplazamientos ni horarios fijos.",
-            imagen: "beneficios/cursar.webp",
+            imagen: "beneficios/online/cursa.webp",
         },
         {
             codigo: "sin-costos-extra",
             titulo: "Rendí sin costos extra",
             descripcion:
                 "El derecho de examen ya está incluido, sin cargos adicionales.",
-            imagen: "beneficios/sin-costos-extra.webp",
+            imagen: "beneficios/online/rendi.webp",
         },
         {
             codigo: "tecnologia",
             titulo: "Potenciá tu aprendizaje con tecnología",
             descripcion:
                 "Una plataforma con inteligencia artificial que acompaña y mejora tu experiencia de estudio.",
-            imagen: "beneficios/tecnologia.webp",
+            imagen: "beneficios/online/tecnologia.webp",
         },
         {
             codigo: "validez",
@@ -174,14 +174,14 @@ const beneficiosPorModalidad: Record<Modalidad, Beneficio[]> = {
             titulo: "Adquirí tu bibliografía, a un clic",
             descripcion:
                 "Material de estudio digitalizado, disponible desde cualquier dispositivo.",
-            imagen: "beneficios/bibliografia.webp",
+            imagen: "beneficios/online/bibliografia.webp",
         },
         {
             codigo: "sedes",
             titulo: "Conocé tu sede más cercana",
             descripcion:
                 "Contamos con sedes en distintos puntos para acompañarte cuando lo necesites.",
-            imagen: "beneficios/sedes.webp",
+            imagen: "beneficios/online/sedes.webp",
         },
     ],
 };

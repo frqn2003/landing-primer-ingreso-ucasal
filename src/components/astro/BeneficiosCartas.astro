@@ -14,7 +14,7 @@ const total = beneficios.length;
 // tamaños en el build: lo que está en /public se copia tal cual. El campo
 // `imagen` de contenido.ts sigue siendo un string, así que se resuelve acá.
 const fotos = import.meta.glob<{ default: ImageMetadata }>(
-  "../../assets/beneficios/*.webp",
+  "../../assets/beneficios/**/*.webp",
   { eager: true },
 );
 

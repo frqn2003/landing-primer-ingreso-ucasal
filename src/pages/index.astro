@@ -11,8 +11,44 @@ import ExploradorCarreras from "../components/react/ExploradorCarreras.tsx";
 import FormSection from "../components/astro/FormSection.astro";
 import carreras from "../data/carrerasLanding";
 import { modosCarrera } from "../config/modalidad";
+import { getImage } from "astro:assets";
+import portadaDesktop from "../assets/portada/desktop.webp";
+import portadaMobile from "../assets/portada/mobile.webp";
 
 const base = import.meta.env.BASE_URL;
+
+// La portada son dos recortes distintos (vertical en mobile, horizontal en
+// desktop), así que no alcanza un `<Picture>`: hace falta el `<picture>` a mano
+// para poder usar `media`. `getImage` igual nos da el srcset con los tamaños
+// intermedios y el avif, que es lo que baja el peso de estos dos archivos de
+// ~1 MB cada uno.
+const [
+  portadaAvifDesktop,
+  portadaAvifMobile,
+  portadaWebpDesktop,
+  portadaWebpMobile,
+] = await Promise.all([
+  getImage({
+    src: portadaDesktop,
+    format: "avif",
+    widths: [1024, 1440, 1920, 2048],
+  }),
+  getImage({
+    src: portadaMobile,
+    format: "avif",
+    widths: [640, 828, 1080, 1236],
+  }),
+  getImage({
+    src: portadaDesktop,
+    format: "webp",
+    widths: [1024, 1440, 1920, 2048],
+  }),
+  getImage({
+    src: portadaMobile,
+    format: "webp",
+    widths: [640, 828, 1080, 1236],
+  }),
+]);
 ---
 
 <Layout
@@ -26,11 +62,32 @@ const base = import.meta.env.BASE_URL;
       <picture>
         <source
           media="(min-width: 769px)"
-          srcset={`${base}encabezados/portada/desktop.webp`}
+          type="image/avif"
+          srcset={portadaAvifDesktop.srcSet.attribute}
+          sizes="100vw"
+        />
+        <source
+          media="(min-width: 769px)"
+          type="image/webp"
+          srcset={portadaWebpDesktop.srcSet.attribute}
+          sizes="100vw"
+        />
+        <source
+          type="image/avif"
+          srcset={portadaAvifMobile.srcSet.attribute}
+          sizes="100vw"
+        />
+        <source
+          type="image/webp"
+          srcset={portadaWebpMobile.srcSet.attribute}
+          sizes="100vw"
         />
         <img
-          src={`${base}encabezados/portada/mobile.webp`}
+          src={portadaWebpMobile.src}
           alt=""
+          loading="eager"
+          fetchpriority="high"
+          decoding="sync"
           class="sticky left-1/2 right-1/2 top-0 h-dvh w-full object-cover"
         />
       </picture>
@@ -55,7 +112,7 @@ const base = import.meta.env.BASE_URL;
     <div class="relative isolate">
       <div class="absolute inset-0 -z-10">
         <img
-          src={`${base}fondos/azul.jpg`}
+          src={`${base}fondos/azul.webp`}
           alt="Imagen de fondo azul"
           class="sticky left-1/2 right-1/2 top-0 h-full w-full object-cover"
         />

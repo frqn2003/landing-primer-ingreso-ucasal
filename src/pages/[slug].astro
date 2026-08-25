@@ -1,9 +1,10 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Navbar from '../components/astro/Navbar.astro';
-import Footer from '../components/astro/Footer.astro';
-import data from '../data/carrerasLanding';
-import CareerDetail from '../components/astro/CareerDetail.astro';
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/astro/Navbar.astro";
+import Footer from "../components/astro/Footer.astro";
+import Testimonios from "../components/astro/Testimonios.astro";
+import data from "../data/carrerasLanding";
+import CareerDetail from "../components/astro/CareerDetail.astro";
 
 // Solo las carreras de esta landing: en el build online no se genera la
 // subpagina de una carrera que solo se dicta presencial.
@@ -16,12 +17,23 @@ export function getStaticPaths() {
 
 const { carrera } = Astro.props;
 const title = `${carrera.nombre} | Estudiá en UCASAL`;
-const description = carrera.descripcion.split('\\n')[0];
+const description = carrera.descripcion.split("\\n")[0];
+const base = import.meta.env.BASE_URL;
 ---
 
 <Layout title={title} description={description}>
     <Navbar onSubPage={true} heroCompleto={true} />
     <CareerDetail carrera={carrera} />
+    <!-- Vamos a hacer que compartan el mismo fondo, el que me paso la fer me gustaba banda -->
+    <div class="relative isolate">
+        <div class="absolute inset-0 -z-10">
+            <img
+                src={`${base}fondos/azul.webp`}
+                alt="Imagen de fondo azul"
+                class="sticky left-1/2 right-1/2 top-0 h-full w-full object-cover"
+            />
+        </div>
+        <Testimonios />
+    </div>
     <Footer />
 </Layout>
-

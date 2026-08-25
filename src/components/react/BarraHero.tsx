@@ -132,7 +132,7 @@ function CeldaPromocion({
 /** Los tres datos, uno al lado del otro. Es lo que se ve en escritorio. */
 function DatosFijos({ datos }: { datos: Dato[] }) {
     return (
-        <div className="flex flex-1 items-center divide-x divide-white/15">
+        <div className="flex flex-1 items-center divide-x divide-white">
             {datos.map((dato) => (
                 <div
                     key={dato.numero}
@@ -242,7 +242,7 @@ export default function BarraHero({
             <div className="flex flex-col md:flex-row items-stretch gap-2 sm:gap-12">
                 {promocion && <CeldaPromocion promocion={promocion} dias={dias} />}
 
-                <div className="flex min-w-0 flex-1 items-center rounded-xl ring-2 ring-gray-600 bg-white/10 backdrop-blur-xl px-3 py-2.5 text-white">
+                <div className="flex min-w-0 flex-1 items-center rounded-xl ring-2 ring-white bg-white/10 backdrop-blur-xl px-3 py-2.5 text-white">
                     {escritorio ? (
                         <DatosFijos datos={datos} />
                     ) : (

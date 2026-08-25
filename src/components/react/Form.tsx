@@ -68,14 +68,6 @@ const IconoBuscar = () => (
 export default function Form({ codcarInicial, onSubPage, modosDisponibles }: {
     codcarInicial?: string,
     onSubPage?: boolean,
-    /**
-     * Códigos de modo que se ofrecen en esta landing. En el build online llega
-     * solo [7]: se listan únicamente las carreras que se venden online y el
-     * selector de modalidad muestra nada más que Online.
-     * Lo resuelve el componente .astro que lo renderiza con `modosCarrera` de
-     * src/config/modalidad.ts; viene por props para no arrastrar la config al
-     * bundle del navegador.
-     */
     modosDisponibles?: number[]
 }) {
     const { register, handleSubmit, formState: { errors, isSubmitted }, watch, setValue } = useForm({
@@ -161,8 +153,8 @@ export default function Form({ codcarInicial, onSubPage, modosDisponibles }: {
 
     const etiquetaModalidad = (modalidadCarrera: number[] = []) => {
         const modos = modosDeLaLanding(modalidadCarrera)
-        if (modos.length > 1) return 'Presencial y Virtual'
-        return modos.includes(7) ? 'Virtual' : 'Presencial'
+        if (modos.length > 1) return 'Presencial | Online'
+        return modos.includes(7) ? 'Online' : 'Presencial'
     }
 
     /* En la landing online se listan solo las carreras que se venden online */
@@ -342,7 +334,7 @@ export default function Form({ codcarInicial, onSubPage, modosDisponibles }: {
                 (_errors) => {
                     clarityEvent('formulario-invalido')
                 })}
-            className={`bg-white rounded-lg shadow-2xl w-full min-w-0 ${onSubPage ? 'px-6 py-4' : 'p-6'}`}>
+            className={`rounded-lg shadow-2xl w-full min-w-0 ${onSubPage ? 'px-6 py-4' : 'p-6'} ${modalidad === '7' ? 'bg-white border-2 border-(--azul-ucasal)' : modalidad === '1' ? 'bg-white border-2 border-(--rojo-ucasal)' : 'border-2 border-transparent [background:linear-gradient(white,white)_padding-box,linear-gradient(to_bottom_right,var(--azul-ucasal),var(--rojo-ucasal))_border-box]'}`}>
             <input type="hidden" value={modalidad === '7' ? '103' : '4'} name="id_origen" />
             <input type="hidden" name="cbx_sede" value={idSedeReal} />
             <input type="hidden" name="sector" value={sectorCarrera} />
