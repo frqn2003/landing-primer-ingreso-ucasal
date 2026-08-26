@@ -42,7 +42,7 @@ const flotarSobreHero = !onSubPage || !!heroCompleto;
     <div class="justify-start flex items-center" id="logo-container">
       <!-- Estado "Volver al inicio" -->
       <a
-        href={base}
+        href={`${base}#carreras`}
         class="flex items-center gap-2 text-sm font-semibold text-(--azul-ucasal) hover:text-(--rojo-ucasal) transition-colors text-center"
         id="volver-inicio-link"
         style="display:none"
@@ -50,7 +50,7 @@ const flotarSobreHero = !onSubPage || !!heroCompleto;
         <svg
           class="w-4 h-4"
           fill="none"
-          stroke="currentColor"
+          stroke="var(--azul-ucasal)"
           viewBox="0 0 24 24"
         >
           <path
@@ -71,7 +71,7 @@ const flotarSobreHero = !onSubPage || !!heroCompleto;
           />
           <span class="flex items-center text-center">Volver al inicio</span>
         </div>
-        <span id="volver-inicio-texto">Volver al inicio</span>
+        <span class="text-white" id="volver-inicio-texto">Volver al inicio</span>
       </a>
 
       <!-- Estado normal: logo -->
@@ -93,6 +93,7 @@ const flotarSobreHero = !onSubPage || !!heroCompleto;
           alt="Logo"
           class="h-10 w-auto brightness-0 invert"
           id="logo-iso"
+          style="display:none"
         />
       </a>
     </div>
@@ -419,6 +420,10 @@ const flotarSobreHero = !onSubPage || !!heroCompleto;
       );
     });
   }
+
+  // Estado inicial: `fromLanding` solo se conoce en el cliente, asi que el
+  // marcado sale con los tres logos ocultos y se resuelve aca, sin esperar scroll.
+  handleScroll();
 
   window.addEventListener("scroll", handleScroll, { passive: true });
 </script>

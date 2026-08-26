@@ -1,0 +1,161 @@
+# ============================================================================
+# UCASAL - Redireccionamiento 301: paginas .php antiguas -> nueva app Astro
+# ============================================================================
+#
+# Este archivo va en el directorio /landing/ del servidor (o en la raiz del
+# host: `Redirect` matchea contra la URL-path completa, asi que funciona desde
+# cualquier directorio ancestro).
+#
+# Las rutas destino salen de la base de cada build (ver .env.presencial /
+# .env.online del repo landing-primer-ingreso) + el `slug` de la carrera en
+# src/data/carreras.ts:
+#
+#   build presencial -> /landing/ingreso/carreras/<slug>
+#   build online     -> /landing/ingreso/carreras-online/<slug>
+#
+# OJO: el bloque "distancia" de mas abajo apunta a /landing/ingreso/carreras-agosto/,
+# que NO coincide con RUTA_BASE de .env.online (/landing/ingreso/carreras-online/).
+# Hay que unificar uno de los dos antes de subir esto.
+#
+# ----------------------------------------------------------------------------
+# BLOQUE 1 - Carreras a DISTANCIA (segun el listado original)
+# ----------------------------------------------------------------------------
+
+Redirect 301 /landing/estudiar-tec-secretariado-ejecutivo-distancia.php /landing/ingreso/carreras-agosto/tecnicatura-univ-en-secretariado-ejecutivo
+Redirect 301 /landing/estudiar-lic-economia-distancia.php /landing/ingreso/carreras-agosto/economia
+Redirect 301 /landing/estudiar-lic-administracion-empresas-distancia.php /landing/ingreso/carreras-agosto/administracion-de-empresas
+Redirect 301 /landing/estudiar-contador-distancia.php /landing/ingreso/carreras-agosto/contador-publico
+Redirect 301 /landing/estudiar-lic-comercializacion-distancia.php /landing/ingreso/carreras-agosto/comercializacion
+Redirect 301 /landing/estudiar-derecho-abogacia-distancia.php /landing/ingreso/carreras-agosto/abogacia
+Redirect 301 /landing/estudiar-licenciatura-ciencias-datos.php /landing/ingreso/carreras-agosto/licenciatura-en-ciencia-de-datos
+Redirect 301 /landing/estudiar-tec-gestion-calidad-distancia.php /landing/ingreso/carreras-agosto/tecnicatura-univ-en-gestion-de-calidad
+Redirect 301 /landing/estudiar-lic-administracion-agropecuaria-distancia.php /landing/ingreso/carreras-agosto/administracion-agropecuaria
+Redirect 301 /landing/estudiar-lic-higiene-y-seguridad-trabajo-distancia.php /landing/ingreso/carreras-agosto/higiene-y-seguridad
+Redirect 301 /landing/estudiar-tecnicatura-gestion-bancos-finanzas-seguros.php /landing/ingreso/carreras-agosto/tec-universitaria-en-gestion-de-bancos-empresas-financieras-y-de-seguros
+Redirect 301 /landing/estudiar-guia-universitaria-turismo-distancia.php /landing/ingreso/carreras-agosto/guia-universitario-de-turismo
+Redirect 301 /landing/estudiar-lic-seguridad-distancia.php /landing/ingreso/carreras-agosto/licenciatura-en-seguridad
+Redirect 301 /landing/estudiar-comercio-internacional-distancia.php /landing/ingreso/carreras-agosto/comercio-internacional
+Redirect 301 /landing/estudiar-martillero-distancia.php /landing/ingreso/carreras-agosto/corredor-inmobiliario-y-martillero-publico
+Redirect 301 /landing/estudiar-licenciatura-administracion-negocios-digitales-distancia.php /landing/ingreso/carreras-agosto/administracion-de-negocios-digitales
+Redirect 301 /landing/estudiar-lic-rrhh-distancia.php /landing/ingreso/carreras-agosto/recursos-humanos
+Redirect 301 /landing/estudiar-escribania-distancia.php /landing/ingreso/carreras-agosto/escribania
+Redirect 301 /landing/estudiar-tec-seguridad-informatica.php /landing/ingreso/carreras-agosto/tecnicatura-en-seguridad-informatica
+Redirect 301 /landing/estudiar-procuracion-distancia.php /landing/ingreso/carreras-agosto/procuracion
+Redirect 301 /landing/estudiar-organizacion-direccion-eventos-ceremonial.php /landing/ingreso/carreras-agosto/tecn-univ-en-organizacion-y-direccion-de-eventos-y-ceremonial
+Redirect 301 /landing/estudiar-tecnicatura-operaciones-mineras.php /landing/ingreso/carreras-agosto/tecnicatura-en-operaciones-mineras-e-industriales
+
+# ----------------------------------------------------------------------------
+# BLOQUE 2 - Carreras PRESENCIALES -> /landing/ingreso/carreras/
+# ----------------------------------------------------------------------------
+
+# -- Grupo A --
+Redirect 301 /landing/estudiar-lic-psicologia-presencial.php /landing/ingreso/carreras/licenciatura-en-psicologia
+Redirect 301 /landing/estudiar-derecho-abogacia-presencial.php /landing/ingreso/carreras/abogacia
+Redirect 301 /landing/estudiar-lic-criminalistica-salta.php /landing/ingreso/carreras/licenciatura-en-criminalistica
+Redirect 301 /landing/estudiar-arquitectura-presencial.php /landing/ingreso/carreras/arquitectura
+Redirect 301 /landing/estudiar-veterinaria-presencial.php /landing/ingreso/carreras/ciencias-veterinarias
+Redirect 301 /landing/estudiar-ingenieria-informatica-presencial.php /landing/ingreso/carreras/ingenieria-en-informatica
+# 53-FORMACION DOCENTE -> en el proyecto figura como codcar 323 "Formacion Docente para Profesionales". Verificar codigo.
+Redirect 301 /landing/estudiar-formacion-docente-presencial.php /landing/ingreso/carreras/formacion-docente-para-profesionales
+Redirect 301 /landing/estudiar-lic-administracion-empresas-presencial.php /landing/ingreso/carreras/administracion-de-empresas
+Redirect 301 /landing/estudiar-contador-presencial.php /landing/ingreso/carreras/contador-publico
+
+# -- Grupo B --
+Redirect 301 /landing/estudiar-prof-ed-fisica.php /landing/ingreso/carreras/profesorado-en-educacion-fisica
+Redirect 301 /landing/estudiar-ingenieria-industrial-presencial.php /landing/ingreso/carreras/ingenieria-industrial
+Redirect 301 /landing/estudiar-lic-kinesiologia-fisioterapia-presencial.php /landing/ingreso/carreras/licenciatura-en-kinesiologia-y-fisioterapia
+Redirect 301 /landing/estudiar-lic-comercializacion-presencial.php /landing/ingreso/carreras/comercializacion
+Redirect 301 /landing/estudiar-lic-higiene-y-seguridad-trabajo-presencial.php /landing/ingreso/carreras/higiene-y-seguridad
+# 232-TEC. UNIV. EN PRODUCCION DE BIO-IMAGENES: el proyecto tiene una sola pagina (232),
+# asi que las variantes "jujuy" y "sin jujuy" caen las dos aca.
+Redirect 301 /landing/estudiar-tec-universitario-prod-bio-imagenes-jujuy.php /landing/ingreso/carreras/tecnicatura-univ-en-produccion-de-bio-imagenes
+Redirect 301 /landing/estudiar-prof-campo-disciplinar.php /landing/ingreso/carreras/profesorado-universitario-campo-disciplinar-segun-titulacion-de-base-ccc
+Redirect 301 /landing/estudiar-lic-comercio-internacional.php /landing/ingreso/carreras/comercio-internacional
+Redirect 301 /landing/estudiar-traductor-ingles-presencial.php /landing/ingreso/carreras/traductor-publico-en-ingles
+Redirect 301 /landing/estudiar-lic-trabajo-social-ccc-presencial.php /landing/ingreso/carreras/licenciatura-en-trabajo-social-ccc
+Redirect 301 /landing/estudiar-escribania.php /landing/ingreso/carreras/escribania
+Redirect 301 /landing/estudiar-ingenieria-civil-presencial.php /landing/ingreso/carreras/ingenieria-civil
+Redirect 301 /landing/estudiar-lic-gestion-educativa-presencial.php /landing/ingreso/carreras/licenciatura-en-gestion-educativa-ciclo-de-licenciatura
+Redirect 301 /landing/estudiar-lic-trabajo-social-presencial.php /landing/ingreso/carreras/licenciatura-en-trabajo-social
+Redirect 301 /landing/estudiar-lic-fonoaudiologia-presencial.php /landing/ingreso/carreras/licenciatura-en-fonoaudiologia
+Redirect 301 /landing/estudiar-lic-relaciones-internacionales-presencial.php /landing/ingreso/carreras/licenciatura-en-relaciones-internacionales
+
+# -- Grupo C --
+Redirect 301 /landing/estudiar-procuracion.php /landing/ingreso/carreras/procuracion
+Redirect 301 /landing/estudiar-disenio-industrial.php /landing/ingreso/carreras/diseno-industrial
+Redirect 301 /landing/estudiar-tecnicatura-universitaria-podologia.php /landing/ingreso/carreras/tecnicatura-univ-en-podologia
+Redirect 301 /landing/estudiar-lic-diseno-interiores-presencial.php /landing/ingreso/carreras/licenciatura-en-diseno-de-interiores
+Redirect 301 /landing/estudiar-prof-ingles-presencial.php /landing/ingreso/carreras/profesorado-en-ingles
+Redirect 301 /landing/estudiar-lic-rrhh-presencial.php /landing/ingreso/carreras/recursos-humanos
+Redirect 301 /landing/estudiar-tec-fitness.php /landing/ingreso/carreras/tecnicatura-univ-en-actividad-fisica-y-fitness
+Redirect 301 /landing/estudiar-licenciatura-psicopedagogia.php /landing/ingreso/carreras/licenciatura-en-psicopedagogia
+Redirect 301 /landing/estudiar-lic-imagen-sonido-presencial.php /landing/ingreso/carreras/licenciatura-en-imagen-y-sonido
+Redirect 301 /landing/estudiar-ing-telecomunicaciones.php /landing/ingreso/carreras/ingenieria-en-telecomunicaciones
+# 1169-LIC. EN PSICOMOTRICIDAD -> en el proyecto figura como codcar 358. Verificar codigo.
+Redirect 301 /landing/estudiar-licenciatura-psicomotricidad.php /landing/ingreso/carreras/licenciatura-en-psicomotricidad
+# 250-NEGOCIOS DIGITALES: en el proyecto es online-only, pero el build presencial
+# genera igual su pagina (modosCarrera presencial = [1, 7]).
+Redirect 301 /landing/estudiar-licenciatura-administracion-negocios-digitales.php /landing/ingreso/carreras/administracion-de-negocios-digitales
+
+# -- Grupo D --
+Redirect 301 /landing/estudiar-lic-terapia-ocupacional-presencial.php /landing/ingreso/carreras/licenciatura-en-terapia-ocupacional
+Redirect 301 /landing/estudiar-prof-educacion-primaria.php /landing/ingreso/carreras/profesorado-universitario-en-educacion-primaria
+Redirect 301 /landing/estudiar-lic-comunicacion-presencial.php /landing/ingreso/carreras/licenciatura-en-comunicaciones
+Redirect 301 /landing/estudiar-licenciatura-teologia.php /landing/ingreso/carreras/licenciatura-en-teologia
+Redirect 301 /landing/estudiar-prof-educacion-inicial-presencial.php /landing/ingreso/carreras/profesorado-universitario-en-educacion-inicial
+Redirect 301 /landing/estudiar-perito-accidentologia-presencial.php /landing/ingreso/carreras/perito-en-accidentologia
+Redirect 301 /landing/estudiar-lic-ingles-complementacion-presencial.php /landing/ingreso/carreras/licenciatura-en-ingles-ciclo-de-licenciatura
+Redirect 301 /landing/estudiar-martillero-presencial.php /landing/ingreso/carreras/corredor-inmobiliario-y-martillero-publico
+Redirect 301 /landing/estudiar-lic-turismo.php /landing/ingreso/carreras/licenciatura-en-turismo
+Redirect 301 /landing/estudiar-lic-entrenamiento-deportivo-ccc.php /landing/ingreso/carreras/licenciatura-en-entrenamiento-deportivo-ccc
+Redirect 301 /landing/estudiar-lic-economia.php /landing/ingreso/carreras/economia
+Redirect 301 /landing/estudiar-lic-publicidad.php /landing/ingreso/carreras/licenciatura-en-publicidad
+# La URL dice "comp-curricular" y la planilla anota 104 -> se manda al Ciclo de
+# Licenciatura (104), no a la Lic. en Educacion Fisica comun (32).
+Redirect 301 /landing/estudiar-lic-educacion-fisica-comp-curricular-presencial.php /landing/ingreso/carreras/licenciatura-en-educacion-fisica-ciclo-de-licenciatura
+Redirect 301 /landing/estudiar-lic-produccion-animal.php /landing/ingreso/carreras/licenciatura-en-produccion-animal
+Redirect 301 /landing/estudiar-lic-periodismo-presencial.php /landing/ingreso/carreras/licenciatura-en-periodismo
+Redirect 301 /landing/estudiar-escribania-ciclo-complementario.php /landing/ingreso/carreras/escribania-ccc
+Redirect 301 /landing/estudiar-lic-artes-musicales.php /landing/ingreso/carreras/licenciatura-en-artes-musicales
+Redirect 301 /landing/estudiar-locutor-nacional-presencial.php /landing/ingreso/carreras/locutor-nacional
+Redirect 301 /landing/estudiar-lic-relaciones-publicas-presencial.php /landing/ingreso/carreras/licenciatura-en-relaciones-publicas-e-institucionales
+Redirect 301 /landing/estudiar-productor-director-radio-tv.php /landing/ingreso/carreras/productor-y-director-para-radio-y-television
+Redirect 301 /landing/estudiar-lic-administracion-agropecuaria.php /landing/ingreso/carreras/administracion-agropecuaria
+Redirect 301 /landing/estudiar-lic-diseno-interiores-presencial-ccc.php /landing/ingreso/carreras/licenciatura-en-diseno-de-interiores-ciclo-de-licenciatura
+Redirect 301 /landing/estudiar-lic-filosofia-presencial.php /landing/ingreso/carreras/licenciatura-en-filosofia
+Redirect 301 /landing/estudiar-lic-lenguajes-expresivos-ccc.php /landing/ingreso/carreras/licenciatura-en-lenguajes-expresivos-ccc
+
+# -- Nuevas --
+Redirect 301 /landing/estudiar-licenciatura-podologia.php /landing/ingreso/carreras/licenciatura-en-podologia-ccc
+Redirect 301 /landing/estudiar-tecnicatura-administracion-gestion-judicial.php /landing/ingreso/carreras/tecnicatura-en-administracion-y-gestion-judicial
+# 1204 y 232 comparten pagina en el proyecto (ver comentario del Grupo B).
+Redirect 301 /landing/estudiar-tec-universitario-prod-bio-imagenes.php /landing/ingreso/carreras/tecnicatura-univ-en-produccion-de-bio-imagenes
+Redirect 301 /landing/estudiar-lic-prod-bioimagenes-jujuy-ccc.php /landing/ingreso/carreras/licenciatura-en-produccion-de-bioimagenes-ccc
+Redirect 301 /landing/estudiar-licenciatura-gastronomia.php /landing/ingreso/carreras/licenciatura-en-gastronomia
+# Escribania CCC Buenos Aires: no hay pagina propia, va a la misma que 146.
+Redirect 301 /landing/estudiar-escribania-ciclo-complementario-buenos-aires.php /landing/ingreso/carreras/escribania-ccc
+Redirect 301 /landing/estudiar-prof-psicologia-presencial.php /landing/ingreso/carreras/profesorado-en-psicologia
+Redirect 301 /landing/estudiar-tecnicatura-universitaria-topografia-y-geomatica.php /landing/ingreso/carreras/tecnicatura-universitaria-topografia-y-geomatica
+Redirect 301 /landing/estudiar-guia-universitario-turismo-presencial.php /landing/ingreso/carreras/guia-universitario-de-turismo
+Redirect 301 /landing/estudiar-licenciatura-ciencias-politicas.php /landing/ingreso/carreras/ciencias-politicas
+
+# ----------------------------------------------------------------------------
+# SIN DESTINO - la carrera NO existe en src/data/carreras.ts
+# ----------------------------------------------------------------------------
+# Descomentar cuando se cargue la carrera en el proyecto, o decidir a donde
+# mandarlas (el listado /landing/ingreso/carreras/ es el fallback razonable).
+#
+# 221-LICENCIATURA EN DISENO GRAFICO
+# Redirect 301 /landing/estudiar-lic-diseno-grafico-presencial.php /landing/ingreso/carreras/
+#
+# 180-LICENCIATURA EN HISTORIA - CICLO DE LICENCIATURA
+# Redirect 301 /landing/estudiar-lic-historia-ciclo-licenciatura.php /landing/ingreso/carreras/
+#
+# 203-LICENCIATURA EN ARTES PLASTICAS - CICLO LICENCIATURA
+# Redirect 301 /landing/estudiar-lic-artes-plasticas-presencial.php /landing/ingreso/carreras/
+#
+# 389-LICENCIATURA EN REALIZACION AUDIOVISUAL
+# Redirect 301 /landing/estudiar-licenciatura-en-realizacion-audiovisual.php /landing/ingreso/carreras/
+#
+# Sin URL de origen en la planilla (no se puede redirigir): 193, 2, 216, 245,
+# 27, 335, 339, 350, 41, 9, 96.

@@ -1,3 +1,5 @@
+import { de } from "zod/locales";
+
 const data = [
     // ── SEDE A ──
     {
@@ -7,7 +9,7 @@ const data = [
         nombre: "Abogacía",
         descripcion: "La carrera de Abogacía forma profesionales con capacidad para asesorar y representar a personas u organizaciones en la resolución de conflictos jurídicos. Los estudiantes dominan herramientas de derecho civil, penal, comercial, procesal y constitucional, junto con técnicas de argumentación y litigación. La carrera combina teoría y práctica para desarrollar líderes capaces de tomar decisiones fundamentadas en el ámbito público y privado.",
         duracion: "5 años",
-        modalidad: [1,7],
+        modalidad: [1, 7],
         perfilEgresado: {
             items: [
                 "Patrocinar y representar a clientes en litigios judiciales y extrajudiciales.",
@@ -99,7 +101,7 @@ const data = [
         nombre: "Corredor Inmobiliario y Martillero Público",
         descripcion: "La carrera de Corredor Inmobiliario y Martillero Público de UCASAL forma profesionales capacitados para gestionar operaciones inmobiliarias, realizar tasaciones y peritajes, y actuar como auxiliares de la justicia en remates y ejecuciones de sentencias, además de gestionar trámites de inscripción registral.",
         duracion: "2 años",
-        modalidad: [1,7],
+        modalidad: [1, 7],
         perfilEgresado: {
             items: [
                 "Intermediar en operaciones de compra, venta, permuta y alquiler de bienes inmuebles.",
@@ -154,7 +156,7 @@ const data = [
         nombre: "Contador Público",
         descripcion: "La carrera de Contador Público de UCASAL forma profesionales con sólida base en contabilidad, costos, impuestos, auditoría y gestión de organizaciones. Los egresados pueden actuar como peritos en el ámbito judicial y ejercer de forma independiente o en relación de dependencia, en organizaciones públicas y privadas, asesorando y liderando procesos administrativo-contables con criterio ético y humanístico.",
         duracion: "4 años",
-        modalidad: [1,7],
+        modalidad: [1, 7],
         perfilEgresado: {
             items: [
                 "Diseñar, administrar e interpretar sistemas de información contable y financiera en organizaciones públicas y privadas.",
@@ -302,7 +304,7 @@ const data = [
         nombre: "Escribanía",
         descripcion: "La carrera de Escribanía de UCASAL forma profesionales habilitados para ejercer la función notarial: confeccionar y autorizar instrumentos públicos, asesorar en materia notarial e instrumental, redactar documentos privados y realizar el estudio de títulos dominiales inmobiliarios. La formación combina bases teórico-prácticas del derecho civil, registral y notarial, con un fuerte compromiso ético y responsabilidad social como funcionario público.",
         duracion: "4½ años",
-        modalidad: [1,7],
+        modalidad: [1, 7],
         perfilEgresado: {
             items: [
                 "Redactar y autorizar escrituras públicas, contratos y documentos notariales.",
@@ -388,7 +390,7 @@ const data = [
         nombre: "Licenciatura en Administración de Empresas",
         descripcion: "La Licenciatura en Administración de Empresas de UCASAL forma profesionales capacitados para gestionar organizaciones de todo tipo y tamaño, con dominio de planificación estratégica, recursos humanos, finanzas, marketing y operaciones. Combina teoría y práctica para desarrollar liderazgo y toma de decisiones en entornos dinámicos, tanto en empresas privadas como en organismos públicos.",
         duracion: "4 años",
-        modalidad: [1,7],
+        modalidad: [1, 7],
         perfilEgresado: {
             items: [
                 "Planificar, dirigir y controlar la gestión integral de todo tipo de organizaciones.",
@@ -542,7 +544,7 @@ const data = [
         nombre: "Licenciatura en Higiene y Seguridad",
         descripcion: "La Licenciatura en Higiene y Seguridad en el Trabajo de UCASAL forma profesionales capacitados para diseñar, implementar y liderar programas de prevención y protección de riesgos laborales, cuidando la integridad de las personas y los recursos materiales y ambientales de las organizaciones. La carrera ofrece título intermedio de Técnico en Higiene y Seguridad en el Trabajo.",
         duracion: "4 años",
-        modalidad: [1,7],
+        modalidad: [1, 7],
         perfilEgresado: {
             items: [
                 "Diseñar, evaluar y gestionar programas integrales de prevención de riesgos laborales e higiene industrial.",
@@ -704,7 +706,7 @@ const data = [
         nombre: "Licenciatura en Recursos Humanos",
         descripcion: "La Licenciatura en Recursos Humanos de UCASAL forma profesionales capacitados para gestionar integralmente el capital humano de las organizaciones: procesos de selección, capacitación, desarrollo, evaluación de desempeño, remuneraciones y relaciones laborales. Combina psicología organizacional, derecho laboral y herramientas de gestión, con título intermedio de Analista Universitario en Recursos Humanos.",
         duracion: "4 años",
-        modalidad: [1,7],
+        modalidad: [1, 7],
         perfilEgresado: {
             items: [
                 "Diseñar y gestionar estrategias de atracción, selección e inducción del talento.",
@@ -788,7 +790,7 @@ const data = [
         nombre: "Licenciatura en Economía",
         descripcion: "La Licenciatura en Economía de UCASAL forma profesionales capacitados para relacionar teorías, modelos y métodos económicos con organizaciones públicas y privadas, comprendiendo fenómenos micro y macroeconómicos para asesorar sobre la marcha de la economía y el diseño de políticas económicas. La formación habilita el desempeño en el sector público, las finanzas, la economía de empresas y el comercio exterior.",
         duracion: "4 años",
-        modalidad: [1,7],
+        modalidad: [1, 7],
         perfilEgresado: {
             items: [
                 "Analizar y proyectar variables macroeconómicas y microeconómicas para la toma de decisiones.",
@@ -871,7 +873,7 @@ const data = [
         nombre: "Licenciatura en Comercialización",
         descripcion: "La Licenciatura en Comercialización de UCASAL forma profesionales capacitados para diseñar y desarrollar estrategias y acciones comerciales, analizando fenómenos del consumo para posicionar organizaciones en mercados nacionales e internacionales mediante herramientas de marketing digital. Incluye investigación de mercados, estrategias de productos y precios, planificación de ventas y comercialización internacional, con título intermedio de Analista en Marketing.",
         duracion: "4 años",
-        modalidad: [1,7],
+        modalidad: [1, 7],
         perfilEgresado: {
             items: [
                 "Diseñar e implementar planes de marketing integrales y estrategias de ventas.",
@@ -1026,7 +1028,7 @@ const data = [
         nombre: "Procuración",
         descripcion: "La carrera de Procuración de UCASAL forma profesionales habilitados para actuar como auxiliares de la justicia, gestionando expedientes y trámites judiciales en distintos fueros. La formación abarca derecho procesal civil, comercial y laboral, redacción de escritos y seguimiento de actuaciones procesales, con salida laboral en estudios jurídicos, tribunales y organismos del Estado. Título de pregrado, con validez nacional.",
         duracion: "3 años",
-        modalidad: [1,7],
+        modalidad: [1, 7],
         perfilEgresado: {
             items: [
                 "Representar a las partes en juicios civiles, comerciales, laborales y administrativos.",
@@ -1206,7 +1208,7 @@ const data = [
         nombre: "Licenciatura en Comercio Internacional",
         descripcion: "La Licenciatura en Comercio Internacional forma profesionales con capacidad para gestionar operaciones y negocios en los mercados globales. Los estudiantes dominan herramientas de logística internacional, legislación aduanera, finanzas de comercio exterior, negociación e inteligencia comercial. La carrera combina teoría y práctica para desarrollar líderes capaces de diseñar estrategias de internacionalización en empresas e instituciones.",
         duracion: "4 años",
-        modalidad: [1,7],
+        modalidad: [1, 7],
         perfilEgresado: {
             items: [
                 "Diseñar estrategias de internacionalización para empresas en mercados globales.",
@@ -1296,7 +1298,7 @@ const data = [
         nombre: "Licenciatura en Administración Agropecuaria",
         descripcion: "La Licenciatura en Administración Agropecuaria forma profesionales capacitados para dirigir y optimizar negocios del sector agroindustrial. Los egresados dominan herramientas de gestión financiera, planificación estratégica, comercialización y sustentabilidad ambiental. La carrera integra la visión técnica con el análisis de mercados para formar líderes capaces de tomar decisiones eficientes en cadenas de valor agrícolas y ganaderas.",
         duracion: "4 años",
-        modalidad: [1,7],
+        modalidad: [1, 7],
         perfilEgresado: {
             items: [
                 "Planificar, dirigir y optimizar empresas del sector agropecuario y agroindustrial.",
@@ -1522,7 +1524,7 @@ const data = [
         nombre: "Guía Universitario de Turismo",
         descripcion: "El Guía Universitario de Turismo forma profesionales con capacidad para conducir, orientar y asistir a grupos en diversos recorridos turísticos. Los estudiantes dominan herramientas de geografía, patrimonio histórico y cultural, técnicas de guiado, primeros auxilios e idiomas. La carrera combina teoría y práctica para desarrollar líderes capaces de enriquecer la experiencia del visitante en circuitos públicos y privados.",
         duracion: "2½ años",
-        modalidad: [1,7],
+        modalidad: [1, 7],
         perfilEgresado: {
             items: [
                 "Guiar, orientar y acompañar a visitantes individuales y grupos de turistas.",
@@ -1790,6 +1792,9 @@ const data = [
         descripcion: "La Licenciatura en Psicología forma profesionales con capacidad para comprender, evaluar e intervenir en el comportamiento humano y la salud mental. Los estudiantes dominan herramientas de psicodiagnóstico, evaluación clínica, psicología social, neurociencias y diversas psicoterapias. La carrera combina teoría y práctica para desarrollar líderes capaces de tomar decisiones estratégicas en los ámbitos clínico, educativo, laboral y comunitario.",
         duracion: "5 años",
         modalidad: [1],
+        cio: {
+            materias: ["Módulo Disciplinar CIO", "MIVU - COEDU"]
+        },
         perfilEgresado: {
             items: [
                 "Evaluar, diagnosticar e intervenir en la salud mental de personas y comunidades.",
@@ -1977,6 +1982,9 @@ const data = [
         descripcion: "La carrera de Arquitectura forma profesionales con capacidad para diseñar, proyectar y dirigir obras que transforman el hábitat y el entorno urbano. Los estudiantes dominan herramientas de diseño arquitectónico, sistemas constructivos, representación digital, sustentabilidad y gestión de proyectos. La carrera combina teoría y práctica para desarrollar líderes capaces de tomar decisiones estratégicas en el ámbito público y privado.",
         duracion: "5 años",
         modalidad: [1],
+        cio: {
+            materias: ["Medios de expresión", "COEDU", "Matemática", "Sistemas de Representación", "MIVU"]
+        },
         perfilEgresado: {
             items: [
                 "Diseñar y proyectar espacios habitables, urbanos, arquitectónicos y del paisaje.",
@@ -2214,6 +2222,9 @@ const data = [
         descripcion: "La carrera de Ingeniería en Informática forma profesionales con capacidad para diseñar, desarrollar y gestionar sistemas tecnológicos complejos. Los estudiantes dominan herramientas de programación avanzada, arquitectura de software, bases de datos, redes, ciberseguridad e inteligencia artificial. La carrera combina teoría y práctica para desarrollar líderes capaces de tomar decisiones estratégicas en el ámbito público y privado.",
         duracion: "5 años",
         modalidad: [1],
+        cio: {
+            materias: ["Matemática Física - Química", "Resolución de problemas con algoritmos ", "Curso Introductorio a la Vida Universitaria General"]
+        },
         perfilEgresado: {
             items: [
                 "Diseñar, desarrollar y liderar proyectos de software, redes y arquitecturas tecnológicas complejas.",
@@ -2325,6 +2336,9 @@ const data = [
         descripcion: "La carrera de Ingeniería Industrial forma profesionales con capacidad para optimizar procesos, recursos e infraestructuras en organizaciones de bienes y servicios. Los estudiantes dominan herramientas de gestión de operaciones, logística, economía, control de calidad y dirección de proyectos. La carrera combina teoría y práctica para desarrollar líderes capaces de tomar decisiones estratégicas en el ámbito público y privado.",
         duracion: "5 años",
         modalidad: [1],
+        cio: {
+            materias: ["Física-Quimica", "Matemáticas", "Resolución de Problemas", "MIVU"]
+        },
         perfilEgresado: {
             items: [
                 "Diseñar, optimizar y dirigir sistemas de producción de bienes y servicios.",
@@ -2936,7 +2950,7 @@ const data = [
         nombre: "Licenciatura en Relaciones Internacionales",
         descripcion: "La Licenciatura en Relaciones Internacionales de UCASAL forma profesionales capacitados para evaluar críticamente los factores que influyen en la política exterior y asesorar a instituciones públicas y empresas privadas sobre la dinámica entre Estados, bloques económicos y organismos internacionales. Habilita para desempeñarse en organismos gubernamentales, ONGs, empresas privadas, docencia e investigación, e ingresar al Servicio Exterior de la Nación.",
         duracion: "4 años",
-        modalidad: [1,7],
+        modalidad: [1, 7],
         perfilEgresado: {
             items: [
                 "Analizar y prospectar la coyuntura política, económica y social a nivel global.",
@@ -4185,7 +4199,7 @@ const data = [
         nombre: "Licenciatura en Turismo",
         descripcion: "La Licenciatura en Turismo forma profesionales con capacidad para planificar, gestionar y desarrollar proyectos turísticos sostenibles. Los estudiantes dominan herramientas de gestión hotelera, administración de agencias, patrimonio cultural, marketing turístico y políticas públicas. La carrera combina teoría y práctica para desarrollar líderes capaces de impulsar destinos competitivos e innovar en el sector público y privado.",
         duracion: "4 años",
-        modalidad: [1,7],
+        modalidad: [1, 7],
         perfilEgresado: {
             items: [
                 "Diseñar, comercializar y gestionar productos, circuitos y destinos turísticos.",
@@ -4849,7 +4863,7 @@ const data = [
         nombre: "Licenciatura en Relaciones Públicas e Institucionales",
         descripcion: "La Licenciatura en Relaciones Públicas e Institucionales forma profesionales capaces de diseñar y gestionar estrategias de comunicación integral para diversas organizaciones. Su plan de estudios integra la gestión de imagen corporativa, la resolución de crisis, la organización de eventos y las relaciones con los medios digitales. Propone un espacio académico para comprender el vínculo institucional y construir puentes de diálogo transparentes.",
         duracion: "4 años",
-        modalidad: [1,7],
+        modalidad: [1, 7],
         perfilEgresado: {
             items: [
                 "Diseñar e implementar estrategias de comunicación institucional, reputación e imagen de marca.",
@@ -5526,7 +5540,7 @@ const data = [
         nombre: "Licenciatura en Gestión Educativa - Ciclo de Licenciatura",
         descripcion: "La Licenciatura en Gestión Educativa forma profesionales con capacidad para liderar y transformar instituciones en los distintos niveles del sistema. Los estudiantes dominan herramientas de planificación curricular, evaluación institucional, legislación escolar, gestión de equipos y política educativa. La carrera combina teoría y práctica para desarrollar líderes capaces de tomar decisiones estratégicas en contextos diversos.",
         duracion: "2 años",
-        modalidad: [1,7],
+        modalidad: [1, 7],
         perfilEgresado: {
             items: [
                 "Liderar y gestionar instituciones educativas de diversos niveles y modalidades.",
@@ -5617,7 +5631,7 @@ const data = [
         nombre: "Licenciatura en Entrenamiento Deportivo - CCC",
         descripcion: "La Licenciatura en Entrenamiento Deportivo forma profesionales con capacidad para planificar y optimizar procesos de alto rendimiento e iniciación atlética. Los estudiantes dominan herramientas de preparación física, fisiología del ejercicio, biomecánica, nutrición aplicada y tecnología deportiva. La carrera combina teoría y práctica para desarrollar líderes capaces de tomar decisiones estratégicas en instituciones, clubes y federaciones.",
         duracion: "1½ años",
-        modalidad: [1,7],
+        modalidad: [1, 7],
         perfilEgresado: {
             items: [
                 "Diseñar y supervisar programas de preparación física para deportistas de alto rendimiento.",
@@ -5661,7 +5675,7 @@ const data = [
         nombre: "Escribanía - CCC",
         descripcion: "La carrera de Escribanía forma profesionales con capacidad para ejercer la fe pública y brindar asesoramiento en actos jurídicos y notariales. Los estudiantes dominan herramientas de derecho notarial, registral, inmobiliario, contractual, tributario y técnica de redacción de escrituras. La carrera combina teoría y práctica para desarrollar líderes capaces de tomar decisiones estratégicas e intervenir con rigor ético en el ámbito legal.",
         duracion: "1 año",
-        modalidad: [1,7],
+        modalidad: [1, 7],
         perfilEgresado: {
             items: [
                 "Redactar y autorizar escrituras públicas, actas y documentos notariales.",
@@ -5776,7 +5790,7 @@ const data = [
         nombre: "Licenciatura en Lenguajes Expresivos - CCC",
         descripcion: "La Licenciatura en Lenguajes Expresivos forma profesionales con capacidad para integrar el arte, la comunicación y el cuerpo en proyectos educativos y socio-culturales. Los estudiantes dominan herramientas de expresión corporal, semiótica, producción artística, dinámicas grupales y gestión cultural. La carrera combina teoría y práctica para desarrollar líderes capaces de tomar decisiones estratégicas en instituciones públicas y privadas.",
         duracion: "1½ años",
-        modalidad: [1,7],
+        modalidad: [1, 7],
         perfilEgresado: {
             items: [
                 "Diseñar proyectos socioeducativos basados en lenguajes artísticos y expresivos.",

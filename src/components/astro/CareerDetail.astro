@@ -1,5 +1,7 @@
 ---
-import { existsSync } from "node:fs";
+import { getImage } from "astro:assets";
+const base = import.meta.env.BASE_URL;
+import type { ImageMetadata } from "astro";
 import {
   MODO_ONLINE,
   MODO_PRESENCIAL,
@@ -23,6 +25,7 @@ interface Career {
   duracion: string;
   modalidad: number[];
   sector: number;
+  cio?: { materias: string[] };
   perfilEgresado?: { items: string[] };
   planEstudios?: PlanEstudios;
   planEstudiosPorModalidad?: {
@@ -36,7 +39,57 @@ interface Props {
 }
 
 const { carrera } = Astro.props;
-const base = import.meta.env.BASE_URL;
+
+const imagenes = import.meta.glob<ImageMetadata>(
+  "../../assets/{encabezados,cards}/*.{webp,jpg,jpeg,png}",
+  {
+    eager: true,
+    import: "default",
+  },
+);
+
+const buscarImagen = (ruta: string) =>
+  Object.entries(imagenes).find(([archivo]) => archivo.endsWith(ruta))?.[1];
+
+const fotoDesktop = buscarImagen(`encabezados/${carrera.codcar}-desktop.webp`);
+const fotoMobile = buscarImagen(`encabezados/${carrera.codcar}-mobile.webp`);
+
+const imagenRespaldo = buscarImagen(`/cards/${carrera.codcar}.webp`);
+
+const encabezadoDesktop = fotoDesktop ?? imagenRespaldo;
+const encabezadoMobile = fotoMobile ?? imagenRespaldo;
+
+if (!encabezadoDesktop || !encabezadoMobile) {
+  throw new Error("No se encontraron las imágenes de encabezado");
+}
+
+const [
+  encabezadoAvifDesktop,
+  encabezadoAvifMobile,
+  encabezadoWebpDesktop,
+  encabezadoWebpMobile,
+] = await Promise.all([
+  getImage({
+    src: encabezadoDesktop,
+    format: "avif",
+    widths: [1024, 1440, 1920, 2048],
+  }),
+  getImage({
+    src: encabezadoMobile,
+    format: "avif",
+    widths: [640, 828, 1080, 1236],
+  }),
+  getImage({
+    src: encabezadoDesktop,
+    format: "webp",
+    widths: [1024, 1440, 1920, 2048],
+  }),
+  getImage({
+    src: encabezadoMobile,
+    format: "webp",
+    widths: [640, 828, 1080, 1236],
+  }),
+]);
 
 const modalidad = getNombreModalidades(carrera.modalidad);
 const facultad = getNombreFacultad(carrera.sector);
@@ -54,23 +107,6 @@ const planEstudios =
 const cursaPresencial = carrera.modalidad.includes(MODO_PRESENCIAL);
 const cursaOnline = carrera.modalidad.includes(MODO_ONLINE);
 const mixta = cursaPresencial && cursaOnline;
-
-// Los encabezados por carrera existen solo para algunas (ver /public/encabezados).
-// Las que no tienen caen a su foto de /cards, que está para todas: sin este
-// chequeo el hero de esas subpáginas quedaba en negro.
-const tieneEncabezado = existsSync(
-  new URL(
-    `../../../public/encabezados/${carrera.codcar}-desktop.webp`,
-    import.meta.url,
-  ),
-);
-const fotoDesktop = tieneEncabezado
-  ? `${base}encabezados/${carrera.codcar}-desktop.webp`
-  : `${base}cards/${carrera.codcar}.webp`;
-const fotoMobile = tieneEncabezado
-  ? `${base}encabezados/${carrera.codcar}-mobile.webp`
-  : `${base}cards/${carrera.codcar}.webp`;
-
 const parrafos = carrera.descripcion.split("\\n").filter(Boolean);
 ---
 
@@ -82,8 +118,23 @@ const parrafos = carrera.descripcion.split("\\n").filter(Boolean);
   >
     <div class="absolute inset-0 -z-10">
       <picture>
-        <source media="(min-width: 769px)" srcset={fotoDesktop} />
-        <img src={fotoMobile} alt="" class="h-full w-full object-cover" />
+        <source
+          media="(min-width: 769px)"
+          srcset={encabezadoAvifDesktop.src}
+          type="image/avif"
+        />
+        <source
+          media="(min-width: 769px)"
+          srcset={encabezadoWebpDesktop.src}
+          type="image/webp"
+        />
+        <source srcset={encabezadoAvifMobile.src} type="image/avif" />
+        <source srcset={encabezadoWebpMobile.src} type="image/webp" />
+        <img
+          src={encabezadoDesktop.src}
+          alt=""
+          class="h-full w-full object-cover"
+        />
       </picture>
       <div
         class="absolute inset-0 bg-linear-to-t from-black/85 via-black/45 to-black/35"
@@ -145,7 +196,7 @@ const parrafos = carrera.descripcion.split("\\n").filter(Boolean);
 
   <section id="detalle" class="bg-white py-16 md:py-20">
     <div
-      class="contenedor grid items-start gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,34rem)] lg:gap-14"
+      class="contenedor grid items-start gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,26rem)] 2xl:grid-cols-[minmax(0,1fr)_minmax(0,34rem)] lg:gap-14"
     >
       <div class="min-w-0">
         <h2 class="text-(--azul-dark-ucasal)">Sobre la carrera</h2>
@@ -210,9 +261,6 @@ const parrafos = carrera.descripcion.split("\\n").filter(Boolean);
           )
         }
       </div>
-
-      <!-- El formulario acompaña todo el detalle: sticky en desktop y,
-                 en mobile, arriba de todo para que no quede tapado por el plan. -->
       <aside
         id="contacto"
         class="order-first min-w-0 scroll-mt-24 lg:order-0 lg:sticky lg:top-24"
@@ -225,34 +273,65 @@ const parrafos = carrera.descripcion.split("\\n").filter(Boolean);
         />
       </aside>
     </div>
+    {
+      carrera.codcar === 84 ||
+      carrera.codcar === 19 ||
+      carrera.codcar === 105 ||
+      carrera.codcar === 26 ? (
+        <section class="flex flex-row gap-16 relative contenedor py-12">
+          <div class="text-xl flex flex-col justify-center items-center text-center">
+            <p class="text-white bg-(--rojo-ucasal) rounded-full size-8 flex justify-center items-center">
+              !
+            </p>
+            <p class="flex flex-col">
+              <span class="first-letter:text-(--rojo-ucasal)">Curso de</span>
+              <span class="first-letter:text-(--rojo-ucasal)">Ingreso</span>
+              <span class="first-letter:text-(--rojo-ucasal)">Obligatorio</span>
+            </p>
+          </div>
+          <div class="text-lg">
+            El <span class="font-bold">curso de ingreso obligatorio (CIO)</span>{" "}
+            tiene por objetivo preparar a los estudiantes para una experiencia
+            universitaria exitosa y productiva. <br />
+            El CIO de {carrera.nombre} consta de los siguientes módulos:
+            {carrera.cio && (
+              <>
+                <ul class="list-disc py-2 italic mx-8">
+                  {carrera.cio?.materias.map((modulo) => (
+                    <li>{modulo}</li>
+                  ))}
+                </ul>
+              </>
+            )}
+            Se realizará durante el mes de Febrero y es condición necesaria para
+            el ingreso a la carrera cumplir con:
+            <ul class="list-disc mx-8 py-2">
+              <li>Contar con almenos el 80% de asistencia.</li>
+              <li>Superar las instancias evaluativas que se darán durante el mes de cursado.</li>
+              <li>Pago del arancel del curso introductorio obligatorio.</li>
+            </ul>
+              El curso podrá cursarse en diferentes turnos, sujeto a la cantidad de aspirantes y comisiones que se habiliten.
+          </div>
+        </section>
+      ) : (
+        ""
+      )
+    }
   </section>
 
   <!-- ───────────────────────────── Beneficios ──────────────────────────── -->
   <div class="relative isolate">
     <div class="absolute inset-0 -z-10">
       <picture>
-        <source media="(min-width: 769px)" srcset={fotoDesktop} />
+        <source media="(min-width: 769px)" srcset={`${base}fondos/azul.webp`} />
         <img
-          src={fotoMobile}
+          src={`${base}fondos/azul.webp`}
           alt=""
           class="sticky top-0 h-dvh w-full object-cover"
         />
       </picture>
-      <div class="absolute inset-0 bg-(--azul-dark-ucasal)/45"></div>
     </div>
     <BeneficiosCartas base={base} />
-  </div>
-
-  <!-- ─────────────────────────── Financiación ──────────────────────────── -->
-  <section class="relative isolate overflow-hidden py-16 md:py-20">
-    <div class="absolute inset-0 -z-10">
-      <img
-        src={`${base}fondos/azul.webp`}
-        alt=""
-        class="h-full w-full object-cover"
-      />
-      <div class="absolute inset-0 bg-(--azul-dark-ucasal)/40"></div>
-    </div>
     <div class="contenedor grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
       <div class="min-w-0 text-white">
         <h2 style="color:white;">Estudiar es más fácil de lo que creés</h2>
@@ -265,10 +344,10 @@ const parrafos = carrera.descripcion.split("\\n").filter(Boolean);
         >
       </div>
       <div class="min-w-0">
-        <Financiacion disposicion="grilla" />
+        <Financiacion disposicion="columna" />
       </div>
     </div>
-  </section>
+  </div>
 
   <!-- ────────────────────────── Campus / Sedes ─────────────────────────── -->
   <Sedes />

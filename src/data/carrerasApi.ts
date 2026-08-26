@@ -11,7 +11,7 @@ const claveCache = (modos: number[]) =>
 let cache: any[] | null = null
 let promesa: Promise<any[]> | null = null
 
-const DEV_MODE = true
+const DEV_MODE = false
 
 /**
  * @param modos Modos de cursado a pedir. La cascada pasa los de esta landing,

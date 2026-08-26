@@ -11,6 +11,7 @@
 import { testimonios } from "../../config/contenido";
 import Convenios from "./Convenios.astro";
 
+const base = import.meta.env.BASE_URL;
 const total = testimonios.length;
 ---
 
@@ -84,7 +85,7 @@ const total = testimonios.length;
                       <figcaption class="mt-6 text-center text-sm md:text-left flex flex-row gap-4 items-center">
                         <img
                           class="size-12 rounded-full"
-                          src={t.imagen}
+                          src={`${base}${t.imagen.replace(/^\/+/, "")}`}
                           alt={t.nombre}
                         />
                         <div>
