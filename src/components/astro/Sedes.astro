@@ -27,7 +27,8 @@ import Faq from "./Faq.astro";
                 style={`--proporcion: ${sedes.proporcion}`}
             >
                 <iframe
-                    src={sedes.url}
+                    data-sede-embebida
+                    data-src={sedes.url}
                     title={sedes.tituloEmbebido}
                     loading="lazy"
                     referrerpolicy="no-referrer-when-downgrade"
@@ -43,6 +44,28 @@ import Faq from "./Faq.astro";
         </div>
     </div>
 </section>
+
+<script>
+    const embebido = document.querySelector<HTMLIFrameElement>('[data-sede-embebida]');
+
+    if (embebido?.dataset.src) {
+        const cargar = () => {
+            embebido.src = embebido.dataset.src ?? '';
+            delete embebido.dataset.src;
+        };
+
+        if ('IntersectionObserver' in window) {
+            const observador = new IntersectionObserver(([entrada]) => {
+                if (!entrada.isIntersecting) return;
+                cargar();
+                observador.disconnect();
+            });
+            observador.observe(embebido);
+        } else {
+            cargar();
+        }
+    }
+</script>
 
 <style>
     /* La proporción va solo desde md: en mobile el ancho es fijo (325px) y una

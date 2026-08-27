@@ -49,6 +49,7 @@ const cssFuentes = fuentes
 		<link rel="icon" href={`${base}iso.svg`} />
 
 		<style is:global set:html={cssFuentes}></style>
+		<slot name="head" />
 
 		<!-- SEO -->
 		<title>{title}</title>
