@@ -370,7 +370,7 @@ const cartas = beneficios.map((beneficio) => ({
     const arrancarAutomatico = () => {
       const quieto = matchMedia("(prefers-reduced-motion: reduce)").matches;
       if (usuarioManda || quieto || automatico !== undefined) return;
-      automatico = window.setInterval(() => ir(activo + 1), 5000);
+      automatico = window.setInterval(() => ir(activo + 1), 7500);
     };
 
     zona.addEventListener("click", (evento) => {

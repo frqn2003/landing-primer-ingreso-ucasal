@@ -72,22 +72,22 @@ const [
   getImage({
     src: encabezadoDesktop,
     format: "avif",
-    widths: [1024, 1440, 1920, 2048],
+    widths: [1024, 1440, 1920],
   }),
   getImage({
     src: encabezadoMobile,
     format: "avif",
-    widths: [640, 828, 1080, 1236],
+    widths: [640, 828, 1236],
   }),
   getImage({
     src: encabezadoDesktop,
     format: "webp",
-    widths: [1024, 1440, 1920, 2048],
+    widths: [1024, 1440, 1920],
   }),
   getImage({
     src: encabezadoMobile,
     format: "webp",
-    widths: [640, 828, 1080, 1236],
+    widths: [640, 828, 1236],
   }),
 ]);
 
@@ -117,22 +117,43 @@ const parrafos = carrera.descripcion.split("\\n").filter(Boolean);
     aria-labelledby="carrera-titulo"
   >
     <div class="absolute inset-0 -z-10">
+      <!-- `srcSet.attribute` y no `.src`: con `.src` el `srcset` sale con una
+           sola URL y todos los anchos que pide `getImage` más arriba quedan sin
+           usar, así que un celular se bajaba la misma imagen que un desktop. Con
+           el srcset completo + `sizes` el navegador elige por viewport y DPR.
+           El fondo tapa toda la sección, de ahí el `100vw`. -->
       <picture>
         <source
           media="(min-width: 769px)"
-          srcset={encabezadoAvifDesktop.src}
+          srcset={encabezadoAvifDesktop.srcSet.attribute}
+          sizes="100vw"
           type="image/avif"
         />
         <source
           media="(min-width: 769px)"
-          srcset={encabezadoWebpDesktop.src}
+          srcset={encabezadoWebpDesktop.srcSet.attribute}
+          sizes="100vw"
           type="image/webp"
         />
-        <source srcset={encabezadoAvifMobile.src} type="image/avif" />
-        <source srcset={encabezadoWebpMobile.src} type="image/webp" />
+        <source
+          srcset={encabezadoAvifMobile.srcSet.attribute}
+          sizes="100vw"
+          type="image/avif"
+        />
+        <source
+          srcset={encabezadoWebpMobile.srcSet.attribute}
+          sizes="100vw"
+          type="image/webp"
+        />
+        <!-- El respaldo apunta al webp procesado y no al asset original, que
+             viaja sin optimizar (112 a 478 KB según la carrera). Es el elemento
+             LCP de la página: eager y prioridad alta. -->
         <img
-          src={encabezadoDesktop.src}
+          src={encabezadoWebpDesktop.src}
           alt=""
+          loading="eager"
+          fetchpriority="high"
+          decoding="async"
           class="h-full w-full object-cover"
         />
       </picture>

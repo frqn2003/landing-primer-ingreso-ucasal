@@ -33,9 +33,6 @@ process.env.PUBLIC_MODALIDAD = env.PUBLIC_MODALIDAD;
 export default defineConfig({
   base: env.RUTA_BASE,
   outDir: env.CARPETA_BUILD,
-  build: {
-    inlineStylesheets: 'always',
-  },
   integrations: [react()],
 
   vite: {

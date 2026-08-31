@@ -15,8 +15,8 @@
 
 html {
   scroll-behavior: smooth;
-  /* Móvil: proximity. */
-  scroll-snap-type: y proximity;
+  /* Móvil: normal. */
+  scroll-snap-type: none;
 }
 
 /* Desktop: una pantalla por gesto */
@@ -49,9 +49,13 @@ html.snap-off {
      #contacto (+455px). Con min-height la sección crece y nada se solapa. */
   min-height: 100dvh;
   display: flex;
-  padding-top: var(--alto-navbar);
   scroll-snap-align: start;
   scroll-snap-stop: always;
+
+  @media (min-width: 1024px) {
+    padding-top: var(--alto-navbar);
+  }
+
 }
 
 /* Desktop: acá el snap es mandatory, así que la sección tiene que medir

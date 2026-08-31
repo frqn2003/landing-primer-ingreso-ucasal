@@ -102,14 +102,14 @@ function CeldaPromocion({
         <div
             role="status"
             aria-label="Promoción vigente"
-            className="flex min-w-0 flex-col text-center gap-2 rounded-2xl bg-white/20 backdrop-blur-xl px-3 py-2.5 text-white shadow-lg ring-3 ring-(--rojo-ucasal) sm:px-5 sm:py-3"
+            className="flex min-w-0 flex-col text-center gap-2 rounded-2xl bg-white/20 backdrop-blur-xl px-3 py-1.5 text-white shadow-lg ring-3 ring-(--rojo-ucasal) sm:px-5 sm:py-3"
         >
             {promocion.descuento ? (
-                <div className="flex flex-col flex-1 md:flex-row text-center items-center sm:gap-6 ">
-                    <span className="text-2xl leading-none text-center font-bold sm:text-4xl uppercase border-(--rojo-ucasal) md:border-r-3 max-sm:border-b-3 px-4">
-                        {promocion.descuento} off <br /><span className="whitespace-normal text-xl">matrícula</span>
+                <div className="flex flex-col flex-1 md:flex-row text-center gap-1 items-center sm:gap-6">
+                    <span className="text-[1.8rem] leading-none text-center font-bold sm:text-4xl uppercase border-(--rojo-ucasal) md:border-r-3 px-4">
+                        {promocion.descuento} off <br className="hidden md:block" /><span className="whitespace-normal leading-12 md:text-[1.6rem]">matrícula</span>
                     </span>
-                    <div className="flex flex-col items-center text-lg gap-2">
+                    <div className="flex flex-row md:flex-col items-center text-lg md:gap-2 gap-5">
                         <span className=" whitespace-nowrap text-white/80 block">
                             {textoPlazo(promocion.fecha_fin)}
                         </span>
@@ -141,7 +141,7 @@ function DatosFijos({ datos }: { datos: Dato[] }) {
                     <span className="text-2xl leading-none text-center font-bold sm:text-3xl">
                         {dato.numero}
                     </span>
-                    <span className="mt-1 text-xs text-white/70">{dato.etiqueta}</span>
+                    <span className="mt-1 text-sm text-white">{dato.etiqueta}</span>
                 </div>
             ))}
         </div>
@@ -238,7 +238,7 @@ export default function BarraHero({
     const escritorio = useMediaQuery(CONSULTA_ESCRITORIO);
 
     return (
-        <div className="w-full max-w-56 sm:max-w-6xl">
+        <div className="w-full max-w-full sm:max-w-6xl">
             <div className="flex flex-col md:flex-row items-stretch gap-2 sm:gap-12">
                 {promocion && <CeldaPromocion promocion={promocion} dias={dias} />}
 

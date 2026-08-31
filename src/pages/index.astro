@@ -32,7 +32,7 @@ const [
     src: portadaDesktop,
     format: "avif",
     quality: 45,
-    widths: [1024, 1440, 1920, 2048],
+    widths: [1024, 1440, 1920],
   }),
   getImage({
     src: portadaMobile,
@@ -43,12 +43,12 @@ const [
   getImage({
     src: portadaDesktop,
     format: "webp",
-    widths: [1024, 1440, 1920, 2048],
+    widths: [1024, 1440, 1920],
   }),
   getImage({
     src: portadaMobile,
     format: "webp",
-    widths: [640, 828, 1080, 1236],
+    widths: [640, 828, 1236],
   }),
 ]);
 ---
@@ -130,24 +130,25 @@ const [
   />
   <!-- A partir de acá el scroll es normal: el observer del Layout apaga el
          snap mientras esta zona esté en pantalla. -->
-  <Sedes />
+
   <div data-scroll-libre>
     <!-- Vamos a hacer que compartan el mismo fondo, el que me paso la fer me gustaba banda -->
     <div class="relative isolate">
       <div class="absolute inset-0 -z-10">
         <img
-          src={`${base}fondos/azul.webp`}
-          alt="Imagen de fondo azul"
-          class="sticky left-1/2 right-1/2 top-0 h-full w-full object-cover"
+        src={`${base}fondos/azul.webp`}
+        alt="Imagen de fondo azul"
+        class="sticky left-1/2 right-1/2 top-0 h-full w-full object-cover"
         />
       </div>
       <FormSection />
       {
         /* La cinta de convenios ya va adentro de Testimonios, en el mismo
-                   panel oscuro. */
+        panel oscuro. */
       }
-      <Testimonios />
     </div>
+    <Sedes />
+    <Testimonios />
     <Footer />
   </div>
 </Layout>

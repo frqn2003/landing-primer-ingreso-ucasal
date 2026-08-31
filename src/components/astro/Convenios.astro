@@ -33,17 +33,89 @@ const svgsCrudos = import.meta.glob<string>("../../assets/convenios/*.svg", {
     eager: true,
 });
 
-const svgPorArchivo = new Map(
+// Illustrator exporta cada logo con un `<style>` adentro del SVG (`.st0`,
+// `.st1`, `.cls-1`…) y un `id="Capa_1"` en la raíz. Pegado inline eso rompe dos
+// veces:
+//
+//  - El `<style>` de un SVG inline no está encapsulado: es CSS del documento.
+//    Los siete logos declaran `.st0`, así que todos terminaban pintados con el
+//    color del último que parseaba el navegador (`.st0` vale #2bb2e4, #24499c,
+//    #232b52, #1628ae, #244081 o #0d8b3a según el archivo).
+//  - `id="Capa_1"` viene repetido en los siete, y la cinta duplica la lista, así
+//    que el HTML salía con catorce elementos con el mismo id.
+//
+// Por eso el `<style>` se resuelve acá, en build: cada regla baja a atributos de
+// presentación sobre el elemento que la usaba (`fill`, `fill-rule` y `font-*`
+// mapean uno a uno) y el bloque desaparece. Sin CSS de por medio el logo queda
+// autocontenido, que es justo lo que hace falta para el `<symbol>` de abajo:
+// dentro de un `<use>` los selectores del documento no llegan, los atributos sí.
+const desarmarSvg = (crudo: string) => {
+    // El prólogo XML sólo vale cuando el SVG es un archivo suelto; en medio del
+    // HTML sobra, igual que el comentario del exportador.
+    let svg = crudo
+        .replace(/<\?xml[\s\S]*?\?>/i, "")
+        .replace(/<!--[\s\S]*?-->/g, "")
+        .trim();
+
+    // clase -> propiedad -> valor. Recorre las reglas en orden de aparición y
+    // sobrescribe, para que gane la última declaración como haría la cascada.
+    const porClase = new Map<string, Map<string, string>>();
+
+    svg = svg.replace(/<style[^>]*>([\s\S]*?)<\/style>/gi, (_, css: string) => {
+        for (const [, selectores, cuerpo] of css.matchAll(
+            /([^{}]+)\{([^{}]*)\}/g,
+        )) {
+            for (const selector of selectores.split(",")) {
+                const nombre = selector.trim();
+                if (!nombre.startsWith(".")) continue;
+                const clase = nombre.slice(1);
+                const props = porClase.get(clase) ?? new Map<string, string>();
+                for (const declaracion of cuerpo.split(";")) {
+                    const corte = declaracion.indexOf(":");
+                    if (corte === -1) continue;
+                    props.set(
+                        declaracion.slice(0, corte).trim(),
+                        declaracion.slice(corte + 1).trim(),
+                    );
+                }
+                porClase.set(clase, props);
+            }
+        }
+        return "";
+    });
+
+    svg = svg.replace(/\s+class="([^"]*)"/g, (_, clases: string) => {
+        const props = new Map<string, string>();
+        for (const clase of clases.trim().split(/\s+/)) {
+            for (const [prop, valor] of porClase.get(clase) ?? []) {
+                props.set(prop, valor);
+            }
+        }
+        return [...props].map(([prop, valor]) => ` ${prop}="${valor}"`).join("");
+    });
+
+    // El `viewBox` pasa al `<symbol>`; el `id="Capa_1"` de la raíz se va con la
+    // etiqueta `<svg>`, y el `<defs>` queda vacío al sacarle el `<style>`.
+    const viewBox = svg.match(/\sviewBox="([^"]*)"/i)?.[1] ?? "0 0 512 512";
+    const cuerpo = svg
+        .replace(/^<svg[^>]*>/i, "")
+        .replace(/<\/svg>\s*$/i, "")
+        .replace(/<defs\s*>\s*<\/defs>/gi, "")
+        .trim();
+
+    return { viewBox, cuerpo };
+};
+
+const vectorPorArchivo = new Map(
     Object.entries(svgsCrudos).map(([ruta, crudo]) => [
         ruta.split("/").pop() as string,
-        // El prólogo XML sólo vale cuando el SVG es un archivo suelto; en medio
-        // del HTML sobra.
-        crudo.replace(/<\?xml[\s\S]*?\?>/i, "").trim(),
+        desarmarSvg(crudo),
     ]),
 );
 
-const svgInline = (convenio: Convenio) =>
-    svgPorArchivo.get(convenio.logo?.split("/").pop() ?? "");
+const archivoDe = (convenio: Convenio) => convenio.logo?.split("/").pop() ?? "";
+
+const vectorDe = (convenio: Convenio) => vectorPorArchivo.get(archivoDe(convenio));
 
 // Los logos que son foto y no vector. Van por el pipeline de imágenes de Astro
 // (avif/webp y srcset), no inline.
@@ -84,6 +156,26 @@ const Titulo = enFranja ? "p" : "h2";
 // pero se sigue moviendo a la misma velocidad en vez de acelerarse.
 const SEGUNDOS_POR_CONVENIO = 3.2;
 const duracion = `${(convenios.length * SEGUNDOS_POR_CONVENIO).toFixed(1)}s`;
+
+// Un `<symbol>` por logo, no uno por aparición. La cinta necesita la lista dos
+// veces (ver arriba) y con el SVG pegado el trazado viajaba duplicado: 93 KB de
+// SVG inline por página, la mitad puro clon. Ahora los trazados van una sola vez
+// en un sprite escondido y cada aparición es un `<use>` de treinta bytes.
+//
+// Los ids llevan la variante porque el componente podría entrar dos veces en la
+// misma página (hoy sólo lo monta Testimonios, pero "seccion" existe para usarla
+// suelta) y dos sprites con los mismos ids se pisarían.
+const idSimbolo = (archivo: string) =>
+    `convenio-${variante}-${archivo.replace(/\.svg$/i, "").toLowerCase()}`;
+
+// Sólo los logos que la cinta realmente muestra, sin repetir.
+const sprite = [...new Set(convenios.map(archivoDe))]
+    .filter((archivo) => vectorPorArchivo.has(archivo))
+    .map((archivo) => {
+        const { viewBox, cuerpo } = vectorPorArchivo.get(archivo)!;
+        return `<symbol id="${idSimbolo(archivo)}" viewBox="${viewBox}">${cuerpo}</symbol>`;
+    })
+    .join("");
 ---
 
 <section
@@ -98,27 +190,37 @@ const duracion = `${(convenios.length * SEGUNDOS_POR_CONVENIO).toFixed(1)}s`;
         class:list={[
             "text-center",
             enFranja
-                ? "text-xs font-bold uppercase tracking-[0.2em] text-white/60 sm:text-sm"
+                ? "text-xs font-bold uppercase tracking-[0.2em] text-(--azul-ucasal) sm:text-sm"
                 : "contenedor text-2xl font-black text-(--azul-dark-ucasal) sm:text-3xl",
         ]}
     >
         Aranceles bonificados con estos convenios
     </Titulo>
 
+    <!-- Los trazados de los logos, una sola vez para toda la página: la cinta y
+         su copia los traen con `<use>`. Fuera de la pantalla en vez de
+         `display: none` porque algunos navegadores no resuelven el `<use>` si el
+         sprite está sin renderizar. -->
+    <svg class="sprite" aria-hidden="true" set:html={sprite} />
+
     <!-- La máscara desvanece los bordes: sin ella la cinta se corta de golpe
          contra los costados de la pantalla. -->
     <div class:list={["cinta-zona", enFranja ? "mt-6" : "mt-8"]}>
-        <div class="cinta bg-white/45 p-4 border border-white/50" style={`--duracion: ${duracion}`}>
+        <div class="cinta bg-(--azul-ucasal)/15 p-4 border border-(--azul-ucasal)/50" style={`--duracion: ${duracion}`}>
             {
                 [false, true].map((esCopia) => (
                     <ul class="tira" aria-hidden={esCopia ? "true" : undefined}>
                         {convenios.map((convenio) => {
-                            const svg = svgInline(convenio);
+                            const vector = vectorDe(convenio);
                             const raster = rasterLocal(convenio);
                             return (
                                 <li class="convenio">
-                                    {svg ? (
-                                        <Fragment set:html={svg} />
+                                    {vector ? (
+                                        <svg viewBox={vector.viewBox}>
+                                            <use
+                                                href={`#${idSimbolo(archivoDe(convenio))}`}
+                                            />
+                                        </svg>
                                     ) : raster ? (
                                         <Image
                                             src={raster}
@@ -152,6 +254,13 @@ const duracion = `${(convenios.length * SEGUNDOS_POR_CONVENIO).toFixed(1)}s`;
 </section>
 
 <style>
+    .sprite {
+        position: absolute;
+        width: 0;
+        height: 0;
+        overflow: hidden;
+    }
+
     .cinta-zona {
         /* Cuánto se desvanece cada borde. En mobile va corto a propósito: con
            6rem por lado, en una pantalla de 375px el desvanecido se comería más

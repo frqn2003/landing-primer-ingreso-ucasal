@@ -1,5 +1,8 @@
 ---
 import '../styles/global.css';
+import scrappingOnline from '../assets/scrapping/scrapping-online.webp';
+import scrappingPresencial from '../assets/scrapping/scrapping-presencial.webp';
+import { modalidad } from '../config/modalidad';
 
 interface Props {
 	title?: string;
@@ -12,7 +15,8 @@ const {
 } = Astro.props;
 const canonical = new URL(Astro.url.pathname, 'https://www.ucasal.edu.ar').href;
 const base = import.meta.env.BASE_URL;
-const socialImage = new URL(`${base}iso.svg`, 'https://www.ucasal.edu.ar').href;
+const socialImageAsset = modalidad === 'online' ? scrappingOnline : scrappingPresencial;
+const socialImage = new URL(socialImageAsset.src, 'https://www.ucasal.edu.ar').href;
 
 // Las @font-face se generan acá y no en global.css porque la ruta de los .woff2
 // depende del `base`, que cambia según la modalidad del build, y el CSS plano no
@@ -47,6 +51,44 @@ const cssFuentes = fuentes
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="icon" href={`${base}iso.svg`} />
+
+		<!-- Los snippets de Google van tal cual los entrega Google, sin las llaves
+		     ni el template literal de JSX: adentro de un <script> de Astro el
+		     contenido es texto plano, así que `{\`...\`}` no interpola nada. Lo que
+		     salía al HTML era un bloque con un string adentro —JavaScript válido,
+		     pero que no ejecuta la IIFE— y por eso no cargaba ninguna etiqueta.
+		     `is:inline` mantiene los tags como están: sin bundlear ni diferir, que
+		     es lo que necesita un script de terceros en el <head>. -->
+
+		<!-- Google tag (gtag.js) -->
+		<script
+			is:inline
+			async
+			src="https://www.googletagmanager.com/gtag/js?id=G-FWEL0PZRJD"></script>
+		<script is:inline>
+			window.dataLayer = window.dataLayer || [];
+			function gtag() {
+				dataLayer.push(arguments);
+			}
+			gtag('js', new Date());
+			gtag('config', 'G-FWEL0PZRJD');
+		</script>
+		<!-- End Google tag (gtag.js) -->
+
+		<!-- Google Tag Manager -->
+		<script is:inline>
+			(function (w, d, s, l, i) {
+				w[l] = w[l] || [];
+				w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+				var f = d.getElementsByTagName(s)[0],
+					j = d.createElement(s),
+					dl = l != 'dataLayer' ? '&l=' + l : '';
+				j.async = true;
+				j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+				f.parentNode.insertBefore(j, f);
+			})(window, document, 'script', 'dataLayer', 'GTM-T6PB8G');
+		</script>
+		<!-- End Google Tag Manager -->
 
 		<style is:global set:html={cssFuentes}></style>
 		<slot name="head" />
@@ -104,6 +146,16 @@ const cssFuentes = fuentes
 		
 	</head>
 	<body>
+		<!-- Google Tag Manager (noscript) -->
+		<noscript>
+			<iframe
+				src="https://www.googletagmanager.com/ns.html?id=GTM-T6PB8G"
+				height="0"
+				width="0"
+				style="display:none;visibility:hidden"
+			></iframe>
+		</noscript>
+		<!-- End Google Tag Manager (noscript) -->
 		<slot />
 		<script>
 			// El snap obligatorio no puede convivir con secciones más altas que la

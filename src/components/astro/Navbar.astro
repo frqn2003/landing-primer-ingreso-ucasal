@@ -272,6 +272,12 @@ const flotarSobreHero = !onSubPage || !!heroCompleto;
   #navbar[data-tema="transparente"] #menu-button {
     color: #fff;
   }
+  #navbar[data-tema="solido"] .nav-link {
+    color: #000;
+  }
+  #navbar[data-tema="solido"] .nav-link.active {
+    color: var(--rojo-ucasal);
+  }
 </style>
 
 <script
@@ -328,7 +334,7 @@ const flotarSobreHero = !onSubPage || !!heroCompleto;
     navMenu.classList.toggle("-translate-y-4", !menuAbierto);
     navMenu.classList.toggle("max-h-0", !menuAbierto);
     navMenu.classList.toggle("invisible", !menuAbierto);
-    navMenu.classList.toggle("text-white", menuAbierto);
+    navMenu.classList.toggle("text-black", menuAbierto);
     overlay.classList.toggle("hidden", !menuAbierto);
     iconAbrir.classList.toggle("hidden", menuAbierto);
     iconCerrar.classList.toggle("hidden", !menuAbierto);
@@ -379,6 +385,7 @@ const flotarSobreHero = !onSubPage || !!heroCompleto;
       botonInscripcion.classList.toggle("boton-inscripcion", !scrolled);
       iconoInscripcion.style.display = scrolled ? "none" : "flex";
       nav.dataset.tema = scrolled ? "solido" : "transparente";
+      navMenu.classList.toggle("text-white", !scrolled)
     } else {
       nav.classList.toggle("sticky", scrolled);
       nav.classList.toggle("nav-menu", scrolled);

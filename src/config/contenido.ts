@@ -25,7 +25,7 @@ export const etiquetaSedes = etiquetasSedes[modalidad];
 /** El párrafo que acompaña al título del hero. */
 const descripcionesHero: Record<Modalidad, string> = {
     presencial:
-        "Transformá tu futuro profesional en nuestra universidad, alcanzá tu título con validez nacional, cursá con la modalidad que prefieras y accedé a todos los beneficios.",
+        "Transformá tu futuro profesional en UCASAL, cursá con la modalidad que prefieras y alcanzá tu título con validez nacional.",
     online:
         "Estudiá online respaldado por una universidad con trayectoria y una red nacional que te acompaña.",
 };
@@ -80,7 +80,7 @@ const beneficiosPorModalidad: Record<Modalidad, Beneficio[]> = {
             codigo: "campus",
             titulo: "Campus en Castañares",
             descripcion:
-                "45 hectáreas al pie del cerro: aulas, laboratorios, comedor y espacios verdes para estudiar y quedarte.",
+                "42 hectáreas al pie del cerro: aulas, laboratorios, comedor y espacios verdes para estudiar y quedarte.",
             imagen: "beneficios/campus.webp",
         },
         {
@@ -127,20 +127,7 @@ const beneficiosPorModalidad: Record<Modalidad, Beneficio[]> = {
         },
     ],
     online: [
-        {
-            codigo: "convalidacion",
-            titulo: "Empezá donde te quedaste",
-            descripcion:
-                "Convalidá materias aprobadas en otras instituciones y avanzá más rápido en tu carrera.",
-            imagen: "beneficios/online/empeza.webp",
-        },
-        {
-            codigo: "becas",
-            titulo: "Becas y ayudas económicas",
-            descripcion:
-                "Hay una beca para cada situación: por mérito, por hermanos, por deporte o por convenio con tu empresa.",
-            imagen: "beneficios/becas.webp",
-        },
+
         {
             codigo: "cursar",
             titulo: "Cursá desde donde estés",
@@ -163,12 +150,27 @@ const beneficiosPorModalidad: Record<Modalidad, Beneficio[]> = {
             imagen: "beneficios/online/tecnologia.webp",
         },
         {
+            codigo: "becas",
+            titulo: "Becas y ayudas económicas",
+            descripcion:
+                "Hay una beca para cada situación: por mérito, por hermanos, por deporte o por convenio con tu empresa.",
+            imagen: "beneficios/becas.webp",
+        },
+        {
             codigo: "validez",
             titulo: "Estudiá con validez nacional",
             descripcion:
                 "Formate online con la misma validez que la modalidad presencial. Carreras oficiales reconocidas por el Ministerio de Educación.",
             imagen: "beneficios/titulos.webp",
         },
+        {
+            codigo: "convalidacion",
+            titulo: "Empezá donde te quedaste",
+            descripcion:
+                "Convalidá materias aprobadas en otras instituciones y avanzá más rápido en tu carrera.",
+            imagen: "beneficios/online/empeza.webp",
+        },
+
         {
             codigo: "bibliografia",
             titulo: "Adquirí tu bibliografía, a un clic",

@@ -141,7 +141,7 @@ export default function Form({ codcarInicial, onSubPage, modosDisponibles }: {
     }
 
     const todosCompletos = !!carreraCompleta && !!nombre && !!email && !!ddiPais && !!codArea && !!tel
-    const carreraSeleccionadaLocal = dataCarreras.find(c => String(c.codcar) === String(codcar))
+    const carreraSeleccionadaLocal = dataCarreras.find(c => String(c.codcar) === String(codcar)) || null
 
     /* Los modos de una carrera que se ofrecen en esta landing: una carrera que
        se dicta [1,7] queda solo como [7] en el build online, asi que ni el
@@ -360,10 +360,10 @@ export default function Form({ codcarInicial, onSubPage, modosDisponibles }: {
 
             {/* 1 · CARRERA */}
             <div className="border-b border-black/10 pb-4 mb-4">
-                <p className="text-xs font-bold text-(--azul-ucasal) tracking-wide uppercase mb-2">{onSubPage ? 'La carrera' : 'Elegí tu carrera'}</p>
+                <p className="text-xs font-bold text-(--azul-ucasal) tracking-wide uppercase mb-2">{onSubPage ? 'Tu carrera' : 'Elegí tu carrera'}</p>
                 {carreraBloqueada ? (
                     <div className="flex flex-wrap items-center justify-between gap-2 rounded-lg border border-gray-300 bg-white p-3 text-black">
-                        <span className="text-base text-black flex flex-col min-w-0 flex-1 basis-full sm:basis-auto break-words pr-2">
+                        <span className="text-base text-black flex flex-col min-w-0 flex-1 basis-full sm:basis-auto wrap-break-word pr-2">
                             {carreraSeleccionadaLocal?.nombre}
                             <span className="text-xs text-gray-600">{carreraSeleccionadaLocal?.duracion}</span>
                         </span>
@@ -425,38 +425,44 @@ export default function Form({ codcarInicial, onSubPage, modosDisponibles }: {
             </div>
 
             {/* 2 · CÓMO SE CURSA */}
-            <div className={`border-b border-black/10 pb-4 mb-4 transition-opacity ${codcar ? '' : 'opacity-50'}`}>
-                <p className="text-xs font-bold text-(--azul-ucasal) tracking-wide uppercase mb-2">Elegí tu modalidad</p>
-                <div className="flex flex-row w-full gap-3">
-                    {(codcar ? modos : (modosDisponibles ?? [1, 7]).map((m) => ({ modalidad: m }))).map((m: any) => {
-                        const esOnline = m.modalidad === 7
-                        const seleccionado = !!codcar && String(modalidad) === String(m.modalidad)
-                        return (
-                            <button key={m.modalidad} type="button"
-                                disabled={!codcar}
-                                onClick={() => {
-                                    setValue('cbx_modo', String(m.modalidad), { shouldValidate: true })
-                                    seleccionarModalidad(String(m.modalidad))
-                                }}
-                                className={`flex flex-row items-start gap-2 rounded-lg border p-3 text-left flex-1 min-w-0 transition-colors ${!codcar ? 'cursor-not-allowed bg-gray-100 border-gray-200' : seleccionado && esOnline ? 'border-(--azul-ucasal) bg-blue-50 cursor-pointer' : seleccionado && !esOnline ? 'border-(--rojo-ucasal) bg-red-50 cursor-pointer' : 'border-gray-300 bg-white hover:bg-gray-50 cursor-pointer'}`}
-                            >
-                                <span className={`flex shrink-0 items-center justify-center w-9 h-9 rounded-md ${seleccionado && esOnline ? 'bg-(--azul-ucasal) text-white' : seleccionado && !esOnline ? 'bg-(--rojo-ucasal) text-white' : 'bg-gray-100 text-gray-500'}`}>
-                                    {esOnline ? <IconoOnline /> : <IconoPresencial />}
-                                </span>
-                                <div className="flex flex-col min-w-0">
-                                    <span className="text-sm font-semibold text-black">{esOnline ? 'Online' : 'Presencial'}</span>
-                                    <span className="text-xs text-gray-500">{esOnline ? 'Desde donde estés' : 'Cursás en una sede'}</span>
-                                </div>
-                            </button>
-                        )
-                    })}
+            {onSubPage && modos.length == 1 ? 
+                <div className="border-b border-black/10 pb-4 mb-4 text-black tracking-normal uppercase text-sm">
+                    Esta carrera se cursa de forma <span className="text-(--azul-ucasal) font-bold underline underline-offset-1">{modos[0].modalidad === 7 ? 'online' : 'presencial'}</span>
                 </div>
-            </div>
+            : (
+                <div className={`border-b border-black/10 pb-4 mb-4 transition-opacity ${codcar ? '' : 'opacity-50'}`}>
+                    <p className="text-xs font-bold text-(--azul-ucasal) tracking-wide uppercase mb-2">Elegí cómo cursar</p>
+                    <div className="flex flex-row w-full gap-3">
+                        {(codcar ? modos : (modosDisponibles ?? [1, 7]).map((m) => ({ modalidad: m }))).map((m: any) => {
+                            const esOnline = m.modalidad === 7
+                            const seleccionado = !!codcar && String(modalidad) === String(m.modalidad)
+                            return (
+                                <button key={m.modalidad} type="button"
+                                    disabled={!codcar}
+                                    onClick={() => {
+                                        setValue('cbx_modo', String(m.modalidad), { shouldValidate: true })
+                                        seleccionarModalidad(String(m.modalidad))
+                                    }}
+                                    className={`flex flex-row items-start gap-2 rounded-lg border p-3 text-left flex-1 min-w-0 transition-colors ${!codcar ? 'cursor-not-allowed bg-gray-100 border-gray-200' : seleccionado && esOnline ? 'border-(--azul-ucasal) bg-blue-50 cursor-pointer' : seleccionado && !esOnline ? 'border-(--rojo-ucasal) bg-red-50 cursor-pointer' : 'border-gray-300 bg-white hover:bg-gray-50 cursor-pointer'}`}
+                                >
+                                    <span className={`flex shrink-0 items-center justify-center w-9 h-9 rounded-md ${seleccionado && esOnline ? 'bg-(--azul-ucasal) text-white' : seleccionado && !esOnline ? 'bg-(--rojo-ucasal) text-white' : 'bg-gray-100 text-gray-500'}`}>
+                                        {esOnline ? <IconoOnline /> : <IconoPresencial />}
+                                    </span>
+                                    <div className="flex flex-col min-w-0">
+                                        <span className="text-sm font-semibold text-black">{esOnline ? 'Online' : 'Presencial'}</span>
+                                        <span className="text-xs text-gray-500">{esOnline ? 'Desde donde estés' : 'Cursás en una sede'}</span>
+                                    </div>
+                                </button>
+                            )
+                        })}
+                    </div>
+                </div>
+            )}
 
             {/* 3 · DESDE QUÉ LOCALIDAD */}
             <div className={`border-b border-black/10 pb-4 mb-4 transition-opacity ${localidadHabilitada ? '' : 'opacity-50'}`}>
                 <div className="flex items-center justify-between mb-2">
-                    <p className="text-xs font-bold text-(--azul-ucasal) tracking-wide uppercase">Elegí tu localidad</p>
+                    <p className="text-xs font-bold text-(--azul-ucasal) tracking-wide uppercase">Indicá tu localidad</p>
                     {localidadHabilitada && (
                         <span className="text-xs text-gray-500">
                             {apiCargando ? 'Cargando...' : `${localidades.length} localidades`}
@@ -527,7 +533,7 @@ export default function Form({ codcarInicial, onSubPage, modosDisponibles }: {
 
             {/* 4 · CÓMO TE CONTACTAMOS */}
             <div className={`transition-opacity ${carreraCompleta ? '' : 'opacity-50'}`}>
-                <p className="text-xs font-bold text-(--azul-ucasal) tracking-wide uppercase mb-2">Cómo te contactamos</p>
+                <p className="text-xs font-bold text-(--azul-ucasal) tracking-wide uppercase mb-2">Datos de contacto</p>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div className={`rounded-lg border ${!carreraCompleta ? 'bg-gray-100 border-gray-200 pointer-events-none' : `bg-white ${claseBorde(carreraCompleta, !!nombre && !errors.nombre)}`}`}>
@@ -670,7 +676,7 @@ export default function Form({ codcarInicial, onSubPage, modosDisponibles }: {
                     style={enviando ? { display: 'none' } : undefined}
                     className={`w-full font-bold text-sm px-5 py-3 text-center text-white rounded-lg transition-colors duration-200 ease-in-out ${todosCompletos ? 'boton-form-glow cursor-pointer hover:opacity-90' : 'cursor-not-allowed bg-gray-300'}`}
                 >
-                    <span>Quiero que me contacten</span>
+                    <span>Solicitar información</span>
                 </button>
                 <div id="spinnerContainer" className={enviando ? '' : 'hidden'} role="status">
                     <svg className="w-8 h-8 text-gray-200 animate-spin fill-[#B11111]" viewBox="0 0 100 101" fill="none"
