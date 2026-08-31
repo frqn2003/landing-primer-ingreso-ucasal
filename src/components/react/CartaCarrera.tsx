@@ -20,7 +20,7 @@ export default function CartaCarrera({ career, base = import.meta.env.BASE_URL }
     const href = `${base}${career.slug}?from=landing`
 
     return (
-        <div className='relative bg-white rounded-2xl shadow-sm flex flex-col h-60 sm:h-80 group border border-slate-200 hover:border-(--rojo-ucasal) transition-all duration-300'>
+        <div className='relative bg-white rounded-2xl shadow-sm flex flex-col h-60 sm:h-80 group border border-slate-200 hover:border-(--rojo-ucasal) transition-all duration-300 carta-carrera'>
             {/* En sm+ toda la carta es clickeable gracias a este link superpuesto */}
             <a href={href} aria-label={career.nombre} className='absolute inset-0 z-10 hidden sm:block rounded-2xl'></a>
             <div className='h-[35%] md:h-[50%] relative'>

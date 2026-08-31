@@ -5833,7 +5833,7 @@ const data = [
 
     },
     {
-        codcar: 340,
+        codcar: 1200,
         sector: 13,
         slug: "licenciatura-en-kinesiologia-y-fisioterapia",
         nombre: "Licenciatura en Kinesiología y Fisioterapia",
@@ -5917,7 +5917,7 @@ const data = [
 
     },
     {
-        codcar: 232,
+        codcar: 1204,
         sector: 13,
         slug: "tecnicatura-univ-en-produccion-de-bio-imagenes",
         nombre: "Tecnicatura Univ. en Producción de Bio-Imágenes",
@@ -5980,7 +5980,7 @@ const data = [
 
     },
     {
-        codcar: 342,
+        codcar: 1202,
         sector: 13,
         slug: "licenciatura-en-fonoaudiologia",
         nombre: "Licenciatura en Fonoaudiología",
@@ -6079,7 +6079,7 @@ const data = [
 
     },
     {
-        codcar: 56,
+        codcar: 1203,
         sector: 13,
         slug: "tecnicatura-univ-en-podologia",
         nombre: "Tecnicatura Univ. en Podología",
@@ -6184,7 +6184,7 @@ const data = [
 
     },
     {
-        codcar: 70,
+        codcar: 1201,
         sector: 13,
         slug: "licenciatura-en-terapia-ocupacional",
         nombre: "Licenciatura en Terapia Ocupacional",
@@ -6327,7 +6327,7 @@ const data = [
 
     },
     {
-        codcar: 358,
+        codcar: 1169,
         sector: 13,
         slug: "licenciatura-en-psicomotricidad",
         nombre: "Licenciatura en Psicomotricidad",

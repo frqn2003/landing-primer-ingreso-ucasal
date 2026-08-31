@@ -298,7 +298,8 @@ const parrafos = carrera.descripcion.split("\\n").filter(Boolean);
       carrera.codcar === 84 ||
       carrera.codcar === 19 ||
       carrera.codcar === 105 ||
-      carrera.codcar === 26 ? (
+      carrera.codcar === 26 || 
+      carrera.sector === 13 ? (
         <section class="flex flex-row gap-16 relative contenedor py-12">
           <div class="text-xl flex flex-col justify-center items-center text-center">
             <p class="text-white bg-(--rojo-ucasal) rounded-full size-8 flex justify-center items-center">
@@ -314,9 +315,9 @@ const parrafos = carrera.descripcion.split("\\n").filter(Boolean);
             El <span class="font-bold">curso de ingreso obligatorio (CIO)</span>{" "}
             tiene por objetivo preparar a los estudiantes para una experiencia
             universitaria exitosa y productiva. <br />
-            El CIO de {carrera.nombre} consta de los siguientes módulos:
-            {carrera.cio && (
+            {carrera.cio?.materias && (
               <>
+                El CIO de {carrera.nombre} consta de los siguientes módulos:
                 <ul class="list-disc py-2 italic mx-8">
                   {carrera.cio?.materias.map((modulo) => (
                     <li>{modulo}</li>
@@ -328,14 +329,18 @@ const parrafos = carrera.descripcion.split("\\n").filter(Boolean);
             el ingreso a la carrera cumplir con:
             <ul class="list-disc mx-8 py-2">
               <li>Contar con almenos el 80% de asistencia.</li>
-              <li>Superar las instancias evaluativas que se darán durante el mes de cursado.</li>
+              <li>
+                Superar las instancias evaluativas que se darán durante el mes
+                de cursado.
+              </li>
               <li>Pago del arancel del curso introductorio obligatorio.</li>
             </ul>
-              El curso podrá cursarse en diferentes turnos, sujeto a la cantidad de aspirantes y comisiones que se habiliten.
+            El curso podrá cursarse en diferentes turnos, sujeto a la cantidad
+            de aspirantes y comisiones que se habiliten.
           </div>
         </section>
       ) : (
-        ""
+        null
       )
     }
   </section>

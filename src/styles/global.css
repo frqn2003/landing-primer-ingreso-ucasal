@@ -49,13 +49,12 @@ html.snap-off {
      #contacto (+455px). Con min-height la sección crece y nada se solapa. */
   min-height: 100dvh;
   display: flex;
+  
   scroll-snap-align: start;
-  scroll-snap-stop: always;
-
   @media (min-width: 1024px) {
     padding-top: var(--alto-navbar);
+    scroll-snap-stop: always;
   }
-
 }
 
 /* Desktop: acá el snap es mandatory, así que la sección tiene que medir
@@ -141,7 +140,7 @@ h3 {
 .boton-form-glow {
   position: relative;
   isolation: isolate;
-  color: black;
+  color: white;
   overflow: hidden;
   box-shadow: 0 0 10px rgba(216, 49, 53, 0.35);
 }
@@ -168,7 +167,7 @@ h3 {
   position: absolute;
   inset: 2px;
   border-radius: calc(0.5rem - 2px);
-  background: rgb(247, 247, 247);
+  background: var(--rojo-ucasal);
   border-color: black;
   z-index: 1;
 }
@@ -417,6 +416,24 @@ h3 {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes in{
+  from {
+    opacity: 0;
+    translate: -10px;
+  }
+}
+
+.carta-carrera {
+  animation: in .4s ease both;
+  animation-delay: calc(sibling-index() * 100ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .carta-carrera {
+    animation: none;
   }
 }
 

@@ -65,18 +65,20 @@ export function useCarrerasCascada({
 
         if (codcarInicial) {
             const modalidadesCarrera = dataCarreras.find(c => String(c.codcar) === codcarInicial)?.modalidad ?? []
+            /* TODOS los modos elegibles, no solo el primero: la API trae una
+               fila por (codcar, modo) con las sedes de ese modo, y el selector
+               ofrece las dos modalidades de una carrera mixta. Pidiendo solo
+               modo 1, elegir "Online" dejaba la cascada sin localidades. */
+            const modosDeLaCarrera = modalidadesCarrera.filter(modoElegible)
             /* Si la carrera no tiene ningun modo de esta landing se usa el
                primero que la landing ofrece, nunca el de la carrera: en el
                build online eso evitaria pedirle a la API el modo presencial. */
-            const modoInicial = String(
-                modalidadesCarrera.find(modoElegible)
-                ?? modosDisponibles?.[0]
-                ?? modalidadesCarrera[0]
-                ?? 7
-            )
-            getCarreraApi(codcarInicial, modoInicial)
-                .then(data => {
-                    const resultado = data ? [data] : []
+            const modosPedidos = modosDeLaCarrera.length
+                ? modosDeLaCarrera
+                : [modosDisponibles?.[0] ?? modalidadesCarrera[0] ?? 7]
+
+            getCarreraApi(codcarInicial, modosPedidos)
+                .then(resultado => {
                     const merged = [...resultado]
                     fallbacks.forEach(fallback => {
                         const existe = resultado.some((c: any) => String(c.codcar) === String(fallback.codcar) && String(c.modo) === String(fallback.modo))

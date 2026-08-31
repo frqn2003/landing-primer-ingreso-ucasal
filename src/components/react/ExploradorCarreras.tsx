@@ -104,15 +104,15 @@ export default function ExploradorCarreras({ careers, modosDisponibles }: Props)
                         {/* Con una sola modalidad disponible (build online) el filtro no aporta nada */}
                         {modalidades.length > 1 && (
                             <div className="relative w-full" ref={modalidadRef}>
-                                <button type="button" onClick={() => setModalidadAbierta((v) => !v)} aria-expanded={modalidadAbierta} className="w-full rounded-xl border border-slate-300 px-4 py-3 text-left text-sm">
+                                <button type="button" onClick={() => setModalidadAbierta((v) => !v)} aria-expanded={modalidadAbierta} className="w-full cursor-pointer rounded-xl border border-slate-300 px-4 py-3 text-left text-sm">
                                     Modalidad{modalities.length > 0 ? ` (${modalities.length})` : ''}
                                 </button>
                                 {modalidadAbierta && (
-                                    <fieldset className="absolute z-10 mt-1 w-full rounded-xl border border-slate-300 bg-white px-4 py-3 shadow-lg">
+                                    <fieldset className="absolute z-50 mt-1 w-full rounded-xl border border-slate-300 bg-white px-4 py-3 shadow-lg">
                                         <legend className="sr-only">Modalidad</legend>
                                         {modalidades.map((m) => (
                                             <label key={m.code} className="flex items-center justify-between gap-2 text-sm">
-                                                <span className="flex items-center gap-2">
+                                                <span className="flex items-center gap-2 cursor-pointer">
                                                     <input type="checkbox" checked={modalities.includes(m.code)} onChange={() => toggleModalidad(m.code)} />
                                                     {m.label}
                                                 </span>
@@ -124,15 +124,15 @@ export default function ExploradorCarreras({ careers, modosDisponibles }: Props)
                             </div>
                         )}
                         <div className="relative w-full" ref={facultadRef}>
-                            <button type="button" onClick={() => setFacultadAbierta((v) => !v)} aria-expanded={facultadAbierta} className="w-full rounded-xl border border-slate-300 px-4 py-3 text-left text-sm">
+                            <button type="button" onClick={() => setFacultadAbierta((v) => !v)} aria-expanded={facultadAbierta} className="w-full rounded-xl border border-slate-300 px-4 py-3 text-left text-sm cursor-pointer">
                                 Facultad{faculties.length > 0 ? ` (${faculties.length})` : ''}
                             </button>
                             {facultadAbierta && (
-                                <fieldset className="absolute z-10 mt-1 w-full rounded-xl border border-slate-300 bg-white px-4 py-3 shadow-lg">
+                                <fieldset className="absolute z-50 mt-1 w-full rounded-xl border border-slate-300 bg-white px-4 py-3 shadow-lg">
                                     <legend className="sr-only">Facultad</legend>
                                     {facultadesVisibles.map((f) => (
                                         <label key={f.code} className="flex items-center justify-between gap-2 text-sm">
-                                            <span className="flex items-center gap-2">
+                                            <span className="flex items-center gap-2 cursor-pointer">
                                                 <input type="checkbox" checked={faculties.includes(f.code)} onChange={() => toggleFacultad(f.code)} />
                                                 {f.label}
                                             </span>

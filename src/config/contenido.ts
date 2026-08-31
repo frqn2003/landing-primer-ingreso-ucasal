@@ -78,7 +78,7 @@ const beneficiosPorModalidad: Record<Modalidad, Beneficio[]> = {
     presencial: [
         {
             codigo: "campus",
-            titulo: "Campus en Castañares",
+            titulo: "Campus Castañares",
             descripcion:
                 "42 hectáreas al pie del cerro: aulas, laboratorios, comedor y espacios verdes para estudiar y quedarte.",
             imagen: "beneficios/campus.webp",

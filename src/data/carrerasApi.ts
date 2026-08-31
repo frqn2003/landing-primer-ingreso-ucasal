@@ -54,16 +54,44 @@ export function getCarrerasApi(modos: number[] = modosUnicos): Promise<any[]> {
 
 /* Para las landings específicas se carga una sola vez el JSON con esa carrera específica */
 
-const cacheIndividual: Record<string, any> = {}
+/* Guarda la promesa, no el valor: si la cascada pide el mismo (codcar, modo)
+   dos veces antes de que resuelva el primer fetch, se reusa el que ya está en
+   vuelo en lugar de disparar otro. */
+const cacheIndividual: Record<string, Promise<any>> = {}
 
-export function getCarreraApi(codcar: string, modo: string): Promise<any> {
+function getCarreraModo(codcar: string, modo: number | string): Promise<any> {
     const key = `${codcar}_${modo}`
-    if (cacheIndividual[key]) return Promise.resolve(cacheIndividual[key])
+    if (!cacheIndividual[key]) {
+        cacheIndividual[key] = fetch(`/landing/consultas/getCarrerasJson.php?modo=${modo}&codcar=${codcar}&tipcar=Grado,Pregrado,Intermedio`)
+            .then(res => res.json())
+            .then(data => data[0] ?? null)
+            /* Un fetch fallido no queda cacheado: si no se borra la clave, el
+               reintento devolvería para siempre la promesa rechazada. */
+            .catch(error => {
+                delete cacheIndividual[key]
+                throw error
+            })
+    }
+    return cacheIndividual[key]
+}
 
-    return fetch(`/landing/consultas/getCarrerasJson.php?modo=${modo}&codcar=${codcar}&tipcar=Grado,Pregrado,Intermedio`)
-        .then(res => res.json())
-        .then(data => {
-            cacheIndividual[key] = data[0] ?? null
-            return cacheIndividual[key]
-        })
+/**
+ * La API devuelve una fila por par (codcar, modo), no una fila por carrera con
+ * las modalidades adentro. Una carrera mixta como Contador Público (14) sale
+ * como dos registros —modo 1 y modo 7—, cada uno con SUS sedes: las de modo 1
+ * son las presenciales y las de modo 7 las online. Por eso hay que pedir un
+ * modo por vez y devolver las dos filas: si se trae solo la primera, el
+ * selector muestra las dos modalidades pero al elegir la segunda no hay
+ * registro que la respalde y la cascada se queda sin localidades.
+ *
+ * @param modos Modos a pedir para esta carrera, ya recortados a los que ofrece
+ * la landing.
+ */
+export function getCarreraApi(codcar: string, modos: (number | string)[]): Promise<any[]> {
+    return Promise.allSettled(modos.map(modo => getCarreraModo(codcar, modo)))
+        .then(resultados => resultados
+            .filter(r => r.status === 'fulfilled')
+            .map(r => (r as PromiseFulfilledResult<any>).value)
+            /* Un modo que la API no tiene cargado devuelve [] -> null. */
+            .filter(Boolean))
 }
