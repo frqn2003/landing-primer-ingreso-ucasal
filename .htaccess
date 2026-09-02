@@ -148,13 +148,18 @@ Redirect 301 /landing/estudiar-licenciatura-ciencias-politicas.php /landing/ingr
 # react-router). Sus 24 carreras usan exactamente el mismo `slug` que
 # src/data/carreras.ts, asi que la unica traduccion es cambiar la base.
 #
-# Las 23 que se dictan a distancia van al build online; topografia y geomatica
-# solo se genera en el build presencial (su `modalidad` no incluye el modo 7),
-# asi que va a /landing/ingreso/carreras/.
+# Van al build MIXTO (/landing/ingreso/carreras/), no al online: ese es el que
+# tiene modosCarrera [1, 7], asi que la carrera llega entera al detalle y se
+# muestra como "Presencial y Online". El build online recorta cada carrera a
+# [7] en carrerasLanding.ts y por eso anunciaba solo Online.
+#
+# Las 24 caen en la misma base, asi que no hay excepciones: una sola regla.
+# De ellas 13 son [1, 7] y se ven mixtas; 10 son [7] y muestran solo Online
+# porque no hay nada mixto que mostrar; 1 es [1] (topografia y geomatica).
 #
 # Todo lo demas de ese arbol -la home, /enviado-agosto, /enviado/<algo>, /404 y
-# los assets viejos- cae a la home online: un lead que entra por un link viejo
-# aterriza en la landing nueva en vez de comerse un 404.
+# los assets viejos- cae a la home nueva: un lead que entra por un link viejo
+# aterriza en la landing en vez de comerse un 404.
 #
 # mod_alias agrega el query string solo cuando el destino no trae uno propio, y
 # aca ninguno lo trae: los utm_* de las campanias de agosto sobreviven al salto.
@@ -166,17 +171,14 @@ Redirect 301 /landing/estudiar-licenciatura-ciencias-politicas.php /landing/ingr
 # bloque es nuevo, asi que arranca con la forma que ahorra el salto.
 #
 # IMPORTANTE - mientras la carpeta carreras-agosto siga en el servidor, estas
-# reglas NO alcanzan: ese directorio tiene su propio .htaccess con el rewrite
-# de la SPA (RewriteRule ^ index.html [L]), mod_rewrite corre antes que
-# mod_alias y por defecto un .htaccess hijo no hereda las reglas del padre.
-# Hay que subir tambien deploy/carreras-agosto.htaccess, que reemplaza ese
-# archivo. Este bloque es la red de contencion para cuando la carpeta se borre.
+# reglas NO alcanzan: ese directorio tiene su propio .htaccess (el de
+# deploy/carreras-agosto.htaccess), mod_rewrite corre antes que mod_alias y por
+# defecto un .htaccess hijo no hereda las reglas del padre. Este bloque es la
+# red de contencion para cuando la carpeta se borre.
 
-RedirectMatch 301 ^/landing/ingreso/carreras-agosto/tecnicatura-universitaria-topografia-y-geomatica/?$ /landing/ingreso/carreras/tecnicatura-universitaria-topografia-y-geomatica/
+RedirectMatch 301 ^/landing/ingreso/carreras-agosto/(abogacia|administracion-agropecuaria|administracion-de-empresas|administracion-de-negocios-digitales|comercializacion|comercio-internacional|contador-publico|corredor-inmobiliario-y-martillero-publico|economia|escribania|guia-universitario-de-turismo|higiene-y-seguridad|licenciatura-en-ciencia-de-datos|licenciatura-en-corretaje-tasacion-y-administracion-de-consorcios|licenciatura-en-seguridad|procuracion|recursos-humanos|tec-universitaria-en-gestion-de-bancos-empresas-financieras-y-de-seguros|tecn-univ-en-organizacion-y-direccion-de-eventos-y-ceremonial|tecnicatura-en-operaciones-mineras-e-industriales|tecnicatura-en-seguridad-informatica|tecnicatura-univ-en-gestion-de-calidad|tecnicatura-univ-en-secretariado-ejecutivo|tecnicatura-universitaria-topografia-y-geomatica)/?$ /landing/ingreso/carreras/$1/
 
-RedirectMatch 301 ^/landing/ingreso/carreras-agosto/(abogacia|administracion-agropecuaria|administracion-de-empresas|administracion-de-negocios-digitales|comercializacion|comercio-internacional|contador-publico|corredor-inmobiliario-y-martillero-publico|economia|escribania|guia-universitario-de-turismo|higiene-y-seguridad|licenciatura-en-ciencia-de-datos|licenciatura-en-corretaje-tasacion-y-administracion-de-consorcios|licenciatura-en-seguridad|procuracion|recursos-humanos|tec-universitaria-en-gestion-de-bancos-empresas-financieras-y-de-seguros|tecn-univ-en-organizacion-y-direccion-de-eventos-y-ceremonial|tecnicatura-en-operaciones-mineras-e-industriales|tecnicatura-en-seguridad-informatica|tecnicatura-univ-en-gestion-de-calidad|tecnicatura-univ-en-secretariado-ejecutivo)/?$ /landing/ingreso/carreras-online/$1/
-
-RedirectMatch 301 ^/landing/ingreso/carreras-agosto(/.*)?$ /landing/ingreso/carreras-online/
+RedirectMatch 301 ^/landing/ingreso/carreras-agosto(/.*)?$ /landing/ingreso/carreras/
 
 # ----------------------------------------------------------------------------
 # SIN DESTINO - la carrera NO existe en src/data/carreras.ts
