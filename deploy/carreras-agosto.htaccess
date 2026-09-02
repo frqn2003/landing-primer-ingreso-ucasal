@@ -1,0 +1,74 @@
+# ============================================================================
+# UCASAL - Retiro de la landing de AGOSTO
+# ============================================================================
+#
+# Este archivo REEMPLAZA al .htaccess que hoy vive en
+# /landing/ingreso/carreras-agosto/ (el del repo landing-agosto, que hacia el
+# rewrite a index.html para react-router). Al reemplazarlo, la SPA de agosto
+# deja de servirse y todo el arbol pasa a redirigir 301 a la landing de primer
+# ingreso, para que los leads de las campanias viejas entren a la web nueva.
+#
+# Va aca y no solo en el .htaccess de /landing/ porque un .htaccess hijo no
+# hereda las RewriteRule del padre y mod_rewrite corre antes que mod_alias: si
+# quedara el rewrite de la SPA, ganaria el y los Redirect del padre nunca
+# verian la URL original.
+#
+# Destinos (ver .env.presencial / .env.online del repo landing-primer-ingreso):
+#
+#   build online     -> /landing/ingreso/carreras-online/<slug>
+#   build presencial -> /landing/ingreso/carreras/<slug>
+#
+# Los slug de agosto y los de src/data/carreras.ts son identicos, asi que lo
+# unico que cambia es la base. mod_rewrite arrastra el query string cuando la
+# sustitucion no trae uno propio, asi que los utm_* de agosto se conservan.
+#
+# Si en algun momento se borra la carpeta carreras-agosto del servidor, este
+# archivo desaparece con ella y toma el relevo el BLOQUE 3 del .htaccess de
+# /landing/, que tiene las mismas reglas en formato RedirectMatch.
+
+RewriteEngine On
+
+# ----------------------------------------------------------------------------
+# 1 - Excepcion: solo se genera en el build PRESENCIAL
+# ----------------------------------------------------------------------------
+# Su `modalidad` en src/data/carreras.ts no incluye el modo 7 (online), asi que
+# la pagina no existe en dist/carreras-online.
+
+RewriteRule ^tecnicatura-universitaria-topografia-y-geomatica/?$ /landing/ingreso/carreras/tecnicatura-universitaria-topografia-y-geomatica [R=301,L]
+
+# ----------------------------------------------------------------------------
+# 2 - Las 23 carreras a distancia -> build ONLINE, mismo slug
+# ----------------------------------------------------------------------------
+
+RewriteRule ^abogacia/?$                                                                 /landing/ingreso/carreras-online/abogacia [R=301,L]
+RewriteRule ^administracion-agropecuaria/?$                                              /landing/ingreso/carreras-online/administracion-agropecuaria [R=301,L]
+RewriteRule ^administracion-de-empresas/?$                                               /landing/ingreso/carreras-online/administracion-de-empresas [R=301,L]
+RewriteRule ^administracion-de-negocios-digitales/?$                                     /landing/ingreso/carreras-online/administracion-de-negocios-digitales [R=301,L]
+RewriteRule ^comercializacion/?$                                                         /landing/ingreso/carreras-online/comercializacion [R=301,L]
+RewriteRule ^comercio-internacional/?$                                                   /landing/ingreso/carreras-online/comercio-internacional [R=301,L]
+RewriteRule ^contador-publico/?$                                                         /landing/ingreso/carreras-online/contador-publico [R=301,L]
+RewriteRule ^corredor-inmobiliario-y-martillero-publico/?$                               /landing/ingreso/carreras-online/corredor-inmobiliario-y-martillero-publico [R=301,L]
+RewriteRule ^economia/?$                                                                 /landing/ingreso/carreras-online/economia [R=301,L]
+RewriteRule ^escribania/?$                                                               /landing/ingreso/carreras-online/escribania [R=301,L]
+RewriteRule ^guia-universitario-de-turismo/?$                                            /landing/ingreso/carreras-online/guia-universitario-de-turismo [R=301,L]
+RewriteRule ^higiene-y-seguridad/?$                                                      /landing/ingreso/carreras-online/higiene-y-seguridad [R=301,L]
+RewriteRule ^licenciatura-en-ciencia-de-datos/?$                                         /landing/ingreso/carreras-online/licenciatura-en-ciencia-de-datos [R=301,L]
+RewriteRule ^licenciatura-en-corretaje-tasacion-y-administracion-de-consorcios/?$        /landing/ingreso/carreras-online/licenciatura-en-corretaje-tasacion-y-administracion-de-consorcios [R=301,L]
+RewriteRule ^licenciatura-en-seguridad/?$                                                /landing/ingreso/carreras-online/licenciatura-en-seguridad [R=301,L]
+RewriteRule ^procuracion/?$                                                              /landing/ingreso/carreras-online/procuracion [R=301,L]
+RewriteRule ^recursos-humanos/?$                                                         /landing/ingreso/carreras-online/recursos-humanos [R=301,L]
+RewriteRule ^tec-universitaria-en-gestion-de-bancos-empresas-financieras-y-de-seguros/?$ /landing/ingreso/carreras-online/tec-universitaria-en-gestion-de-bancos-empresas-financieras-y-de-seguros [R=301,L]
+RewriteRule ^tecn-univ-en-organizacion-y-direccion-de-eventos-y-ceremonial/?$            /landing/ingreso/carreras-online/tecn-univ-en-organizacion-y-direccion-de-eventos-y-ceremonial [R=301,L]
+RewriteRule ^tecnicatura-en-operaciones-mineras-e-industriales/?$                        /landing/ingreso/carreras-online/tecnicatura-en-operaciones-mineras-e-industriales [R=301,L]
+RewriteRule ^tecnicatura-en-seguridad-informatica/?$                                     /landing/ingreso/carreras-online/tecnicatura-en-seguridad-informatica [R=301,L]
+RewriteRule ^tecnicatura-univ-en-gestion-de-calidad/?$                                   /landing/ingreso/carreras-online/tecnicatura-univ-en-gestion-de-calidad [R=301,L]
+RewriteRule ^tecnicatura-univ-en-secretariado-ejecutivo/?$                               /landing/ingreso/carreras-online/tecnicatura-univ-en-secretariado-ejecutivo [R=301,L]
+
+# ----------------------------------------------------------------------------
+# 3 - Todo lo demas -> home de la landing ONLINE
+# ----------------------------------------------------------------------------
+# Cubre la home de agosto, /enviado-agosto, /enviado/<slug>, /404, los assets
+# viejos y cualquier slug que no este arriba. Mejor la home nueva que un 404:
+# el lead sigue en la pagina y puede elegir carrera.
+
+RewriteRule ^ /landing/ingreso/carreras-online/ [R=301,L]
