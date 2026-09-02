@@ -329,7 +329,7 @@ export default function Form({ codcarInicial, onSubPage, modosDisponibles }: {
                             ? 'Modalidad Home (tu sede no es cercana)'
                             : sedeSeleccionada?.nombre_sede ?? '',
                     })
-                    window.location.assign(`${BASE_URL}gracias?${resumen.toString()}`)
+                    window.location.assign(`${BASE_URL}enviado?${resumen.toString()}`)
                 },
                 (_errors) => {
                     clarityEvent('formulario-invalido')
@@ -347,8 +347,8 @@ export default function Form({ codcarInicial, onSubPage, modosDisponibles }: {
             <input type="hidden" name="utm_campaign" value={parametros.utm_campaign || ''} />
             <input type="hidden" name="idconversion" value={parametros.idconversion || ''} />
             <input type="hidden" name="campaignid" value={parametros.campaignid || ''} />
-            <input type="hidden" name="tkp" value={`${BASE_URL}gracias`} />
-            <input type="hidden" name="fkp" value={`${BASE_URL}gracias?id=404`} />
+            <input type="hidden" name="tkp" value={`${BASE_URL}enviado`} />
+            <input type="hidden" name="fkp" value={`${BASE_URL}enviado?id=404`} />
 
             {!onSubPage && (
                 <div className="flex justify-center">
