@@ -159,6 +159,12 @@ Redirect 301 /landing/estudiar-licenciatura-ciencias-politicas.php /landing/ingr
 # mod_alias agrega el query string solo cuando el destino no trae uno propio, y
 # aca ninguno lo trae: los utm_* de las campanias de agosto sobreviven al salto.
 #
+# Los destinos de este bloque llevan barra final y los de los BLOQUES 1 y 2 no.
+# No es un descuido: Astro buildea en formato directorio, asi que sin la barra
+# Apache suma un 301 propio de mod_dir. Los bloques 1 y 2 ya estan publicados en
+# el servidor tal como estan, y tocarlos obligaria a resubir este archivo; este
+# bloque es nuevo, asi que arranca con la forma que ahorra el salto.
+#
 # IMPORTANTE - mientras la carpeta carreras-agosto siga en el servidor, estas
 # reglas NO alcanzan: ese directorio tiene su propio .htaccess con el rewrite
 # de la SPA (RewriteRule ^ index.html [L]), mod_rewrite corre antes que
@@ -166,9 +172,9 @@ Redirect 301 /landing/estudiar-licenciatura-ciencias-politicas.php /landing/ingr
 # Hay que subir tambien deploy/carreras-agosto.htaccess, que reemplaza ese
 # archivo. Este bloque es la red de contencion para cuando la carpeta se borre.
 
-RedirectMatch 301 ^/landing/ingreso/carreras-agosto/tecnicatura-universitaria-topografia-y-geomatica/?$ /landing/ingreso/carreras/tecnicatura-universitaria-topografia-y-geomatica
+RedirectMatch 301 ^/landing/ingreso/carreras-agosto/tecnicatura-universitaria-topografia-y-geomatica/?$ /landing/ingreso/carreras/tecnicatura-universitaria-topografia-y-geomatica/
 
-RedirectMatch 301 ^/landing/ingreso/carreras-agosto/(abogacia|administracion-agropecuaria|administracion-de-empresas|administracion-de-negocios-digitales|comercializacion|comercio-internacional|contador-publico|corredor-inmobiliario-y-martillero-publico|economia|escribania|guia-universitario-de-turismo|higiene-y-seguridad|licenciatura-en-ciencia-de-datos|licenciatura-en-corretaje-tasacion-y-administracion-de-consorcios|licenciatura-en-seguridad|procuracion|recursos-humanos|tec-universitaria-en-gestion-de-bancos-empresas-financieras-y-de-seguros|tecn-univ-en-organizacion-y-direccion-de-eventos-y-ceremonial|tecnicatura-en-operaciones-mineras-e-industriales|tecnicatura-en-seguridad-informatica|tecnicatura-univ-en-gestion-de-calidad|tecnicatura-univ-en-secretariado-ejecutivo)/?$ /landing/ingreso/carreras-online/$1
+RedirectMatch 301 ^/landing/ingreso/carreras-agosto/(abogacia|administracion-agropecuaria|administracion-de-empresas|administracion-de-negocios-digitales|comercializacion|comercio-internacional|contador-publico|corredor-inmobiliario-y-martillero-publico|economia|escribania|guia-universitario-de-turismo|higiene-y-seguridad|licenciatura-en-ciencia-de-datos|licenciatura-en-corretaje-tasacion-y-administracion-de-consorcios|licenciatura-en-seguridad|procuracion|recursos-humanos|tec-universitaria-en-gestion-de-bancos-empresas-financieras-y-de-seguros|tecn-univ-en-organizacion-y-direccion-de-eventos-y-ceremonial|tecnicatura-en-operaciones-mineras-e-industriales|tecnicatura-en-seguridad-informatica|tecnicatura-univ-en-gestion-de-calidad|tecnicatura-univ-en-secretariado-ejecutivo)/?$ /landing/ingreso/carreras-online/$1/
 
 RedirectMatch 301 ^/landing/ingreso/carreras-agosto(/.*)?$ /landing/ingreso/carreras-online/
 
