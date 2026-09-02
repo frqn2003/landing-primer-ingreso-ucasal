@@ -1,0 +1,6 @@
+# Los .htaccess se suben tal cual al servidor Apache y algunos builds se quejan
+# si las directivas terminan en CRLF. Se fuerzan a LF para que un checkout en
+# Windows no los convierta y despues haya que acordarse de subirlos en modo
+# ASCII por FTP.
+.htaccess          text eol=lf
+*.htaccess         text eol=lf
