@@ -1023,7 +1023,9 @@ const data = [
     },
     {
         codcar: 147,
-        sector: 2,
+        // Sector 1 (Artes y Ciencias) para que la card coincida con la landing
+        // ya publicada en /licenciatura-finanzas/, que muestra esa facultad.
+        sector: 1,
         slug: "licenciatura-finanzas",
         nombre: "Licenciatura en Finanzas",
         descripcion: "La Licenciatura en Finanzas propone una formación sólida para comprender, analizar y gestionar decisiones financieras en organizaciones, mercados e instituciones. El plan articula conocimientos de finanzas, economía, administración, matemática, estadística, econometría y normativa con una capa tecnológica diferencial: ciencia de datos e inteligencia artificial aplicada a las finanzas.",
