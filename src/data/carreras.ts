@@ -1022,6 +1022,88 @@ const data = [
         ]
     },
     {
+        codcar: 147,
+        sector: 2,
+        slug: "licenciatura-finanzas",
+        nombre: "Licenciatura en Finanzas",
+        descripcion: "La Licenciatura en Finanzas propone una formación sólida para comprender, analizar y gestionar decisiones financieras en organizaciones, mercados e instituciones. El plan articula conocimientos de finanzas, economía, administración, matemática, estadística, econometría y normativa con una capa tecnológica diferencial: ciencia de datos e inteligencia artificial aplicada a las finanzas.",
+        duracion: "4 años",
+        modalidad: [1, 7],
+        perfilEgresado: {
+            items: [
+                "Analizar mercados financieros, tasas y activos de renta fija y variable.",
+                "Diseñar y evaluar proyectos de inversión y financiamiento.",
+                "Aplicar herramientas de econometría, estadística y ciencia de datos a las finanzas.",
+                "Gestionar riesgos financieros en empresas, bancos y otras instituciones.",
+                "Interpretar estados contables y valuar activos y empresas.",
+                "Actuar con criterio ético y responsabilidad profesional en la toma de decisiones financieras."
+            ]
+        },
+        planEstudios: [
+            {
+                semestre: "1° Año",
+                materias: [
+                    "•",
+                    "•",
+                    "•",
+                    "•",
+                    "•",
+                    "•",
+                    "•",
+                    "•",
+                    "•",
+                    "•",
+                    "•"
+                ]
+            },
+            {
+                semestre: "2° Año",
+                materias: [
+                    "•",
+                    "•",
+                    "•",
+                    "•",
+                    "•",
+                    "•",
+                    "•",
+                    "•",
+                    "•",
+                    "•"
+                ]
+            },
+            {
+                semestre: "3° Año",
+                materias: [
+                    "•",
+                    "•",
+                    "•",
+                    "•",
+                    "•",
+                    "•",
+                    "•",
+                    "•",
+                    "•",
+                    "•",
+                    "•"
+                ]
+            },
+            {
+                semestre: "4° Año",
+                materias: [
+                    "•",
+                    "•",
+                    "•",
+                    "•",
+                    "•",
+                    "•",
+                    "•",
+                    "•",
+                    "•"
+                ]
+            }
+        ]
+    },
+    {
         codcar: 363,
         sector: 3,
         slug: "procuracion",
