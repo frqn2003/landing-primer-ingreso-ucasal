@@ -8,11 +8,17 @@ import CareerDetail from "../components/astro/CareerDetail.astro";
 
 // Solo las carreras de esta landing: en el build online no se genera la
 // subpagina de una carrera que solo se dicta presencial.
+//
+// Y se saltean las marcadas con `paginaExterna`: su landing ya está publicada y
+// se mantiene por fuera de este proyecto, así que generarla acá la pisaría en el
+// próximo deploy. Igual aparecen en el explorador, y su card linkea al slug.
 export function getStaticPaths() {
-    return data.map((carrera) => ({
-        params: { slug: carrera.slug },
-        props: { carrera },
-    }));
+    return data
+        .filter((carrera: any) => !carrera.paginaExterna)
+        .map((carrera) => ({
+            params: { slug: carrera.slug },
+            props: { carrera },
+        }));
 }
 
 const { carrera } = Astro.props;
