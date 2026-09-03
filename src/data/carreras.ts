@@ -1043,62 +1043,62 @@ const data = [
             {
                 semestre: "1° Año",
                 materias: [
-                    "•",
-                    "•",
-                    "•",
-                    "•",
-                    "•",
-                    "•",
-                    "•",
-                    "•",
-                    "•",
-                    "•",
-                    "•"
+                    "Filosofía",
+                    "Matemáticas I",
+                    "Microeconomía",
+                    "Administración I",
+                    "Finanzas I",
+                    "Derecho Civil",
+                    "Matemáticas II",
+                    "Macroeconomía",
+                    "Administración II",
+                    "Finanzas II",
+                    "Inglés I"
                 ]
             },
             {
                 semestre: "2° Año",
                 materias: [
-                    "•",
-                    "•",
-                    "•",
-                    "•",
-                    "•",
-                    "•",
-                    "•",
-                    "•",
-                    "•",
-                    "•"
+                    "Teología",
+                    "Impuestos",
+                    "Estadística I",
+                    "Finanzas Internacionales",
+                    "Derecho Comercial y Societario",
+                    "Matemática Financiera",
+                    "Estadística II",
+                    "Formulación y Evaluación de Proyectos",
+                    "Inglés II",
+                    "Instituciones del Sistema Financiero"
                 ]
             },
             {
                 semestre: "3° Año",
                 materias: [
-                    "•",
-                    "•",
-                    "•",
-                    "•",
-                    "•",
-                    "•",
-                    "•",
-                    "•",
-                    "•",
-                    "•",
-                    "•"
+                    "Pensamiento Social Cristiano",
+                    "Econometría I",
+                    "Política Monetaria y Fiscal",
+                    "Contabilidad General",
+                    "Finanzas Públicas",
+                    "Normativa del Mercado de Capitales",
+                    "Econometría II",
+                    "Análisis e Interpretación de los Estados Contables",
+                    "Mercado de Capitales",
+                    "Metodología de la Investigación",
+                    "Sistema Bancario y No Bancario"
                 ]
             },
             {
                 semestre: "4° Año",
                 materias: [
-                    "•",
-                    "•",
-                    "•",
-                    "•",
-                    "•",
-                    "•",
-                    "•",
-                    "•",
-                    "•"
+                    "Ética Profesional",
+                    "IA Aplicada a las Finanzas",
+                    "Ciencia de Datos I",
+                    "Valuación de Activos Financieros, Títulos de Renta Fija y Renta Variable",
+                    "Ciencia de Datos II",
+                    "Seminario de Actualización Profesional",
+                    "Valuación de Empresas",
+                    "Inglés III",
+                    "Trabajo Final Graduación"
                 ]
             }
         ]
