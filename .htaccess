@@ -139,6 +139,10 @@ Redirect 301 /landing/estudiar-prof-psicologia-presencial.php /landing/ingreso/c
 Redirect 301 /landing/estudiar-tecnicatura-universitaria-topografia-y-geomatica.php /landing/ingreso/carreras/tecnicatura-universitaria-topografia-y-geomatica
 Redirect 301 /landing/estudiar-guia-universitario-turismo-presencial.php /landing/ingreso/carreras/guia-universitario-de-turismo
 Redirect 301 /landing/estudiar-licenciatura-ciencias-politicas.php /landing/ingreso/carreras/ciencias-politicas
+# 180-LIC. EN HISTORIA: el .php se llama "ciclo-licenciatura" y el slug del
+# proyecto termina en -ccc. Es la misma carrera, solo cambia como la nombra
+# cada lado (el `nombre` en carreras.ts es "Licenciatura en Historia - CCC").
+Redirect 301 /landing/estudiar-lic-historia-ciclo-licenciatura.php /landing/ingreso/carreras/licenciatura-en-historia-ccc
 
 # ----------------------------------------------------------------------------
 # BLOQUE 3 - Landing de AGOSTO retirada -> landing de primer ingreso
@@ -188,9 +192,6 @@ RedirectMatch 301 ^/landing/ingreso/carreras-agosto(/.*)?$ /landing/ingreso/carr
 #
 # 221-LICENCIATURA EN DISENO GRAFICO
 # Redirect 301 /landing/estudiar-lic-diseno-grafico-presencial.php /landing/ingreso/carreras/
-#
-# 180-LICENCIATURA EN HISTORIA - CICLO DE LICENCIATURA
-# Redirect 301 /landing/estudiar-lic-historia-ciclo-licenciatura.php /landing/ingreso/carreras/
 #
 # 203-LICENCIATURA EN ARTES PLASTICAS - CICLO LICENCIATURA
 # Redirect 301 /landing/estudiar-lic-artes-plasticas-presencial.php /landing/ingreso/carreras/
