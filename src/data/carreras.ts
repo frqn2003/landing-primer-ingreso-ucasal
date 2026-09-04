@@ -630,6 +630,86 @@ const data = [
             }
         ]
     },
+    {
+        codcar: 403,
+        sector: 6,
+        slug: "licenciatura-en-gerontologia-social",
+        nombre: "Licenciatura en Gerontología Social",
+        descripcion: "La Licenciatura en Gerontología forma profesionales capacitados para diseñar y dirigir programas de salud y bienestar para personas mayores, gestionar centros residenciales y promover el envejecimiento activo, liderando equipos interdisciplinarios en políticas públicas, investigación e intervención sociosanitaria.",
+        duracion: "4 años",
+        modalidad: [7],
+        perfilEgresado: {
+            items: [
+                "Diseñar, gestionar y evaluar programas integrales de salud y bienestar para personas mayores.",
+                "Dirigir y asesorar centros de día, residencias y servicios de atención gerontológica.",
+                "Intervenir en procesos de envejecimiento activo, prevención de la dependencia y promoción de la autonomía.",
+                "Liderar equipos interdisciplinarios en salud, aspectos sociosanitarios y políticas públicas.",
+                "Desarrollar proyectos de investigación científica y ejercer la docencia en el área del envejecimiento."
+            ]
+        },
+        planEstudios: [
+            {
+                semestre: "1° Año",
+                materias: [
+                    "Bases Psicosociales del Envejecimiento I",
+                    "Envejecimiento Saludable I",
+                    "Filosofía",
+                    "Atención Centrada en la Persona",
+                    "Factores Socioeconómicos del Siglo XXI",
+                    "Bases Psicosociales del Envejecimiento II",
+                    "Envejecimiento Saludable II",
+                    "Seguridad Social",
+                    "Entorno Sociofamiliar de las Personas Mayores",
+                    "Práctica Gerontológica: Introducción"
+                ]
+            },
+            {
+                semestre: "2° Año",
+                materias: [
+                    "Cuidados y Modelos de Apoyo I",
+                    "Intervención con los Cuidadores: Aplicación del Modelo ACP",
+                    "Patologías Prevalentes y Factores de Riesgo",
+                    "Teología",
+                    "Prácticas Externas I",
+                    "Cuidados y Modelos de Apoyo II",
+                    "Valoración Geriátrica Integral (VGI)",
+                    "Comunicación y Escucha Activa",
+                    "Pensamiento Social Cristiano I",
+                    "Prácticas Externas II"
+                ]
+            },
+            {
+                semestre: "3° Año",
+                materias: [
+                    "Planificación del Cuidado Gerontológico",
+                    "Salud Mental en Personas Mayores",
+                    "Estándares y Calidad en Gerontología",
+                    "Pensamiento Social Cristiano II",
+                    "Prácticas Externas III",
+                    "Gestión de Proyectos Sociales para el Envejecimiento",
+                    "Intervención en Situaciones de Crisis y Duelo",
+                    "Recreación y Tiempo Libre",
+                    "Metodología de la Investigación en Gerontología Social I",
+                    "Prácticas Externas IV"
+                ]
+            },
+            {
+                semestre: "4° Año",
+                materias: [
+                    "Gestión de Organizaciones para el Cuidado Gerontológico",
+                    "Metodología de la Investigación en Gerontología Social II",
+                    "Envejecimiento, Vivienda y Entorno",
+                    "Ética Profesional",
+                    "Prácticas Externas V",
+                    "Seminario de Actualización en Gerontología Social",
+                    "Tecnología y Envejecimiento",
+                    "Envejecimiento y Diversidad Cultural",
+                    "Taller de Trabajo Integrador Final"
+                ]
+            }
+        ]
+    },
+
     // ── SEDE B ──
     {
         codcar: 96,
