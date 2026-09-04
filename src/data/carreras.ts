@@ -5671,6 +5671,52 @@ const data = [
 
     },
     {
+        codcar: 180,
+        sector: 21,
+        slug: "licenciatura-en-historia-ccc",
+        nombre: "Licenciatura en Historia - CCC",
+        descripcion: "La Licenciatura en Historia forma profesionales capacitados para investigar, analizar e interpretar procesos históricos, gestionar proyectos de patrimonio cultural y divulgación, y ejercer la docencia, aportando una visión crítica e interdisciplinaria sobre la sociedad pasada y contemporánea.",
+        duracion: "2 años",
+        modalidad: [1],
+        perfilEgresado: {
+            items: [
+                "Investigar, analizar e interpretar procesos históricos locales, nacionales e internacionales.",
+                "Asesorar en el diseño de políticas culturales, gestión del patrimonio histórico y conservación documental en organismos públicos y privados.",
+                "Producir y divulgar contenidos historiográficos para medios de comunicación, editoriales, museos y espacios culturales.",
+                "Integrar y liderar equipos de investigación interdisciplinarios.",
+                "Ejercer la docencia en el nivel superior y universitario, promoviendo el pensamiento reflexivo sobre la realidad contemporánea."
+            ]
+        },
+        planEstudios: [
+            {
+                semestre: "1° Año",
+                materias: [
+                    "Filosofía de la Historia",
+                    "Antropología Filosófica",
+                    "Tesis I",
+                    "Seminario IV (Historia de Salta)",
+                    "Sociología",
+                    "Tesis II",
+                    "Seminario de la Historia Contemporánea",
+                    "Seminario de la Historia de América",
+                    "Seminario de la Historia Argentina",
+                    "Seminario de la Historia Moderna"
+                ]
+            },
+            {
+                semestre: "2° Año",
+                materias: [
+                    "Humanismo y Doctrina Social de la Iglesia",
+                    "Las Ciencias Sociales y la Transformación Educativa",
+                    "Trabajo de Tesis",
+                    "Seminario: Modernidad y Postmodernidad",
+                    "Seminario: Modelos Políticos y su Influencia en las Sociedades Modernas",
+                    "Idioma Inglés"
+                ]
+            }
+        ]
+    },
+    {
         codcar: 94,
         sector: 1,
         slug: "licenciatura-en-ingles-ciclo-de-licenciatura",
