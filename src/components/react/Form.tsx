@@ -141,7 +141,7 @@ export default function Form({ codcarInicial, onSubPage, modosDisponibles }: {
     }
 
     const todosCompletos = !!carreraCompleta && !!nombre && !!email && !!ddiPais && !!codArea && !!tel
-    const carreraSeleccionadaLocal = dataCarreras.find(c => String(c.codcar) === String(codcar)) || null
+    const carreraSeleccionadaLocal = dataCarreras.find(c => String(c.codcar) === String(codcar)) || undefined
 
     /* Los modos de una carrera que se ofrecen en esta landing: una carrera que
        se dicta [1,7] queda solo como [7] en el build online, asi que ni el
@@ -674,7 +674,7 @@ export default function Form({ codcarInicial, onSubPage, modosDisponibles }: {
                 <button id="formButton" type="submit"
                     disabled={!todosCompletos}
                     style={enviando ? { display: 'none' } : undefined}
-                    className={`w-full font-bold text-sm px-5 py-3 text-center text-white rounded-lg transition-colors duration-200 ease-in-out ${todosCompletos ? 'boton-form-glow cursor-pointer hover:opacity-90' : 'cursor-not-allowed bg-gray-300'}`}
+                    className={`w-full font-bold text-sm px-5 py-3 text-center rounded-lg transition-colors duration-200 ease-in-out ${todosCompletos ? 'cursor-pointer hover:opacity-90 bg-(--rojo-ucasal) text-black' : 'cursor-not-allowed bg-gray-300'}`}
                 >
                     <span>Solicitar información</span>
                 </button>

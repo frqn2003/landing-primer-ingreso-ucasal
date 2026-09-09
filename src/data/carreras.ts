@@ -5876,7 +5876,7 @@ const data = [
         },
 
     },
-    {
+    /* {
         codcar: 146,
         sector: 3,
         slug: "escribania-ccc",
@@ -5913,7 +5913,7 @@ const data = [
         },
 
 
-    },
+    }, */
     {
         codcar: 104,
         sector: 7,

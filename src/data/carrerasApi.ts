@@ -40,7 +40,7 @@ export function getCarrerasApi(modos: number[] = modosUnicos): Promise<any[]> {
 
     promesa = Promise.allSettled(
         modos.map(modo =>
-            fetch(`/landing/consultas/getCarrerasJson.php?modo=${modo}&tipcar=Grado,Pregrado,Intermedio`)
+            fetch(`/landing/consultas/getCarrerasJson.php?modo=${modo}&tipcar=Grado,Pregrado,Intermedio,Curso`)
                 .then(res => res.json())
         )
     ).then(resultados => {
@@ -62,7 +62,7 @@ const cacheIndividual: Record<string, Promise<any>> = {}
 function getCarreraModo(codcar: string, modo: number | string): Promise<any> {
     const key = `${codcar}_${modo}`
     if (!cacheIndividual[key]) {
-        cacheIndividual[key] = fetch(`/landing/consultas/getCarrerasJson.php?modo=${modo}&codcar=${codcar}&tipcar=Grado,Pregrado,Intermedio`)
+        cacheIndividual[key] = fetch(`/landing/consultas/getCarrerasJson.php?modo=${modo}&codcar=${codcar}&tipcar=Grado,Pregrado,Intermedio,Curso`)
             .then(res => res.json())
             .then(data => data[0] ?? null)
             /* Un fetch fallido no queda cacheado: si no se borra la clave, el

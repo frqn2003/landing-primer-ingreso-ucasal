@@ -252,7 +252,7 @@ const parrafos = carrera.descripcion.split("\\n").filter(Boolean);
             ? "Elegí cómo cursarla"
             : cursaOnline
               ? "Esta carrera se cursa online"
-              : "Esta carrera se cursa en el campus"}
+              : "Esta carrera se cursa presencialmente"}
           destinoCta="#contacto"
           textoCta="Consultar por esta modalidad"
           onSubPage={true}
@@ -281,6 +281,17 @@ const parrafos = carrera.descripcion.split("\\n").filter(Boolean);
             </div>
           )
         }
+            <!-- Vamos a hacer que compartan el mismo fondo, el que me paso la fer me gustaba banda -->
+    <div class="relative isolate min-w-0 my-6 rounded-3xl overflow-hidden">
+        <div class="absolute inset-0 -z-10">
+            <img
+                src={`${base}fondos/azul.webp`}
+                alt="Imagen de fondo azul"
+                class="sticky left-1/2 right-1/2 top-0 h-full w-full object-cover"
+            />
+        </div>
+        <Financiacion disposicion="columna" />
+    </div>
       </div>
       <aside
         id="contacto"
@@ -298,7 +309,7 @@ const parrafos = carrera.descripcion.split("\\n").filter(Boolean);
       carrera.codcar === 84 ||
       carrera.codcar === 19 ||
       carrera.codcar === 105 ||
-      carrera.codcar === 26 || 
+      carrera.codcar === 26 ||
       carrera.sector === 13 ? (
         <section class="flex flex-row gap-16 relative contenedor py-12">
           <div class="text-xl flex flex-col justify-center items-center text-center">
@@ -339,9 +350,7 @@ const parrafos = carrera.descripcion.split("\\n").filter(Boolean);
             de aspirantes y comisiones que se habiliten.
           </div>
         </section>
-      ) : (
-        null
-      )
+      ) : null
     }
   </section>
 
@@ -358,21 +367,6 @@ const parrafos = carrera.descripcion.split("\\n").filter(Boolean);
       </picture>
     </div>
     <BeneficiosCartas base={base} />
-    <div class="contenedor grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
-      <div class="min-w-0 text-white">
-        <h2 style="color:white;">Estudiar es más fácil de lo que creés</h2>
-        <p class="mt-5 max-w-[45ch] text-lg leading-8 text-white/85">
-          {carrera.nombre} tiene planes de pago, becas y descuentos por convenio.
-          Consultá los aranceles vigentes y financiá la cuota con tu tarjeta.
-        </p>
-        <a href="#contacto" class="boton-cta-hero mt-8 inline-flex"
-          >Quiero que me contacten</a
-        >
-      </div>
-      <div class="min-w-0">
-        <Financiacion disposicion="columna" />
-      </div>
-    </div>
   </div>
 
   <!-- ────────────────────────── Campus / Sedes ─────────────────────────── -->
