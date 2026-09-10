@@ -100,7 +100,7 @@ const data = [
         slug: "corredor-inmobiliario-y-martillero-publico",
         nombre: "Corredor Inmobiliario y Martillero Público",
         descripcion: "La carrera de Corredor Inmobiliario y Martillero Público de UCASAL forma profesionales capacitados para gestionar operaciones inmobiliarias, realizar tasaciones y peritajes, y actuar como auxiliares de la justicia en remates y ejecuciones de sentencias, además de gestionar trámites de inscripción registral.",
-        duracion: "2 años",
+        duracion: "2½ años",
         modalidad: [1, 7],
         perfilEgresado: {
             items: [
