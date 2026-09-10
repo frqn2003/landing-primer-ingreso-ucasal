@@ -1,6 +1,6 @@
 import Clarity from '@microsoft/clarity'
 
-export function initClarity(projectId: string) {
+export function initClarity(projectId: string)  {
     try {
         Clarity.init(projectId)
     } catch (error) {

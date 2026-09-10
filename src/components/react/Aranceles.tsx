@@ -17,7 +17,7 @@ export function Aranceles(ArancelesProps: ArancelesProps) {
         enabled: ArancelesProps.enabled ?? true,
     })
     return (
-        <section className="border-(--azul-ucasal) px-6 py-4 rounded-lg border bg-white">
+        <section className="border-(--azul-ucasal) px-6 py-4 mt-4 rounded-lg border bg-white">
             {data &&
                 <div>
                     <p className="text-lg font-semibold">PRECIO DE MATRÍCULA: </p>
