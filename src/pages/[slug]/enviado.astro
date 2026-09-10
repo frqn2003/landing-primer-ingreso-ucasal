@@ -1,0 +1,33 @@
+---
+/**
+ * Gracias del formulario de la subpágina de una carrera: /<carrera>/enviado
+ *
+ * Existe para que la URL de agradecimiento acompañe a la carrera desde la que
+ * se envió el formulario (/abogacia/enviado y no /enviado). El destino lo arma
+ * CareerDetail.astro y se lo pasa a Form.tsx por la prop `urlEnviado`.
+ *
+ * Se generan solo las carreras de esta landing, igual que [slug].astro: en el
+ * build online no hay /<carrera-presencial>/enviado porque tampoco hay
+ * formulario del que llegar.
+ */
+import Layout from "../../layouts/Layout.astro";
+import Enviado from "../../components/astro/Enviado.astro";
+import data from "../../data/carrerasLanding";
+
+export function getStaticPaths() {
+    return data.map((carrera) => ({
+        params: { slug: carrera.slug },
+        props: { carrera },
+    }));
+}
+
+const { carrera } = Astro.props;
+---
+
+<Layout
+    title={`Gracias por contactarnos | ${carrera.nombre} | UCASAL`}
+    description={`Recibimos tu consulta sobre ${carrera.nombre} en UCASAL.`}
+    noindex={true}
+>
+    <Enviado />
+</Layout>

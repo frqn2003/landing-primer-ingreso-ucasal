@@ -300,6 +300,7 @@ const parrafos = carrera.descripcion.split("\\n").filter(Boolean);
         <Form
           codcarInicial={String(carrera.codcar)}
           onSubPage={true}
+          urlEnviado={`${import.meta.env.BASE_URL}${carrera.slug}/enviado`}
           modosDisponibles={modosCarrera}
           client:visible
         />

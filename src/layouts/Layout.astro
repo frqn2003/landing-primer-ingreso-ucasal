@@ -5,22 +5,24 @@ import { esOnline } from "../config/modalidad";
 interface Props {
   title?: string;
   description?: string;
+  /**
+   * Saca la página del índice de los buscadores. Lo usan las pantallas de
+   * "gracias": hay una por carrera y son todas iguales, así que indexarlas
+   * serían decenas de páginas duplicadas sin valor de búsqueda.
+   */
+  noindex?: boolean;
 }
 
 const {
   title = "Estudia, conectá, crecé | Estudiá en UCASAL",
   description = "Encontrá tu carrera, elegí tu modalidad y comenzá tu camino universitario en UCASAL.",
+  noindex = false,
 } = Astro.props;
 const canonical = new URL(Astro.url.pathname, "https://www.ucasal.edu.ar").href;
 const base = import.meta.env.BASE_URL;
-const socialImageName = esOnline
-  ? "scrapping/online.jpg"
-  : "scrapping/presencial.jpg";
-
-const socialImage = new URL(
-  `${base}${socialImageName}`,
-  "https://www.ucasal.edu.ar",
-).href;
+const socialImage = esOnline
+  ? "https://www.ucasal.edu.ar/landing/ingreso/carreras-online/scrapping/online.jpg"
+  : "https://www.ucasal.edu.ar/landing/ingreso/carreras/scrapping/presencial.jpg";
 
 // Las @font-face se generan acá y no en global.css porque la ruta de los .woff2
 // depende del `base`, que cambia según la modalidad del build, y el CSS plano no
@@ -132,6 +134,7 @@ const cssFuentes = fuentes
     <meta name="description" content={description} />
     <meta name="author" content="Universidad Católica de Salta - UCASAL" />
     <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
 
     <!-- OG -->
     <meta property="og:type" content="website" />

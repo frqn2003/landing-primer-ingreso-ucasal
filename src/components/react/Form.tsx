@@ -65,9 +65,15 @@ const IconoBuscar = () => (
     </svg>
 )
 
-export default function Form({ codcarInicial, onSubPage, modosDisponibles }: {
+export default function Form({ codcarInicial, onSubPage, urlEnviado, modosDisponibles }: {
     codcarInicial?: string,
     onSubPage?: boolean,
+    /**
+     * A dónde se manda al visitante después de enviar. En la subpágina de una
+     * carrera llega `<base><slug>/enviado`, así que la URL de agradecimiento
+     * acompaña a la carrera desde la que consultó. Por defecto, la de la home.
+     */
+    urlEnviado?: string,
     modosDisponibles?: number[]
 }) {
     const { register, handleSubmit, formState: { errors, isSubmitted }, watch, setValue } = useForm({
@@ -128,6 +134,8 @@ export default function Form({ codcarInicial, onSubPage, modosDisponibles }: {
         userAgent: typeof navigator !== 'undefined' ? navigator.userAgent : ''
     }
     const [carreraBloqueada, setCarreraBloqueada] = useState(Boolean(codcarInicial))
+    /* Pantalla de gracias: la de la carrera si vino por prop, si no la de la home. */
+    const destinoEnviado = urlEnviado ?? `${BASE_URL}enviado`
     const [buscarLocalidad, setBuscarLocalidad] = useState('')
     const [localidadAbierta, setLocalidadAbierta] = useState(false)
     const localidadRef = useRef<HTMLDivElement>(null)
@@ -329,7 +337,7 @@ export default function Form({ codcarInicial, onSubPage, modosDisponibles }: {
                             ? 'Modalidad Home (tu sede no es cercana)'
                             : sedeSeleccionada?.nombre_sede ?? '',
                     })
-                    window.location.assign(`${BASE_URL}enviado?${resumen.toString()}`)
+                    window.location.assign(`${destinoEnviado}?${resumen.toString()}`)
                 },
                 (_errors) => {
                     clarityEvent('formulario-invalido')
@@ -347,8 +355,8 @@ export default function Form({ codcarInicial, onSubPage, modosDisponibles }: {
             <input type="hidden" name="utm_campaign" value={parametros.utm_campaign || ''} />
             <input type="hidden" name="idconversion" value={parametros.idconversion || ''} />
             <input type="hidden" name="campaignid" value={parametros.campaignid || ''} />
-            <input type="hidden" name="tkp" value={`${BASE_URL}enviado`} />
-            <input type="hidden" name="fkp" value={`${BASE_URL}enviado?id=404`} />
+            <input type="hidden" name="tkp" value={destinoEnviado} />
+            <input type="hidden" name="fkp" value={`${destinoEnviado}?id=404`} />
 
             {!onSubPage && (
                 <div className="flex justify-center">
