@@ -13,6 +13,7 @@
 import Layout from "../../layouts/Layout.astro";
 import Enviado from "../../components/astro/Enviado.astro";
 import data from "../../data/carrerasLanding";
+import MetaPixel from "../../components/astro/MetaPixel.astro";
 
 export function getStaticPaths() {
     return data.map((carrera) => ({
@@ -29,5 +30,6 @@ const { carrera } = Astro.props;
     description={`Recibimos tu consulta sobre ${carrera.nombre} en UCASAL.`}
     noindex={true}
 >
+    <MetaPixel />
     <Enviado />
 </Layout>

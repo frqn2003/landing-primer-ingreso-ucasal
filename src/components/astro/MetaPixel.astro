@@ -1,0 +1,50 @@
+<!-- Meta Pixel Code -->
+<script slot="head" is:inline>
+    !(function (f, b, e, v, n, t, s) {
+        if (f.fbq) return;
+        n = f.fbq = function () {
+            n.callMethod
+                ? n.callMethod.apply(n, arguments)
+                : n.queue.push(arguments);
+        };
+        if (!f._fbq) f._fbq = n;
+        n.push = n;
+        n.loaded = !0;
+        n.version = "2.0";
+        n.queue = [];
+        t = b.createElement(e);
+        t.async = !0;
+        t.src = v;
+        s = b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t, s);
+    })(
+        window,
+        document,
+        "script",
+        "https://connect.facebook.net/en_US/fbevents.js",
+    );
+    fbq("init", "328130240872648");
+    fbq("track", "PageView");
+
+    // El Lead se dispara una sola vez por envío. Sin esto, un F5 o un "volver"
+    // en esta página estática vuelven a contar la conversión.
+    const params = new URLSearchParams(location.search);
+
+    if (params.has("email")) {
+        const clave = "fb-lead:" + params.toString();
+        let yaContado = false;
+        try {
+            yaContado = sessionStorage.getItem(clave) === "1";
+            sessionStorage.setItem(clave, "1");
+        } catch (e) {
+            // Modo incógnito o cookies bloqueadas: preferimos contar de más.
+        }
+
+        if (!yaContado) {
+            fbq("track", "Lead", {
+                content_name: params.get("carrera") || "Sin especificar",
+                content_category: "primer-ingreso",
+            });
+        }
+    }
+</script>
