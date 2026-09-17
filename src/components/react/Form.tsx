@@ -296,6 +296,29 @@ export default function Form({ codcarInicial, onSubPage, urlEnviado, modosDispon
     const localidadHabilitada = !!codcar && !!modalidad
     const labelModalidad = etiquetaModalidad(carreraSeleccionadaLocal?.modalidad)
 
+    /**
+     * Qué modo de cursado se manda al CRM.
+     *
+     * Normalmente es el que eligió el visitante, pero hay dos casos donde nunca
+     * llega a tocar un botón: la carrera se dicta de una sola forma (la
+     * subpágina muestra un texto en vez del selector) y la landing online, que
+     * ofrece un solo modo. En esos casos se manda el único posible en vez de
+     * vacío, que es lo que el CRM venía recibiendo como 0.
+     *
+     * `modos` son los modos de la carrera elegida ya recortados a esta landing;
+     * si todavía no hay carrera se cae a los de la landing. Así el build online
+     * manda 7 siempre, pase lo que pase con el estado.
+     */
+    const modosPosibles = (modos.length > 0
+        ? modos.map((m: any) => m.modalidad)
+        : (modosDisponibles ?? [])
+    ).map(String)
+    const modoEnviado = modosPosibles.includes(String(modalidad))
+        ? String(modalidad)
+        : modosPosibles.length === 1
+            ? modosPosibles[0]
+            : ''
+
     return (
         <form ref={setFormRef} role="form" id="pedidoinfo" method="post" encType="multipart/form-data" action="/postulantes_mail1.php"
             autoComplete="on"
@@ -343,7 +366,14 @@ export default function Form({ codcarInicial, onSubPage, urlEnviado, modosDispon
                     clarityEvent('formulario-invalido')
                 })}
             className={`rounded-lg shadow-2xl w-full min-w-0 ${onSubPage ? 'px-6 py-4' : 'p-6'} ${modalidad === '7' ? 'bg-white border-2 border-(--azul-ucasal)' : modalidad === '1' ? 'bg-white border-2 border-(--rojo-ucasal)' : 'border-2 border-transparent [background:linear-gradient(white,white)_padding-box,linear-gradient(to_bottom_right,var(--azul-ucasal),var(--rojo-ucasal))_border-box]'}`}>
-            <input type="hidden" value={modalidad === '7' ? '103' : '4'} name="id_origen" />
+            {/* El submit arma el payload con `new FormData(form)`, que lee el DOM
+                y no ve el estado de react-hook-form. Todo lo que el CRM tiene
+                que recibir necesita su propio input, aunque el control visible
+                sea un botón. Ojo con los `name`: el CRM espera "modo", no
+                "cbx_modo" (eso era el id del viejo <select>). */}
+            <input type="hidden" value={modoEnviado === '7' ? '103' : '4'} name="id_origen" />
+            <input type="hidden" name="modo" value={modoEnviado} />
+            <input type="hidden" name="cbx_provincia" value={idProvincia} />
             <input type="hidden" name="cbx_sede" value={idSedeReal} />
             <input type="hidden" name="sector" value={sectorCarrera} />
             <input type="hidden" value="postulantes" name="tabla" />
@@ -429,7 +459,11 @@ export default function Form({ codcarInicial, onSubPage, urlEnviado, modosDispon
                         })}
                     </fieldset>
                 )}
-                {!codcarInicial && <input type="hidden" name="cbx_carrera" value={codcar} />}
+                {/* Sin condición: antes esto convivía con un <select name="cbx_carrera">
+                    que se usaba cuando no había carrera fija. Ese select ya no
+                    existe, así que este input es el único que lleva la carrera y
+                    tiene que renderizarse también en la subpágina. */}
+                <input type="hidden" name="cbx_carrera" value={codcar} />
             </div>
 
             {/* 2 · CÓMO SE CURSA */}
