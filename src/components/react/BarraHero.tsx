@@ -59,8 +59,8 @@ function textoPlazo(fechaFin: string): string {
 }
 
 function textoDias(dias: number): string {
-    if (dias === 0) return "¡Último día!";
-    const unidad = dias === 1 ? "día" : "días";
+    if (dias === 1) return "¡Último día!";
+    const unidad = dias === 2 ? "día" : "días";
     return dias <= DIAS_URGENCIA
         ? `¡Últimos ${dias} ${unidad}!`
         : `Quedan ${dias} ${unidad}`;
