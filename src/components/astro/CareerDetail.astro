@@ -14,6 +14,7 @@ import ModalidadesPuerta from "./ModalidadesPuerta.astro";
 import Financiacion from "./Financiacion.astro";
 import Sedes from "./Sedes.astro";
 import Form from "../react/Form.tsx";
+import { paraFormulario } from "../../data/carrerasCliente";
 
 type PlanEstudios = { semestre: string; materias: string[] }[];
 
@@ -297,7 +298,14 @@ const parrafos = carrera.descripcion.split("\\n").filter(Boolean);
         id="contacto"
         class="order-first min-w-0 scroll-mt-24 lg:order-0 lg:sticky lg:top-24"
       >
+        <!-- Solo ESTA carrera, no el catálogo entero. Acá el formulario la
+             muestra fija: el botón "Cambiar" está detrás de un `!onSubPage`
+             en Form.tsx, así que el listado de carreras nunca se dibuja y
+             mandarlo serían 14 KB de JSON muertos dentro del HTML de cada una
+             de las 179 páginas. Si alguna vez se habilita cambiar de carrera
+             desde la subpágina, acá hay que volver a pasar el catálogo. -->
         <Form
+          carreras={paraFormulario([carrera])}
           codcarInicial={String(carrera.codcar)}
           onSubPage={true}
           urlEnviado={`${import.meta.env.BASE_URL}${carrera.slug}/enviado`}

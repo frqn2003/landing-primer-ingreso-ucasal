@@ -9,6 +9,24 @@
  */
 import Footer from './Footer.astro';
 import { esOnline } from '../../config/modalidad';
+import todasLasCarreras from '../../data/carreras';
+import {
+    urlInscripcion,
+    codcarsPorRegla,
+    esCCC,
+    sinInscripcion,
+    ID_SEDE_HOME,
+    URL_CCC,
+    URL_HOME,
+    type CarreraInscripcion,
+} from '../../lib/inscripcion';
+
+interface Props {
+    /** La carrera desde la que se envió el formulario, si la ruta la conoce. */
+    carrera?: CarreraInscripcion;
+}
+
+const { carrera } = Astro.props;
 
 // El resumen se arma en el navegador con lo que viene por querystring (lo manda
 // Form.tsx al redirigir). Las etiquetas salen de acá para que el build online no
@@ -18,8 +36,25 @@ const etiquetasModo: Record<string, string> = esOnline
     : { '1': 'Presencial', '7': 'Online' };
 
 const base = import.meta.env.BASE_URL;
-const linkInscripcion =
-    'https://www.ucasal.edu.ar/inscripciones/?utm_source=landing_primer_ingreso&utm_medium=gracias';
+
+/**
+ * El botón de inscripción.
+ *
+ * /<carrera>/enviado conoce la carrera por props y ya resuelve acá el caso CCC
+ * y el de las carreras sin inscripción. Lo que no puede saber el build es qué
+ * sede eligió el visitante, así que el caso "Modalidad Home" lo ajusta el
+ * script de abajo con lo que llega por querystring. /enviado (el de la home)
+ * entra sin carrera y resuelve todo ahí: Form.tsx manda el codcar.
+ */
+const linkInscripcion = urlInscripcion({ carrera, utmMedium: 'gracias' });
+const reglasInscripcion = {
+    ...codcarsPorRegla(todasLasCarreras),
+    cccServidor: !!carrera && esCCC(carrera),
+    bloqueadaServidor: !!carrera && sinInscripcion(carrera),
+    ID_SEDE_HOME,
+    URL_CCC,
+    URL_HOME,
+};
 
 const redes = [
     { nombre: 'Facebook', url: 'https://www.facebook.com/Ucasal', color: '#1877F2', path: 'M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z' },
@@ -84,15 +119,20 @@ const iconos: Record<string, string[]> = {
                 <ul id="resumen-lista" class="flex flex-col gap-4"></ul>
             </div>
             <!-- acá poner las cosas de las promo pago adelantado -->
-            <a
-                href={linkInscripcion}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="boton-cta inline-flex w-full max-w-md justify-center"
-                style="opacity: 0; animation: heroFadeInUp 0.6s ease-out 0.5s forwards;"
-            >
-                Inscribirme ahora
-            </a>
+            {
+                linkInscripcion && (
+                    <a
+                        id="link-inscripcion"
+                        href={linkInscripcion}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="boton-cta inline-flex w-full max-w-md justify-center"
+                        style="opacity: 0; animation: heroFadeInUp 0.6s ease-out 0.5s forwards;"
+                    >
+                        Inscribirme ahora
+                    </a>
+                )
+            }
 
             {/* Redes sociales */}
             <div class="flex flex-col items-center gap-3" style="opacity: 0; animation: heroFadeInUp 0.6s ease-out 0.7s forwards;">
@@ -130,10 +170,33 @@ const iconos: Record<string, string[]> = {
 </main>
 <Footer />
 
-<script is:inline define:vars={{ etiquetasModo, iconos }}>
+<script is:inline define:vars={{ etiquetasModo, iconos, reglasInscripcion }}>
     window.scrollTo({ top: 0, behavior: "instant" });
 
     const params = new URLSearchParams(window.location.search);
+
+    /* Destino final del botón de inscripción.
+     *
+     * El orden es el mismo que en src/lib/inscripcion.ts: primero las carreras
+     * que todavía no tienen inscripción (el botón se va de la página), después
+     * las de ciclo de complementación y recién al final la sede Home. Si la
+     * carrera vino por props el build ya dejó el href correcto y acá solo puede
+     * cambiar por la sede. */
+    const botonInscripcion = document.getElementById("link-inscripcion");
+    if (botonInscripcion) {
+        const codcar = Number(params.get("codcar"));
+        const idSede = Number(params.get("idSede"));
+        const bloqueada =
+            reglasInscripcion.bloqueadaServidor ||
+            reglasInscripcion.sinInscripcion.includes(codcar);
+        const esCCC =
+            reglasInscripcion.cccServidor || reglasInscripcion.ccc.includes(codcar);
+
+        if (bloqueada) botonInscripcion.remove();
+        else if (esCCC) botonInscripcion.href = reglasInscripcion.URL_CCC;
+        else if (idSede === reglasInscripcion.ID_SEDE_HOME)
+            botonInscripcion.href = reglasInscripcion.URL_HOME;
+    }
 
     // El querystring lo controla quien abre el link, así que todo lo que termina
     // en innerHTML pasa por acá antes.

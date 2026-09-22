@@ -255,13 +255,27 @@ h3 {
   }
 }
 
-@keyframes heroFadeIn {
+/* Entrada del hero: SOLO desplazamiento, sin opacidad.
+ *
+ * El h1 del hero es el elemento LCP de la Home, y el de la subpagina de carrera
+ * entra en el mismo grupo. Con un fade, `both` deja el estado inicial aplicado
+ * durante el delay, o sea que el texto arranca invisible y el LCP no se puede
+ * marcar hasta que la animacion avanza: PageSpeed medía 2.770 ms de "retraso en
+ * la renderizacion del elemento" sobre un texto que ya estaba en el HTML.
+ * Animando solo `transform`, el texto se pinta en el primer frame y la entrada
+ * escalonada se mantiene igual.
+ *
+ * No la uses para nada que tenga que aparecer de la nada: para eso esta
+ * heroFadeInUp, que sigue viva en la pantalla de gracias (noindex, no compite
+ * con ninguna metrica).
+ */
+@keyframes heroSubeEntra {
   from {
-    opacity: 0;
+    transform: translateY(20px);
   }
 
   to {
-    opacity: 1;
+    transform: translateY(0);
   }
 }
 
@@ -288,9 +302,11 @@ h3 {
  * sobre cualquier transform declarado en el elemento, asi que el boton y la
  * barra se animan desde un wrapper y no desde ellos mismos (el hover del boton
  * usa scale y quedaria pisado).
+ *
+ * El texto nunca esta invisible durante el delay: ver heroSubeEntra.
  */
 .hero-entra {
-  animation: heroFadeInUp 0.75s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: heroSubeEntra 0.75s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .hero-entra-1 {
@@ -310,8 +326,11 @@ h3 {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  /* Antes acá había un fade de 0.01s, que existía solo para no dejar el texto
+     en el estado inicial de heroFadeInUp. Sin opacidad no hace falta nada: el
+     elemento ya está donde tiene que estar. */
   .hero-entra {
-    animation: heroFadeIn 0.01s both;
+    animation: none;
   }
 }
 

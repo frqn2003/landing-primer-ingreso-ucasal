@@ -1,7 +1,13 @@
 import { useEffect, useRef, useState } from "react"
-import dataCarreras from '../../data/carreras'
+import type { CarreraFormulario } from '../../data/carrerasCliente'
 import intlTelInput from 'intl-tel-input'
-import 'intl-tel-input/styles'
+/* `?url` y no un import de CSS comun: asi Vite emite el archivo con hash pero
+   no lo mete en el grafo de estilos del island, que es lo que hacia que Astro
+   lo colgara del <head> como <link> bloqueante. Acá solo llega la URL; el
+   <link> lo agrega el efecto de abajo cuando el formulario se monta. Ojo que
+   un import dinamico del CSS NO alcanza: Astro lo sigue igual y termina en el
+   head lo mismo, solo que partido en dos archivos. */
+import urlEstilosTelefono from 'intl-tel-input/dist/css/intlTelInput.css?url'
 import { clarityEvent, clarityUpgrade } from '../../lib/clarity'
 import { useCarrerasCascada } from '../../hooks/useCarrerasCascada'
 
@@ -41,6 +47,34 @@ function cargarRecaptcha() {
     return recaptchaPromise
 }
 
+/**
+ * Agrega una hoja de estilos al <head> una sola vez y avisa cuando cargó.
+ *
+ * Es para CSS que no tiene por qué estar en la ruta crítica: el del selector de
+ * país sirve recién cuando el formulario existe en pantalla, y hasta ahora
+ * bloqueaba el primer pintado de todas las páginas de la landing.
+ */
+let promesaCssTelefono: Promise<void> | null = null
+
+function cargarCssTelefono() {
+    if (promesaCssTelefono) return promesaCssTelefono
+
+    promesaCssTelefono = new Promise<void>((resolve) => {
+        const existente = document.querySelector<HTMLLinkElement>(`link[href="${urlEstilosTelefono}"]`)
+        if (existente) return resolve()
+
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = urlEstilosTelefono
+        /* Resuelve igual si falla: mejor el widget sin estilos que sin widget. */
+        link.addEventListener('load', () => resolve(), { once: true })
+        link.addEventListener('error', () => resolve(), { once: true })
+        document.head.appendChild(link)
+    })
+
+    return promesaCssTelefono
+}
+
 function normalizar(texto: string) {
     return texto.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase()
 }
@@ -65,7 +99,19 @@ const IconoBuscar = () => (
     </svg>
 )
 
-export default function Form({ codcarInicial, onSubPage, urlEnviado, modosDisponibles }: {
+export default function Form({ carreras, codcarInicial, onSubPage, urlEnviado, modosDisponibles }: {
+    /**
+     * El catálogo recortado a lo que usa el desplegable. Viene por props desde
+     * el .astro que renderiza el formulario: importar `../../data/carreras`
+     * acá metía las 88 carreras completas —planes de estudio incluidos— en el
+     * bundle del navegador. Ver src/data/carrerasCliente.ts.
+     *
+     * Con `onSubPage` llega una sola carrera, la de esa página, porque ahí el
+     * listado no se dibuja (el botón "Cambiar" de más abajo vive detrás de un
+     * `!onSubPage`). Si eso cambia, CareerDetail.astro tiene que volver a
+     * mandar el catálogo completo.
+     */
+    carreras: CarreraFormulario[],
     codcarInicial?: string,
     onSubPage?: boolean,
     /**
@@ -99,6 +145,7 @@ export default function Form({ codcarInicial, onSubPage, urlEnviado, modosDispon
         seleccionarProvincia,
         seleccionarLocalidad,
     } = useCarrerasCascada({
+        catalogo: carreras,
         codcarInicial,
         onSubPage,
         modosDisponibles,
@@ -149,7 +196,7 @@ export default function Form({ codcarInicial, onSubPage, urlEnviado, modosDispon
     }
 
     const todosCompletos = !!carreraCompleta && !!nombre && !!email && !!ddiPais && !!codArea && !!tel
-    const carreraSeleccionadaLocal = dataCarreras.find(c => String(c.codcar) === String(codcar)) || undefined
+    const carreraSeleccionadaLocal = carreras.find(c => String(c.codcar) === String(codcar)) || undefined
 
     /* Los modos de una carrera que se ofrecen en esta landing: una carrera que
        se dicta [1,7] queda solo como [7] en el build online, asi que ni el
@@ -167,8 +214,8 @@ export default function Form({ codcarInicial, onSubPage, urlEnviado, modosDispon
 
     /* En la landing online se listan solo las carreras que se venden online */
     const carrerasDisponibles = modosDisponibles
-        ? dataCarreras.filter(c => modosDeLaLanding(c.modalidad).length > 0)
-        : dataCarreras
+        ? carreras.filter(c => modosDeLaLanding(c.modalidad).length > 0)
+        : carreras
     const sectorCarrera = carreraSeleccionadaLocal?.sector
 
     /* Sedes */
@@ -211,26 +258,68 @@ export default function Form({ codcarInicial, onSubPage, urlEnviado, modosDispon
         })
     }
     useEffect(() => {
-        if (phoneRef.current) {
-            itiRef.current = intlTelInput(phoneRef.current, {
+        const elemento = phoneRef.current
+        if (!elemento) return
+
+        /* Vivo mientras el efecto no se limpie: el widget se crea despues de un
+           await, asi que para cuando llega puede no haber nadie esperandolo. */
+        let vigente = true
+        let limpiar: (() => void) | undefined
+
+        const updateDialCode = () => {
+            const dialCode = itiRef.current?.getSelectedCountry()?.dialCode ?? ''
+            setDdiPais(dialCode)
+        }
+
+        /* Sin `loadUtils` a propósito.
+         *
+         * `intl-tel-input/utils` es libphonenumber: 264 KB, el chunk más pesado
+         * de la landing, y como `loadUtils` el widget lo pedía al crearse, o
+         * sea durante la carga de la página (en la subpágina de carrera el
+         * formulario está en el viewport inicial).
+         *
+         * Lo único que aporta es formateo mientras se tipea, placeholder de
+         * ejemplo y validación del número. Nada de eso aplica acá: #phone es
+         * solo el selector de país —ancho fijo, `caret-transparent`, con
+         * onKeyDown/onPaste cancelados, y sin `name`, así que ni siquiera se
+         * envía—, el número va en los campos `cod_area` y `tel`, y la
+         * validación la hace zod. El código solo le pide `getSelectedCountry()`
+         * para el `ddi_pais`, que sale de los datos de países del módulo
+         * principal y no de utils.
+         *
+         * La bandera y el +54 se ven igual sin utils (verificado). Si algún día
+         * se habilita escribir el número en este campo o se usa isValidNumber /
+         * getNumber, hay que volver a engancharlo con
+         * `intlTelInput.attachUtils(() => import('intl-tel-input/utils'))`,
+         * idealmente recién cuando el campo se use. */
+        const crearWidget = () => {
+            if (!vigente) return
+            itiRef.current = intlTelInput(elemento, {
                 initialCountry: 'ar',
                 separateDialCode: true,
-                loadUtils: () => import('intl-tel-input/utils'),
             })
-            const updateDialCode = () => {
-                const dialCode = itiRef.current?.getSelectedCountry()?.dialCode ?? ''
-                setDdiPais(dialCode)
-            }
             updateDialCode()
-            const elemento = phoneRef.current
             elemento.addEventListener('countrychange', updateDialCode)
             elemento.addEventListener('input', updateDialCode)
 
-            return () => {
+            limpiar = () => {
                 itiRef.current?.destroy()
                 elemento.removeEventListener('countrychange', updateDialCode)
                 elemento.removeEventListener('input', updateDialCode)
             }
+        }
+
+        /* El CSS del selector de pais se pide recien acá: antes entraba como
+           import de modulo y Astro lo colgaba del <head> de todas las paginas
+           como <link> bloqueante (5,5 KiB, 1.040 ms en PageSpeed) por un widget
+           que vive dentro de un island `client:visible` y que el visitante
+           puede no ver nunca. Se espera a que cargue antes de crear el widget
+           para que no se dibuje sin estilos. */
+        cargarCssTelefono().then(crearWidget)
+
+        return () => {
+            vigente = false
+            limpiar?.()
         }
     }, [])
 
@@ -351,14 +440,21 @@ export default function Form({ codcarInicial, onSubPage, urlEnviado, modosDispon
                     clarityEvent('formulario-enviado')
                     clarityUpgrade('conversion-formulario')
 
+                    /* `codcar` e `idSede` no se muestran en la pantalla de
+                       gracias: los usa para elegir a qué formulario de
+                       inscripción manda el botón (CCC, admisión por sede Home,
+                       o ninguno si la carrera todavía no tiene inscripción).
+                       Ver src/lib/inscripcion.ts. */
                     const resumen = new URLSearchParams({
                         nombre: nombre ?? '',
                         email: email ?? '',
                         carrera: carreraSeleccionadaLocal?.nombre ?? '',
+                        codcar: String(carreraSeleccionadaLocal?.codcar ?? codcar ?? ''),
                         modo: modalidad ?? '',
                         sede: Number(sedeSeleccionada?.id_sede) === 500
-                            ? 'Modalidad Home (tu sede no es cercana)'
+                            ? 'Modalidad Home'
                             : sedeSeleccionada?.nombre_sede ?? '',
+                        idSede: idSedeReal ?? '',
                     })
                     window.location.assign(`${destinoEnviado}?${resumen.toString()}`)
                 },
@@ -406,7 +502,7 @@ export default function Form({ codcarInicial, onSubPage, urlEnviado, modosDispon
                             <span className="text-xs text-gray-600">{carreraSeleccionadaLocal?.duracion}</span>
                         </span>
                         <div className="flex w-full flex-row items-center justify-end gap-2 sm:w-auto md:gap-6">
-                            <div className={`items-center h-full justify-end flex shrink-0 whitespace-nowrap text-xs border-gray-200 border rounded text-white py-1 px-2 ${carreraSeleccionadaLocal?.modalidad.length > 1 ? 'bg-gradient-to-r from-15% from-(--rojo-ucasal) to-(--azul-ucasal) to-70%' : carreraSeleccionadaLocal?.modalidad.includes(7) ? 'bg-(--azul-ucasal)' : 'bg-(--rojo-ucasal)'}`}>{labelModalidad}</div>
+                            <div className={`items-center h-full justify-end flex shrink-0 whitespace-nowrap text-xs border-gray-200 border rounded text-white py-1 px-2 ${(carreraSeleccionadaLocal?.modalidad.length ?? 0) > 1 ? 'bg-gradient-to-r from-15% from-(--rojo-ucasal) to-(--azul-ucasal) to-70%' : carreraSeleccionadaLocal?.modalidad.includes(7) ? 'bg-(--azul-ucasal)' : 'bg-(--rojo-ucasal)'}`}>{labelModalidad}</div>
                             {/* En la subpágina de una carrera no se puede
                                 cambiar: la página ES esa carrera. */}
                             {!onSubPage && (
@@ -544,7 +640,7 @@ export default function Form({ codcarInicial, onSubPage, urlEnviado, modosDispon
                                                 seleccionarLocalidad(String(item.id_provincia), item)
                                                 setBuscarLocalidad(
                                                     Number(item.id_sede) === 500
-                                                        ? 'Modalidad Home (tu sede no es cercana)'
+                                                        ? 'Modalidad Home'
                                                         : item.nombre_sede
                                                 )
                                                 setLocalidadAbierta(false)
@@ -553,7 +649,7 @@ export default function Form({ codcarInicial, onSubPage, urlEnviado, modosDispon
                                         >
                                             <span className="font-bold">
                                                 {Number(item.id_sede) === 500
-                                                    ? 'Modalidad Home (tu sede no es cercana)'
+                                                    ? 'Modalidad Home'
                                                     : item.nombre_sede}
                                             </span>
                                             <span

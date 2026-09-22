@@ -31,5 +31,7 @@ const { carrera } = Astro.props;
     noindex={true}
 >
     <MetaPixel />
-    <Enviado />
+    <!-- La carrera decide a qué formulario manda "Inscribirme ahora": CCC,
+         admisión o inscripciones. Ver src/lib/inscripcion.ts. -->
+    <Enviado carrera={carrera} />
 </Layout>

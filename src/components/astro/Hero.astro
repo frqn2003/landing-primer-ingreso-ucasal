@@ -46,10 +46,20 @@ const promociones = await obtenerPromociones();
             <div
                 class="hero-entra hero-entra-4 flex w-full justify-center"
             >
+                <!-- `client:visible` y no `client:load`: con load, Astro baja
+                     react-dom (184 KB) durante la carga de la página, o sea
+                     compitiendo con el LCP, que es el título de acá arriba. Con
+                     visible el import arranca recién después del primer
+                     pintado. No se usa `client:idle`, que sería más tarde
+                     todavía: la barra se renderiza en el servidor en su
+                     variante mobile y React la corrige al hidratar (ver el
+                     useMediaQuery de BarraHero), así que en escritorio
+                     conviene que esa corrección pase apenas se pinta y no
+                     cuando el navegador queda ocioso. -->
                 <BarraHero
                     promociones={promociones}
                     datos={datosHero}
-                    client:load
+                    client:visible
                 />
             </div>
         </div>
