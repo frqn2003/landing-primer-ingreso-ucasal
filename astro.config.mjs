@@ -36,6 +36,27 @@ export default defineConfig({
   integrations: [react()],
 
   vite: {
-    plugins: [tailwindcss()]
+    plugins: [tailwindcss()],
+
+    build: {
+      // Qué tan moderno sale el JS del bundle.
+      //
+      // Está escrito aunque hoy sea el valor por defecto de Vite: así la
+      // decisión queda a la vista y un cambio de default en una actualización
+      // no nos empieza a transpilar de nuevo sin que nadie se entere.
+      //
+      // Medido sobre el build actual: no hay un solo helper de esbuild
+      // (__spreadValues, __async, __objRest) ni rastro de core-js, y el
+      // optional chaining, el nullish coalescing, async/await, las clases y el
+      // spread salen tal cual se escribieron. O sea que no hay nada que ganar
+      // acá: el aviso de "polyfills y transformaciones" de PageSpeed no es por
+      // nuestro código.
+      //
+      // "baseline-widely-available" son los navegadores con ~30 meses de
+      // antigüedad. Es una política y no una lista congelada, que para el
+      // público de la landing (con su cola larga de Android viejo) es lo
+      // sensato. Si alguna vez hay que bancar algo más viejo, este es el lugar.
+      target: 'baseline-widely-available',
+    },
   }
 });

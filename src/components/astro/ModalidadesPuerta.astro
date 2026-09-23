@@ -196,7 +196,9 @@ const modalidades = todasLasModalidades.filter(
 </style>
 
 <script>
-  const paneles = Array.from(document.querySelectorAll(".puerta-panel"));
+  const paneles = Array.from(
+    document.querySelectorAll<HTMLElement>(".puerta-panel"),
+  );
 
   paneles.forEach((panel) => {
     panel.addEventListener("click", () => {
@@ -207,7 +209,7 @@ const modalidades = todasLasModalidades.filter(
   });
 
   paneles.forEach((panel) => {
-    const cta = panel.querySelector(".puerta-cta");
+    const cta = panel.querySelector<HTMLElement>(".puerta-cta");
     cta?.addEventListener("click", (e) => {
       if (panel.dataset.active !== "true") {
         e.preventDefault();

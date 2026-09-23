@@ -5379,7 +5379,7 @@ const data = [
         codcar: 132,
         sector: 3,
         slug: "ciencias-politicas",
-        nombre: "Ciencias Políticas",
+        nombre: "Licenciatura en Ciencias Políticas",
         descripcion: "La Licenciatura en Ciencias Políticas forma profesionales capacitados para analizar, interpretar y gestionar los procesos de poder, las instituciones públicas y la dinámica social. Los estudiantes dominan herramientas de teoría política, relaciones internacionales, políticas públicas, opinión pública y análisis legislativo. Esta formación impulsa la toma de decisiones estratégicas en el diseño e implementación de proyectos gubernamentales y sociales.",
         duracion: "4 años",
         modalidad: [1],

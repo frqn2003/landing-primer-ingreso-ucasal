@@ -1,6 +1,15 @@
-import data from './carreras'
+import { MODO_PRESENCIAL, MODO_ONLINE } from '../config/modalidad'
 
-const modosUnicos = [...new Set(data.flatMap(c => c.modalidad))]
+/* Los modos que existen en el catálogo.
+ *
+ * Antes era `[...new Set(data.flatMap(c => c.modalidad))]` sobre
+ * src/data/carreras.ts. Esa sola línea —que solo servía para el valor por
+ * defecto de un parámetro— metía las 88 carreras enteras, con planes de estudio
+ * y perfiles, en el bundle del navegador: el recorte de carrerasCliente.ts no
+ * servía de nada mientras este import siguiera vivo. Los códigos salen de
+ * config/modalidad.ts, que está pensado justamente para que lo importen
+ * componentes del cliente. */
+const modosUnicos = [MODO_PRESENCIAL, MODO_ONLINE]
 
 /* Clave de sesion por juego de modos: las dos landings pueden convivir en el
    mismo origen y con una sola clave la cache de la presencial le servia sedes

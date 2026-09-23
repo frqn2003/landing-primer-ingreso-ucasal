@@ -9,13 +9,21 @@ import Testimonios from "../components/astro/Testimonios.astro";
 import Footer from "../components/astro/Footer.astro";
 import ExploradorCarreras from "../components/react/ExploradorCarreras.tsx";
 import FormSection from "../components/astro/FormSection.astro";
-import carreras from "../data/carrerasLanding";
+import carrerasLanding from "../data/carrerasLanding";
+import { paraExplorador } from "../data/carrerasCliente";
 import { modosCarrera } from "../config/modalidad";
 import { getImage } from "astro:assets";
 import portadaDesktop from "../assets/portada/desktop.webp";
 import portadaMobile from "../assets/portada/mobile.webp";
 
 const base = import.meta.env.BASE_URL;
+
+// Los props de un island se serializan dentro del HTML. Pasando los registros
+// completos, el catálogo entero —descripciones, perfil del egresado y planes de
+// estudio— iba a parar al documento: 303 KB de los 656 KB que pesaba esta
+// página. El explorador solo arma cartas y un buscador por texto, así que va
+// recortado. Ver src/data/carrerasCliente.ts.
+const carreras = paraExplorador(carrerasLanding);
 
 // La portada son dos recortes distintos (vertical en mobile, horizontal en
 // desktop), así que no alcanza un `<Picture>`: hace falta el `<picture>` a mano

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { getCarrerasApi, getCarreraApi } from '../data/carrerasApi'
-import dataCarreras from '../data/carreras'
+import type { CarreraFormulario } from '../data/carrerasCliente'
 
 const FALLBACK_CARRERAS: any[] = [
     {
@@ -17,6 +17,16 @@ function getSedeValue(sede: any) {
 }
 
 export interface UseCarrerasCascadaOptions {
+    /**
+     * El catálogo, ya recortado por el .astro que renderiza el formulario (ver
+     * src/data/carrerasCliente.ts). Llega por props y no por import a
+     * propósito: importar `../data/carreras` desde acá mete las 88 carreras
+     * enteras —con planes de estudio y todo— en el bundle del navegador.
+     *
+     * No confundir con el estado `carreras` de más abajo, que es lo que
+     * devuelve la API (carrera × modo × sedes).
+     */
+    catalogo: CarreraFormulario[]
     codcarInicial?: string
     onSubPage?: boolean
     /** Callback llamado cuando se auto-selecciona la modalidad (para sincronizar react-hook-form) */
@@ -36,6 +46,7 @@ export interface UseCarrerasCascadaOptions {
 }
 
 export function useCarrerasCascada({
+    catalogo,
     codcarInicial,
     onSubPage,
     onModalidadChange,
@@ -43,7 +54,7 @@ export function useCarrerasCascada({
     onSedeChange,
     onCodcarChange,
     modosDisponibles,
-}: UseCarrerasCascadaOptions = {}) {
+}: UseCarrerasCascadaOptions) {
     const modoElegible = (modo: number) =>
         !modosDisponibles || modosDisponibles.includes(Number(modo))
     /* El fallback trae una sede presencial: en la landing online no entra. */
@@ -64,7 +75,7 @@ export function useCarrerasCascada({
         setApiCargando(true)
 
         if (codcarInicial) {
-            const modalidadesCarrera = dataCarreras.find(c => String(c.codcar) === codcarInicial)?.modalidad ?? []
+            const modalidadesCarrera = catalogo.find(c => String(c.codcar) === codcarInicial)?.modalidad ?? []
             /* TODOS los modos elegibles, no solo el primero: la API trae una
                fila por (codcar, modo) con las sedes de ese modo, y el selector
                ofrece las dos modalidades de una carrera mixta. Pidiendo solo
@@ -103,11 +114,11 @@ export function useCarrerasCascada({
     }
 
     /* Derivados */
-    const carrerasUnicas = dataCarreras.filter(c => c.modalidad.some(modoElegible))
+    const carrerasUnicas = catalogo.filter(c => c.modalidad.some(modoElegible))
     /* Cada carrera puede tener varias modalidades (array); se despliega una entrada por modalidad */
     const modos = [
         ...new Map(
-            dataCarreras
+            catalogo
                 .filter(c => String(c.codcar) === codcar)
                 .flatMap(c => c.modalidad.filter(modoElegible).map((m) => [String(m), { modalidad: m }] as const))
         ).values()

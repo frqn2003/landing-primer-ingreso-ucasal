@@ -1,7 +1,14 @@
 ---
 import Form from "../react/Form.tsx";
 import { modosCarrera } from "../../config/modalidad";
+import carrerasLanding from "../../data/carrerasLanding";
+import { paraFormulario } from "../../data/carrerasCliente";
 import Financiacion from "./Financiacion.astro";
+
+// El catálogo se recorta acá, en el servidor: el formulario solo necesita
+// codcar, nombre, modalidad y sector para armar el desplegable. Ver
+// src/data/carrerasCliente.ts.
+const carreras = paraFormulario(carrerasLanding);
 ---
 
 <!-- min-h-dvh y no h-dvh: el formulario y las formas de pago son más altos
@@ -17,6 +24,7 @@ import Financiacion from "./Financiacion.astro";
 
         <div class="mx-2 min-w-0 h-full flex justify-center items-center">
             <Form
+                carreras={carreras}
                 onSubPage={false}
                 modosDisponibles={modosCarrera}
                 client:visible

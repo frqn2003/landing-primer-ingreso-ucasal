@@ -5,7 +5,13 @@
     "**/*"
   ],
   "exclude": [
-    "dist"
+    "dist",
+    // Componentes de landings anteriores que no importa nadie: no entran en
+    // ningún build y arrastran errores propios (una variable `pasos` que no
+    // existe, un `./Aranceles` que se movió). Se dejan fuera del check para que
+    // `npm run build` falle solo por código vivo. Si se borra la carpeta, esta
+    // línea se va con ella.
+    "src/components/viejo"
   ],
   "compilerOptions": {
     "jsx": "react-jsx",

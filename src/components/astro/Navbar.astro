@@ -1,6 +1,7 @@
 ---
 import data from "../../data/carrerasLanding";
 import { sanitizarTexto } from "../../lib/utils";
+import { urlInscripcion as urlInscripcionCarrera } from "../../lib/inscripcion";
 import { etiquetaSedes } from "../../config/contenido";
 
 interface Props {
@@ -13,11 +14,20 @@ const { onSubPage, heroCompleto } = Astro.props;
 const { slug } = Astro.params;
 const slugLimpio = slug ? sanitizarTexto(slug) : "";
 const carreraActiva = data.find((c: any) => c.slug === slugLimpio);
-const carrerasConCCC =
-  carreraActiva?.codcar === 401 || carreraActiva?.codcar === 196;
-const urlInscripcion = carrerasConCCC
-  ? "https://www.ucasal.edu.ar/carreras/ccc-form.php"
-  : "https://www.ucasal.edu.ar/inscripciones/?utm_source=landing_primer_ingreso&utm_medium=navbar";
+
+// A dónde manda "¡Quiero Inscribirme!" en ESTA página. Las reglas (CCC, sector
+// sin inscripción, sede Home) están en src/lib/inscripcion.ts. La sede todavía
+// no se conoce acá: recién se elige en el formulario, así que ese caso lo
+// resuelve la pantalla de gracias.
+const urlInscripcion = urlInscripcionCarrera({
+  carrera: carreraActiva,
+  utmMedium: "navbar",
+});
+
+// Sin destino (sector 13): el botón baja al formulario de la subpágina en vez
+// de abrir una pestaña. El `aside` del formulario en CareerDetail.astro es
+// #contacto; en la Home, FormSection.astro usa el mismo id.
+const inscripcionBloqueada = urlInscripcion === null;
 
 const base = import.meta.env.BASE_URL;
 
@@ -129,17 +139,33 @@ const flotarSobreHero = !onSubPage || !!heroCompleto;
     </div>
 
     <div class="justify-end flex items-center">
-      <a
-        href={urlInscripcion}
-        target="_blank"
-        rel="noopener noreferrer"
-        id="boton-inscripcion"
-        class="hidden lg:flex boton-inscripcion"
-      >
-        <span id="iconoInscripcion"> </span>
-
-        ¡Quiero Inscribirme!
-      </a>
+      {
+        inscripcionBloqueada ? (
+          /* Ancla nativa y no el `data-scroll-to` del resto del menú: ese usa
+             scrollIntoView, y sobre el aside del formulario —que es
+             `lg:sticky`— Chrome calcula que ya está en su lugar y no scrollea.
+             Con el hash anda, igual que el "Pedí información" del hero. */
+          <a
+            href="#contacto"
+            id="boton-inscripcion"
+            class="hidden lg:flex boton-inscripcion"
+          >
+            <span id="iconoInscripcion" />
+            ¡Quiero Inscribirme!
+          </a>
+        ) : (
+          <a
+            href={urlInscripcion}
+            target="_blank"
+            rel="noopener noreferrer"
+            id="boton-inscripcion"
+            class="hidden lg:flex boton-inscripcion"
+          >
+            <span id="iconoInscripcion" />
+            ¡Quiero Inscribirme!
+          </a>
+        )
+      }
       <button
         type="button"
         id="menu-button"
@@ -361,6 +387,15 @@ const flotarSobreHero = !onSubPage || !!heroCompleto;
     .getElementById("mobile-inscribirme")
     ?.addEventListener("click", () => {
       toggleMenu(false);
+      // Sin destino (sector 13): se comporta como el resto del menú, cierra y
+      // baja al formulario. Acá sí sirve scrollIntoView: el menú mobile solo
+      // existe por debajo de lg, donde el formulario todavía no es sticky.
+      if (!urlInscripcion) {
+        document
+          .getElementById("contacto")
+          ?.scrollIntoView({ behavior: "smooth" });
+        return;
+      }
       window.open(urlInscripcion, "_blank", "noopener,noreferrer");
     });
 
