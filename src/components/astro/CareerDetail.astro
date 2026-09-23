@@ -27,6 +27,8 @@ interface Career {
   sector: number;
   cio?: { materias: string[] };
   perfilEgresado?: { items: string[] };
+  modalidadesDetalle?: string[];
+  orientaciones?: string[];
   planEstudios?: PlanEstudios;
   planEstudiosPorModalidad?: {
     1?: PlanEstudios;
@@ -189,14 +191,22 @@ const parrafos = carrera.descripcion.split("\\n").filter(Boolean);
       <div class="hero-entra hero-entra-3 mt-6 flex flex-wrap gap-3">
         <span class="ficha-hero">Duración: {carrera.duracion}</span>
         <span class="ficha-hero">Título universitario</span>
-        <span
-          class="ficha-hero ficha-modalidad"
-          style={mixta
-            ? "background:linear-gradient(90deg,var(--rojo-ucasal) 10%,var(--azul-ucasal) 90%);border-color:transparent"
-            : `background:${cursaOnline ? "var(--azul-ucasal)" : "var(--rojo-ucasal)"};border-color:transparent`}
-        >
-          {modalidad}
-        </span>
+        {carrera.modalidadesDetalle ? (
+          carrera.modalidadesDetalle.map((detalle) => (
+            <span class="ficha-hero" style="background:var(--rojo-ucasal);border-color:transparent">
+              {detalle}
+            </span>
+          ))
+        ) : (
+          <span
+            class="ficha-hero ficha-modalidad"
+            style={mixta
+              ? "background:linear-gradient(90deg,var(--rojo-ucasal) 10%,var(--azul-ucasal) 90%);border-color:transparent"
+              : `background:${cursaOnline ? "var(--azul-ucasal)" : "var(--rojo-ucasal)"};border-color:transparent`}
+          >
+            {modalidad}
+          </span>
+        )}
       </div>
 
       <div class="hero-entra hero-entra-4 mt-10 flex flex-wrap gap-4">
@@ -224,6 +234,22 @@ const parrafos = carrera.descripcion.split("\\n").filter(Boolean);
         <div class="mt-5 space-y-4 text-lg leading-8 text-slate-600">
           {parrafos.map((parrafo) => <p>{parrafo}</p>)}
         </div>
+
+        {
+          carrera.orientaciones && (
+            <div class="mt-8">
+              <h3 class="text-(--azul-ucasal)">Las orientaciones ofrecidas son:</h3>
+              <ul class="mt-4 grid gap-2 text-slate-600 sm:grid-cols-2">
+                {carrera.orientaciones.map((orientacion) => (
+                  <li class="flex gap-2 leading-7">
+                    <span class="text-slate-400">•</span>
+                    <span>{orientacion}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )
+        }
 
         {
           carrera.perfilEgresado && (
@@ -261,6 +287,16 @@ const parrafos = carrera.descripcion.split("\\n").filter(Boolean);
           planEstudios && (
             <div id="plan-de-estudios" class="scroll-mt-24">
               <h2 class="mt-14 text-(--azul-dark-ucasal)">Plan de estudios</h2>
+              {carrera.orientaciones && (
+                <div class="mt-6 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+                  <h3 class="text-lg font-bold text-(--rojo-ucasal)">Opciones de especialidad</h3>
+                  <ul class="mt-4 grid gap-2 text-sm leading-6 text-slate-600 sm:grid-cols-2">
+                    {carrera.orientaciones.map((orientacion) => (
+                      <li class="flex gap-2"><span class="text-slate-400">•</span><span>{orientacion}</span></li>
+                    ))}
+                  </ul>
+                </div>
+              )}
               <div class="mt-6 grid gap-4 md:grid-cols-2">
                 {planEstudios.map((anio) => (
                   <article class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">

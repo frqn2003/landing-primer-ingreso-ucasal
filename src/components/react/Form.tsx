@@ -334,7 +334,7 @@ export default function Form({ codcarInicial, onSubPage, urlEnviado, modosDispon
                         carrera: carreraSeleccionadaLocal?.nombre ?? '',
                         modo: modalidad ?? '',
                         sede: Number(sedeSeleccionada?.id_sede) === 500
-                            ? 'Modalidad Home (tu sede no es cercana)'
+                            ? 'Modalidad Home'
                             : sedeSeleccionada?.nombre_sede ?? '',
                     })
                     window.location.assign(`${destinoEnviado}?${resumen.toString()}`)
@@ -429,7 +429,9 @@ export default function Form({ codcarInicial, onSubPage, urlEnviado, modosDispon
                         })}
                     </fieldset>
                 )}
-                {!codcarInicial && <input type="hidden" name="cbx_carrera" value={codcar} />}
+                {/* FormData solo lee inputs del DOM: setValue no alcanza para el POST */}
+                <input type="hidden" name="cbx_carrera" value={codcar} />
+                <input type="hidden" name="modo" value={modalidad} />
             </div>
 
             {/* 2 · CÓMO SE CURSA */}
@@ -510,7 +512,7 @@ export default function Form({ codcarInicial, onSubPage, urlEnviado, modosDispon
                                                 seleccionarLocalidad(String(item.id_provincia), item)
                                                 setBuscarLocalidad(
                                                     Number(item.id_sede) === 500
-                                                        ? 'Modalidad Home (tu sede no es cercana)'
+                                                        ? 'Modalidad Home'
                                                         : item.nombre_sede
                                                 )
                                                 setLocalidadAbierta(false)
@@ -519,7 +521,7 @@ export default function Form({ codcarInicial, onSubPage, urlEnviado, modosDispon
                                         >
                                             <span className="font-bold">
                                                 {Number(item.id_sede) === 500
-                                                    ? 'Modalidad Home (tu sede no es cercana)'
+                                                    ? 'Modalidad Home'
                                                     : item.nombre_sede}
                                             </span>
                                             <span
