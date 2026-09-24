@@ -2842,6 +2842,8 @@ const data = [
         codcar: 220,
         sector: 1,
         slug: "licenciatura-en-imagen-y-sonido",
+        // Sin inscripción a 1.er año desde 2027: la reemplazan la Lic. en Realización Audiovisual y la Lic. en Producción de Sonido, Eventos y Espectáculos.
+        ofertada: false,
         nombre: "Licenciatura en Imagen y Sonido",
         descripcion: "La Licenciatura en Imagen y Sonido forma profesionales con capacidad para concebir, producir y dirigir realizaciones audiovisuales y multimedia innovadoras. Los estudiantes dominan herramientas de producción cinematográfica, edición de video, diseño sonoro, guión, iluminación y postproducción digital. La carrera combina teoría y práctica para desarrollar líderes capaces de tomar decisiones creativas en el ámbito público y privado.",
         duracion: "4 años",
@@ -2933,6 +2935,89 @@ const data = [
         },
 
 
+    },
+    {
+        codcar: 389,
+        sector: 1,
+        slug: "licenciatura-en-realizacion-audiovisual",
+        nombre: "Licenciatura en Realización Audiovisual",
+        descripcion: "La Licenciatura en Realización Audiovisual forma profesionales capacitados para conceptualizar, escribir, dirigir y producir proyectos en cine, televisión y medios digitales, integrando herramientas avanzadas de guion, dirección de cámara, iluminación, sonido y postproducción con una visión narrativa, técnica y comercial.",
+        duracion: "4 años",
+        modalidad: [1],
+        tituloIntermedio: { nombre: "Técnico Universitario en Realización Audiovisual", semestre: 5 },
+        perfilEgresado: {
+            items: [
+                "Diseñar, dirigir y ejecutar producciones audiovisuales integrales.",
+                "Confeccionar guiones, libretos y propuestas narrativas originales adaptadas a diversos géneros y formatos.",
+                "Coordinar la realización técnica en rodajes, incluyendo dirección de fotografía, cámara, iluminación y diseño sonoro.",
+                "Operar y gestionar la postproducción de imagen, montaje, edición digital y efectos visuales.",
+                "Planificar presupuestos, viabilidad financiera y planes de rodaje.",
+            ]
+        },
+        planEstudiosPorModalidad: {
+            1: [
+                {
+                    "semestre": "1° Año",
+                    "materias": [
+                        "Filosofía",
+                        "Historia del Arte y de los Medios Audiovisuales",
+                        "Sonido I",
+                        "Taller de Fotografía y Composición",
+                        "Lenguaje Audiovisual",
+                        "Teoría de la Comunicación Audiovisual",
+                        "Sonido II",
+                        "Taller de Realización Audiovisual I",
+                        "Narrativas Audiovisuales",
+                        "Escritura y Guion Audiovisual I"
+                    ]
+                },
+                {
+                    "semestre": "2° Año",
+                    "materias": [
+                        "Teología",
+                        "Taller de Realización Audiovisual II",
+                        "Dirección de Arte I",
+                        "Taller de Postproducción Audiovisual I",
+                        "Escritura y Guion Audiovisual II",
+                        "Pensamiento Social Cristiano I",
+                        "Taller de Realización Audiovisual III",
+                        "Administración y Educación Financiera",
+                        "Dirección de Arte II",
+                        "Taller de Postproducción Audiovisual II"
+                    ]
+                },
+                {
+                    "semestre": "3° Año",
+                    "materias": [
+                        "Pensamiento Social Cristiano II",
+                        "Estética de los Medios Audiovisuales",
+                        "Taller de Realización Audiovisual IV",
+                        "Taller de Narrativas Transmedia",
+                        "Práctica Pre-Profesional",
+                        "Sociedad y Cultura Digital",
+                        "Animación I",
+                        "Taller de Realización Audiovisual V",
+                        "Producción Ejecutiva I",
+                        "Técnicas de Investigación"
+                    ]
+                },
+                {
+                    "semestre": "4° Año",
+                    "materias": [
+                        "Ética Profesional",
+                        "Animación II",
+                        "Videojuegos",
+                        "Difusión y Comercialización",
+                        "Trabajo Integrador Final I",
+                        "Innovación Audiovisual",
+                        "Modelos de Negocios en la Industria Audiovisual",
+                        "Taller de Realización Audiovisual VI",
+                        "Producción Ejecutiva II",
+                        "Trabajo Integrador Final II"
+                    ]
+                }
+            ]
+        },
     },
     {
         codcar: 18,
@@ -4114,15 +4199,16 @@ const data = [
     {
         codcar: 385,
         sector: 1,
-        slug: "licenciatura-en-comunicaciones",
-        nombre: "Licenciatura en Comunicaciones",
-        descripcion: "La Licenciatura en Comunicaciones forma profesionales con capacidad para planificar, gestionar y ejecutar estrategias de comunicación efectivas e innovadoras. Los estudiantes dominan herramientas de gestión de medios, producción de contenidos, comunicación institucional, marketing digital y opinión pública. La carrera combina teoría y práctica para desarrollar líderes capaces de tomar decisiones estratégicas en el ámbito público y privado.",
+        slug: "licenciatura-en-comunicacion",
+        nombre: "Licenciatura en Comunicación",
+        descripcion: "La Licenciatura en Comunicación forma profesionales con capacidad para planificar, gestionar y ejecutar estrategias de comunicación efectivas e innovadoras. Los estudiantes dominan herramientas de gestión de medios, producción de contenidos, comunicación institucional, marketing digital y opinión pública. La carrera combina teoría y práctica para desarrollar líderes capaces de tomar decisiones estratégicas en el ámbito público y privado.",
         duracion: "4 años",
         modalidad: [1],
+        tituloIntermedio: { nombre: "Técnico Universitario en Comunicación", semestre: 5 },
+        habilitacionLocutor: true,
         perfilEgresado: {
             items: [
                 "Diseñar y gestionar estrategias de comunicación institucional, corporativa y digital.",
-                "Obtener el título intermedio de pregrado al finalizar el 5.º semestre.",
                 "Crear, producir y gestionar contenidos creativos para medios tradicionales y plataformas multimedia.",
                 "Planificar y ejecutar campañas de publicidad, relaciones públicas y gestión de imagen.",
                 "Analizar audiencias, tendencias mediáticas y métricas para la toma de decisiones estratégicas.",
@@ -4212,6 +4298,7 @@ const data = [
         descripcion: "La Licenciatura en Diseño de la Comunicación Visual forma profesionales capaces de crear soluciones visuales para comunicar ideas, identidades y experiencias en medios impresos y digitales. La formación integra diseño, tipografía, lenguaje visual, herramientas digitales y comunicación, con proyectos prácticos que incorporan investigación, innovación y una mirada ética sobre las necesidades de cada público.",
         duracion: "4 años",
         modalidad: [1],
+        tituloIntermedio: { nombre: "Técnico Universitario en Diseño de la Comunicación Visual", semestre: 5 },
         perfilEgresado: {
             items: [
                 "Diseñar y desarrollar sistemas de identidad visual para organizaciones, productos y servicios.",
@@ -4625,17 +4712,18 @@ const data = [
         sector: 1,
         slug: "licenciatura-en-publicidad",
         nombre: "Licenciatura en Publicidad",
-        descripcion: "La Licenciatura en Publicidad forma profesionales capaces de diseñar, implementar y liderar campañas creativas de comunicación estratégica. Los estudiantes dominan herramientas de branding, comportamiento del consumidor, dirección de arte, planificación de medios digitales y redacción publicitaria. La propuesta fomenta una visión innovadora enfocada en posicionar marcas de manera efectiva en entornos altamente competitivos.",
+        descripcion: "La Licenciatura en Publicidad forma profesionales capaces de investigar, concebir, planificar y difundir estrategias y campañas publicitarias para públicos definidos, en medios sociales, de comunicación y soportes tecnológicos. El plan de estudios integra redacción publicitaria, producción creativa, planificación de medios, dirección de arte, narrativas multimedia y transmedia, y analítica y ciencia de datos aplicadas a la publicidad, con una mirada humanista y ética sobre la profesión.",
         duracion: "4 años",
         modalidad: [1],
+        tituloIntermedio: { nombre: "Técnico Universitario en Publicidad", semestre: 5 },
+        habilitacionLocutor: true,
         perfilEgresado: {
             items: [
-                "Diseñar y ejecutar estrategias creativas de comunicación, marcas y posicionamiento de mercado.",
-                "Obtener el título intermedio de pregrado (Técnico Universitario en Publicidad).",
-                "Planificar, implementar y optimizar campañas publicitarias en medios tradicionales y digitales.",
-                "Investigar el comportamiento del consumidor, tendencias de mercado y analítica de audiencias.",
-                "Gestionar la comunicación de marcas, relaciones públicas y la identidad corporativa.",
-                "Dirigir proyectos en agencias de publicidad, departamentos de marketing y emprendimientos propios.",
+                "Dirigir equipos de trabajo para realizar investigaciones sobre públicos, mercados y audiencias.",
+                "Concebir, planificar y diseñar productos, estrategias y campañas publicitarias dirigidas a públicos predeterminados.",
+                "Difundir e interactuar con las audiencias mediante contenidos publicitarios en medios sociales, de comunicación y diversos soportes tecnológicos.",
+                "Desempeñarse de manera autónoma o en organizaciones públicas o privadas, con y sin fines de lucro.",
+                "Ejercer la profesión con respeto por sus semejantes, desde una perspectiva humanista.",
             ]
         },
         planEstudiosPorModalidad: {
@@ -4643,72 +4731,69 @@ const data = [
                 {
                     "semestre": "1° Año",
                     "materias": [
-                        "Lengua Inglesa Elemental",
-                        "Taller de Redacción",
-                        "Pensamiento Filosófico I",
+                        "Filosofía",
+                        "Taller de Redacción Publicitaria",
+                        "Publicidad I",
+                        "Herramientas Digitales I",
+                        "Taller de Cámara e Iluminación",
+                        "Administración y Educación Financiera",
+                        "Taller de Redacción para Medios Digitales",
+                        "Formatos y Narrativas",
+                        "Publicidad II",
+                        "Herramientas Digitales II",
                         "Psicología Social",
-                        "Teoría de la Comunicación I",
-                        "Diseño en Comunicación Visual",
-                        "Expresión Oral y Escrita",
-                        "Pensamiento Filosófico II",
-                        "Psicología de la Motivación",
-                        "Informática",
-                        "Estadística",
-                        "Teoría de la Comunicación II"
+                        "Diseño Visual"
                     ]
                 },
                 {
                     "semestre": "2° Año",
                     "materias": [
-                        "Lengua Inglesa Intermedia",
-                        "Teología I",
-                        "Semiótica General y Aplicada",
-                        "Taller de Fotografía",
-                        "Introducción a la Comunicación Publicitaria",
-                        "Diseño y Producción Audiovisual",
-                        "Pensamiento y Producción Creativa I",
-                        "Teología II",
-                        "Mercadotecnia",
-                        "Estética e Historia del Arte",
-                        "Pensamiento y Producción Creativa II",
-                        "Comunicación Publicitaria",
-                        "Taller de Producción Audiovisual"
+                        "Teología",
+                        "Semiótica de la Publicidad",
+                        "Taller de Producción Creativa I",
+                        "Taller de Comunicación Multimedia y Transmedia I",
+                        "Principios de Programación",
+                        "Community Management",
+                        "Pensamiento Social Cristiano I",
+                        "Marketing",
+                        "Taller de Producción Creativa II",
+                        "Taller de Comunicación Multimedia y Transmedia II",
+                        "Psicología de la Motivación",
+                        "Taller de Realización Audiovisual"
                     ]
                 },
                 {
                     "semestre": "3° Año",
                     "materias": [
-                        "Metodología de la Investigación en Comunicaciones",
-                        "Comportamiento del Consumidor",
-                        "Administración de la Empresa de Comunicación",
-                        "Semiología de la Publicidad",
-                        "Planificación de Medios I",
-                        "Comunicaciones Integradas",
-                        "Doctrina Social de la Iglesia",
-                        "Comunicación Digital",
-                        "Dirección y Atención de Cuentas",
-                        "Marketing Social y Político",
-                        "Régimen Legal de las Comunicaciones",
-                        "Planificación de Medios II"
+                        "Pensamiento Social Cristiano II",
+                        "Planning y Estrategias de Medios",
+                        "Publicidad III",
+                        "Métrica y Analítica Digital",
+                        "Ciencia de Datos",
+                        "Práctica Pre-Profesional",
+                        "Publicidad y Política Gubernamental",
+                        "Análisis y Planificación de Medios",
+                        "Producción Publicitaria",
+                        "Sociedad y Cultura Digital",
+                        "Dirección de Arte",
+                        "Técnicas de Investigación"
                     ]
                 },
                 {
                     "semestre": "4° Año",
                     "materias": [
-                        "Educomunicación",
-                        "Proyecto de Tesis",
-                        "Sociología",
-                        "Comunicaciones Comerciales",
-                        "Comunicación en las Organizaciones",
-                        "Análisis del Discurso",
-                        "Agencia de Publicidad",
-                        "Ética Profesional",
-                        "Taller de Tesis",
-                        "Historia de los Movimientos Sociales y Políticos",
-                        "Planificación",
-                        "Comunicación Política",
-                        "Opinión Pública",
-                        "Práctica Profesional Asistida"
+                        "Ética y Deontología Profesional",
+                        "Tendencias Tecnológicas",
+                        "Diseño Editorial I",
+                        "Crítica Literaria y Audiovisual I",
+                        "Audiencias e Innovación",
+                        "Trabajo Integrador Final I",
+                        "Dirección Estratégica",
+                        "Diseño Editorial II",
+                        "Crítica Literaria y Audiovisual II",
+                        "Modelos de Negocios en Publicidad",
+                        "Taller de Aplicación de Datos en Publicidad",
+                        "Trabajo Integrador Final II"
                     ]
                 }
             ]
@@ -4724,10 +4809,11 @@ const data = [
         descripcion: "La Licenciatura en Periodismo forma profesionales capacitados para investigar, redactar y difundir información rigurosa en múltiples plataformas analógicas y digitales. Los estudiantes dominan herramientas de producción narrativa, investigación periodística, gestión de contenidos, ética de los medios y análisis geopolítico. Su formación impulsa un pensamiento crítico capaz de interpretar la realidad y generar impacto en la opinión pública.",
         duracion: "4 años",
         modalidad: [1],
+        tituloIntermedio: { nombre: "Técnico Universitario en Periodismo", semestre: 5 },
+        habilitacionLocutor: true,
         perfilEgresado: {
             items: [
                 "Investigar, redactar y producir contenidos periodísticos para medios gráficos, audiovisuales y digitales.",
-                "Obtener el título intermedio de pregrado (Técnico Universitario en Periodismo).",
                 "Realizar cobertura de noticias en tiempo real, entrevistas y crónicas.",
                 "Editar y gestionar medios informativos, portales de noticias y nuevos formatos narrativos.",
                 "Analizar la realidad social, política y cultural con criterio ético y responsabilidad social.",
@@ -5519,6 +5605,8 @@ const data = [
         codcar: 7,
         sector: 1,
         slug: "locutor-nacional",
+        // No es carrera de grado: es una habilitación profesional (ISER) que se ofrece dentro de Comunicación, Periodismo y Publicidad (ver habilitacionLocutor).
+        ofertada: false,
         nombre: "Locutor Nacional",
         descripcion: "La carrera de Locutor Nacional forma profesionales capacitados para dominar el uso de la voz, la comunicación oral y la conducción en medios de difusión tradicionales y digitales. Los estudiantes dominan herramientas de foniatría, locución comercial, oratoria, lectura interpretativa, doblaje y articulación periodística. Esta propuesta fortalece la versatilidad sonora y el rigor comunicacional para liderar producciones audiovisuales.",
         duracion: "3 años",
@@ -5595,6 +5683,8 @@ const data = [
         codcar: 54,
         sector: 1,
         slug: "productor-y-director-para-radio-y-television",
+        // No es carrera de grado: habilitación profesional (ISER) que el departamento pidió dejar de ofrecer.
+        ofertada: false,
         nombre: "Productor y Director para Radio y Televisión",
         descripcion: "La carrera de Productor y Director para Radio y Televisión forma profesionales capacitados para diseñar, realizar y coordinar contenidos audiovisuales y sonoros en múltiples plataformas. Los estudiantes dominan herramientas de guion, dirección de cámaras, edición digital, diseño de producción, puesta en aire y gestión de proyectos. Esta propuesta fomenta la innovación narrativa e impulsa la creación de formatos de alto impacto comunicacional.",
         duracion: "3 años",

@@ -28,6 +28,10 @@ interface Career {
   sector: number;
   cio?: { materias: string[] };
   perfilEgresado?: { items: string[] };
+  /** Título de pregrado que se obtiene al aprobar hasta `semestre` inclusive. */
+  tituloIntermedio?: { nombre: string; semestre: number };
+  /** Ofrece cursar la habilitación de Locutor Nacional (ISER) en paralelo. */
+  habilitacionLocutor?: boolean;
   modalidadesDetalle?: string[];
   orientaciones?: string[];
   planEstudios?: PlanEstudios;
@@ -111,6 +115,12 @@ const cursaPresencial = carrera.modalidad.includes(MODO_PRESENCIAL);
 const cursaOnline = carrera.modalidad.includes(MODO_ONLINE);
 const mixta = cursaPresencial && cursaOnline;
 const parrafos = carrera.descripcion.split("\\n").filter(Boolean);
+
+// El título intermedio va aparte del perfil: la tecnicatura tiene alcances
+// propios, distintos de los de la licenciatura. En el plan se marca en la
+// tarjeta del año en que termina ese semestre (el 5.º cierra el 3.er año).
+const intermedio = carrera.tituloIntermedio;
+const anioIntermedio = intermedio ? Math.ceil(intermedio.semestre / 2) - 1 : -1;
 ---
 
 <main data-scroll-libre>
@@ -270,6 +280,20 @@ const parrafos = carrera.descripcion.split("\\n").filter(Boolean);
           )
         }
 
+        {
+          intermedio && (
+            <div class="mt-10 rounded-2xl border border-slate-200 bg-slate-50 p-6">
+              <h3 class="text-(--azul-ucasal)">Título intermedio</h3>
+              <p class="mt-3 leading-7 text-slate-600">
+                Al finalizar el {intermedio.semestre}.º semestre podés obtener el
+                título intermedio de pregrado de{" "}
+                <strong class="text-slate-800">{intermedio.nombre}</strong>, sin
+                interrumpir la licenciatura.
+              </p>
+            </div>
+          )
+        }
+
         <!-- ──────────────────────────── Modalidades ────────────────────────────
          Solo las de ESTA carrera, y el CTA manda al formulario de arriba en vez
          de al explorador (que no existe en esta página). -->
@@ -299,7 +323,7 @@ const parrafos = carrera.descripcion.split("\\n").filter(Boolean);
                 </div>
               )}
               <div class="mt-6 grid gap-4 md:grid-cols-2">
-                {planEstudios.map((anio) => (
+                {planEstudios.map((anio, i) => (
                   <article class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
                     <h3 class="text-lg font-bold text-(--rojo-ucasal)">
                       {anio.semestre}
@@ -312,9 +336,38 @@ const parrafos = carrera.descripcion.split("\\n").filter(Boolean);
                         </li>
                       ))}
                     </ul>
+                    {intermedio && i === anioIntermedio && (
+                      <p class="mt-5 border-t border-slate-200 pt-4 text-sm leading-6 text-slate-600">
+                        <span class="font-bold text-(--azul-ucasal)">
+                          Al finalizar el {intermedio.semestre}.º semestre:
+                        </span>{" "}
+                        {intermedio.nombre}
+                      </p>
+                    )}
                   </article>
                 ))}
               </div>
+            </div>
+          )
+        }
+
+        {
+          carrera.habilitacionLocutor && (
+            <div class="mt-14 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm md:p-8">
+              <p class="text-xs font-bold uppercase tracking-[0.2em] text-(--rojo-ucasal)">
+                Habilitación profesional (ISER)
+              </p>
+              <h3 class="mt-2 text-(--azul-dark-ucasal)">Sumá Locutor Nacional</h3>
+              <p class="mt-3 leading-7 text-slate-600">
+                Mientras cursás la licenciatura podés obtener la habilitación
+                profesional de <strong class="text-slate-800">Locutor Nacional</strong>,
+                otorgada por el ISER. Se cursa por la tarde y no requiere
+                inversión adicional.
+              </p>
+              <p class="mt-3 text-sm leading-6 text-slate-500">
+                No es una carrera de grado: la única condición es estar cursando
+                la Licenciatura en Comunicación, en Periodismo o en Publicidad.
+              </p>
             </div>
           )
         }

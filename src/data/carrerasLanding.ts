@@ -3,7 +3,9 @@
  *
  * Hace dos cosas, y la segunda es la que importa:
  *
- * 1. Deja solo las carreras que se venden en los modos de este build.
+ * 1. Deja solo las carreras que se venden en los modos de este build, y saca
+ *    las marcadas `ofertada: false` (sin inscripción a 1.er año: no generan
+ *    página ni aparecen en el explorador, la navbar o el formulario).
  * 2. Recorta el array `modalidad` de cada carrera a esos mismos modos.
  *
  * Sin el paso 2 una carrera que se dicta [1,7] llegaba entera a los componentes
@@ -18,7 +20,11 @@
 import data from "./carreras";
 import { filtrarCarreras, modosCarrera } from "../config/modalidad";
 
-const carrerasLanding = filtrarCarreras(data).map((carrera) => ({
+const ofertadas = data.filter(
+    (carrera) => !("ofertada" in carrera) || carrera.ofertada !== false,
+);
+
+const carrerasLanding = filtrarCarreras(ofertadas).map((carrera) => ({
     ...carrera,
     modalidad: carrera.modalidad.filter((modo) => modosCarrera.includes(modo)),
 }));

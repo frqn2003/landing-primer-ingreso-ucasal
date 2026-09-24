@@ -90,7 +90,10 @@ Redirect 301 /landing/estudiar-prof-ingles-presencial.php /landing/ingreso/carre
 Redirect 301 /landing/estudiar-lic-rrhh-presencial.php /landing/ingreso/carreras/recursos-humanos
 Redirect 301 /landing/estudiar-tec-fitness.php /landing/ingreso/carreras/tecnicatura-univ-en-actividad-fisica-y-fitness
 Redirect 301 /landing/estudiar-licenciatura-psicopedagogia.php /landing/ingreso/carreras/licenciatura-en-psicopedagogia
-Redirect 301 /landing/estudiar-lic-imagen-sonido-presencial.php /landing/ingreso/carreras/licenciatura-en-imagen-y-sonido
+# 220-LIC. EN IMAGEN Y SONIDO: sin inscripcion a 1er anio desde 2027 (ofertada: false),
+# la reemplaza Realizacion Audiovisual (389).
+Redirect 301 /landing/estudiar-lic-imagen-sonido-presencial.php /landing/ingreso/carreras/licenciatura-en-realizacion-audiovisual/
+Redirect 301 /landing/estudiar-licenciatura-en-realizacion-audiovisual.php /landing/ingreso/carreras/licenciatura-en-realizacion-audiovisual/
 Redirect 301 /landing/estudiar-ing-telecomunicaciones.php /landing/ingreso/carreras/ingenieria-en-telecomunicaciones
 # 1169-LIC. EN PSICOMOTRICIDAD -> en el proyecto figura como codcar 358. Verificar codigo.
 Redirect 301 /landing/estudiar-licenciatura-psicomotricidad.php /landing/ingreso/carreras/licenciatura-en-psicomotricidad
@@ -101,7 +104,7 @@ Redirect 301 /landing/estudiar-licenciatura-administracion-negocios-digitales.ph
 # -- Grupo D --
 Redirect 301 /landing/estudiar-lic-terapia-ocupacional-presencial.php /landing/ingreso/carreras/licenciatura-en-terapia-ocupacional
 Redirect 301 /landing/estudiar-prof-educacion-primaria.php /landing/ingreso/carreras/profesorado-universitario-en-educacion-primaria
-Redirect 301 /landing/estudiar-lic-comunicacion-presencial.php /landing/ingreso/carreras/licenciatura-en-comunicaciones
+Redirect 301 /landing/estudiar-lic-comunicacion-presencial.php /landing/ingreso/carreras/licenciatura-en-comunicacion
 Redirect 301 /landing/estudiar-licenciatura-teologia.php /landing/ingreso/carreras/licenciatura-en-teologia
 Redirect 301 /landing/estudiar-prof-educacion-inicial-presencial.php /landing/ingreso/carreras/profesorado-universitario-en-educacion-inicial
 Redirect 301 /landing/estudiar-perito-accidentologia-presencial.php /landing/ingreso/carreras/perito-en-accidentologia
@@ -118,9 +121,12 @@ Redirect 301 /landing/estudiar-lic-produccion-animal.php /landing/ingreso/carrer
 Redirect 301 /landing/estudiar-lic-periodismo-presencial.php /landing/ingreso/carreras/licenciatura-en-periodismo
 Redirect 301 /landing/estudiar-escribania-ciclo-complementario.php /landing/ingreso/carreras/escribania-ccc
 Redirect 301 /landing/estudiar-lic-artes-musicales.php /landing/ingreso/carreras/licenciatura-en-artes-musicales
-Redirect 301 /landing/estudiar-locutor-nacional-presencial.php /landing/ingreso/carreras/locutor-nacional
+# 7-LOCUTOR NACIONAL: no es carrera de grado, se ofrece como habilitacion al pie
+# de Comunicacion, Periodismo y Publicidad. Va a Comunicacion.
+Redirect 301 /landing/estudiar-locutor-nacional-presencial.php /landing/ingreso/carreras/licenciatura-en-comunicacion/
 Redirect 301 /landing/estudiar-lic-relaciones-publicas-presencial.php /landing/ingreso/carreras/licenciatura-en-relaciones-publicas-e-institucionales
-Redirect 301 /landing/estudiar-productor-director-radio-tv.php /landing/ingreso/carreras/productor-y-director-para-radio-y-television
+# 54-PRODUCTOR Y DIRECTOR PARA RADIO Y TV: ya no se ofrece, va al listado.
+Redirect 301 /landing/estudiar-productor-director-radio-tv.php /landing/ingreso/carreras/
 Redirect 301 /landing/estudiar-lic-administracion-agropecuaria.php /landing/ingreso/carreras/administracion-agropecuaria
 Redirect 301 /landing/estudiar-lic-diseno-interiores-presencial-ccc.php /landing/ingreso/carreras/licenciatura-en-diseno-de-interiores-ciclo-de-licenciatura
 Redirect 301 /landing/estudiar-lic-filosofia-presencial.php /landing/ingreso/carreras/licenciatura-en-filosofia
@@ -185,6 +191,17 @@ RedirectMatch 301 ^/landing/ingreso/carreras-agosto/(abogacia|administracion-agr
 RedirectMatch 301 ^/landing/ingreso/carreras-agosto(/.*)?$ /landing/ingreso/carreras/
 
 # ----------------------------------------------------------------------------
+# BLOQUE 4 - Carreras dadas de baja en la landing (ofertada: false)
+# ----------------------------------------------------------------------------
+# Sus paginas dejan de generarse; estas reglas atajan los links que ya
+# circulaban. Locutor Nacional se ofrece ahora al pie de Comunicacion,
+# Periodismo y Publicidad, asi que va a Comunicacion.
+
+RedirectMatch 301 ^/landing/ingreso/carreras/licenciatura-en-imagen-y-sonido(/.*)?$ /landing/ingreso/carreras/licenciatura-en-realizacion-audiovisual/
+RedirectMatch 301 ^/landing/ingreso/carreras/productor-y-director-para-radio-y-television(/.*)?$ /landing/ingreso/carreras/
+RedirectMatch 301 ^/landing/ingreso/carreras/locutor-nacional(/.*)?$ /landing/ingreso/carreras/licenciatura-en-comunicacion/
+
+# ----------------------------------------------------------------------------
 # SIN DESTINO - la carrera NO existe en src/data/carreras.ts
 # ----------------------------------------------------------------------------
 # Descomentar cuando se cargue la carrera en el proyecto, o decidir a donde
@@ -195,9 +212,6 @@ RedirectMatch 301 ^/landing/ingreso/carreras-agosto(/.*)?$ /landing/ingreso/carr
 #
 # 203-LICENCIATURA EN ARTES PLASTICAS - CICLO LICENCIATURA
 # Redirect 301 /landing/estudiar-lic-artes-plasticas-presencial.php /landing/ingreso/carreras/
-#
-# 389-LICENCIATURA EN REALIZACION AUDIOVISUAL
-# Redirect 301 /landing/estudiar-licenciatura-en-realizacion-audiovisual.php /landing/ingreso/carreras/
 #
 # Sin URL de origen en la planilla (no se puede redirigir): 193, 2, 216, 245,
 # 27, 335, 339, 350, 41, 9, 96.
