@@ -183,6 +183,11 @@ export default function Form({ carreras, codcarInicial, onSubPage, urlEnviado, m
     const [carreraBloqueada, setCarreraBloqueada] = useState(Boolean(codcarInicial))
     /* Pantalla de gracias: la de la carrera si vino por prop, si no la de la home. */
     const destinoEnviado = urlEnviado ?? `${BASE_URL}enviado`
+    /* `tkp`/`fkp` van absolutos y en https para que el redirect del PHP no
+       salga como http:// (bloqueado por mixed content). */
+    const destinoAbsoluto = typeof window !== 'undefined'
+        ? new URL(destinoEnviado, window.location.origin).href.replace(/^http:/, 'https:')
+        : destinoEnviado
     const [buscarLocalidad, setBuscarLocalidad] = useState('')
     const [localidadAbierta, setLocalidadAbierta] = useState(false)
     const localidadRef = useRef<HTMLDivElement>(null)
@@ -433,7 +438,15 @@ export default function Form({ carreras, codcarInicial, onSubPage, urlEnviado, m
                     const formEl = document.getElementById('pedidoinfo') as HTMLFormElement
                     const formData = new FormData(formEl)
 
-                    await fetch('/postulantes_mail1.php', { method: 'POST', body: formData })
+                    /* El PHP responde con un redirect a `tkp`; si ese Location
+                       sale como http:// el navegador lo bloquea (mixed content)
+                       y el fetch rechaza aunque el POST ya llegó. No debe
+                       impedir el redirect a la pantalla de gracias. */
+                    try {
+                        await fetch('/postulantes_mail1.php', { method: 'POST', body: formData, redirect: 'manual' })
+                    } catch (e) {
+                        console.error('Error enviando el formulario:', e)
+                    }
 
                         ; (window as any).dataLayer?.push({ event: 'form_enviado_pedidoinfo', form_id: 'pedidoinfo' })
                     onSubPage ? clarityEvent('formulario-enviado-especifica') : clarityEvent('formulario-enviado-general')
@@ -481,8 +494,8 @@ export default function Form({ carreras, codcarInicial, onSubPage, urlEnviado, m
             <input type="hidden" name="utm_campaign" value={parametros.utm_campaign || ''} />
             <input type="hidden" name="idconversion" value={parametros.idconversion || ''} />
             <input type="hidden" name="campaignid" value={parametros.campaignid || ''} />
-            <input type="hidden" name="tkp" value={destinoEnviado} />
-            <input type="hidden" name="fkp" value={`${destinoEnviado}?id=404`} />
+            <input type="hidden" name="tkp" value={destinoAbsoluto} />
+            <input type="hidden" name="fkp" value={`${destinoAbsoluto}?id=404`} />
 
             {!onSubPage && (
                 <div className="flex justify-center">
