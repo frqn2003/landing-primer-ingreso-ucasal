@@ -206,10 +206,10 @@ interface Embebido {
     url: string;
     /** Descripción del iframe para lectores de pantalla. */
     tituloEmbebido: string;
-    /** Texto del link de salida, por si el embebido no carga. */
-    textoEnlace: string;
     /** Relación de aspecto del embebido en desktop. */
     proporcion: string;
+    /** Texto que se muestra si el embebido no carga. */
+    textoError: string;
 }
 
 const sedesPorModalidad: Record<Modalidad, Embebido> = {
@@ -218,7 +218,7 @@ const sedesPorModalidad: Record<Modalidad, Embebido> = {
         copete: "Recorré el campus de Castañares en 360°, aula por aula, antes de venir.",
         url: "https://www.ucasal.edu.ar/proyecto360/",
         tituloEmbebido: "Recorrido virtual 360° del campus de UCASAL en Castañares",
-        textoEnlace: "Abrir el recorrido en una pestaña nueva",
+        textoError: "Lo sentimos, el recorrido no está disponible por el momento.",
         proporcion: "16 / 10",
     },
     online: {
@@ -226,7 +226,7 @@ const sedesPorModalidad: Record<Modalidad, Embebido> = {
         copete: "Tenemos sedes y centros de apoyo en todo el país para rendir y hacer trámites.",
         url: "https://ucasal.edu.ar/mapa_sedes/mapa_sedes_ucasal.html",
         tituloEmbebido: "Mapa de sedes y centros de apoyo de UCASAL en el país",
-        textoEnlace: "Abrir el mapa en una pestaña nueva",
+        textoError: "Lo sentimos, el mapa de sedes no está disponible por el momento.",
         proporcion: "4 / 3",
     },
 };
@@ -255,7 +255,7 @@ const preguntasPorModalidad: Record<Modalidad, Pregunta[]> = {
             pregunta:
                 "¿Qué medios de pago están disponibles y qué tipo de becas ofrecen?",
             respuesta:
-                "UCASAL ofrece planes de financiamiento a partir de las cuotas sin interés, además de tener un amplio sistema de becas para cada situación particular. Consultá con un asesor y accedé a distintas opciones para empezar tu carrera universitaria.",
+                "UCASAL ofrece planes de financiamiento a partir de las cuotas sin interés, además de tener un amplio sistema de becas para cada situación particular. Llena el formulario y accedé a distintas opciones para empezar tu carrera universitaria.",
         },
         {
             pregunta: "¿Tengo que pagar derecho de exámen para rendir?",
@@ -266,7 +266,7 @@ const preguntasPorModalidad: Record<Modalidad, Pregunta[]> = {
             pregunta:
                 "¿Puedo solicitar equivalencias si ya cursé en otra universidad?",
             respuesta:
-                "Sí, en UCASAL podés solicitar equivalencias de materias cursadas en otras instituciones, consultá en nuestra web o contactá a un asesor para validarlas.",
+                "Sí, en UCASAL podés solicitar equivalencias de materias cursadas en otras instituciones, llená el formulario y un asesor te ayudará a validarlas.",
         },
         {
             pregunta:
@@ -285,7 +285,7 @@ const preguntasPorModalidad: Record<Modalidad, Pregunta[]> = {
             pregunta:
                 "¿Qué medios de pago están disponibles y qué tipo de becas ofrecen?",
             respuesta:
-                "UCASAL ofrece planes de financiamiento a partir de las cuotas sin interés, además de tener un amplio sistema de becas para cada situación particular. Consultá con un asesor y accedé a distintas opciones para empezar tu carrera universitaria.",
+                "UCASAL ofrece planes de financiamiento a partir de las cuotas sin interés, además de tener un amplio sistema de becas para cada situación particular. Llena el formulario y accedé a distintas opciones para empezar tu carrera universitaria.",
         },
         {
             pregunta: "¿Tengo que pagar derecho de exámen para rendir?",
@@ -301,7 +301,7 @@ const preguntasPorModalidad: Record<Modalidad, Pregunta[]> = {
             pregunta:
                 "¿Puedo solicitar equivalencias si ya cursé en otra universidad?",
             respuesta:
-                "Sí, en UCASAL podés solicitar equivalencias de materias cursadas en otras instituciones, consultá en nuestra web o contactá a un asesor para validarlas.",
+                "Sí, en UCASAL podés solicitar equivalencias de materias cursadas en otras instituciones, llená el formulario y un asesor te ayudará a validarlas.",
         },
         {
             pregunta: "¿Cómo y dónde se rinden los exámenes?",

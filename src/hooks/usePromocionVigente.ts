@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react'
-import type { Promocion } from '../data/promociones'
+import { obtenerPromociones, type Promocion } from '../data/promociones'
 
 /** Cada cuánto se recalculan la vigencia y los días restantes. */
 const REFRESCO_MS = 60_000
+const REFRESCO_DATOS_MS = 300_000
 
 interface UsePromocionVigenteReturn {
     /** La promoción que está corriendo ahora, o null si ninguna. */
@@ -19,19 +20,32 @@ interface UsePromocionVigenteReturn {
 }
 
 /**
- * Elige la promoción vigente de la lista que se leyó en el build y lleva la
+ * Lee las promociones publicadas en el navegador, elige la vigente y lleva la
  * cuenta de los días que le quedan. Ver src/data/promociones.ts.
  *
  * Un solo reloj para las dos cosas: cuando una promoción se vence con la
  * pestaña abierta, lo que se muestra pasa solo a la siguiente o desaparece.
  */
-export function usePromocionVigente(promociones: Promocion[]): UsePromocionVigenteReturn {
+export function usePromocionVigente(): UsePromocionVigenteReturn {
     const [ahora, setAhora] = useState<Date | null>(null)
+    const [promociones, setPromociones] = useState<Promocion[]>([])
 
     useEffect(() => {
+        const controlador = new AbortController()
+        const actualizar = async () => {
+            const publicadas = await obtenerPromociones(controlador.signal)
+            if (!controlador.signal.aborted) setPromociones(publicadas)
+        }
+
         setAhora(new Date())
+        void actualizar()
         const intervalo = setInterval(() => setAhora(new Date()), REFRESCO_MS)
-        return () => clearInterval(intervalo)
+        const intervaloDatos = setInterval(() => void actualizar(), REFRESCO_DATOS_MS)
+        return () => {
+            controlador.abort()
+            clearInterval(intervalo)
+            clearInterval(intervaloDatos)
+        }
     }, [])
 
     if (!ahora) return { promocion: null, dias: 0, montado: false }

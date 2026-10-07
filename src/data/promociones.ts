@@ -10,8 +10,7 @@ export interface Promocion {
     subtitulo: string;
 }
 
-const URL_DATOS =
-    "https://www.ucasal.edu.ar/landing/ingreso/assets/datosLanding.json";
+const URL_DATOS = "/landing/ingreso/assets/datosLanding.json";
 
 /**
  * De qué clave del JSON salen las promociones.
@@ -21,7 +20,7 @@ const URL_DATOS =
  * `descuento` + `subtitulo`; las claves que traen `mensajes` con HTML son del
  * ticker viejo y de ahí no sale un descuento (hoy, `promociones_dinamicas_postgrados`).
  * Las entradas que no sirven se descartan en `esPromocion`, con un aviso en el
- * log del build.
+ * log del navegador.
  */
 const CLAVE_PROMOCIONES = "promociones_dinamicas";
 
@@ -39,9 +38,9 @@ function esPromocion(item: unknown): item is Promocion {
 /**
  * Devuelve la lista de promociones publicada, o vacía si el JSON no responde.
  */
-export async function obtenerPromociones(): Promise<Promocion[]> {
+export async function obtenerPromociones(signal?: AbortSignal): Promise<Promocion[]> {
     try {
-        const respuesta = await fetch(URL_DATOS);
+        const respuesta = await fetch(URL_DATOS, { cache: "no-cache", signal });
         if (!respuesta.ok) {
             throw new Error(`El JSON respondió ${respuesta.status}`);
         }
@@ -66,9 +65,10 @@ export async function obtenerPromociones(): Promise<Promocion[]> {
 
         return promociones;
     } catch (error) {
+        if (signal?.aborted) return [];
         console.warn(
             `[promociones] No se pudieron leer las promociones de ${URL_DATOS}, ` +
-                `la landing se arma sin la promoción en la barra del hero.`,
+                `no se mostrará ninguna promoción.`,
             error,
         );
         return [];

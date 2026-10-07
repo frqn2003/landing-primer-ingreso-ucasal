@@ -15,6 +15,7 @@ import Financiacion from "./Financiacion.astro";
 import Sedes from "./Sedes.astro";
 import Form from "../react/Form.tsx";
 import { paraFormulario } from "../../data/carrerasCliente";
+import CeldaPromocion, { PromocionVigente } from "../react/Promocion.tsx";
 
 type PlanEstudios = { semestre: string; materias: string[] }[];
 
@@ -29,7 +30,7 @@ interface Career {
   cio?: { materias: string[] };
   perfilEgresado?: { items: string[] };
   /** Título de pregrado que se obtiene al aprobar hasta `semestre` inclusive. */
-  tituloIntermedio?: { nombre: string; semestre: number };
+  tituloIntermedio?: { nombre: string; semestre: number; requisito?: string };
   /** Ofrece cursar la habilitación de Locutor Nacional (ISER) en paralelo. */
   habilitacionLocutor?: boolean;
   modalidadesDetalle?: string[];
@@ -121,6 +122,9 @@ const parrafos = carrera.descripcion.split("\\n").filter(Boolean);
 // tarjeta del año en que termina ese semestre (el 5.º cierra el 3.er año).
 const intermedio = carrera.tituloIntermedio;
 const anioIntermedio = intermedio ? Math.ceil(intermedio.semestre / 2) - 1 : -1;
+const momentoIntermedio = intermedio
+  ? `${intermedio.semestre % 2 ? "A mitad de" : "En"} ${anioIntermedio + 1}.º año tenés el título`
+  : "";
 ---
 
 <main data-scroll-libre>
@@ -199,39 +203,52 @@ const anioIntermedio = intermedio ? Math.ceil(intermedio.semestre / 2) - 1 : -1;
         {carrera.nombre}
       </h1>
 
-      <div class="hero-entra hero-entra-3 mt-6 flex flex-wrap gap-3">
-        <span class="ficha-hero">Duración: {carrera.duracion}</span>
-        <span class="ficha-hero">Título universitario</span>
-        {carrera.modalidadesDetalle ? (
-          carrera.modalidadesDetalle.map((detalle) => (
-            <span class="ficha-hero" style="background:var(--rojo-ucasal);border-color:transparent">
-              {detalle}
-            </span>
-          ))
-        ) : (
-          <span
-            class="ficha-hero ficha-modalidad"
-            style={mixta
-              ? "background:linear-gradient(90deg,var(--rojo-ucasal) 10%,var(--azul-ucasal) 90%);border-color:transparent"
-              : `background:${cursaOnline ? "var(--azul-ucasal)" : "var(--rojo-ucasal)"};border-color:transparent`}
-          >
-            {modalidad}
-          </span>
-        )}
+      <div
+        class="hero-entra hero-entra-3 mt-6 flex flex-col items-start gap-3 md:flex-row md:items-center"
+      >
+        <div class="flex flex-wrap gap-3">
+          <span class="ficha-hero">Duración: {carrera.duracion}</span>
+          {
+            carrera.modalidadesDetalle ? (
+              carrera.modalidadesDetalle.map((detalle) => (
+                <span
+                  class="ficha-hero"
+                  style="background:var(--rojo-ucasal);border-color:transparent"
+                >
+                  {detalle}
+                </span>
+              ))
+            ) : (
+              <span
+                class="ficha-hero ficha-modalidad"
+                style={
+                  mixta
+                    ? "background:linear-gradient(90deg,var(--rojo-ucasal) 10%,var(--azul-ucasal) 90%);border-color:transparent"
+                    : `background:${cursaOnline ? "var(--azul-ucasal)" : "var(--rojo-ucasal)"};border-color:transparent`
+                }
+              >
+                {modalidad}
+              </span>
+            )
+          }
+        </div>
       </div>
 
-      <div class="hero-entra hero-entra-4 mt-10 flex flex-wrap gap-4">
-        <a href="#contacto" class="boton-cta-hero">Pedí información</a>
-        {
-          planEstudios && (
-            <a
-              href="#plan-de-estudios"
-              class="flex w-fit items-center justify-center rounded-[10px] border border-white/60 px-6 py-3 text-sm font-semibold uppercase text-white transition-colors hover:bg-white/15"
-            >
-              Ver plan de estudios
-            </a>
-          )
-        }
+      <div class="hero-entra hero-entra-4 mt-10 flex flex-wrap max-lg:justify-center lg:gap-12">
+        <PromocionVigente client:load onSubPage={false} />
+        <div class="mt-6 lg:mt-0 lg:h-full flex lg:flex-col justify-center gap-6">
+          <a href="#contacto" class="boton-cta-hero mx-1">Pedí información</a>
+          {
+            planEstudios && (
+              <a
+                href="#plan-de-estudios"
+                class="flex w-fit items-center justify-center rounded-[10px] border border-white/60 px-4 py-2 lg:px-6 lg:py-3 text-xs lg:text-sm font-semibold uppercase text-white transition-colors hover:bg-white/15"
+              >
+                Ver plan de estudios
+              </a>
+            )
+          }
+        </div>
       </div>
     </div>
   </section>
@@ -249,7 +266,9 @@ const anioIntermedio = intermedio ? Math.ceil(intermedio.semestre / 2) - 1 : -1;
         {
           carrera.orientaciones && (
             <div class="mt-8">
-              <h3 class="text-(--azul-ucasal)">Las orientaciones ofrecidas son:</h3>
+              <h3 class="text-(--azul-ucasal)">
+                Las orientaciones ofrecidas son:
+              </h3>
               <ul class="mt-4 grid gap-2 text-slate-600 sm:grid-cols-2">
                 {carrera.orientaciones.map((orientacion) => (
                   <li class="flex gap-2 leading-7">
@@ -285,10 +304,9 @@ const anioIntermedio = intermedio ? Math.ceil(intermedio.semestre / 2) - 1 : -1;
             <div class="mt-10 rounded-2xl border border-slate-200 bg-slate-50 p-6">
               <h3 class="text-(--azul-ucasal)">Título intermedio</h3>
               <p class="mt-3 leading-7 text-slate-600">
-                Al finalizar el {intermedio.semestre}.º semestre podés obtener el
-                título intermedio de pregrado de{" "}
-                <strong class="text-slate-800">{intermedio.nombre}</strong>, sin
-                interrumpir la licenciatura.
+                {momentoIntermedio} intermedio de{" "}
+                <strong class="text-slate-800">{intermedio.nombre}</strong>
+                {intermedio.requisito && `, ${intermedio.requisito}`}.
               </p>
             </div>
           )
@@ -314,10 +332,15 @@ const anioIntermedio = intermedio ? Math.ceil(intermedio.semestre / 2) - 1 : -1;
               <h2 class="mt-14 text-(--azul-dark-ucasal)">Plan de estudios</h2>
               {carrera.orientaciones && (
                 <div class="mt-6 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-                  <h3 class="text-lg font-bold text-(--rojo-ucasal)">Opciones de especialidad</h3>
+                  <h3 class="text-lg font-bold text-(--rojo-ucasal)">
+                    Opciones de especialidad
+                  </h3>
                   <ul class="mt-4 grid gap-2 text-sm leading-6 text-slate-600 sm:grid-cols-2">
                     {carrera.orientaciones.map((orientacion) => (
-                      <li class="flex gap-2"><span class="text-slate-400">•</span><span>{orientacion}</span></li>
+                      <li class="flex gap-2">
+                        <span class="text-slate-400">•</span>
+                        <span>{orientacion}</span>
+                      </li>
                     ))}
                   </ul>
                 </div>
@@ -339,9 +362,10 @@ const anioIntermedio = intermedio ? Math.ceil(intermedio.semestre / 2) - 1 : -1;
                     {intermedio && i === anioIntermedio && (
                       <p class="mt-5 border-t border-slate-200 pt-4 text-sm leading-6 text-slate-600">
                         <span class="font-bold text-(--azul-ucasal)">
-                          Al finalizar el {intermedio.semestre}.º semestre:
+                          {momentoIntermedio}:
                         </span>{" "}
                         {intermedio.nombre}
+                        {intermedio.requisito && `, ${intermedio.requisito}`}
                       </p>
                     )}
                   </article>
@@ -357,10 +381,13 @@ const anioIntermedio = intermedio ? Math.ceil(intermedio.semestre / 2) - 1 : -1;
               <p class="text-xs font-bold uppercase tracking-[0.2em] text-(--rojo-ucasal)">
                 Habilitación profesional (ISER)
               </p>
-              <h3 class="mt-2 text-(--azul-dark-ucasal)">Sumá Locutor Nacional</h3>
+              <h3 class="mt-2 text-(--azul-dark-ucasal)">
+                Sumá Locutor Nacional
+              </h3>
               <p class="mt-3 leading-7 text-slate-600">
                 Mientras cursás la licenciatura podés obtener la habilitación
-                profesional de <strong class="text-slate-800">Locutor Nacional</strong>,
+                profesional de{" "}
+                <strong class="text-slate-800">Locutor Nacional</strong>,
                 otorgada por el ISER. Se cursa por la tarde y no requiere
                 inversión adicional.
               </p>
@@ -371,17 +398,17 @@ const anioIntermedio = intermedio ? Math.ceil(intermedio.semestre / 2) - 1 : -1;
             </div>
           )
         }
-            <!-- Vamos a hacer que compartan el mismo fondo, el que me paso la fer me gustaba banda -->
-    <div class="relative isolate min-w-0 my-6 rounded-3xl overflow-hidden">
-        <div class="absolute inset-0 -z-10">
+        <!-- Vamos a hacer que compartan el mismo fondo, el que me paso la fer me gustaba banda -->
+        <div class="relative isolate min-w-0 my-6 rounded-3xl overflow-hidden">
+          <div class="absolute inset-0 -z-10">
             <img
-                src={`${base}fondos/azul.webp`}
-                alt="Imagen de fondo azul"
-                class="sticky left-1/2 right-1/2 top-0 h-full w-full object-cover"
+              src={`${base}fondos/azul.webp`}
+              alt="Imagen de fondo azul"
+              class="sticky left-1/2 right-1/2 top-0 h-full w-full object-cover"
             />
+          </div>
+          <Financiacion disposicion="columna" />
         </div>
-        <Financiacion disposicion="columna" />
-    </div>
       </div>
       <aside
         id="contacto"

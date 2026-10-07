@@ -14,16 +14,14 @@
  * todo el ancho.
  */
 import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from "react";
-import type { Promocion } from "../../data/promociones";
 import { usePromocionVigente } from "../../hooks/usePromocionVigente";
-
+import CeldaPromocion from "./Promocion";
 interface Dato {
     numero: string;
     etiqueta: string;
 }
 
 interface Props {
-    promociones: Promocion[];
     /**
      * Los datos institucionales, que cambian según el build: la landing online
      * suma los suyos (trayectoria virtual y red de sedes). Llegan por props
@@ -51,21 +49,6 @@ const MS_BORRADO = 25;
 const MS_SOSTENIDO = 2400;
 const MS_ENTRE_DATOS = 300;
 
-function textoPlazo(fechaFin: string): string {
-    const fecha = new Date(fechaFin);
-    const dia = String(fecha.getDate()).padStart(2, "0");
-    const mes = String(fecha.getMonth() + 1).padStart(2, "0");
-    return `Hasta el ${dia}/${mes}`;
-}
-
-function textoDias(dias: number): string {
-    if (dias === 1) return "¡Último día!";
-    const unidad = dias === 2 ? "día" : "días";
-    return dias <= DIAS_URGENCIA
-        ? `¡Últimos ${dias} ${unidad}!`
-        : `Quedan ${dias} ${unidad}`;
-}
-
 /**
  * True cuando la media query da true, y se actualiza si cambia el tamaño.
  *
@@ -88,44 +71,6 @@ function useMediaQuery(consulta: string): boolean {
         suscribir,
         () => matchMedia(consulta).matches,
         () => false,
-    );
-}
-
-function CeldaPromocion({
-    promocion,
-    dias,
-}: {
-    promocion: Promocion;
-    dias: number;
-}) {
-    return (
-        <div
-            role="status"
-            aria-label="Promoción vigente"
-            className="flex min-w-0 flex-col text-center gap-2 rounded-2xl bg-white/20 backdrop-blur-xl px-3 py-1.5 text-white shadow-lg ring-3 ring-(--rojo-ucasal) sm:px-5 sm:py-3"
-        >
-            {promocion.descuento ? (
-                <div className="flex flex-col flex-1 md:flex-row text-center gap-1 items-center sm:gap-6">
-                    <span className="text-[1.8rem] leading-none text-center font-bold sm:text-4xl uppercase border-(--rojo-ucasal) md:border-r-3 px-4">
-                        {promocion.descuento} off <br className="hidden md:block" /><span className="whitespace-normal leading-12 md:text-[1.6rem]">matrícula</span>
-                    </span>
-                    <div className="flex flex-row md:flex-col items-center text-lg md:gap-2 gap-5">
-                        <span className=" whitespace-nowrap text-white/80 block">
-                            {textoPlazo(promocion.fecha_fin)}
-                        </span>
-                        <span className="w-fit rounded-lg bg-(--rojo-ucasal)/50 px-2 py-1 font-bold whitespace-nowrap">
-                            {textoDias(dias)}
-                        </span>
-                    </div>
-                </div>
-            ) : (
-                <span className="text-base leading-tight font-black uppercase sm:text-2xl">
-                    {promocion.subtitulo || "Cuotas sin interés"}
-                </span>
-            )}
-
-
-        </div>
     );
 }
 
@@ -231,16 +176,15 @@ function DatoEscribiendo({ datos }: { datos: Dato[] }) {
 }
 
 export default function BarraHero({
-    promociones,
     datos = DATOS_POR_DEFECTO,
 }: Props) {
-    const { promocion, dias } = usePromocionVigente(promociones);
+    const { promocion } = usePromocionVigente();
     const escritorio = useMediaQuery(CONSULTA_ESCRITORIO);
 
     return (
         <div className="w-full max-w-full sm:max-w-6xl">
             <div className="flex flex-col md:flex-row items-stretch gap-2 sm:gap-12">
-                {promocion && <CeldaPromocion promocion={promocion} dias={dias} />}
+                {promocion && <CeldaPromocion promocion={promocion} />}
 
                 <div className="flex min-w-0 flex-1 items-center rounded-xl ring-2 ring-white bg-white/10 backdrop-blur-xl px-3 py-2.5 text-white">
                     {escritorio ? (

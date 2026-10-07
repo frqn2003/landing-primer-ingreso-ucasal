@@ -37,6 +37,14 @@ export default defineConfig({
 
   vite: {
     plugins: [tailwindcss()],
+    server: {
+      proxy: {
+        '/landing/ingreso/assets/datosLanding.json': {
+          target: 'https://www.ucasal.edu.ar',
+          changeOrigin: true,
+        },
+      },
+    },
 
     build: {
       // Qué tan moderno sale el JS del bundle.

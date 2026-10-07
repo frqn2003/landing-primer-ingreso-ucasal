@@ -1,6 +1,5 @@
 ---
 import BarraHero from "../react/BarraHero.tsx";
-import { obtenerPromociones } from "../../data/promociones";
 import { datosHero, descripcionHero } from "../../config/contenido";
 
 interface Props {
@@ -9,9 +8,7 @@ interface Props {
 
 const { base = import.meta.env.BASE_URL } = Astro.props;
 
-// La lista se lee en el build; cuál está vigente y cuántos días quedan lo
-// resuelve la píldora en el navegador. Ver src/data/promociones.ts.
-const promociones = await obtenerPromociones();
+// La lista y su vigencia se consultan en el navegador. Ver src/data/promociones.ts.
 ---
 
 <section
@@ -57,7 +54,6 @@ const promociones = await obtenerPromociones();
                      conviene que esa corrección pase apenas se pinta y no
                      cuando el navegador queda ocioso. -->
                 <BarraHero
-                    promociones={promociones}
                     datos={datosHero}
                     client:visible
                 />

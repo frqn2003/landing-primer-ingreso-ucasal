@@ -542,9 +542,10 @@ const data = [
         sector: 4,
         slug: "higiene-y-seguridad",
         nombre: "Licenciatura en Higiene y Seguridad",
-        descripcion: "La Licenciatura en Higiene y Seguridad en el Trabajo de UCASAL forma profesionales capacitados para diseñar, implementar y liderar programas de prevención y protección de riesgos laborales, cuidando la integridad de las personas y los recursos materiales y ambientales de las organizaciones. La carrera ofrece título intermedio de Técnico en Higiene y Seguridad en el Trabajo.",
+        descripcion: "La Licenciatura en Higiene y Seguridad en el Trabajo de UCASAL forma profesionales capacitados para diseñar, implementar y liderar programas de prevención y protección de riesgos laborales, cuidando la integridad de las personas y los recursos materiales y ambientales de las organizaciones. La carrera ofrece título intermedio de Técnico/a en Higiene y Seguridad en el Trabajo.",
         duracion: "4 años",
         modalidad: [1, 7],
+        tituloIntermedio: { nombre: "Técnico/a en Higiene y Seguridad en el Trabajo", semestre: 6, requisito: "al finalizar Práctica Pre Profesional I" },
         perfilEgresado: {
             items: [
                 "Diseñar, evaluar y gestionar programas integrales de prevención de riesgos laborales e higiene industrial.",
@@ -638,6 +639,7 @@ const data = [
         descripcion: "La Licenciatura en Gerontología forma profesionales capacitados para diseñar y dirigir programas de salud y bienestar para personas mayores, gestionar centros residenciales y promover el envejecimiento activo, liderando equipos interdisciplinarios en políticas públicas, investigación e intervención sociosanitaria.",
         duracion: "4 años",
         modalidad: [7],
+        tituloIntermedio: { nombre: "Tecnicatura Universitaria en Gerontología Social", semestre: 4, requisito: "al finalizar los primeros 2 años" },
         perfilEgresado: {
             items: [
                 "Diseñar, gestionar y evaluar programas integrales de salud y bienestar para personas mayores.",
@@ -784,9 +786,10 @@ const data = [
         sector: 2,
         slug: "recursos-humanos",
         nombre: "Licenciatura en Recursos Humanos",
-        descripcion: "La Licenciatura en Recursos Humanos de UCASAL forma profesionales capacitados para gestionar integralmente el capital humano de las organizaciones: procesos de selección, capacitación, desarrollo, evaluación de desempeño, remuneraciones y relaciones laborales. Combina psicología organizacional, derecho laboral y herramientas de gestión, con título intermedio de Analista Universitario en Recursos Humanos.",
+        descripcion: "La Licenciatura en Recursos Humanos de UCASAL forma profesionales capacitados para gestionar integralmente el capital humano de las organizaciones: procesos de selección, capacitación, desarrollo, evaluación de desempeño, remuneraciones y relaciones laborales. Combina psicología organizacional, derecho laboral y herramientas de gestión, con título intermedio de Analista en Recursos Humanos.",
         duracion: "4 años",
         modalidad: [1, 7],
+        tituloIntermedio: { nombre: "Analista en Recursos Humanos", semestre: 6, requisito: "al finalizar todas las materias hasta 3.º año" },
         perfilEgresado: {
             items: [
                 "Diseñar y gestionar estrategias de atracción, selección e inducción del talento.",
@@ -954,6 +957,7 @@ const data = [
         descripcion: "La Licenciatura en Comercialización de UCASAL forma profesionales capacitados para diseñar y desarrollar estrategias y acciones comerciales, analizando fenómenos del consumo para posicionar organizaciones en mercados nacionales e internacionales mediante herramientas de marketing digital. Incluye investigación de mercados, estrategias de productos y precios, planificación de ventas y comercialización internacional, con título intermedio de Analista en Marketing.",
         duracion: "4 años",
         modalidad: [1, 7],
+        tituloIntermedio: { nombre: "Analista en Marketing", semestre: 6, requisito: "al finalizar todas las materias hasta 3.º año" },
         perfilEgresado: {
             items: [
                 "Diseñar e implementar planes de marketing integrales y estrategias de ventas.",
@@ -1371,6 +1375,7 @@ const data = [
         descripcion: "La Licenciatura en Comercio Internacional forma profesionales con capacidad para gestionar operaciones y negocios en los mercados globales. Los estudiantes dominan herramientas de logística internacional, legislación aduanera, finanzas de comercio exterior, negociación e inteligencia comercial. La carrera combina teoría y práctica para desarrollar líderes capaces de diseñar estrategias de internacionalización en empresas e instituciones.",
         duracion: "4 años",
         modalidad: [1, 7],
+        tituloIntermedio: { nombre: "Analista en comercio exterior", semestre: 6, requisito: "al finalizar todas las materias hasta 3.º año" },
         perfilEgresado: {
             items: [
                 "Diseñar estrategias de internacionalización para empresas en mercados globales.",
@@ -5230,6 +5235,7 @@ const data = [
         descripcion: "La Licenciatura en Relaciones Públicas e Institucionales forma profesionales capaces de diseñar y gestionar estrategias de comunicación integral para diversas organizaciones. Su plan de estudios integra la gestión de imagen corporativa, la resolución de crisis, la organización de eventos y las relaciones con los medios digitales. Propone un espacio académico para comprender el vínculo institucional y construir puentes de diálogo transparentes.",
         duracion: "4 años",
         modalidad: [1, 7],
+        tituloIntermedio: { nombre: "Analista Universitario en Relaciones Públicas", semestre: 6, requisito: "al finalizar todas las materias hasta 3.º año" },
         perfilEgresado: {
             items: [
                 "Diseñar e implementar estrategias de comunicación institucional, reputación e imagen de marca.",
