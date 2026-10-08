@@ -75,6 +75,10 @@ function cargarCssTelefono() {
     return promesaCssTelefono
 }
 
+/* Campo de prueba: Lic. en Higiene y Seguridad (138) y Corredor Inmobiliario (244). */
+const CODCARS_MEDIO_CONTACTO = ['138', '244']
+const MEDIOS_CONTACTO = ['Llamada', 'Mensaje', 'Mail']
+
 function normalizar(texto: string) {
     return texto.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase()
 }
@@ -188,6 +192,10 @@ export default function Form({ carreras, codcarInicial, onSubPage, urlEnviado, m
     const destinoAbsoluto = typeof window !== 'undefined'
         ? new URL(destinoEnviado, window.location.origin).href.replace(/^http:/, 'https:')
         : destinoEnviado
+    /* Campo de prueba "Medio de contacto": solo para estas carreras. Se manda
+       como un único input hidden con los valores separados por coma, porque
+       el submit lee el DOM con `new FormData(form)`. */
+    const [mediosContacto, setMediosContacto] = useState<string[]>([])
     const [buscarLocalidad, setBuscarLocalidad] = useState('')
     const [localidadAbierta, setLocalidadAbierta] = useState(false)
     const localidadRef = useRef<HTMLDivElement>(null)
@@ -753,6 +761,30 @@ export default function Form({ carreras, codcarInicial, onSubPage, urlEnviado, m
                         {errors.cod_area && <p id="error-cod_area" className="text-red-500 text-xs" role="alert">{errors.cod_area.message}</p>}
                         {errors.tel && <p id="error-tel" className="text-red-500 text-xs" role="alert">{errors.tel.message}</p>}
                     </div>
+                )}
+
+                {CODCARS_MEDIO_CONTACTO.includes(String(codcar)) && (
+                    <fieldset className={`mt-3 ${!carreraCompleta ? 'pointer-events-none opacity-75' : ''}`}>
+                        <legend className="text-xs font-bold text-(--azul-ucasal) tracking-wide uppercase mb-2">Medio de contacto</legend>
+                        <input type="hidden" name="medio_contacto" value={mediosContacto.join(',')} />
+                        <div className="flex flex-row flex-wrap gap-4">
+                            {MEDIOS_CONTACTO.map((medio) => (
+                                <label key={medio} className="flex items-center gap-2 text-sm text-gray-900 cursor-pointer">
+                                    <input
+                                        type="checkbox"
+                                        disabled={!carreraCompleta}
+                                        checked={mediosContacto.includes(medio)}
+                                        onChange={(e) => setMediosContacto((actuales) =>
+                                            e.target.checked
+                                                ? MEDIOS_CONTACTO.filter((m) => m === medio || actuales.includes(m))
+                                                : actuales.filter((m) => m !== medio)
+                                        )}
+                                    />
+                                    {medio}
+                                </label>
+                            ))}
+                        </div>
+                    </fieldset>
                 )}
             </div>
 

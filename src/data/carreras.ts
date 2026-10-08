@@ -1,5 +1,3 @@
-import { de } from "zod/locales";
-
 const data = [
     // ── SEDE A ──
     {
@@ -3021,6 +3019,25 @@ const data = [
                         "Trabajo Integrador Final II"
                     ]
                 }
+            ]
+        },
+    },
+    {
+        codcar: 406,
+        sector: 1,
+        slug: "licenciatura-en-produccion-de-sonido-eventos-y-espectaculos",
+        nombre: "Licenciatura en Producción de Sonido, Eventos y Espectáculos",
+        descripcion: "La Licenciatura en Producción de Sonido, Eventos y Espectáculos forma profesionales capacitados para dirigir equipos y gestionar proyectos integrales en medios sonoros y espectáculos, crear y difundir contenidos culturales y artísticos e integrar tecnologías digitales y plataformas multimedia. Promueve la iniciativa, la innovación y la creatividad, con una visión crítica de la industria cultural y del entretenimiento y una formación ética y humanista orientada al impacto positivo en la sociedad. Otorga el título de Licenciado/a en Producción de Sonido, Eventos y Espectáculos.",
+        duracion: "4 años",
+        modalidad: [1],
+        tituloIntermedio: { nombre: "Tecnicatura Universitaria en Producción de Sonido, Eventos y Espectáculos", semestre: 5, requisito: "al finalizar todas las materias hasta el 5.º semestre (2 años y medio)" },
+        perfilEgresado: {
+            items: [
+                "Dirigir equipos de trabajo para gestionar y producir proyectos integrales en medios sonoros y espectáculos.",
+                "Concebir, crear, planificar, diseñar y difundir contenidos culturales y artísticos para públicos amplios y segmentados, adaptándose a los soportes tecnológicos actuales y futuros.",
+                "Integrar nuevas tecnologías digitales y plataformas multimedia en la producción de eventos y contenidos, incluyendo medios sociales, de comunicación y aplicaciones emergentes.",
+                "Desarrollar proyectos con iniciativa propia, innovación y creatividad, comprendiendo las tendencias de la industria cultural y del entretenimiento y las demandas del entorno.",
+                "Ejercer la profesión con una visión crítica, ética y humanista, respetando a los demás y priorizando el impacto positivo en la sociedad.",
             ]
         },
     },
