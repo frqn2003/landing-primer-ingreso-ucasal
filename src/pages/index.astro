@@ -11,10 +11,11 @@ import ExploradorCarreras from "../components/react/ExploradorCarreras.tsx";
 import FormSection from "../components/astro/FormSection.astro";
 import carrerasLanding from "../data/carrerasLanding";
 import { paraExplorador } from "../data/carrerasCliente";
-import { modosCarrera } from "../config/modalidad";
+import { esHome, modosCarrera } from "../config/modalidad";
 import { getImage } from "astro:assets";
 import portadaDesktop from "../assets/portada/desktop.webp";
 import portadaMobile from "../assets/portada/mobile.webp";
+import portadaHome from "../assets/portada/home-desktop.webp";
 
 const base = import.meta.env.BASE_URL;
 
@@ -25,11 +26,11 @@ const base = import.meta.env.BASE_URL;
 // recortado. Ver src/data/carrerasCliente.ts.
 const carreras = paraExplorador(carrerasLanding);
 
-// La portada son dos recortes distintos (vertical en mobile, horizontal en
-// desktop), así que no alcanza un `<Picture>`: hace falta el `<picture>` a mano
-// para poder usar `media`. `getImage` igual nos da el srcset con los tamaños
-// intermedios y el avif, que es lo que baja el peso de estos dos archivos de
-// ~1 MB cada uno.
+// En Home se usa el mismo recorte para mobile y desktop; las demás variantes
+// tienen dos recortes distintos. El `<picture>` usa `media` para cada tamaño
+// y `getImage` genera srcsets optimizados en avif y webp.
+const fuenteDesktop = esHome ? portadaHome : portadaDesktop;
+const fuenteMobile = esHome ? portadaHome : portadaMobile;
 const [
   portadaAvifDesktop,
   portadaAvifMobile,
@@ -37,24 +38,24 @@ const [
   portadaWebpMobile,
 ] = await Promise.all([
   getImage({
-    src: portadaDesktop,
+    src: fuenteDesktop,
     format: "avif",
     quality: 45,
     widths: [1024, 1440, 1920],
   }),
   getImage({
-    src: portadaMobile,
+    src: fuenteMobile,
     format: "avif",
     quality: 45,
     widths: [640, 828, 1080],
   }),
   getImage({
-    src: portadaDesktop,
+    src: fuenteDesktop,
     format: "webp",
     widths: [1024, 1440, 1920],
   }),
   getImage({
-    src: portadaMobile,
+    src: fuenteMobile,
     format: "webp",
     widths: [640, 828, 1236],
   }),
@@ -125,7 +126,6 @@ const [
       <div class="absolute inset-0 bg-linear-to-t from-transparent to-black/30">
       </div>
     </div>
-
     <Hero base={base} />
     <BeneficiosCartas base={base} />
   </div>

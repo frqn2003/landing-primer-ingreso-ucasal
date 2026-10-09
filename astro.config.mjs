@@ -20,7 +20,7 @@ const env = loadEnv(modo, process.cwd(), '');
 if (!env.RUTA_BASE || !env.PUBLIC_MODALIDAD) {
   throw new Error(
     `Falta RUTA_BASE o PUBLIC_MODALIDAD para el modo "${modo}". Revisá que ` +
-      `exista .env.${modo} y usá los scripts build:presencial / build:online.`,
+      `exista .env.${modo} y usá los scripts build:presencial / build:online / build:home.`,
   );
 }
 

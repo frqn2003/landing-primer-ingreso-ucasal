@@ -5,7 +5,7 @@
  * build, así que nada de esto viaja al bundle del navegador. Si algún día lo
  * necesita un componente React, pasalo por props en vez de importarlo ahí.
  */
-import { modalidad, type Modalidad } from "./modalidad";
+import { esHome, modalidad, type Modalidad } from "./modalidad";
 
 /* ───────────────────────────── Navegación ─────────────────────────────── */
 
@@ -16,6 +16,7 @@ import { modalidad, type Modalidad } from "./modalidad";
 const etiquetasSedes: Record<Modalidad, string> = {
     presencial: "Campus",
     online: "Sedes",
+    home: "Sedes",
 };
 
 export const etiquetaSedes = etiquetasSedes[modalidad];
@@ -28,6 +29,8 @@ const descripcionesHero: Record<Modalidad, string> = {
         "Transformá tu futuro profesional en UCASAL, cursá con la modalidad que prefieras y alcanzá tu título con validez nacional.",
     online:
         "Estudiá online respaldado por una universidad con trayectoria y una red nacional que te acompaña.",
+    home:
+        "Estudiá y rendí desde tu casa con el acompañamiento de UCASAL, sin necesidad de viajar a una sede universitaria.",
 };
 
 export const descripcionHero = descripcionesHero[modalidad];
@@ -57,6 +60,12 @@ const datosHeroPorModalidad: Record<Modalidad, DatoHero[]> = {
         { numero: "+40.000", etiqueta: "Estudiantes" },
         { numero: "+5.000", etiqueta: "Becados" },
     ],
+    home: [
+        { numero: "+35", etiqueta: "Años de educación virtual" },
+        { numero: "+60", etiqueta: "Años enseñando" },
+        { numero: "+40.000", etiqueta: "Estudiantes" },
+        { numero: "+5.000", etiqueta: "Becados" },
+    ],
 };
 
 export const datosHero = datosHeroPorModalidad[modalidad];
@@ -74,7 +83,7 @@ interface Beneficio {
 // Las fotos de /cards son PLACEHOLDERS (stock genérico del explorador de
 // carreras). Cuando estén las fotos reales, dejalas en /public/beneficios/ y
 // cambiá solo el campo `imagen` de cada item.
-const beneficiosPorModalidad: Record<Modalidad, Beneficio[]> = {
+const beneficiosPorModalidad: Record<Exclude<Modalidad, "home">, Beneficio[]> = {
     presencial: [
         {
             codigo: "campus",
@@ -179,6 +188,13 @@ const beneficiosPorModalidad: Record<Modalidad, Beneficio[]> = {
             imagen: "beneficios/online/bibliografia.webp",
         },
         {
+            codigo: "experiencias",
+            titulo: "Experiencias profesionales e internacionales",
+            descripcion:
+                "Posibilidad de realizar prácticas preprofesionales y participar en iniciativas de internacionalización, virtuales o presenciales, según la carrera y la actividad.",
+            imagen: "beneficios/practicas.webp",
+        },
+        {
             codigo: "sedes",
             titulo: "Conocé tu sede más cercana",
             descripcion:
@@ -188,7 +204,29 @@ const beneficiosPorModalidad: Record<Modalidad, Beneficio[]> = {
     ],
 };
 
-export const beneficios = beneficiosPorModalidad[modalidad];
+export const beneficios: Beneficio[] = esHome
+    ? beneficiosPorModalidad.online.map((beneficio) => {
+          if (beneficio.codigo === "cursar")
+              return {
+                  ...beneficio,
+                  titulo: "100% online, incluido los exámenes finales",
+                  descripcion: "Estudiá y rendí desde tu casa, sin necesidad de viajar a una sede universitaria.",
+              };
+          if (beneficio.codigo === "sedes")
+              return {
+                  ...beneficio,
+                  titulo: "Acompañamiento durante tu carrera",
+                  descripcion: "Contá con asistencia tutorial, encuentros virtuales con profesores, interacción con compañeros y mentorías personalizadas.",
+                  imagen: "beneficios/cowork.webp",
+              };
+          if (beneficio.codigo === "validez")
+              return {
+                  ...beneficio,
+                  descripcion: "Carreras oficiales reconocidas por el Ministerio de Educación, con títulos de validez nacional.",
+              };
+          return beneficio;
+      })
+    : beneficiosPorModalidad[modalidad === "home" ? "online" : modalidad];
 
 /* ──────────────────────────────── Sedes ───────────────────────────────── */
 
@@ -227,6 +265,14 @@ const sedesPorModalidad: Record<Modalidad, Embebido> = {
         url: "https://ucasal.edu.ar/mapa_sedes/mapa_sedes_ucasal.html",
         tituloEmbebido: "Mapa de sedes y centros de apoyo de UCASAL en el país",
         textoError: "Lo sentimos, el mapa de sedes no está disponible por el momento.",
+        proporcion: "4 / 3",
+    },
+    home: {
+        titulo: "Estudiá desde tu casa",
+        copete: "Cursá y rendí de forma virtual con el acompañamiento de UCASAL.",
+        url: "https://www.ucasal.edu.ar/mapa_sedes/mapa_sedes_ucasal.html",
+        tituloEmbebido: "Mapa de sedes de UCASAL",
+        textoError: "En modalidad Home cursás y rendís sin necesidad de viajar a una sede universitaria.",
         proporcion: "4 / 3",
     },
 };
@@ -307,6 +353,24 @@ const preguntasPorModalidad: Record<Modalidad, Pregunta[]> = {
             pregunta: "¿Cómo y dónde se rinden los exámenes?",
             respuesta:
                 "Los trabajos prácticos y parciales se realizan a través de la plataforma virtual. Los exámenes finales pueden ser virtuales si vivís lejos de una sede o presenciales en la sede más cercana a tu localidad.",
+        },
+    ],
+    home: [
+        {
+            pregunta: "¿Cuándo empiezan las clases?",
+            respuesta: "Las clases del ciclo lectivo 2027 empiezan entre la primera y segunda semana de marzo dependiendo tu carrera. Inscribite ahora y asegurá tu lugar en UCASAL.",
+        },
+        {
+            pregunta: "¿Qué medios de pago están disponibles y qué tipo de becas ofrecen?",
+            respuesta: "UCASAL ofrece planes de financiamiento y becas para cada situación particular. Completá el formulario para conocer tus opciones.",
+        },
+        {
+            pregunta: "¿Cómo es la modalidad Home?",
+            respuesta: "Cursás, consultás a tus docentes y rendís los exámenes parciales y finales de forma virtual, sin viajar a una sede universitaria. Esta modalidad está pensada para quienes viven a más de 100 km de una sede.",
+        },
+        {
+            pregunta: "¿Puedo solicitar equivalencias si ya cursé en otra universidad?",
+            respuesta: "Sí, podés solicitar equivalencias de materias aprobadas en otras instituciones. Completá el formulario y un asesor te ayudará a validarlas.",
         },
     ],
 };
@@ -399,5 +463,5 @@ const todosLosTestimonios: Testimonio[] = [
 ];
 
 export const testimonios = todosLosTestimonios.filter(
-    (t) => t.modalidad === modalidad || t.modalidad === "ambas",
+    (t) => t.modalidad === modalidad || (esHome && t.modalidad === "online") || t.modalidad === "ambas",
 );

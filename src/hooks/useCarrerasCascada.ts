@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { getCarrerasApi, getCarreraApi } from '../data/carrerasApi'
 import type { CarreraFormulario } from '../data/carrerasCliente'
+import { esHome } from '../config/modalidad'
 
 const FALLBACK_CARRERAS: any[] = [
     {
@@ -127,11 +128,15 @@ export function useCarrerasCascada({
     const provincias: any[] = [
         ...new Map(
             (carreraSeleccionada?.provincias || [])
-                .filter((prov: any) => prov.id_provincia != null)
+                .filter((prov: any) => prov.id_provincia != null && (Number(prov.id_sede) === 500) === esHome)
                 .map((prov: any) => [prov.id_provincia, prov])
         ).values()
     ]
-    const localidades: any[] = carreraSeleccionada?.provincias || []
+    const localidades: any[] = [...new Map(
+        (carreraSeleccionada?.provincias || [])
+            .filter((sede: any) => (Number(sede.id_sede) === 500) === esHome && (!esHome || sede.id_provincia != null))
+            .map((sede: any) => [getSedeValue(sede), sede])
+    ).values()]
     const todasLasSedes = localidades
         .filter((sede: any) => String(sede.id_provincia) === idProvincia)
     const sedesOficiales = todasLasSedes.filter((s: any) => s.id_sede !== 500)

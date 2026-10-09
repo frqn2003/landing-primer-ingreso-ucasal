@@ -9,15 +9,16 @@
  */
 import Footer from "./Footer.astro";
 import { PromocionVigente } from "../react/Promocion.tsx";
-import { esOnline } from "../../config/modalidad";
+import { esOnline, esHome } from "../../config/modalidad";
 import todasLasCarreras from "../../data/carreras";
 
 import {
   urlInscripcion,
   codcarsPorRegla,
   esCCC,
-  sinInscripcion,
+  esSalud,
   ID_SEDE_HOME,
+  URL_SALUD,
   URL_CCC,
   URL_HOME,
   type CarreraInscripcion,
@@ -33,27 +34,36 @@ const { carrera } = Astro.props;
 // El resumen se arma en el navegador con lo que viene por querystring (lo manda
 // Form.tsx al redirigir). Las etiquetas salen de acá para que el build online no
 // lleve la palabra "Presencial" ni en el script: ahí el único modo posible es el 7.
-const etiquetasModo: Record<string, string> = esOnline
-  ? { "7": "Online" }
-  : { "1": "Presencial", "7": "Online" };
+const etiquetasModo: Record<string, string> = esHome
+  ? { "7": "Home" }
+  : esOnline
+    ? { "7": "Online" }
+    : { "1": "Presencial", "7": "Online" };
 
 const base = import.meta.env.BASE_URL;
 
 /**
  * El botón de inscripción.
  *
- * /<carrera>/enviado conoce la carrera por props y ya resuelve acá el caso CCC
- * y el de las carreras sin inscripción. Lo que no puede saber el build es qué
- * sede eligió el visitante, así que el caso "Modalidad Home" lo ajusta el
- * script de abajo con lo que llega por querystring. /enviado (el de la home)
- * entra sin carrera y resuelve todo ahí: Form.tsx manda el codcar.
+ * /<carrera>/enviado conoce la carrera por props y ya resuelve acá los casos
+ * de Salud y CCC. Lo que no puede saber el build es qué sede eligió el
+ * visitante, así que el caso "Modalidad Home" lo ajusta el script de abajo
+ * con lo que llega por querystring. /enviado (el de la home) entra sin carrera
+ * y resuelve todo ahí: Form.tsx manda el codcar.
  */
-const linkInscripcion = urlInscripcion({ carrera, utmMedium: "gracias" });
+const linkInscripcion = esHome && (!carrera || !esSalud(carrera))
+  ? `https://ucasal.edu.ar/carreras/admision-form.php?carrera=${carrera?.codcar ?? ""}&utm_source=landing_enviado&utm_medium=gracias`
+  : urlInscripcion({
+      carrera,
+      utmMedium: "gracias",
+    });
 const reglasInscripcion = {
   ...codcarsPorRegla(todasLasCarreras),
+  homeBuild: esHome,
   cccServidor: !!carrera && esCCC(carrera),
-  bloqueadaServidor: !!carrera && sinInscripcion(carrera),
+  saludServidor: !!carrera && esSalud(carrera),
   ID_SEDE_HOME,
+  URL_SALUD,
   URL_CCC,
   URL_HOME,
 };
@@ -149,7 +159,7 @@ const iconos: Record<string, string[]> = {
         ¡Gracias<span id="gracias-nombre"></span>!
       </h1>
       <p class="text-lg text-gray-500">
-        Recibimos tu solicitud correctamente. Pronto se te enviará información por mail y nos comunicaremos con vos.
+        Recibimos tu solicitud correctamente. Pronto se te enviará información por mail y un asesor se comunicará con vos.
       </p>
     </div>
 
@@ -300,24 +310,22 @@ const iconos: Record<string, string[]> = {
 
   /* Destino final del botón de inscripción.
    *
-   * El orden es el mismo que en src/lib/inscripcion.ts: primero las carreras
-   * que todavía no tienen inscripción (el botón se va de la página), después
-   * las de ciclo de complementación y recién al final la sede Home. Si la
-   * carrera vino por props el build ya dejó el href correcto y acá solo puede
-   * cambiar por la sede. */
+   * El orden es el mismo que en src/lib/inscripcion.ts: primero Salud,
+   * después las carreras de ciclo de complementación y al final la sede Home.
+   * Si la carrera vino por props el build ya dejó el href correcto y acá solo
+   * puede cambiar por la sede. */
   const botonInscripcion = document.getElementById("link-inscripcion");
   if (botonInscripcion) {
     const codcar = Number(params.get("codcar"));
     const idSede = Number(params.get("idSede"));
-    const bloqueada =
-      reglasInscripcion.bloqueadaServidor ||
-      reglasInscripcion.sinInscripcion.includes(codcar);
+    const esSalud =
+      reglasInscripcion.saludServidor || reglasInscripcion.salud.includes(codcar);
     const esCCC =
       reglasInscripcion.cccServidor || reglasInscripcion.ccc.includes(codcar);
 
-    if (bloqueada) botonInscripcion.remove();
+    if (esSalud) botonInscripcion.href = reglasInscripcion.URL_SALUD;
     else if (esCCC) botonInscripcion.href = reglasInscripcion.URL_CCC;
-    else if (idSede === reglasInscripcion.ID_SEDE_HOME)
+    else if (reglasInscripcion.homeBuild && idSede === reglasInscripcion.ID_SEDE_HOME)
       botonInscripcion.href = reglasInscripcion.URL_HOME;
   }
 

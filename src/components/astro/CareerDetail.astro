@@ -6,6 +6,7 @@ import {
   MODO_ONLINE,
   MODO_PRESENCIAL,
   esOnline,
+  esHome,
   modosCarrera,
 } from "../../config/modalidad";
 import { getNombreModalidades, getNombreFacultad } from "../../lib/utils";
@@ -102,7 +103,7 @@ const [
 const modalidad = getNombreModalidades(carrera.modalidad);
 const facultad = getNombreFacultad(carrera.sector);
 const planesPorModalidad = carrera.planEstudiosPorModalidad;
-const modoActivo = esOnline ? MODO_ONLINE : MODO_PRESENCIAL;
+const modoActivo = esOnline || esHome ? MODO_ONLINE : MODO_PRESENCIAL;
 const planEstudios =
   planesPorModalidad?.[modoActivo] ??
   carrera.planEstudios ??
@@ -320,7 +321,7 @@ const momentoIntermedio = intermedio
           titulo={mixta
             ? "Elegí cómo cursarla"
             : cursaOnline
-              ? "Esta carrera se cursa online"
+              ? esHome ? "Esta carrera se cursa en modalidad Home" : "Esta carrera se cursa online"
               : "Esta carrera se cursa presencialmente"}
           destinoCta="#contacto"
           textoCta="Consultar por esta modalidad"

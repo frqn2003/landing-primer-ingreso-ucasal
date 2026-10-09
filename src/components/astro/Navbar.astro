@@ -1,8 +1,9 @@
 ---
 import data from "../../data/carrerasLanding";
 import { sanitizarTexto } from "../../lib/utils";
-import { urlInscripcion as urlInscripcionCarrera } from "../../lib/inscripcion";
+import { esSalud, urlInscripcion as urlInscripcionCarrera } from "../../lib/inscripcion";
 import { etiquetaSedes } from "../../config/contenido";
+import { esHome } from "../../config/modalidad";
 
 interface Props {
   onSubPage?: boolean;
@@ -15,17 +16,20 @@ const { slug } = Astro.params;
 const slugLimpio = slug ? sanitizarTexto(slug) : "";
 const carreraActiva = data.find((c: any) => c.slug === slugLimpio);
 
-// A dónde manda "¡Quiero Inscribirme!" en ESTA página. Las reglas (CCC, sector
-// sin inscripción, sede Home) están en src/lib/inscripcion.ts. La sede todavía
-// no se conoce acá: recién se elige en el formulario, así que ese caso lo
-// resuelve la pantalla de gracias.
-const urlInscripcion = urlInscripcionCarrera({
-  carrera: carreraActiva,
-  utmMedium: "navbar",
-});
+// A dónde manda "¡Quiero Inscribirme!" en ESTA página. Las reglas (Salud, CCC,
+// sede Home) están en src/lib/inscripcion.ts. La sede todavía no se conoce acá:
+// recién se elige en el formulario, así que ese caso lo resuelve la pantalla
+// de gracias.
+const urlInscripcion = esHome && (!carreraActiva || !esSalud(carreraActiva))
+  ? `https://ucasal.edu.ar/carreras/admision-form.php?utm_source=landing_home&utm_medium=navbar`
+  : urlInscripcionCarrera({
+      carrera: carreraActiva,
+      utmMedium: "navbar",
+    });
 
-// Sin destino (sector 13): el botón baja al formulario de la subpágina en vez
-// de abrir una pestaña. El `aside` del formulario en CareerDetail.astro es
+
+// Si no hay destino, el botón baja al formulario de la subpágina en vez de
+// abrir una pestaña. El `aside` del formulario en CareerDetail.astro es
 // #contacto; en la Home, FormSection.astro usa el mismo id.
 const inscripcionBloqueada = urlInscripcion === null;
 
@@ -115,7 +119,7 @@ const flotarSobreHero = !onSubPage || !!heroCompleto;
         onSubPage ? (
           <>
             <button data-scroll-to="modalidades" class="nav-link">
-              Modalidades
+              {esHome ? "Modalidad" : "Modalidades"}
             </button>
             <button data-scroll-to="beneficios" class="nav-link">
               Beneficios
@@ -127,7 +131,7 @@ const flotarSobreHero = !onSubPage || !!heroCompleto;
               Beneficios
             </button>
             <button data-scroll-to="modalidades" class="nav-link">
-              Modalidades
+              {esHome ? "Modalidad" : "Modalidades"}
             </button>
             <button data-scroll-to="carreras" class="nav-link">
               Carreras
@@ -219,7 +223,7 @@ const flotarSobreHero = !onSubPage || !!heroCompleto;
                 data-scroll-to="modalidades"
                 class="mobile-nav-link justify-start items-start flex w-full px-4 py-3  hover:bg-red-50 hover:text-(--rojo-ucasal) transition-colors font-semibold border-l-4 border-transparent hover:border-(--rojo-ucasal)"
               >
-                Modalidades
+                {esHome ? "Modalidad" : "Modalidades"}
               </button>
             </li>
             <li class="w-full">
@@ -246,7 +250,7 @@ const flotarSobreHero = !onSubPage || !!heroCompleto;
                 data-scroll-to="modalidades"
                 class="mobile-nav-link justify-start items-start flex w-full px-4 py-3  hover:bg-red-50 hover:text-(--rojo-ucasal) transition-colors font-semibold border-l-4 border-transparent hover:border-(--rojo-ucasal)"
               >
-                Modalidades
+                {esHome ? "Modalidad" : "Modalidades"}
               </button>
             </li>
             <li class="w-full">
@@ -387,7 +391,7 @@ const flotarSobreHero = !onSubPage || !!heroCompleto;
     .getElementById("mobile-inscribirme")
     ?.addEventListener("click", () => {
       toggleMenu(false);
-      // Sin destino (sector 13): se comporta como el resto del menú, cierra y
+      // Sin destino: se comporta como el resto del menú, cierra y
       // baja al formulario. Acá sí sirve scrollIntoView: el menú mobile solo
       // existe por debajo de lg, donde el formulario todavía no es sticky.
       if (!urlInscripcion) {

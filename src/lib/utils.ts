@@ -1,4 +1,5 @@
 import { modalidades } from '../data/modalidades';
+import { esHome, MODO_ONLINE } from '../config/modalidad';
 import { facultades } from '../data/facultades';
 
 export function sanitizarTexto(texto: string): string{
@@ -7,7 +8,7 @@ export function sanitizarTexto(texto: string): string{
 }
 
 export function getModalidadLabel(code: number): string {
-    return modalidades.find((m) => m.code === code)?.label ?? 'Consultar modalidad';
+    return esHome && code === MODO_ONLINE ? 'Home' : modalidades.find((m) => m.code === code)?.label ?? 'Consultar modalidad';
 }
 
 export function getNombreFacultad(sector: number): string {

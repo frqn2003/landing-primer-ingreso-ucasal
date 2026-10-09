@@ -1,6 +1,6 @@
 ---
 import { Image } from "astro:assets";
-import { MODO_HOME, MODO_ONLINE, modosPuerta } from "../../config/modalidad";
+import { MODO_HOME, MODO_ONLINE, esHome, modosPuerta } from "../../config/modalidad";
 import imgPresencial from "../../assets/modalidades/presencial.webp";
 import imgOnline from "../../assets/modalidades/online.webp";
 import imgHome from "../../assets/modalidades/home.webp";
@@ -20,7 +20,7 @@ interface Props {
 
 const {
   modosCarrera,
-  titulo = "Modalidades",
+  titulo = esHome ? "Modalidad" : "Modalidades",
   onSubPage = false,
   destinoCta = "#carreras",
   textoCta = "Explorar carreras de esta modalidad",
@@ -60,12 +60,12 @@ const todasLasModalidades = [
     color: "--azul-dark-ucasal",
     nombre: "home",
     caracteristicas: [
-      "Clases y exámenes 100% virtuales",
-      "Acceso a clases grabadas y foros",
-      "Estudia desde cualquier parte del mundo",
+      "Clases, exámenes parciales y finales, y acompañamiento totalmente virtual",
+      "Acceso a clases grabadas, foros y consultas",
+      "Seguí estudiando sin dejar de lado tu trabajo ni tu familia",
     ],
     description:
-      "Clases en plataforma virtual y acceso a material las 24 horas",
+      "Carrera 100% virtual de UCASAL, diseñada para personas que viven a más de 100 km de las sedes universitarias.",
     imagen: imgHome,
   },
 ];

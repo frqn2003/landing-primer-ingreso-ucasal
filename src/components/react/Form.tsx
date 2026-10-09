@@ -10,6 +10,7 @@ import intlTelInput from 'intl-tel-input'
 import urlEstilosTelefono from 'intl-tel-input/dist/css/intlTelInput.css?url'
 import { clarityEvent, clarityUpgrade } from '../../lib/clarity'
 import { useCarrerasCascada } from '../../hooks/useCarrerasCascada'
+import { esHome } from '../../config/modalidad'
 
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -77,7 +78,7 @@ function cargarCssTelefono() {
 
 /* Campo de prueba: Lic. en Higiene y Seguridad (138) y Corredor Inmobiliario (244). */
 const CODCARS_MEDIO_CONTACTO = ['138', '244']
-const MEDIOS_CONTACTO = ['Llamada', 'Mensaje', 'Mail']
+const MEDIOS_CONTACTO = ['Llamada', 'Whatsapp', 'Mail']
 
 function normalizar(texto: string) {
     return texto.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase()
@@ -222,7 +223,7 @@ export default function Form({ carreras, codcarInicial, onSubPage, urlEnviado, m
     const etiquetaModalidad = (modalidadCarrera: number[] = []) => {
         const modos = modosDeLaLanding(modalidadCarrera)
         if (modos.length > 1) return 'Presencial | Online'
-        return modos.includes(7) ? 'Online' : 'Presencial'
+        return modos.includes(7) ? (esHome ? 'Home' : 'Online') : 'Presencial'
     }
 
     /* En la landing online se listan solo las carreras que se venden online */
@@ -240,15 +241,11 @@ export default function Form({ carreras, codcarInicial, onSubPage, urlEnviado, m
         return normalizar(l.nombre_provincia).includes(q) || normalizar(l.nombre_sede).includes(q)
     })
 
-    const sedeHome = localidadesFiltradas.find(l => Number(l.id_sede) === 500)
-
-    const sedesNoHome = localidadesFiltradas.filter(l => Number(l.id_sede) !== 500)
-
     const localidadesAgrupadas: {
         nombre_provincia: string,
         items: any[]
     }[] = Object.values(
-        sedesNoHome.reduce((acc: Record<string,
+        localidadesFiltradas.reduce((acc: Record<string,
             { nombre_provincia: string, items: any[] }>, l: any) => {
 
             const key = String(l.id_provincia)
@@ -264,12 +261,6 @@ export default function Form({ carreras, codcarInicial, onSubPage, urlEnviado, m
         }, {})
     )
 
-    if (sedeHome) {
-        localidadesAgrupadas.push({
-            nombre_provincia: 'Sedes Home',
-            items: [sedeHome]
-        })
-    }
     useEffect(() => {
         const elemento = phoneRef.current
         if (!elemento) return
@@ -384,11 +375,7 @@ export default function Form({ carreras, codcarInicial, onSubPage, urlEnviado, m
 
     useEffect(() => {
         if (sedeSeleccionada) {
-            setBuscarLocalidad(
-                Number(sedeSeleccionada.id_sede) === 500
-                    ? 'Home'
-                    : sedeSeleccionada.nombre_sede
-            )
+            setBuscarLocalidad(sedeSeleccionada.nombre_sede)
         }
     }, [
         sedeSeleccionada?.id_sede,
@@ -472,9 +459,7 @@ export default function Form({ carreras, codcarInicial, onSubPage, urlEnviado, m
                         carrera: carreraSeleccionadaLocal?.nombre ?? '',
                         codcar: String(carreraSeleccionadaLocal?.codcar ?? codcar ?? ''),
                         modo: modalidad ?? '',
-                        sede: Number(sedeSeleccionada?.id_sede) === 500
-                            ? 'Modalidad Home'
-                            : sedeSeleccionada?.nombre_sede ?? '',
+                        sede: sedeSeleccionada?.nombre_sede ?? '',
                         idSede: idSedeReal ?? '',
                     })
                     window.location.assign(`${destinoEnviado}?${resumen.toString()}`)
@@ -491,7 +476,7 @@ export default function Form({ carreras, codcarInicial, onSubPage, urlEnviado, m
             <input type="hidden" value={modoEnviado === '7' ? '103' : '4'} name="id_origen" />
             <input type="hidden" name="modo" value={modoEnviado} />
             <input type="hidden" name="cbx_provincia" value={idProvincia} />
-            <input type="hidden" name="cbx_sede" value={idSedeReal} />
+            <input type="hidden" name="cbx_sede" value={esHome ? (idSede ? '500' : '') : idSedeReal} />
             <input type="hidden" name="sector" value={sectorCarrera} />
             <input type="hidden" value="postulantes" name="tabla" />
             <input type="hidden" id="agent" name="agent" value={parametros.userAgent || ''} />
@@ -586,7 +571,7 @@ export default function Form({ carreras, codcarInicial, onSubPage, urlEnviado, m
             {/* 2 · CÓMO SE CURSA */}
             {onSubPage && modos.length == 1 ? 
                 <div className="border-b border-black/10 pb-4 mb-4 text-black tracking-normal uppercase text-sm">
-                    Esta carrera se cursa de forma <span className="text-(--azul-ucasal) font-bold underline underline-offset-1">{modos[0].modalidad === 7 ? 'online' : 'presencial'}</span>
+                    Esta carrera se cursa de forma <span className="text-(--azul-ucasal) font-bold underline underline-offset-1">{modos[0].modalidad === 7 ? (esHome ? 'home' : 'online') : 'presencial'}</span>
                 </div>
             : (
                 <div className={`border-b border-black/10 pb-4 mb-4 transition-opacity ${codcar ? '' : 'opacity-50'}`}>
@@ -608,8 +593,8 @@ export default function Form({ carreras, codcarInicial, onSubPage, urlEnviado, m
                                         {esOnline ? <IconoOnline /> : <IconoPresencial />}
                                     </span>
                                     <div className="flex flex-col min-w-0">
-                                        <span className="text-sm font-semibold text-black">{esOnline ? 'Online' : 'Presencial'}</span>
-                                        <span className="text-xs text-gray-500">{esOnline ? 'Desde donde estés' : 'Cursás en una sede'}</span>
+                                        <span className="text-sm font-semibold text-black">{esOnline ? (esHome ? 'Home' : 'Online') : 'Presencial'}</span>
+                                        <span className="text-xs text-gray-500">{esOnline ? (esHome ? 'Cursás y rendís desde casa' : 'Desde donde estés') : 'Cursás en una sede'}</span>
                                     </div>
                                 </button>
                             )
@@ -655,31 +640,22 @@ export default function Form({ carreras, codcarInicial, onSubPage, urlEnviado, m
                                     <p className="sticky top-0 bg-gray-50 px-3 py-1 text-xs font-semibold text-gray-500">{grupo.nombre_provincia}</p>
                                     {grupo.items.map((item: any) => (
                                         <button
-                                            key={`${item.id_provincia}-${item.id_sede}`}
+                                            key={`${item.id_provincia}-${item.id_sede}-${item.nombre_sede}`}
                                             type="button"
                                             onClick={() => {
                                                 seleccionarLocalidad(String(item.id_provincia), item)
-                                                setBuscarLocalidad(
-                                                    Number(item.id_sede) === 500
-                                                        ? 'Modalidad Home'
-                                                        : item.nombre_sede
-                                                )
+                                                setBuscarLocalidad(item.nombre_sede)
                                                 setLocalidadAbierta(false)
                                             }}
                                             className="flex w-full items-center justify-between px-3 py-2 text-left text-sm text-black hover:bg-black/5 cursor-pointer"
                                         >
                                             <span className="font-bold">
-                                                {Number(item.id_sede) === 500
-                                                    ? 'Modalidad Home'
-                                                    : item.nombre_sede}
+                                                {item.nombre_sede}
                                             </span>
                                             <span
-                                                className={`text-xs font-semibold px-2 py-0.5 rounded ${Number(item.id_sede) === 500
-                                                    ? 'bg-rose-100 text-rose-600'
-                                                    : 'bg-emerald-100 text-emerald-700'
-                                                    }`}
+                                                className={`text-xs font-semibold px-2 py-0.5 rounded ${esHome ? 'bg-rose-100 text-rose-600' : 'bg-emerald-100 text-emerald-700'}`}
                                             >
-                                                {Number(item.id_sede) === 500 ? 'Home' : 'Sede'}
+                                                {esHome ? 'Home' : 'Sede'}
                                             </span>
                                         </button>
                                     ))}

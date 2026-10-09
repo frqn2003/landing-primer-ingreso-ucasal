@@ -5,10 +5,8 @@
  * carrera puede caer en más de una regla (Podología CCC y Producción de
  * Bioimágenes CCC son CCC *y* sector 13). De mayor a menor prioridad:
  *
- *   1. Sector 13 (Cs. de la Salud) → sin destino. Todavía no existe la página
- *      de inscripción de estas carreras, así que el botón no navega a ningún
- *      lado: en la subpágina baja al formulario de contacto y en la pantalla de
- *      gracias directamente no se muestra.
+ *   1. Sector 13 (Cs. de la Salud) → inscripción específica de Salud.
+ *      Aplica también a sus carreras CCC y tiene prioridad sobre la sede Home.
  *   2. Ciclo de Complementación Curricular (CCC) → formulario propio de CCC.
  *   3. Sede "Modalidad Home" (idSede 500) → formulario de admisión. Solo aplica
  *      después de enviar el formulario: antes de eso no se sabe qué sede va a
@@ -30,10 +28,11 @@ export interface CarreraInscripcion {
 /** Sede ficticia que la API usa para "tu sede no es cercana" (modalidad Home). */
 export const ID_SEDE_HOME = 500;
 
-/** Cs. de la Salud: sin página de inscripción propia por ahora. */
-export const SECTOR_SIN_INSCRIPCION = 13;
+/** Sector de Ciencias de la Salud. */
+export const SECTOR_SALUD = 13;
 
 const URL_GENERAL = "https://www.ucasal.edu.ar/inscripciones/";
+export const URL_SALUD = "https://www.ucasal.edu.ar/inscripciones-salud/";
 export const URL_CCC = "https://www.ucasal.edu.ar/carreras/ccc-form.php";
 export const URL_HOME = "https://ucasal.edu.ar/carreras/admision-form.php";
 
@@ -47,19 +46,19 @@ export function esCCC(carrera: CarreraInscripcion): boolean {
     return carrera.nombre.trimEnd().endsWith("- CCC");
 }
 
-/** True si la carrera todavía no tiene a dónde mandar al inscripto. */
-export function sinInscripcion(carrera: CarreraInscripcion): boolean {
-    return carrera.sector === SECTOR_SIN_INSCRIPCION;
+/** True si la carrera pertenece a Ciencias de la Salud. */
+export function esSalud(carrera: CarreraInscripcion): boolean {
+    return carrera.sector === SECTOR_SALUD;
 }
 
 /**
- * Destino del botón, o `null` si la carrera no tiene inscripción todavía.
+ * Destino del botón de inscripción según la carrera y la sede.
  *
  * - `carrera` ausente (pantalla de gracias de la home sin datos) cae al link
  *   general, que es lo que se mostraba antes de todo esto.
  * - `idSede` solo se pasa cuando ya se envió el formulario.
- * - `utmMedium` se agrega únicamente al link general: los formularios de CCC y
- *   de admisión se usan tal cual los entrega admisiones.
+ * - `utmMedium` se agrega únicamente al link general: los formularios de Salud,
+ *   CCC y admisión se usan tal cual los entrega admisiones.
  */
 export function urlInscripcion({
     carrera,
@@ -70,7 +69,7 @@ export function urlInscripcion({
     idSede?: number | string | null;
     utmMedium?: string;
 } = {}): string | null {
-    if (carrera && sinInscripcion(carrera)) return null;
+    if (carrera && esSalud(carrera)) return URL_SALUD;
     if (carrera && esCCC(carrera)) return URL_CCC;
     if (idSede != null && Number(idSede) === ID_SEDE_HOME) return URL_HOME;
 
@@ -84,13 +83,13 @@ export function urlInscripcion({
  * pueda resolver el destino en el navegador: ahí la carrera llega por
  * querystring (la manda Form.tsx) y no por props del build.
  *
- * Son 22 números entre las dos listas, así que viajan enteras sin problema.
+ * Incluye los códigos de Salud y CCC para respetar el orden de prioridad.
  */
 export function codcarsPorRegla(carreras: CarreraInscripcion[]) {
     return {
-        sinInscripcion: carreras.filter(sinInscripcion).map((c) => c.codcar),
+        salud: carreras.filter(esSalud).map((c) => c.codcar),
         ccc: carreras
-            .filter((c) => !sinInscripcion(c) && esCCC(c))
+            .filter((c) => !esSalud(c) && esCCC(c))
             .map((c) => c.codcar),
     };
 }
