@@ -3040,6 +3040,70 @@ const data = [
                 "Ejercer la profesión con una visión crítica, ética y humanista, respetando a los demás y priorizando el impacto positivo en la sociedad.",
             ]
         },
+        planEstudiosPorModalidad: {
+            1: [
+                {
+                    "semestre": "1° Año",
+                    "materias": [
+                        "Filosofía",
+                        "Sonido I",
+                        "Tecnología de la Imagen y el Sonido",
+                        "Lenguajes Artísticos",
+                        "Historia del Arte y de los Medios Sonoros y Audiovisuales",
+                        "Sonido II",
+                        "Taller de Integración I",
+                        "Narrativa Sonora y de Espectáculos",
+                        "Guion y Producción de Contenidos",
+                        "Iluminación y Escenotecnia"
+                    ]
+                },
+                {
+                    "semestre": "2° Año",
+                    "materias": [
+                        "Teología",
+                        "Sonido en Vivo",
+                        "Taller de Integración II",
+                        "Realización Audiovisual",
+                        "Grabación y Edición de Audio",
+                        "Pensamiento Social Cristiano I",
+                        "Taller de Integración III",
+                        "Historia de la Música",
+                        "Administración y Educación Financiera",
+                        "Producción de Eventos y Espectáculos"
+                    ]
+                },
+                {
+                    "semestre": "3° Año",
+                    "materias": [
+                        "Pensamiento Social Cristiano II",
+                        "Diseño de Imagen y Sonido",
+                        "Taller de Integración IV",
+                        "Narrativa Transmedia",
+                        "Práctica Pre-profesional",
+                        "Mezcla y Masterización",
+                        "Taller de Integración V",
+                        "Sociedad y Cultura Digital",
+                        "Técnicas de Investigación",
+                        "Audioperceptiva y Creación Musical"
+                    ]
+                },
+                {
+                    "semestre": "4° Año",
+                    "materias": [
+                        "Ética Profesional",
+                        "Difusión y Comercialización",
+                        "Animación y Efectos Especiales",
+                        "Dirección y Gestión Sonora y de Espectáculos",
+                        "Trabajo Integrador Final I",
+                        "Modelos de Negocios en la Industria Sonora y de Espectáculos",
+                        "Taller de Integración VI",
+                        "Diseño Acústico",
+                        "Planificación de Proyectos Culturales",
+                        "Trabajo Integrador Final II"
+                    ]
+                }
+            ]
+        },
     },
     {
         codcar: 18,

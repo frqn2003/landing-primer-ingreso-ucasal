@@ -51,12 +51,13 @@ const base = import.meta.env.BASE_URL;
  * con lo que llega por querystring. /enviado (el de la home) entra sin carrera
  * y resuelve todo ahí: Form.tsx manda el codcar.
  */
-const linkInscripcion = esHome && (!carrera || !esSalud(carrera))
-  ? `https://ucasal.edu.ar/carreras/admision-form.php?carrera=${carrera?.codcar ?? ""}&utm_source=landing_enviado&utm_medium=gracias`
-  : urlInscripcion({
-      carrera,
-      utmMedium: "gracias",
-    });
+const linkInscripcion =
+  esHome && (!carrera || !esSalud(carrera))
+    ? `https://ucasal.edu.ar/carreras/admision-form.php?carrera=${carrera?.codcar ?? ""}&utm_source=landing_enviado&utm_medium=gracias`
+    : urlInscripcion({
+        carrera,
+        utmMedium: "gracias",
+      });
 const reglasInscripcion = {
   ...codcarsPorRegla(todasLasCarreras),
   homeBuild: esHome,
@@ -107,13 +108,9 @@ const redes = [
   },
 ];
 
-// Iconos de cada fila del resumen, indexados por la clave del querystring. Los
+// Iconos de las filas del resumen que llevan icono, indexados por la clave del querystring. Los
 // arma el script de abajo, que es el que sabe qué campos llegaron.
 const iconos: Record<string, string[]> = {
-  carrera: [
-    "M12 14l9-5-9-5-9 5 9 5z",
-    "M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z",
-  ],
   modo: [
     "M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z",
   ],
@@ -122,77 +119,90 @@ const iconos: Record<string, string[]> = {
     "M15 11a3 3 0 11-6 0 3 3 0 016 0z",
   ],
 };
-
 ---
 
 <main>
   <div
-    class="contenedor flex min-h-[70vh] flex-col items-center justify-center gap-8 bg-linear-to-br from-blue-400 via-white to-red-400 pt-14 lg:pt-28 pb-16"
+    class="contenedor relative text-white flex justify-center items-center flex-col gap-4"
   >
-    {/* Check animado */}
-    <div class="relative">
-      <div
-        class="flex size-24 items-center justify-center rounded-full bg-(--azul-ucasal) shadow-2xl animate-[heroFadeInUp_0.5s_ease-out_forwards]"
-      >
-        <svg
-          class="size-12 text-white"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-          aria-hidden="true"
+    <div class="absolute inset-0 -z-10">
+      <img
+        src={`${base}fondos/azul.webp`}
+        alt="Imagen de fondo azul"
+        class="sticky left-1/2 right-1/2 top-0 h-full w-full object-cover"
+      />
+    </div>
+    <div
+      class="flex flex-col items-center justify-center gap-4 mt-12 pt-14 lg:pt-20 border-2 border-(--rojo-ucasal) rounded-4xl  bg-white/15"
+    >
+      {/* Check animado */}
+      <div class="relative">
+        <div
+          class="flex size-18 items-center justify-center rounded-full bg-white shadow-2xl animate-[heroFadeInUp_0.5s_ease-out_forwards]"
         >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2.5"
-            d="M5 13l4 4L19 7"></path>
-        </svg>
+          <svg
+            class="size-10 text-(--azul-ucasal)"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2.5"
+              d="M5 13l4 4L19 7"></path>
+          </svg>
+        </div>
       </div>
-    </div>
 
-    {/* Título */}
-    <div
-      class="max-w-xl text-center"
-      style="opacity: 0; animation: heroFadeInUp 0.6s ease-out 0.2s forwards;"
-    >
-      <h1 class="mb-3 text-2xl font-extrabold degrade-azul md:text-3xl">
-        ¡Gracias<span id="gracias-nombre"></span>!
-      </h1>
-      <p class="text-lg text-gray-500">
-        Recibimos tu solicitud correctamente. Pronto se te enviará información por mail y un asesor se comunicará con vos.
-      </p>
-    </div>
-
-    <div
-      id="resumen-solicitud"
-      class="hidden w-full max-w-xl rounded-2xl border border-gray-100 bg-white p-6 shadow-xl md:p-8"
-      style="opacity: 0; animation: heroFadeInUp 0.6s ease-out 0.4s forwards;"
-    >
-      <h3
-        class="mb-4 text-lg font-semibold uppercase tracking-wide text-black/80"
+      {/* Título */}
+      <div
+        class="w-full max-md:w-4/5 md:max-w-xl text-center"
+        style="opacity: 0; animation: heroFadeInUp 0.6s ease-out 0.2s forwards;"
       >
-        Inscribite ahora a:
-      </h3>
-      <ul id="resumen-lista" class="flex flex-col gap-4"></ul>
+        <h1 class="mb-3 text-2xl font-extrabold md:text-3xl">
+          ¡Gracias<span id="gracias-nombre"></span>!
+        </h1>
+        <p class="text-lg">
+          Recibimos tu solicitud correctamente. Pronto se te enviará información
+          por <span class="lowercase">mail</span> y un asesor se comunicará con vos.
+        </p>
+      </div>
+
+      <div
+        id="resumen-solicitud"
+        class="hidden w-4/5 max-w-xl rounded-2xl py-3 md:py-4"
+        style="opacity: 0; animation: heroFadeInUp 0.6s ease-out 0.4s forwards;"
+      >
+        <h4
+          class="mb-4 text-base text-gray-300 font-semibold uppercase tracking-wide"
+        >
+          Tu carrera elegida:
+        </h4>
+        <ul id="resumen-lista" class="grid grid-cols-2 gap-4"></ul>
+      </div>
+      <div class="w-4/5 bg-(--rojo-ucasal) h-1 rounded-full shadow-lg"></div>
+      <p class="text-sm text-center uppercase font-extralight">
+        Beneficio por tiempo limitado
+      </p>
+      <PromocionVigente client:load onSubPage={true}/>
+      <!-- acá poner las cosas de las promo pago adelantado -->
+      {linkInscripcion && (
+          <a
+            id="link-inscripcion"
+            href={linkInscripcion}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="w-full bg-(--rojo-ucasal) text-white py-3 rounded-t-none px-6 rounded-3xl font-semibold text-center flex items-end justify-center"
+            style="opacity: 0; animation: heroFadeInUp 0.6s ease-out 0.5s forwards;"
+          >
+            ¡Inscribirme ahora!
+          </a>
+        )
+      }
     </div>
 
-    <PromocionVigente client:load />
-
-        <!-- acá poner las cosas de las promo pago adelantado -->
-    {
-      linkInscripcion && (
-        <a
-          id="link-inscripcion"
-          href={linkInscripcion}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="boton-cta inline-flex w-full max-w-md justify-center"
-          style="opacity: 0; animation: heroFadeInUp 0.6s ease-out 0.5s forwards;"
-        >
-          ¡Inscribirme ahora!
-        </a>
-      )
-    }
     {/* Redes sociales */}
     <div
       class="flex flex-col items-center gap-3"
@@ -228,7 +238,7 @@ const iconos: Record<string, string[]> = {
 
     {/* Volver */}
     <div
-      style="opacity: 0; animation: heroFadeInUp 0.6s ease-out 0.8s forwards;"
+      style="opacity: 0; animation: heroFadeInUp 0.6s ease-out 0.8s forwards; margin-bottom: 24px;"
     >
       <a
         href={`${base}#carreras`}
@@ -252,7 +262,9 @@ const iconos: Record<string, string[]> = {
     </div>
   </div>
   {/* Bot flotante con globo de texto */}
-  <div class="fixed z-50 bottom-6 left-2 right-2 flex items-center gap-2 md:bottom-10 md:left-auto md:right-20 md:flex-col md:gap-0">
+  <div
+    class="fixed z-50 bottom-6 left-2 right-2 flex items-center gap-2 md:bottom-10 md:left-auto md:right-20 md:flex-col md:gap-0"
+  >
     {/* Globo de texto */}
     <div
       class="order-2 min-w-0 flex-1 md:order-1 md:mb-2 md:mr-2 md:flex-none"
@@ -264,14 +276,26 @@ const iconos: Record<string, string[]> = {
         <div class="text-center">
           ¿Te quedó alguna duda?
           <br />
-          <span class="text-xs opacity-90">¡Habla con UKI! Nuestro asistente virtual</span>
+          <span class="text-xs opacity-90"
+            >¡Habla con UKI! Nuestro asistente virtual</span
+          >
         </div>
         {/* Flecha del globo */}
-        <div class="absolute left-0 top-1/2 -translate-x-full -translate-y-1/2 md:hidden">
-          <div class="h-0 w-0 border-y-8 border-r-8 border-y-transparent border-r-gray-800"></div>
+        <div
+          class="absolute left-0 top-1/2 -translate-x-full -translate-y-1/2 md:hidden"
+        >
+          <div
+            class="h-0 w-0 border-y-8 border-r-8 border-y-transparent border-r-gray-800"
+          >
+          </div>
         </div>
-        <div class="absolute bottom-0 right-28 hidden translate-y-full md:block">
-          <div class="h-6 w-0 border-l-8 border-r-8 border-t-8 border-l-transparent border-r-transparent border-t-gray-800"></div>
+        <div
+          class="absolute bottom-0 right-28 hidden translate-y-full md:block"
+        >
+          <div
+            class="h-6 w-0 border-l-8 border-r-8 border-t-8 border-l-transparent border-r-transparent border-t-gray-800"
+          >
+          </div>
         </div>
       </div>
     </div>
@@ -319,13 +343,17 @@ const iconos: Record<string, string[]> = {
     const codcar = Number(params.get("codcar"));
     const idSede = Number(params.get("idSede"));
     const esSalud =
-      reglasInscripcion.saludServidor || reglasInscripcion.salud.includes(codcar);
+      reglasInscripcion.saludServidor ||
+      reglasInscripcion.salud.includes(codcar);
     const esCCC =
       reglasInscripcion.cccServidor || reglasInscripcion.ccc.includes(codcar);
 
     if (esSalud) botonInscripcion.href = reglasInscripcion.URL_SALUD;
     else if (esCCC) botonInscripcion.href = reglasInscripcion.URL_CCC;
-    else if (reglasInscripcion.homeBuild && idSede === reglasInscripcion.ID_SEDE_HOME)
+    else if (
+      reglasInscripcion.homeBuild &&
+      idSede === reglasInscripcion.ID_SEDE_HOME
+    )
       botonInscripcion.href = reglasInscripcion.URL_HOME;
   }
 
@@ -364,6 +392,9 @@ const iconos: Record<string, string[]> = {
       const valor = params.get(clave);
       if (!valor) return null;
       const texto = formato ? formato(valor) : valor;
+      if (clave === "carrera") {
+        return `<li class="text-4xl font-bold col-span-2">${escapar(texto)}</li>`;
+      }
       const paths = (iconos[clave] ?? [])
         .map(
           (d) =>
@@ -371,12 +402,12 @@ const iconos: Record<string, string[]> = {
         )
         .join("");
       return `<li class="flex items-start gap-3">
-                <div class="mt-0.5 flex size-8 shrink-0 items-center justify-center rounded-full bg-(--azul-ucasal)/10">
-                    <svg class="size-4 text-(--azul-ucasal)" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">${paths}</svg>
+                <div class="mt-0.5 flex size-8 shrink-0 items-center justify-center rounded-full bg-(--rojo-ucasal)/10">
+                    <svg class="size-4 text-(--rojo-ucasal)" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">${paths}</svg>
                 </div>
                 <div>
-                    <p class="text-xs text-gray-400">${etiqueta}</p>
-                    <p class="text-sm font-semibold text-gray-800">${escapar(texto)}</p>
+                    <p class="text-[11px]">${etiqueta}</p>
+                    <p class="text-sm font-semibold">${escapar(texto)}</p>
                 </div>
             </li>`;
     })
