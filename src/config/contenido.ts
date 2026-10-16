@@ -358,11 +358,11 @@ const preguntasPorModalidad: Record<Modalidad, Pregunta[]> = {
     home: [
         {
             pregunta: "¿Cuándo empiezan las clases?",
-            respuesta: "Las clases del ciclo lectivo 2027 empiezan entre la primera y segunda semana de marzo dependiendo tu carrera. Inscribite ahora y asegurá tu lugar en UCASAL.",
+            respuesta: "Las clases del ciclo lectivo 2027 empiezan entre la primera y segunda semana de marzo dependiendo tu carrera.",
         },
         {
             pregunta: "¿Qué medios de pago están disponibles y qué tipo de becas ofrecen?",
-            respuesta: "UCASAL ofrece planes de financiamiento y becas para cada situación particular. Completá el formulario para conocer tus opciones.",
+            respuesta: "Tenemos planes de financiamiento con tarjetas de créditos y becas de todo tipo. Completá el formulario y conocé todas las opciones.",
         },
         {
             pregunta: "¿Cómo es la modalidad Home?",
