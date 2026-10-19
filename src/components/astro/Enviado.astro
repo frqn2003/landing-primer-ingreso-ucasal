@@ -350,10 +350,7 @@ const iconos: Record<string, string[]> = {
 
     if (esSalud) botonInscripcion.href = reglasInscripcion.URL_SALUD;
     else if (esCCC) botonInscripcion.href = reglasInscripcion.URL_CCC;
-    else if (
-      reglasInscripcion.homeBuild &&
-      idSede === reglasInscripcion.ID_SEDE_HOME
-    )
+    else if (idSede === reglasInscripcion.ID_SEDE_HOME)
       botonInscripcion.href = reglasInscripcion.URL_HOME;
   }
 

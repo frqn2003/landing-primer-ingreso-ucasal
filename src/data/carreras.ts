@@ -1319,6 +1319,10 @@ const data = [
         descripcion: "La Licenciatura en Seguridad forma profesionales con capacidad para diseñar y gestionar proyectos integrales de protección e intervención ciudadana. Los estudiantes dominan herramientas de gestión de riesgos, investigación operativa, legislación, políticas de seguridad y resolución de conflictos. La carrera combina teoría y práctica para desarrollar líderes capaces de tomar decisiones estratégicas en organismos públicos y empresas privadas.",
         duracion: "2 años",
         modalidad: [7],
+        requisitosIngreso: [
+            "Título de Técnico Superior en Seguridad Pública o tecnicatura superior equivalente, otorgado por universidades o institutos de formación de las fuerzas policiales, de seguridad o del servicio penitenciario.",
+            "Duración mínima de 2 años y carga horaria de al menos 1200 horas reloj.",
+        ],
         perfilEgresado: {
             items: [
                 "Diseñar y coordinar planes integrales de seguridad pública y privada.",
@@ -1464,6 +1468,7 @@ const data = [
         descripcion: "La Licenciatura en Administración Agropecuaria forma profesionales capacitados para dirigir y optimizar negocios del sector agroindustrial. Los egresados dominan herramientas de gestión financiera, planificación estratégica, comercialización y sustentabilidad ambiental. La carrera integra la visión técnica con el análisis de mercados para formar líderes capaces de tomar decisiones eficientes en cadenas de valor agrícolas y ganaderas.",
         duracion: "4 años",
         modalidad: [1, 7],
+        tituloIntermedio: { nombre: "Técnico Universitario en Administración Agropecuaria", semestre: 6, requisito: "al finalizar todas las materias hasta 3.º año" },
         perfilEgresado: {
             items: [
                 "Planificar, dirigir y optimizar empresas del sector agropecuario y agroindustrial.",
@@ -1836,6 +1841,9 @@ const data = [
         descripcion: "Esta carrera forma profesionales especializados en el mercado inmobiliario, la valuación de bienes y la gestión de propiedad horizontal. Los egresados pueden ejercer como corredores, tasadores, administradores de consorcios y asesores en transacciones inmobiliarias, combinando formación jurídica, económica y técnica para operar con eficiencia en el ámbito público y privado.",
         duracion: "1½ años",
         modalidad: [7],
+        requisitosIngreso: [
+            "Título de Corredor Inmobiliario o Martillero Público.",
+        ],
         perfilEgresado: {
             items: [
                 "Intermediar en operaciones de compra, venta, alquiler y subastas de bienes muebles e inmuebles.",
@@ -2065,6 +2073,7 @@ const data = [
         descripcion: "La Licenciatura en Criminalística forma profesionales con capacidad para investigar, analizar y reconstruir hechos delictivos mediante métodos científicos. Los estudiantes dominan herramientas de balística, papiloscopía, accidentología, documentología y ciencias forenses. La carrera combina teoría y práctica para desarrollar líderes capaces de redactar peritajes judiciales y tomar decisiones estratégicas en el ámbito público y privado.",
         duracion: "4 años",
         modalidad: [1],
+        tituloIntermedio: { nombre: "Perito en Inspecciones Oculares y Dactiloscopía", semestre: 4, requisito: "al finalizar todas las materias hasta 2.º año" },
         perfilEgresado: {
             items: [
                 "Procesar la escena del crimen recolectando y preservando evidencias físicas.",
@@ -2387,6 +2396,7 @@ const data = [
         descripcion: "La carrera de Ingeniería en Informática forma profesionales con capacidad para diseñar, desarrollar y gestionar sistemas tecnológicos complejos. Los estudiantes dominan herramientas de programación avanzada, arquitectura de software, bases de datos, redes, ciberseguridad e inteligencia artificial. La carrera combina teoría y práctica para desarrollar líderes capaces de tomar decisiones estratégicas en el ámbito público y privado.",
         duracion: "5 años",
         modalidad: [1],
+        tituloIntermedio: { nombre: "Tecnicatura Univ. en Informático", semestre: 6, requisito: "al finalizar todas las materias de tercer año" },
         cio: {
             materias: ["Matemática Física - Química", "Resolución de problemas con algoritmos ", "Curso Introductorio a la Vida Universitaria General"]
         },
@@ -2503,6 +2513,7 @@ const data = [
         descripcion: "La carrera de Ingeniería Industrial forma profesionales con capacidad para optimizar procesos, recursos e infraestructuras en organizaciones de bienes y servicios. Los estudiantes dominan herramientas de gestión de operaciones, logística, economía, control de calidad y dirección de proyectos. La carrera combina teoría y práctica para desarrollar líderes capaces de tomar decisiones estratégicas en el ámbito público y privado.",
         duracion: "5 años",
         modalidad: [1],
+        tituloIntermedio: { nombre: "Tecnicatura Univ. en Empresas Industriales", semestre: 6, requisito: "al finalizar todas las materias de tercer año" },
         cio: {
             materias: ["Física-Quimica", "Matemáticas", "Resolución de Problemas", "MIVU"]
         },
@@ -2708,6 +2719,11 @@ const data = [
         descripcion: "La Formación Docente para Profesionales capacita a graduados universitarios para la enseñanza pedagógica en el sistema educativo. Los estudiantes dominan herramientas de didáctica, planificación curricular, evaluación de aprendizajes, tecnologías educativas y gestión escolar. La carrera combina teoría y práctica para desarrollar educadores capaces de tomar decisiones estratégicas e impactar en el aula pública y privada.",
         duracion: "2 años",
         modalidad: [1],
+        requisitosIngreso: [
+            "Título final de grado universitario emitido por instituciones de gestión estatal o privada con reconocimiento ministerial (no se acepta constancia de título en trámite).",
+            "Duración mínima de 4 años y 2600 horas reloj.",
+            "Constancia de la institución formadora o copia de la Resolución Ministerial del plan de estudios donde figure la carga horaria cursada.",
+        ],
         perfilEgresado: {
             items: [
                 "Ejercer la docencia en nivel superior y universitario según su título base.",
@@ -2947,7 +2963,7 @@ const data = [
         descripcion: "La Licenciatura en Realización Audiovisual forma profesionales capacitados para conceptualizar, escribir, dirigir y producir proyectos en cine, televisión y medios digitales, integrando herramientas avanzadas de guion, dirección de cámara, iluminación, sonido y postproducción con una visión narrativa, técnica y comercial.",
         duracion: "4 años",
         modalidad: [1],
-        tituloIntermedio: { nombre: "Técnico Universitario en Realización Audiovisual", semestre: 5 },
+        tituloIntermedio: { nombre: "Técnico Universitario en Realización Audiovisual", semestre: 5, requisito: "al finalizar todas las materias hasta 3.º año" },
         perfilEgresado: {
             items: [
                 "Diseñar, dirigir y ejecutar producciones audiovisuales integrales.",
@@ -3113,6 +3129,7 @@ const data = [
         descripcion: "La carrera de Ingeniería Civil forma profesionales con capacidad para planificar, diseñar, construir y mantener infraestructuras esenciales para el desarrollo socioeconómico. Los estudiantes dominan herramientas de cálculo estructural, hidráulica, geotecnia, vías de transporte y gestión de obras. La carrera combina teoría y práctica para desarrollar líderes capaces de tomar decisiones estratégicas en el ámbito público y privado.",
         duracion: "5 años",
         modalidad: [1],
+        tituloIntermedio: { nombre: "Tecnicatura Univ. en Construcciones Civiles", semestre: 6, requisito: "al finalizar todas las materias de tercer año" },
         perfilEgresado: {
             items: [
                 "Diseñar, calcular y proyectar estructuras, obras edilicias y de infraestructura vial o hidráulica.",
@@ -3758,6 +3775,7 @@ const data = [
         descripcion: "La carrera de Traductor Público en Inglés forma profesionales con capacidad para brindar fe pública en la traducción e interpretación de documentos legales. Los estudiantes dominan herramientas de traducción jurídica, terminología técnica, lingüística aplicada, derecho comparado y edición. La carrera combina teoría y práctica para desarrollar expertos capaces de tomar decisiones estratégicas e intervenir en el ámbito legal público y privado.",
         duracion: "4 años",
         modalidad: [1],
+        tituloIntermedio: { nombre: "Técnico Traductor de Inglés", semestre: 6, requisito: "al finalizar todas las materias hasta 3.º año" },
         perfilEgresado: {
             items: [
                 "Traducir y validar con fe pública documentos de carácter legal, técnico, comercial y literario.",
@@ -3958,6 +3976,7 @@ const data = [
         descripcion: "La carrera de Ingeniería en Telecomunicaciones forma profesionales con capacidad para diseñar, implementar y gestionar redes y sistemas de comunicación complejos. Los estudiantes dominan herramientas de transmisión de datos, radiocomunicaciones, procesamiento de señales, telefonía móvil y seguridad en redes. La carrera combina teoría y práctica para desarrollar líderes capaces de tomar decisiones estratégicas en el ámbito público y privado.",
         duracion: "5 años",
         modalidad: [1],
+        tituloIntermedio: { nombre: "Tecnicatura Univ. en Telecomunicaciones", semestre: 6, requisito: "al finalizar todas las materias de tercer año" },
         perfilEgresado: {
             items: [
                 "Diseñar y gestionar redes y sistemas de comunicación.",
@@ -4290,7 +4309,7 @@ const data = [
         descripcion: "La Licenciatura en Comunicación forma profesionales con capacidad para planificar, gestionar y ejecutar estrategias de comunicación efectivas e innovadoras. Los estudiantes dominan herramientas de gestión de medios, producción de contenidos, comunicación institucional, marketing digital y opinión pública. La carrera combina teoría y práctica para desarrollar líderes capaces de tomar decisiones estratégicas en el ámbito público y privado.",
         duracion: "4 años",
         modalidad: [1],
-        tituloIntermedio: { nombre: "Técnico Universitario en Comunicación", semestre: 5 },
+        tituloIntermedio: { nombre: "Técnico Universitario en Comunicación", semestre: 5, requisito: "al finalizar todas las materias hasta 3.º año" },
         habilitacionLocutor: true,
         perfilEgresado: {
             items: [
@@ -4384,7 +4403,7 @@ const data = [
         descripcion: "La Licenciatura en Diseño de la Comunicación Visual forma profesionales capaces de crear soluciones visuales para comunicar ideas, identidades y experiencias en medios impresos y digitales. La formación integra diseño, tipografía, lenguaje visual, herramientas digitales y comunicación, con proyectos prácticos que incorporan investigación, innovación y una mirada ética sobre las necesidades de cada público.",
         duracion: "4 años",
         modalidad: [1],
-        tituloIntermedio: { nombre: "Técnico Universitario en Diseño de la Comunicación Visual", semestre: 5 },
+        tituloIntermedio: { nombre: "Técnico Universitario en Diseño de la Comunicación Visual", semestre: 5, requisito: "al finalizar todas las materias hasta 3.º año" },
         perfilEgresado: {
             items: [
                 "Diseñar y desarrollar sistemas de identidad visual para organizaciones, productos y servicios.",
@@ -4629,6 +4648,8 @@ const data = [
         descripcion: "La Licenciatura en Turismo forma profesionales con capacidad para planificar, gestionar y desarrollar proyectos turísticos sostenibles. Los estudiantes dominan herramientas de gestión hotelera, administración de agencias, patrimonio cultural, marketing turístico y políticas públicas. La carrera combina teoría y práctica para desarrollar líderes capaces de impulsar destinos competitivos e innovar en el sector público y privado.",
         duracion: "4 años",
         modalidad: [1, 7],
+        tituloIntermedio: { nombre: "Técnico en Turismo", semestre: 6, requisito: "al finalizar todas las materias hasta 3.º año" },
+
         perfilEgresado: {
             items: [
                 "Diseñar, comercializar y gestionar productos, circuitos y destinos turísticos.",
@@ -4801,7 +4822,7 @@ const data = [
         descripcion: "La Licenciatura en Publicidad forma profesionales capaces de investigar, concebir, planificar y difundir estrategias y campañas publicitarias para públicos definidos, en medios sociales, de comunicación y soportes tecnológicos. El plan de estudios integra redacción publicitaria, producción creativa, planificación de medios, dirección de arte, narrativas multimedia y transmedia, y analítica y ciencia de datos aplicadas a la publicidad, con una mirada humanista y ética sobre la profesión.",
         duracion: "4 años",
         modalidad: [1],
-        tituloIntermedio: { nombre: "Técnico Universitario en Publicidad", semestre: 5 },
+        tituloIntermedio: { nombre: "Técnico Universitario en Publicidad", semestre: 5, requisito: "al finalizar todas las materias hasta 3.º año" },
         habilitacionLocutor: true,
         perfilEgresado: {
             items: [
@@ -4895,7 +4916,7 @@ const data = [
         descripcion: "La Licenciatura en Periodismo forma profesionales capacitados para investigar, redactar y difundir información rigurosa en múltiples plataformas analógicas y digitales. Los estudiantes dominan herramientas de producción narrativa, investigación periodística, gestión de contenidos, ética de los medios y análisis geopolítico. Su formación impulsa un pensamiento crítico capaz de interpretar la realidad y generar impacto en la opinión pública.",
         duracion: "4 años",
         modalidad: [1],
-        tituloIntermedio: { nombre: "Técnico Universitario en Periodismo", semestre: 5 },
+        tituloIntermedio: { nombre: "Técnico Universitario en Periodismo", semestre: 5, requisito: "al finalizar todas las materias hasta 3.º año" },
         habilitacionLocutor: true,
         perfilEgresado: {
             items: [
@@ -4989,6 +5010,7 @@ const data = [
         descripcion: "La Licenciatura en Producción Animal forma profesionales capacitados para optimizar la cría, nutrición y manejo integral del ganado mediante la aplicación de criterios científicos y tecnológicos. Los estudiantes dominan herramientas de genética, bioseguridad, reproducción, bienestar animal y eficiencia operativa. Su perfil responde a la creciente demanda de sistemas agropecuarios sostenibles, rentables y respetuosos con el medio ambiente.",
         duracion: "4 años",
         modalidad: [1],
+        tituloIntermedio: { nombre: "Técnico Universitario en Producción Animal", semestre: 4, requisito: "al finalizar todas las materias hasta 2.º año" },
         perfilEgresado: {
             items: [
                 "Planificar, dirigir y optimizar sistemas de producción ganadera e insumos de origen animal.",
@@ -5463,6 +5485,7 @@ const data = [
         descripcion: "La Licenciatura en Filosofía forma profesionales capacitados para examinar, cuestionar y comprender de manera rigurosa los grandes dilemas del pensamiento humano y la sociedad. Los estudiantes dominan herramientas de lógica, epistemología, ética, metafísica, historia de las ideas y análisis del discurso. Esta propuesta impulsa una sólida capacidad analítica y argumentativa clave para abordar las problemáticas contemporáneas.",
         duracion: "4 años",
         modalidad: [1],
+        tituloIntermedio: { nombre: "Profesor en Fisolofía", semestre: 8, requisito: "al finalizar la licenciatura se puede optar por el título intermedio" },
         perfilEgresado: {
             items: [
                 "Investigar y analizar temas éticos, políticos y sociales.",
@@ -5998,6 +6021,12 @@ const data = [
         descripcion: "La Licenciatura en Gestión Educativa forma profesionales con capacidad para liderar y transformar instituciones en los distintos niveles del sistema. Los estudiantes dominan herramientas de planificación curricular, evaluación institucional, legislación escolar, gestión de equipos y política educativa. La carrera combina teoría y práctica para desarrollar líderes capaces de tomar decisiones estratégicas en contextos diversos.",
         duracion: "2 años",
         modalidad: [1, 7],
+        requisitosIngreso: [
+            "Título de profesor otorgado por instituciones de nivel superior o universitario (no se acepta constancia de título en trámite).",
+            "Duración mínima de 4 años y 1800 horas reloj.",
+            "Certificado analítico final del título de profesor.",
+            "Constancia de horas reloj cursadas emitida por la institución formadora o copia de la Resolución Ministerial del plan de estudios.",
+        ],
         perfilEgresado: {
             items: [
                 "Liderar y gestionar instituciones educativas de diversos niveles y modalidades.",
@@ -6099,6 +6128,12 @@ const data = [
         descripcion: "La Licenciatura en Inglés (Ciclo de Licenciatura) forma profesionales capacitados para abordar la lengua inglesa desde una perspectiva lingüística, literaria e intercultural avanzada. Los estudiantes dominan herramientas de análisis del discurso, crítica literaria, traducción, lingüística aplicada y producción académica especializada. Esta propuesta profundiza los conocimientos previos para impulsar la investigación, la edición y la consultoría lingüística internacional.",
         duracion: "2 años",
         modalidad: [1],
+        requisitosIngreso: [
+            "Título de Profesor en Inglés de institutos no universitarios, o de Traductor en Inglés universitario o no universitario.",
+            "Plan de estudios de al menos 4 años y 2000 horas.",
+            "Solo se acepta el título habilitante: no constancias de título en trámite ni analíticos provisorios.",
+            "Documentación: título autenticado, 4 fotos 4×4, fotocopia del DNI (ambas caras), ficha médica, ficha de inscripción y fotocopia autenticada del título secundario.",
+        ],
         planEstudiosPorModalidad: {
             1: [
                 {
@@ -6135,6 +6170,10 @@ const data = [
         descripcion: "La Licenciatura en Entrenamiento Deportivo forma profesionales con capacidad para planificar y optimizar procesos de alto rendimiento e iniciación atlética. Los estudiantes dominan herramientas de preparación física, fisiología del ejercicio, biomecánica, nutrición aplicada y tecnología deportiva. La carrera combina teoría y práctica para desarrollar líderes capaces de tomar decisiones estratégicas en instituciones, clubes y federaciones.",
         duracion: "1½ años",
         modalidad: [1, 7],
+        requisitosIngreso: [
+            "Título de Profesor o Licenciado en Educación Física u otra carrera afín, otorgado por instituciones de nivel superior con reconocimiento oficial.",
+            "Plan de estudios de al menos 4 años y 2600 horas.",
+        ],
         perfilEgresado: {
             items: [
                 "Diseñar y supervisar programas de preparación física para deportistas de alto rendimiento.",
@@ -6255,6 +6294,9 @@ const data = [
         descripcion: "La Licenciatura en Diseño de Interiores (Ciclo de Licenciatura) forma profesionales capacitados para proyectar, transformar y gestionar espacios habitables, comerciales e institucionales con rigor técnico y estético. Los estudiantes dominan herramientas de arquitectura interior, tecnología de materiales, iluminación avanzada, modelado tridimensional y gestión de obras. Esta propuesta profundiza la formación previa para liderar proyectos conceptuales e innovadores.",
         duracion: "1 año",
         modalidad: [1],
+        requisitosIngreso: [
+            "Título en Diseño de Interiores o profesiones afines, con reconocimiento ministerial, de instituciones universitarias o terciarias.",
+        ],
         perfilEgresado: {
             items: [
                 "Diseñar y optimizar espacios interiores complejos, funcionales y sostenibles.",
@@ -6294,6 +6336,10 @@ const data = [
         descripcion: "La Licenciatura en Lenguajes Expresivos forma profesionales con capacidad para integrar el arte, la comunicación y el cuerpo en proyectos educativos y socio-culturales. Los estudiantes dominan herramientas de expresión corporal, semiótica, producción artística, dinámicas grupales y gestión cultural. La carrera combina teoría y práctica para desarrollar líderes capaces de tomar decisiones estratégicas en instituciones públicas y privadas.",
         duracion: "1½ años",
         modalidad: [1, 7],
+        requisitosIngreso: [
+            "Título docente otorgado por instituciones de nivel superior universitario o no universitario con reconocimiento oficial.",
+            "Plan de estudios de al menos 4 años y 2600 horas.",
+        ],
         perfilEgresado: {
             items: [
                 "Diseñar proyectos socioeducativos basados en lenguajes artísticos y expresivos.",
@@ -6650,6 +6696,10 @@ const data = [
         descripcion: "La Licenciatura en Podología (Ciclo de Complementación Curricular) forma profesionales capacitados para investigar, dirigir y profundizar el abordaje clínico de patologías complejas del pie. Los estudiantes dominan herramientas de pie diabético avanzado, cirugía menor podológica, gestión hospitalaria, biomecánica clínica y metodología de la investigación. Esta propuesta fortalece el perfil de grado para integrar equipos médicos multidisciplinarios.",
         duracion: "1½ años",
         modalidad: [1],
+        requisitosIngreso: [
+            "Título de Podólogo Universitario o Técnico en Podología, expedido por universidades o institutos de nivel superior no universitario del país.",
+            "Carga horaria mínima de 1500 horas reloj.",
+        ],
         perfilEgresado: {
             items: [
                 "Diseñar, gestionar y evaluar proyectos de investigación en el área de la salud podológica.",
@@ -6785,6 +6835,9 @@ const data = [
         descripcion: "La Licenciatura en Producción de Bioimágenes (Ciclo de Complementación Curricular) forma profesionales capacitados para dirigir, investigar y gestionar servicios de diagnóstico y tratamiento por imágenes de alta complejidad. Los estudiantes dominan herramientas de tomografía avanzada, resonancia magnética funcional, medicina nuclear, gestión hospitalaria y seguridad radiológica. Esta propuesta profundiza la práctica previa para liderar equipos técnicos.",
         duracion: "2 años",
         modalidad: [1],
+        requisitosIngreso: [
+            "Título universitario de Técnico Radiólogo o Técnico en Diagnóstico por Imágenes.",
+        ],
         perfilEgresado: {
             items: [
                 "Administrar y coordinar servicios de diagnóstico por imágenes en centros de salud.",
@@ -6930,6 +6983,7 @@ const data = [
         descripcion: "La Licenciatura en Gastronomía forma profesionales capacitados para dirigir, diseñar y optimizar proyectos culinarios e industrias de la alimentación a nivel internacional. Los estudiantes dominan herramientas de alta cocina, enología, química de los alimentos, gestión de restaurantes, seguridad e higiene y administración financiera. Esta propuesta combina el arte culinario con la innovación empresarial para liderar la cultura gastronómica.",
         duracion: "4 años",
         modalidad: [1],
+        tituloIntermedio: { nombre: "Técnico en Gastronomía", semestre: 4, requisito: "al finalizar todas las materias hasta 2.º año" },
         perfilEgresado: {
             items: [
                 "Diseñar, planificar y dirigir proyectos gastronómicos y emprendimientos de servicios de alimentación.",
@@ -7195,6 +7249,11 @@ const data = [
         descripcion: "La Licenciatura en Criminología forma profesionales con capacidad para profundizar en el análisis, prevención y abordaje integral del fenómeno delictivo. Los estudiantes dominan herramientas de política criminal, investigación avanzada, victimología, psicología forense y seguridad pública. La carrera combina teoría y práctica para desarrollar líderes capaces de tomar decisiones estratégicas en instituciones del sistema penal y gubernamental.",
         duracion: "2 años",
         modalidad: [7],
+        requisitosIngreso: [
+            "Título de Tecnicatura Superior en Criminología o equivalente obtenido en el país, otorgado por universidades o institutos de formación de las fuerzas policiales, de seguridad o del servicio penitenciario.",
+            "Duración mínima de 2 años y 1200 horas reloj.",
+            "Aspirantes extranjeros: acreditar estudios secundarios completos y presentar la documentación legalizada y la constancia de residencia correspondiente.",
+        ],
         perfilEgresado: {
             items: [
                 "Diseñar e implementar políticas públicas de prevención del delito y seguridad.",
@@ -7255,6 +7314,11 @@ const data = [
         descripcion: "La Licenciatura en Educación Física forma profesionales con capacidad para liderar y optimizar programas de actividad física, deporte y salud. Los estudiantes dominan herramientas de entrenamiento deportivo, rendimiento corporal, gestión de instituciones deportivas e investigación en ciencias del movimiento. La carrera combina teoría y práctica para desarrollar líderes capaces de tomar decisiones estratégicas en el ámbito educativo y deportivo.",
         duracion: "1½ años",
         modalidad: [7],
+        requisitosIngreso: [
+            "Título de profesor de 4 años de duración y al menos 2600 horas.",
+            "Contenidos distribuidos entre formación general, formación específica y formación de la práctica profesional.",
+            "Egresados de institutos extranjeros: presentar el título con los sellos correspondientes.",
+        ],
         perfilEgresado: {
             items: [
                 "Diseñar, gestionar y evaluar proyectos deportivos, recreativos y de salud.",
@@ -7357,6 +7421,12 @@ const data = [
         descripcion: "La Licenciatura en Comercio Internacional forma profesionales con capacidad para optimizar la inserción estratégica de organizaciones en mercados globales. Los estudiantes dominan herramientas de logística internacional, legislación aduanera, finanzas de comercio exterior, negociación e inteligencia comercial. La carrera combina teoría y práctica para desarrollar líderes capaces de tomar decisiones estratégicas en empresas e instituciones.",
         duracion: "2 años",
         modalidad: [7],
+        requisitosIngreso: [
+            "Título de Técnico, Técnico Superior o Analista en Comercio Internacional, Comercio Exterior, Aduanas u otra denominación similar orientada al comercio exterior.",
+            "Duración mínima de 3 años y 1600 horas, expedido por una universidad o instituto superior reconocido.",
+            "No aplica el ingreso por excepción de mayores de 25 años sin título secundario (art. 7, Ley 24.521).",
+            "Documentación: título autenticado, ficha académica, plan de estudios y programas de la carrera previa, formulario de inscripción, DNI o pasaporte y certificado médico.",
+        ],
         perfilEgresado: {
             items: [
                 "Diseñar estrategias de internacionalización de empresas en mercados globales.",

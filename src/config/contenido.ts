@@ -262,7 +262,7 @@ const sedesPorModalidad: Record<Modalidad, Embebido> = {
     online: {
         titulo: "Encontrá tu sede más cercana",
         copete: "Tenemos sedes y centros de apoyo en todo el país para rendir y hacer trámites.",
-        url: "https://ucasal.edu.ar/mapa_sedes/mapa_sedes_ucasal.html",
+        url: "https://www.ucasal.edu.ar/mapa_sedes/mapa_sedes_ucasal.html",
         tituloEmbebido: "Mapa de sedes y centros de apoyo de UCASAL en el país",
         textoError: "Lo sentimos, el mapa de sedes no está disponible por el momento.",
         proporcion: "4 / 3",

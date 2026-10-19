@@ -241,11 +241,17 @@ export default function Form({ carreras, codcarInicial, onSubPage, urlEnviado, m
         return normalizar(l.nombre_provincia).includes(q) || normalizar(l.nombre_sede).includes(q)
     })
 
+    const sedeHome = !esHome ? localidadesFiltradas.find(l => Number(l.id_sede) === 500) : undefined
+
+    const sedesParaAgrupar = esHome
+        ? localidadesFiltradas
+        : localidadesFiltradas.filter(l => Number(l.id_sede) !== 500)
+
     const localidadesAgrupadas: {
         nombre_provincia: string,
         items: any[]
     }[] = Object.values(
-        localidadesFiltradas.reduce((acc: Record<string,
+        sedesParaAgrupar.reduce((acc: Record<string,
             { nombre_provincia: string, items: any[] }>, l: any) => {
 
             const key = String(l.id_provincia)
@@ -260,6 +266,13 @@ export default function Form({ carreras, codcarInicial, onSubPage, urlEnviado, m
             return acc
         }, {})
     )
+
+    if (sedeHome) {
+        localidadesAgrupadas.push({
+            nombre_provincia: 'Sedes Home',
+            items: [sedeHome]
+        })
+    }
 
     useEffect(() => {
         const elemento = phoneRef.current
@@ -375,7 +388,11 @@ export default function Form({ carreras, codcarInicial, onSubPage, urlEnviado, m
 
     useEffect(() => {
         if (sedeSeleccionada) {
-            setBuscarLocalidad(sedeSeleccionada.nombre_sede)
+            setBuscarLocalidad(
+                !esHome && Number(sedeSeleccionada.id_sede) === 500
+                    ? 'Home'
+                    : sedeSeleccionada.nombre_sede
+            )
         }
     }, [
         sedeSeleccionada?.id_sede,
@@ -459,7 +476,9 @@ export default function Form({ carreras, codcarInicial, onSubPage, urlEnviado, m
                         carrera: carreraSeleccionadaLocal?.nombre ?? '',
                         codcar: String(carreraSeleccionadaLocal?.codcar ?? codcar ?? ''),
                         modo: modalidad ?? '',
-                        sede: sedeSeleccionada?.nombre_sede ?? '',
+                        sede: !esHome && Number(sedeSeleccionada?.id_sede) === 500
+                            ? 'Modalidad Home'
+                            : sedeSeleccionada?.nombre_sede ?? '',
                         idSede: idSedeReal ?? '',
                     })
                     window.location.assign(`${destinoEnviado}?${resumen.toString()}`)
@@ -644,18 +663,24 @@ export default function Form({ carreras, codcarInicial, onSubPage, urlEnviado, m
                                             type="button"
                                             onClick={() => {
                                                 seleccionarLocalidad(String(item.id_provincia), item)
-                                                setBuscarLocalidad(item.nombre_sede)
+                                                setBuscarLocalidad(
+                                                    !esHome && Number(item.id_sede) === 500
+                                                        ? 'Modalidad Home'
+                                                        : item.nombre_sede
+                                                )
                                                 setLocalidadAbierta(false)
                                             }}
                                             className="flex w-full items-center justify-between px-3 py-2 text-left text-sm text-black hover:bg-black/5 cursor-pointer"
                                         >
                                             <span className="font-bold">
-                                                {item.nombre_sede}
+                                                {!esHome && Number(item.id_sede) === 500
+                                                    ? 'Modalidad Home'
+                                                    : item.nombre_sede}
                                             </span>
                                             <span
-                                                className={`text-xs font-semibold px-2 py-0.5 rounded ${esHome ? 'bg-rose-100 text-rose-600' : 'bg-emerald-100 text-emerald-700'}`}
+                                                className={`text-xs font-semibold px-2 py-0.5 rounded ${esHome || Number(item.id_sede) === 500 ? 'bg-rose-100 text-rose-600' : 'bg-emerald-100 text-emerald-700'}`}
                                             >
-                                                {esHome ? 'Home' : 'Sede'}
+                                                {esHome || Number(item.id_sede) === 500 ? 'Home' : 'Sede'}
                                             </span>
                                         </button>
                                     ))}
