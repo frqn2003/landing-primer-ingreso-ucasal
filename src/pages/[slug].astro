@@ -17,7 +17,6 @@ export function getStaticPaths() {
 const { carrera } = Astro.props;
 const title = `Estudiá ${carrera.nombre} | Estudiá en UCASAL`;
 const description = carrera.descripcion.split("\\n")[0];
-const base = import.meta.env.BASE_URL;
 ---
 
 <Layout title={title} description={description}>

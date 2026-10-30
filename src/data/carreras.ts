@@ -1834,6 +1834,63 @@ const data = [
         ]
     },
     {
+        codcar: 251,
+        sector: 4,
+        slug: "tecnicatura-en-sistemas-de-inteligencia-artificial",
+        nombre: "Tecnicatura en Sistemas de Inteligencia Artificial",
+        descripcion: "La Tecnicatura en Sistemas de Inteligencia Artificial de UCASAL forma profesionales capacitados para configurar, operar y brindar soporte técnico a sistemas de inteligencia artificial, participando en la implementación de soluciones basadas en IA como colaboradores del profesional a cargo. La formación integra programación, aprendizaje automático, redes neuronales e infraestructura tecnológica, con un profundo compromiso con los valores éticos, sociales y humanísticos, respondiendo a la creciente demanda de la nueva economía basada en datos y automatización.",
+        duracion: "2 años",
+        modalidad: [7],
+        perfilEgresado: {
+            items: [
+                "Ejecutar tareas operativas relacionadas con la configuración y el manejo de sistemas de inteligencia artificial, respetando protocolos técnicos.",
+                "Realizar la configuración, prueba y ajuste de sistemas básicos de inteligencia artificial.",
+                "Brindar soporte técnico en la utilización de herramientas de inteligencia artificial.",
+                "Participar en proyectos de implementación de soluciones basadas en inteligencia artificial, en colaboración con el ingeniero o profesional a cargo.",
+                "Aplicar estándares de calidad, seguridad y normativas vigentes en el desarrollo de su tarea profesional.",
+                "Actuar con un profundo compromiso con los valores éticos, sociales y humanísticos, promoviendo un impacto positivo en su comunidad y el entorno laboral.",
+            ]
+        },
+        planEstudios: [
+            {
+                semestre: "1° Año",
+                materias: [
+                    "Fundamentos de Informática",
+                    "Matemática para Informática",
+                    "Probabilidad y Estadística",
+                    "Introducción a la Inteligencia Artificial",
+                    "Inglés I",
+                    "Filosofía",
+                    "Representación de Datos",
+                    "Análisis Matemático",
+                    "Aprendizaje Automático I",
+                    "Lenguajes de Programación",
+                    "Razonamiento y Planificación Automática",
+                    "Infraestructura para Inteligencia Artificial",
+                    "Inglés II"
+                ]
+            },
+            {
+                semestre: "2° Año",
+                materias: [
+                    "Teología",
+                    "Taller de Programación I",
+                    "Arquitecturas para Inteligencia Artificial",
+                    "Fundamentos de Redes Neuronales",
+                    "Aprendizaje Automático II",
+                    "Legislación",
+                    "Pensamiento Social Cristiano",
+                    "Taller de Programación II",
+                    "Despliegue de Sistemas Inteligentes",
+                    "Ética Profesional",
+                    "Big Data",
+                    "Sistemas Cognitivos Artificiales",
+                    "Trabajo Final"
+                ]
+            }
+        ]
+    },
+    {
         codcar: 401,
         sector: 3,
         slug: "licenciatura-en-corretaje-tasacion-y-administracion-de-consorcios",

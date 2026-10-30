@@ -1,7 +1,7 @@
 ---
 import data from "../../data/carrerasLanding";
 import { sanitizarTexto } from "../../lib/utils";
-import { esSalud, urlInscripcion as urlInscripcionCarrera } from "../../lib/inscripcion";
+import { esSalud, esCCC, urlInscripcion as urlInscripcionCarrera } from "../../lib/inscripcion";
 import { etiquetaSedes } from "../../config/contenido";
 import { esHome } from "../../config/modalidad";
 
@@ -32,6 +32,10 @@ const urlInscripcion = esHome && (!carreraActiva || !esSalud(carreraActiva))
 // abrir una pestaña. El `aside` del formulario en CareerDetail.astro es
 // #contacto; en la Home, FormSection.astro usa el mismo id.
 const inscripcionBloqueada = urlInscripcion === null;
+const textoBotonInscripcion =
+  carreraActiva && esCCC(carreraActiva)
+    ? "Solicitar admisión"
+    : "¡Quiero Inscribirme!";
 
 const base = import.meta.env.BASE_URL;
 
@@ -155,7 +159,7 @@ const flotarSobreHero = !onSubPage || !!heroCompleto;
             class="hidden lg:flex boton-inscripcion"
           >
             <span id="iconoInscripcion" />
-            ¡Quiero Inscribirme!
+            {textoBotonInscripcion}
           </a>
         ) : (
           <a
@@ -166,7 +170,7 @@ const flotarSobreHero = !onSubPage || !!heroCompleto;
             class="hidden lg:flex boton-inscripcion"
           >
             <span id="iconoInscripcion" />
-            ¡Quiero Inscribirme!
+            {textoBotonInscripcion}
           </a>
         )
       }
@@ -275,7 +279,7 @@ const flotarSobreHero = !onSubPage || !!heroCompleto;
         <button
           id="mobile-inscribirme"
           class="mobile-nav-link justify-start items-start flex w-full px-4 py-3 hover:bg-red-50 hover:text-(--rojo-ucasal) transition-colors font-semibold border-l-4 border-transparent hover:border-(--rojo-ucasal)"
-          >¡Quiero Inscribirme!</button
+          >{textoBotonInscripcion}</button
         >
       </li>
     </ul>

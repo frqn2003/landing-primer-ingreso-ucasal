@@ -197,7 +197,7 @@ const iconos: Record<string, string[]> = {
             class="w-full bg-(--rojo-ucasal) text-white py-3 rounded-t-none px-6 rounded-3xl font-semibold text-center flex items-end justify-center"
             style="opacity: 0; animation: heroFadeInUp 0.6s ease-out 0.5s forwards;"
           >
-            ¡Inscribirme ahora!
+            {reglasInscripcion.cccServidor ? "Solicitar admisión" : "¡Inscribirme ahora!"}
           </a>
         )
       }
@@ -352,6 +352,10 @@ const iconos: Record<string, string[]> = {
     else if (esCCC) botonInscripcion.href = reglasInscripcion.URL_CCC;
     else if (idSede === reglasInscripcion.ID_SEDE_HOME)
       botonInscripcion.href = reglasInscripcion.URL_HOME;
+
+    if (esCCC || carreraParam?.trim().endsWith("- CCC")) {
+      botonInscripcion.textContent = "Solicitar admisión";
+    }
   }
 
   // El querystring lo controla quien abre el link, así que todo lo que termina
