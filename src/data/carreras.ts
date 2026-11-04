@@ -630,6 +630,63 @@ const data = [
         ]
     },
     {
+        codcar: 405,
+        sector: 4,
+        slug: "tecnicatura-universitaria-en-gestion-electrica-y-automatizacion-industrial",
+        nombre: "Tecnicatura Universitaria en Gestión Eléctrica y Automatización Industrial",
+        descripcion: "La Tecnicatura Universitaria en Gestión Eléctrica y Automatización Industrial de UCASAL forma profesionales capacitados para ejecutar, controlar y mantener instalaciones eléctricas en entornos residenciales e industriales, con sólida formación en principios eléctricos, normativa vigente y seguridad. La carrera incorpora conocimientos en automatización industrial para implementar, programar y mantener sistemas automatizados y equipos de control como PLCs, aplicando tecnologías de vanguardia que mejoran la eficiencia de los procesos productivos, dentro de un ejercicio profesional ético y responsable con la seguridad de las personas.",
+        duracion: "2 años",
+        modalidad: [1],
+        perfilEgresado: {
+            items: [
+                "Calcular y dimensionar instalaciones eléctricas.",
+                "Participar en tareas de generación y transformación de energía.",
+                "Colaborar en proyectos eléctricos residenciales e industriales.",
+                "Implementar planes de mantenimiento eléctrico.",
+                "Relevar requerimientos energéticos.",
+                "Realizar mantenimiento de equipos eléctricos.",
+                "Implementar medidas de seguridad para garantizar un entorno laboral seguro y conforme a las normativas vigentes.",
+                "Implementar y mantener sistemas automatizados.",
+            ]
+        },
+        planEstudios: [
+            {
+                semestre: "1° Año",
+                materias: [
+                    "Filosofía",
+                    "Fundamentos de Electricidad",
+                    "Matemáticas Aplicadas",
+                    "Tecnología de Materiales Eléctricos",
+                    "Gestión de Mantenimiento y Activos Físicos",
+                    "Cómputos y Presupuesto para Instalaciones Eléctricas",
+                    "Teología",
+                    "Electrónica Básica",
+                    "Recurso Humano",
+                    "Normativas y Reglamentación Eléctrica",
+                    "Energías Renovables y Eficiencia Energética",
+                    "Higiene y Seguridad"
+                ]
+            },
+            {
+                semestre: "2° Año",
+                materias: [
+                    "Taller de Instalaciones Eléctricas I",
+                    "Estadística Aplicada: Análisis y Procedimiento de Datos",
+                    "Dibujo Técnico y Planos Eléctricos",
+                    "Circuitos Eléctricos Industriales",
+                    "Pensamiento Social Cristiano",
+                    "Programación, Automatización y Control I",
+                    "Electrónica de Potencia",
+                    "Mantenimiento Eléctrico Preventivo, Predictivo y Correctivo",
+                    "Ética Profesional",
+                    "Programación, Automatización y Control II",
+                    "Taller de Instalaciones II",
+                    "Trabajo Final Integrador"
+                ]
+            }
+        ]
+    },
+    {
         codcar: 403,
         sector: 6,
         slug: "licenciatura-en-gerontologia-social",

@@ -1,16 +1,11 @@
 import { useEffect, useRef, useState } from "react"
 import type { CarreraFormulario } from '../../data/carrerasCliente'
 import intlTelInput from 'intl-tel-input'
-/* `?url` y no un import de CSS comun: asi Vite emite el archivo con hash pero
-   no lo mete en el grafo de estilos del island, que es lo que hacia que Astro
-   lo colgara del <head> como <link> bloqueante. Acá solo llega la URL; el
-   <link> lo agrega el efecto de abajo cuando el formulario se monta. Ojo que
-   un import dinamico del CSS NO alcanza: Astro lo sigue igual y termina en el
-   head lo mismo, solo que partido en dos archivos. */
 import urlEstilosTelefono from 'intl-tel-input/dist/css/intlTelInput.css?url'
 import { clarityEvent, clarityUpgrade } from '../../lib/clarity'
 import { useCarrerasCascada } from '../../hooks/useCarrerasCascada'
 import { esHome } from '../../config/modalidad'
+import { obtenerAtribucion, type Atribucion } from '../../lib/atribucion'
 
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -48,13 +43,6 @@ function cargarRecaptcha() {
     return recaptchaPromise
 }
 
-/**
- * Agrega una hoja de estilos al <head> una sola vez y avisa cuando cargó.
- *
- * Es para CSS que no tiene por qué estar en la ruta crítica: el del selector de
- * país sirve recién cuando el formulario existe en pantalla, y hasta ahora
- * bloqueaba el primer pintado de todas las páginas de la landing.
- */
 let promesaCssTelefono: Promise<void> | null = null
 
 function cargarCssTelefono() {
@@ -105,25 +93,9 @@ const IconoBuscar = () => (
 )
 
 export default function Form({ carreras, codcarInicial, onSubPage, urlEnviado, modosDisponibles }: {
-    /**
-     * El catálogo recortado a lo que usa el desplegable. Viene por props desde
-     * el .astro que renderiza el formulario: importar `../../data/carreras`
-     * acá metía las 88 carreras completas —planes de estudio incluidos— en el
-     * bundle del navegador. Ver src/data/carrerasCliente.ts.
-     *
-     * Con `onSubPage` llega una sola carrera, la de esa página, porque ahí el
-     * listado no se dibuja (el botón "Cambiar" de más abajo vive detrás de un
-     * `!onSubPage`). Si eso cambia, CareerDetail.astro tiene que volver a
-     * mandar el catálogo completo.
-     */
     carreras: CarreraFormulario[],
     codcarInicial?: string,
     onSubPage?: boolean,
-    /**
-     * A dónde se manda al visitante después de enviar. En la subpágina de una
-     * carrera llega `<base><slug>/enviado`, así que la URL de agradecimiento
-     * acompaña a la carrera desde la que consultó. Por defecto, la de la home.
-     */
     urlEnviado?: string,
     modosDisponibles?: number[]
 }) {
@@ -174,17 +146,17 @@ export default function Form({ carreras, codcarInicial, onSubPage, urlEnviado, m
         formRef.current = el; (containerRef as React.RefObject<HTMLElement | null>).current = el
     }
     const itiRef = useRef<ReturnType<typeof intlTelInput> | null>(null)
-    const urlParametros = new URLSearchParams(typeof window !== 'undefined' ? window.location.search : '')
-    const parametros = {
-        utm_source: urlParametros.get('utm_source'),
-        utm_medium: urlParametros.get('utm_medium'),
-        utm_campaign: urlParametros.get('utm_campaign'),
-        utm_term: urlParametros.get('utm_term'),
-        utm_content: urlParametros.get('utm_content'),
-        idconversion: urlParametros.get('id_conversion'),
-        campaignid: urlParametros.get('campaignid'),
-        userAgent: typeof navigator !== 'undefined' ? navigator.userAgent : ''
-    }
+    /* UTM y click IDs: los de la URL actual o, si no trae, los guardados en la
+       primera visita (ver src/lib/atribucion.ts). Se cargan en un efecto y no
+       durante el render: el form viene prerenderizado sin window, y si el
+       valor se calcula en el render la hidratación puede dejar el del HTML
+       (vacío) en los inputs ocultos. */
+    const [atribucion, setAtribucion] = useState<Atribucion>({})
+    const [userAgent, setUserAgent] = useState('')
+    useEffect(() => {
+        setAtribucion(obtenerAtribucion())
+        setUserAgent(navigator.userAgent)
+    }, [])
     const [carreraBloqueada, setCarreraBloqueada] = useState(Boolean(codcarInicial))
     /* Pantalla de gracias: la de la carrera si vino por prop, si no la de la home. */
     const destinoEnviado = urlEnviado ?? `${BASE_URL}enviado`
@@ -193,9 +165,7 @@ export default function Form({ carreras, codcarInicial, onSubPage, urlEnviado, m
     const destinoAbsoluto = typeof window !== 'undefined'
         ? new URL(destinoEnviado, window.location.origin).href.replace(/^http:/, 'https:')
         : destinoEnviado
-    /* Campo de prueba "Medio de contacto": solo para estas carreras. Se manda
-       como un único input hidden con los valores separados por coma, porque
-       el submit lee el DOM con `new FormData(form)`. */
+
     const [mediosContacto, setMediosContacto] = useState<string[]>([])
     const [buscarLocalidad, setBuscarLocalidad] = useState('')
     const [localidadAbierta, setLocalidadAbierta] = useState(false)
@@ -288,27 +258,6 @@ export default function Form({ carreras, codcarInicial, onSubPage, urlEnviado, m
             setDdiPais(dialCode)
         }
 
-        /* Sin `loadUtils` a propósito.
-         *
-         * `intl-tel-input/utils` es libphonenumber: 264 KB, el chunk más pesado
-         * de la landing, y como `loadUtils` el widget lo pedía al crearse, o
-         * sea durante la carga de la página (en la subpágina de carrera el
-         * formulario está en el viewport inicial).
-         *
-         * Lo único que aporta es formateo mientras se tipea, placeholder de
-         * ejemplo y validación del número. Nada de eso aplica acá: #phone es
-         * solo el selector de país —ancho fijo, `caret-transparent`, con
-         * onKeyDown/onPaste cancelados, y sin `name`, así que ni siquiera se
-         * envía—, el número va en los campos `cod_area` y `tel`, y la
-         * validación la hace zod. El código solo le pide `getSelectedCountry()`
-         * para el `ddi_pais`, que sale de los datos de países del módulo
-         * principal y no de utils.
-         *
-         * La bandera y el +54 se ven igual sin utils (verificado). Si algún día
-         * se habilita escribir el número en este campo o se usa isValidNumber /
-         * getNumber, hay que volver a engancharlo con
-         * `intlTelInput.attachUtils(() => import('intl-tel-input/utils'))`,
-         * idealmente recién cuando el campo se use. */
         const crearWidget = () => {
             if (!vigente) return
             itiRef.current = intlTelInput(elemento, {
@@ -325,13 +274,6 @@ export default function Form({ carreras, codcarInicial, onSubPage, urlEnviado, m
                 elemento.removeEventListener('input', updateDialCode)
             }
         }
-
-        /* El CSS del selector de pais se pide recien acá: antes entraba como
-           import de modulo y Astro lo colgaba del <head> de todas las paginas
-           como <link> bloqueante (5,5 KiB, 1.040 ms en PageSpeed) por un widget
-           que vive dentro de un island `client:visible` y que el visitante
-           puede no ver nunca. Se espera a que cargue antes de crear el widget
-           para que no se dibuje sin estilos. */
         cargarCssTelefono().then(crearWidget)
 
         return () => {
@@ -357,10 +299,6 @@ export default function Form({ carreras, codcarInicial, onSubPage, urlEnviado, m
         return () => observer.disconnect()
     }, [])
 
-    /* En el detalle de carrera las puertas de "Modalidades" apuntan a este
-       formulario: la carrera ya viene fija, así que el CTA solo tiene que dejar
-       marcado el modo elegido. En la Home este evento lo escucha el explorador
-       de carreras, no el form. */
     useEffect(() => {
         if (!onSubPage) return
         const handler = (evento: Event) => {
@@ -401,20 +339,6 @@ export default function Form({ carreras, codcarInicial, onSubPage, urlEnviado, m
 
     const localidadHabilitada = !!codcar && !!modalidad
     const labelModalidad = etiquetaModalidad(carreraSeleccionadaLocal?.modalidad)
-
-    /**
-     * Qué modo de cursado se manda al CRM.
-     *
-     * Normalmente es el que eligió el visitante, pero hay dos casos donde nunca
-     * llega a tocar un botón: la carrera se dicta de una sola forma (la
-     * subpágina muestra un texto en vez del selector) y la landing online, que
-     * ofrece un solo modo. En esos casos se manda el único posible en vez de
-     * vacío, que es lo que el CRM venía recibiendo como 0.
-     *
-     * `modos` son los modos de la carrera elegida ya recortados a esta landing;
-     * si todavía no hay carrera se cae a los de la landing. Así el build online
-     * manda 7 siempre, pase lo que pase con el estado.
-     */
     const modosPosibles = (modos.length > 0
         ? modos.map((m: any) => m.modalidad)
         : (modosDisponibles ?? [])
@@ -498,14 +422,19 @@ export default function Form({ carreras, codcarInicial, onSubPage, urlEnviado, m
             <input type="hidden" name="cbx_sede" value={esHome ? (idSede ? '500' : '') : idSedeReal} />
             <input type="hidden" name="sector" value={sectorCarrera} />
             <input type="hidden" value="postulantes" name="tabla" />
-            <input type="hidden" id="agent" name="agent" value={parametros.userAgent || ''} />
-            <input type="hidden" name="utm_source" value={parametros.utm_source || ''} />
-            <input type="hidden" name="utm_medium" value={parametros.utm_medium || ''} />
-            <input type="hidden" name="utm_term" value={parametros.utm_term || ''} />
-            <input type="hidden" name="utm_content" value={parametros.utm_content || ''} />
-            <input type="hidden" name="utm_campaign" value={parametros.utm_campaign || ''} />
-            <input type="hidden" name="idconversion" value={parametros.idconversion || ''} />
-            <input type="hidden" name="campaignid" value={parametros.campaignid || ''} />
+            <input type="hidden" id="agent" name="agent" value={userAgent} />
+            <input type="hidden" name="utm_source" value={atribucion.utm_source ?? ''} />
+            <input type="hidden" name="utm_medium" value={atribucion.utm_medium ?? ''} />
+            <input type="hidden" name="utm_term" value={atribucion.utm_term ?? ''} />
+            <input type="hidden" name="utm_content" value={atribucion.utm_content ?? ''} />
+            <input type="hidden" name="utm_campaign" value={atribucion.utm_campaign ?? ''} />
+            <input type="hidden" name="idconversion" value={atribucion.id_conversion ?? ''} />
+            <input type="hidden" name="campaignid" value={atribucion.campaignid ?? ''} />
+            <input type="hidden" name="gclid" value={atribucion.gclid ?? ''} />
+            {/* Click IDs de Google Ads para iOS (cuando no hay gclid). El CRM
+                tiene que mapearlos para que lleguen a Salesforce. */}
+            <input type="hidden" name="gbraid" value={atribucion.gbraid ?? ''} />
+            <input type="hidden" name="wbraid" value={atribucion.wbraid ?? ''} />
             <input type="hidden" name="tkp" value={destinoAbsoluto} />
             <input type="hidden" name="fkp" value={`${destinoAbsoluto}?id=404`} />
 
@@ -527,7 +456,7 @@ export default function Form({ carreras, codcarInicial, onSubPage, urlEnviado, m
                             <span className="text-xs text-gray-600">{carreraSeleccionadaLocal?.duracion}</span>
                         </span>
                         <div className="flex w-full flex-row items-center justify-end gap-2 sm:w-auto md:gap-6">
-                            <div className={`items-center h-full justify-end flex shrink-0 whitespace-nowrap text-xs border-gray-200 border rounded text-white py-1 px-2 ${(carreraSeleccionadaLocal?.modalidad.length ?? 0) > 1 ? 'bg-gradient-to-r from-15% from-(--rojo-ucasal) to-(--azul-ucasal) to-70%' : carreraSeleccionadaLocal?.modalidad.includes(7) ? 'bg-(--azul-ucasal)' : 'bg-(--rojo-ucasal)'}`}>{labelModalidad}</div>
+                            <div className={`items-center h-full justify-end flex shrink-0 whitespace-nowrap text-xs border-gray-200 border rounded text-white py-1 px-2 ${(carreraSeleccionadaLocal?.modalidad.length ?? 0) > 1 ? 'bg-linear-to-r from-15% from-(--rojo-ucasal) to-(--azul-ucasal) to-70%' : carreraSeleccionadaLocal?.modalidad.includes(7) ? 'bg-(--azul-ucasal)' : 'bg-(--rojo-ucasal)'}`}>{labelModalidad}</div>
                             {/* En la subpágina de una carrera no se puede
                                 cambiar: la página ES esa carrera. */}
                             {!onSubPage && (
@@ -542,7 +471,7 @@ export default function Form({ carreras, codcarInicial, onSubPage, urlEnviado, m
                                             setLocalidadAbierta(false)
                                             setCarreraBloqueada(false)
                                         }}
-                                        className="rounded border border-gray-300 bg-white px-3 py-1 text-sm text-black cursor-pointer border"
+                                        className="rounded border border-gray-300 bg-white px-3 py-1 text-sm text-black cursor-pointer"
                                     >
                                         Cambiar
                                     </button>
@@ -569,11 +498,11 @@ export default function Form({ carreras, codcarInicial, onSubPage, urlEnviado, m
                                         }}
                                         className="text-left w-full p-2 cursor-pointer flex flex-row items-center justify-between hover:bg-black/10"
                                     >
-                                        <span className="text-base text-black flex flex-col min-w-0 flex-1 break-words pr-2">
+                                        <span className="text-base text-black flex flex-col min-w-0 flex-1 wrap-break-words pr-2">
                                             {carrera.nombre}
                                             <span className="text-xs text-gray-600">{carrera.duracion}</span>
                                         </span>
-                                        <div className={`items-center h-full justify-end flex shrink-0 whitespace-nowrap text-xs border-gray-200 border rounded text-white py-1 px-2 ${modosCarrera.length > 1 ? 'bg-gradient-to-r from-15% from-(--rojo-ucasal) to-(--azul-ucasal) to-70%' : modosCarrera.includes(7) ? 'bg-(--azul-ucasal)' : 'bg-(--rojo-ucasal)'}`}>{labelModalidad}</div>
+                                        <div className={`items-center h-full justify-end flex shrink-0 whitespace-nowrap text-xs border-gray-200 border rounded text-white py-1 px-2 ${modosCarrera.length > 1 ? 'bg-linear-to-r from-15% from-(--rojo-ucasal) to-(--azul-ucasal) to-70%' : modosCarrera.includes(7) ? 'bg-(--azul-ucasal)' : 'bg-(--rojo-ucasal)'}`}>{labelModalidad}</div>
                                     </button>
                                 </div>
                             )

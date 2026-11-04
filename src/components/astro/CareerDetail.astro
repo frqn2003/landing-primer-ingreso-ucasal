@@ -11,6 +11,8 @@ import {
 } from "../../config/modalidad";
 import { getNombreModalidades, getNombreFacultad } from "../../lib/utils";
 import BeneficiosCartas from "./BeneficiosCartas.astro";
+import BeneficiosEspecificos from "./BeneficiosEspecificos.astro";
+import { beneficiosEspecificos } from "../../data/beneficiosEspecificos";
 import ModalidadesPuerta from "./ModalidadesPuerta.astro";
 import Financiacion from "./Financiacion.astro";
 import Sedes from "./Sedes.astro";
@@ -50,6 +52,7 @@ interface Props {
 }
 
 const { carrera } = Astro.props;
+const experiencias = beneficiosEspecificos[carrera.codcar];
 
 const imagenes = import.meta.glob<ImageMetadata>(
   "../../assets/{encabezados,cards}/*.{webp,jpg,jpeg,png}",
@@ -301,6 +304,10 @@ const momentoIntermedio = intermedio
             </>
           )
         }
+
+        {experiencias?.length > 0 && (
+          <BeneficiosEspecificos beneficios={experiencias} carrera={carrera.nombre} />
+        )}
 
         {
           carrera.requisitosIngreso && (

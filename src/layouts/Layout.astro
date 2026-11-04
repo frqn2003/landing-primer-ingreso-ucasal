@@ -272,5 +272,14 @@ const cssFuentes = fuentes
 
       initClarity(clarityId);
     </script>
+
+    <script>
+      // Guarda UTM y click IDs en la primera página que se visita, para que
+      // el formulario los mande aunque se envíe desde otra página u otro día.
+      // Ver src/lib/atribucion.ts.
+      import { guardarAtribucion } from "../lib/atribucion";
+
+      guardarAtribucion();
+    </script>
   </body>
 </html>
