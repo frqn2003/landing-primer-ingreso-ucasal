@@ -304,7 +304,7 @@ const preguntasPorModalidad: Record<Modalidad, Pregunta[]> = {
                 "UCASAL ofrece planes de financiamiento a partir de las cuotas sin interés, además de tener un amplio sistema de becas para cada situación particular. Llena el formulario y accedé a distintas opciones para empezar tu carrera universitaria.",
         },
         {
-            pregunta: "¿Tengo que pagar derecho de exámen para rendir?",
+            pregunta: "¿Tengo que pagar derecho de examen para rendir?",
             respuesta:
                 "No, en UCASAL solo se abona la matrícula de inscripción y una cuota mensual. Los exámenes parciales y finales son sin cargo.",
         },
@@ -334,7 +334,7 @@ const preguntasPorModalidad: Record<Modalidad, Pregunta[]> = {
                 "UCASAL ofrece planes de financiamiento a partir de las cuotas sin interés, además de tener un amplio sistema de becas para cada situación particular. Llena el formulario y accedé a distintas opciones para empezar tu carrera universitaria.",
         },
         {
-            pregunta: "¿Tengo que pagar derecho de exámen para rendir?",
+            pregunta: "¿Tengo que pagar derecho de examen para rendir?",
             respuesta:
                 "No, en UCASAL solo se abona la matrícula de inscripción y una cuota mensual. Los exámenes parciales y finales son sin cargo.",
         },

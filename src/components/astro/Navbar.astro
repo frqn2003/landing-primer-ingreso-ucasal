@@ -22,6 +22,8 @@ const carreraActiva = data.find((c: any) => c.slug === slugLimpio);
 // de gracias.
 const urlInscripcion = esHome && (!carreraActiva || !esSalud(carreraActiva))
   ? `https://ucasal.edu.ar/carreras/admision-form.php?utm_source=landing_home&utm_medium=navbar`
+  : carreraActiva && carreraActiva.codcar === 113
+  ? `https://www.ucasal.edu.ar/carreras/ccc-form.php?utm_source=landing_home&utm_medium=navbar`
   : urlInscripcionCarrera({
       carrera: carreraActiva,
       utmMedium: "navbar",
@@ -33,7 +35,7 @@ const urlInscripcion = esHome && (!carreraActiva || !esSalud(carreraActiva))
 // #contacto; en la Home, FormSection.astro usa el mismo id.
 const inscripcionBloqueada = urlInscripcion === null;
 const textoBotonInscripcion =
-  carreraActiva && esCCC(carreraActiva)
+  carreraActiva && (esCCC(carreraActiva) || carreraActiva.codcar === 113)
     ? "Solicitar admisión"
     : "¡Quiero Inscribirme!";
 
