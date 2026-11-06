@@ -2076,7 +2076,7 @@ const data = [
         sector: 1,
         slug: "licenciatura-en-psicologia",
         nombre: "Licenciatura en Psicología",
-        descripcion: "La Licenciatura en Psicología forma profesionales con capacidad para comprender, evaluar e intervenir en el comportamiento humano y la salud mental. Los estudiantes dominan herramientas de psicodiagnóstico, evaluación clínica, psicología social, neurociencias y diversas psicoterapias. La carrera combina teoría y práctica para desarrollar líderes capaces de tomar decisiones estratégicas en los ámbitos clínico, educativo, laboral y comunitario.",
+        descripcion: "En la Licenciatura en Psicología vas a aprender a comprender, evaluar y acompañar a las personas en cada etapa de su vida. Te formás en psicodiagnóstico, psicología clínica, neurociencias y psicoterapias, y antes de recibirte hacés prácticas en cinco áreas: clínica, educacional, laboral, jurídico-forense y sociocomunitaria. Así llegás al título con experiencia real y sabiendo en qué campo querés crecer.",
         duracion: "5 años",
         modalidad: [1],
         cio: {

@@ -56,7 +56,7 @@ export function Aranceles(ArancelesProps: ArancelesProps) {
                     </svg>
                 </div>
             }
-            {error && <p>Llena el formulario y consulta los aranceles con un asesor</p>}
+            {error && <p>Llená el formulario y consulta los aranceles con un asesor</p>}
         </section>
     )
 }

@@ -301,7 +301,7 @@ const preguntasPorModalidad: Record<Modalidad, Pregunta[]> = {
             pregunta:
                 "¿Qué medios de pago están disponibles y qué tipo de becas ofrecen?",
             respuesta:
-                "UCASAL ofrece planes de financiamiento a partir de las cuotas sin interés, además de tener un amplio sistema de becas para cada situación particular. Llena el formulario y accedé a distintas opciones para empezar tu carrera universitaria.",
+                "UCASAL ofrece planes de pago en cuotas sin interés, además de tener un amplio sistema de becas para cada situación particular. Llená el formulario y accedé a distintas opciones para empezar tu carrera universitaria.",
         },
         {
             pregunta: "¿Tengo que pagar derecho de examen para rendir?",
@@ -331,7 +331,7 @@ const preguntasPorModalidad: Record<Modalidad, Pregunta[]> = {
             pregunta:
                 "¿Qué medios de pago están disponibles y qué tipo de becas ofrecen?",
             respuesta:
-                "UCASAL ofrece planes de financiamiento a partir de las cuotas sin interés, además de tener un amplio sistema de becas para cada situación particular. Llena el formulario y accedé a distintas opciones para empezar tu carrera universitaria.",
+                "UCASAL ofrece planes de pago en cuotas sin interés, además de tener un amplio sistema de becas para cada situación particular. Llená el formulario y accedé a distintas opciones para empezar tu carrera universitaria.",
         },
         {
             pregunta: "¿Tengo que pagar derecho de examen para rendir?",
