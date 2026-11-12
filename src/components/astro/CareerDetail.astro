@@ -129,7 +129,7 @@ const parrafos = carrera.descripcion.split("\\n").filter(Boolean);
 const intermedio = carrera.tituloIntermedio;
 const anioIntermedio = intermedio ? Math.ceil(intermedio.semestre / 2) - 1 : -1;
 const momentoIntermedio = intermedio
-  ? `${intermedio.semestre % 2 ? "A mitad de" : "En"} ${anioIntermedio + 1}.º año tenés el título`
+  ? `${intermedio.semestre % 2 ? "Al finalizar la mitad de" : "Al finalizar"} ${anioIntermedio + 1}.º año tenés el título`
   : "";
 ---
 

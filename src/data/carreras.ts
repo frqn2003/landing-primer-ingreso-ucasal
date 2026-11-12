@@ -5,7 +5,7 @@ const data = [
         sector: 3,
         slug: "abogacia",
         nombre: "Abogacía",
-        descripcion: "La carrera de Abogacía forma profesionales con capacidad para asesorar y representar a personas u organizaciones en la resolución de conflictos jurídicos. Los estudiantes dominan herramientas de derecho civil, penal, comercial, procesal y constitucional, junto con técnicas de argumentación y litigación. La carrera combina teoría y práctica para desarrollar líderes capaces de tomar decisiones fundamentadas en el ámbito público y privado.",
+        descripcion: "En Abogacía vas a aprender a asesorar, representar y defender a personas y organizaciones, y a resolver conflictos dentro y fuera de los tribunales. Te formás en derecho civil, penal, comercial, laboral y constitucional, entrenás la argumentación y la litigación, y en 4° y 5° año hacés Práctica Profesional para llegar al título sabiendo cómo se trabaja un caso real. Todo con una mirada ética y humanista, el sello de UCASAL.",
         duracion: "5 años",
         modalidad: [1, 7],
         perfilEgresado: {
@@ -152,7 +152,7 @@ const data = [
         sector: 2,
         slug: "contador-publico",
         nombre: "Contador Público",
-        descripcion: "La carrera de Contador Público de UCASAL forma profesionales con sólida base en contabilidad, costos, impuestos, auditoría y gestión de organizaciones. Los egresados pueden actuar como peritos en el ámbito judicial y ejercer de forma independiente o en relación de dependencia, en organizaciones públicas y privadas, asesorando y liderando procesos administrativo-contables con criterio ético y humanístico.",
+        descripcion: "Toda empresa, comercio y organización necesita a alguien que entienda sus números, cumpla con los impuestos y garantice que la información es confiable. En Contador Público vas a formarte para ser ese profesional: contabilidad, impuestos, auditoría y finanzas, con una mirada ética. Es una carrera con salida laboral en todos los sectores, que te permite trabajar en una empresa, en el Estado o abrir tu propio estudio.",
         duracion: "4 años",
         modalidad: [1, 7],
         perfilEgresado: {
@@ -386,7 +386,7 @@ const data = [
         sector: 2,
         slug: "administracion-de-empresas",
         nombre: "Licenciatura en Administración de Empresas",
-        descripcion: "La Licenciatura en Administración de Empresas de UCASAL forma profesionales capacitados para gestionar organizaciones de todo tipo y tamaño, con dominio de planificación estratégica, recursos humanos, finanzas, marketing y operaciones. Combina teoría y práctica para desarrollar liderazgo y toma de decisiones en entornos dinámicos, tanto en empresas privadas como en organismos públicos.",
+        descripcion: "Detrás de cada empresa, comercio o emprendimiento hay alguien que toma decisiones: cómo crecer, dónde invertir, cómo organizar al equipo. En Administración de Empresas vas a aprender a ser esa persona. Te vas a formar en estrategia, finanzas, marketing y gestión de personas, con una mirada práctica para dirigir organizaciones de cualquier tamaño o llevar adelante tu propio proyecto. ",
         duracion: "4 años",
         modalidad: [1, 7],
         perfilEgresado: {
@@ -543,7 +543,7 @@ const data = [
         descripcion: "La Licenciatura en Higiene y Seguridad en el Trabajo de UCASAL forma profesionales capacitados para diseñar, implementar y liderar programas de prevención y protección de riesgos laborales, cuidando la integridad de las personas y los recursos materiales y ambientales de las organizaciones. La carrera ofrece título intermedio de Técnico/a en Higiene y Seguridad en el Trabajo.",
         duracion: "4 años",
         modalidad: [1, 7],
-        tituloIntermedio: { nombre: "Técnico/a en Higiene y Seguridad en el Trabajo", semestre: 6, requisito: "al finalizar Práctica Pre Profesional I" },
+        tituloIntermedio: { nombre: "Técnico/a en Higiene y Seguridad en el Trabajo", semestre: 6},
         perfilEgresado: {
             items: [
                 "Diseñar, evaluar y gestionar programas integrales de prevención de riesgos laborales e higiene industrial.",
@@ -694,7 +694,7 @@ const data = [
         descripcion: "La Licenciatura en Gerontología forma profesionales capacitados para diseñar y dirigir programas de salud y bienestar para personas mayores, gestionar centros residenciales y promover el envejecimiento activo, liderando equipos interdisciplinarios en políticas públicas, investigación e intervención sociosanitaria.",
         duracion: "4 años",
         modalidad: [7],
-        tituloIntermedio: { nombre: "Tecnicatura Universitaria en Gerontología Social", semestre: 4, requisito: "al finalizar los primeros 2 años" },
+        tituloIntermedio: { nombre: "Tecnicatura Universitaria en Gerontología Social", semestre: 4},
         perfilEgresado: {
             items: [
                 "Diseñar, gestionar y evaluar programas integrales de salud y bienestar para personas mayores.",
@@ -844,7 +844,7 @@ const data = [
         descripcion: "La Licenciatura en Recursos Humanos de UCASAL forma profesionales capacitados para gestionar integralmente el capital humano de las organizaciones: procesos de selección, capacitación, desarrollo, evaluación de desempeño, remuneraciones y relaciones laborales. Combina psicología organizacional, derecho laboral y herramientas de gestión, con título intermedio de Analista en Recursos Humanos.",
         duracion: "4 años",
         modalidad: [1, 7],
-        tituloIntermedio: { nombre: "Analista en Recursos Humanos", semestre: 6, requisito: "al finalizar todas las materias hasta 3.º año" },
+        tituloIntermedio: { nombre: "Analista en Recursos Humanos", semestre: 6 },
         perfilEgresado: {
             items: [
                 "Diseñar y gestionar estrategias de atracción, selección e inducción del talento.",
@@ -1012,7 +1012,7 @@ const data = [
         descripcion: "La Licenciatura en Comercialización de UCASAL forma profesionales capacitados para diseñar y desarrollar estrategias y acciones comerciales, analizando fenómenos del consumo para posicionar organizaciones en mercados nacionales e internacionales mediante herramientas de marketing digital. Incluye investigación de mercados, estrategias de productos y precios, planificación de ventas y comercialización internacional, con título intermedio de Analista en Marketing.",
         duracion: "4 años",
         modalidad: [1, 7],
-        tituloIntermedio: { nombre: "Analista en Marketing", semestre: 6, requisito: "al finalizar todas las materias hasta 3.º año" },
+        tituloIntermedio: { nombre: "Analista en Marketing", semestre: 6 },
         perfilEgresado: {
             items: [
                 "Diseñar e implementar planes de marketing integrales y estrategias de ventas.",
@@ -1434,7 +1434,7 @@ const data = [
         descripcion: "La Licenciatura en Comercio Internacional forma profesionales con capacidad para gestionar operaciones y negocios en los mercados globales. Los estudiantes dominan herramientas de logística internacional, legislación aduanera, finanzas de comercio exterior, negociación e inteligencia comercial. La carrera combina teoría y práctica para desarrollar líderes capaces de diseñar estrategias de internacionalización en empresas e instituciones.",
         duracion: "4 años",
         modalidad: [1, 7],
-        tituloIntermedio: { nombre: "Analista en comercio exterior", semestre: 6, requisito: "al finalizar todas las materias hasta 3.º año" },
+        tituloIntermedio: { nombre: "Analista en comercio exterior", semestre: 6},
         perfilEgresado: {
             items: [
                 "Diseñar estrategias de internacionalización para empresas en mercados globales.",
@@ -1525,7 +1525,7 @@ const data = [
         descripcion: "La Licenciatura en Administración Agropecuaria forma profesionales capacitados para dirigir y optimizar negocios del sector agroindustrial. Los egresados dominan herramientas de gestión financiera, planificación estratégica, comercialización y sustentabilidad ambiental. La carrera integra la visión técnica con el análisis de mercados para formar líderes capaces de tomar decisiones eficientes en cadenas de valor agrícolas y ganaderas.",
         duracion: "4 años",
         modalidad: [1, 7],
-        tituloIntermedio: { nombre: "Técnico Universitario en Administración Agropecuaria", semestre: 6, requisito: "al finalizar todas las materias hasta 3.º año" },
+        tituloIntermedio: { nombre: "Técnico Universitario en Administración Agropecuaria", semestre: 6 },
         perfilEgresado: {
             items: [
                 "Planificar, dirigir y optimizar empresas del sector agropecuario y agroindustrial.",
@@ -2184,10 +2184,10 @@ const data = [
         sector: 3,
         slug: "licenciatura-en-criminalistica",
         nombre: "Licenciatura en Criminalística",
-        descripcion: "La Licenciatura en Criminalística forma profesionales con capacidad para investigar, analizar y reconstruir hechos delictivos mediante métodos científicos. Los estudiantes dominan herramientas de balística, papiloscopía, accidentología, documentología y ciencias forenses. La carrera combina teoría y práctica para desarrollar líderes capaces de redactar peritajes judiciales y tomar decisiones estratégicas en el ámbito público y privado.",
+        descripcion: "En Criminalística vas a aprender a investigar hechos delictivos con método científico: procesar la escena, analizar rastros y evidencias, y redactar los peritajes que usan jueces y fiscales. Te formás en balística, documentología, accidentología, química y medicina legal, y en 2° año hacés pasantías en el Registro Nacional de Reincidencia y prácticas en la Dirección de Policía Científica.",
         duracion: "4 años",
         modalidad: [1],
-        tituloIntermedio: { nombre: "Perito en Inspecciones Oculares y Dactiloscopía", semestre: 4, requisito: "al finalizar todas las materias hasta 2.º año" },
+        tituloIntermedio: { nombre: "Perito en Inspecciones Oculares y Dactiloscopía", semestre: 4},
         perfilEgresado: {
             items: [
                 "Procesar la escena del crimen recolectando y preservando evidencias físicas.",
@@ -2267,7 +2267,7 @@ const data = [
         sector: 5,
         slug: "arquitectura",
         nombre: "Arquitectura",
-        descripcion: "La carrera de Arquitectura forma profesionales con capacidad para diseñar, proyectar y dirigir obras que transforman el hábitat y el entorno urbano. Los estudiantes dominan herramientas de diseño arquitectónico, sistemas constructivos, representación digital, sustentabilidad y gestión de proyectos. La carrera combina teoría y práctica para desarrollar líderes capaces de tomar decisiones estratégicas en el ámbito público y privado.",
+        descripcion: "En Arquitectura vas a aprender a transformar ideas en espacios reales: viviendas, edificios, plazas y ciudades pensadas para las personas. Es una carrera que combina creatividad y técnica, donde el diseño se pone al servicio de la vida cotidiana, el cuidado del ambiente y el patrimonio de cada lugar. Te vas a formar para proyectar, construir y mejorar el entorno en el que todos vivimos.",
         duracion: "5 años",
         modalidad: [1],
         cio: {
@@ -2399,7 +2399,7 @@ const data = [
         sector: 9,
         slug: "ciencias-veterinarias",
         nombre: "Ciencias Veterinarias",
-        descripcion: "La carrera de Ciencias Veterinarias forma profesionales con capacidad para promover la salud animal, la producción agropecuaria y la salud pública. Los estudiantes dominan herramientas de medicina clínica, cirugía, diagnóstico epidemiológico, bioseguridad y tecnología de los alimentos. La carrera combina teoría y práctica para desarrollar líderes capaces de tomar decisiones estratégicas en el ámbito público y privado.",
+        descripcion: "Ser veterinario es mucho más que curar mascotas: es cuidar la salud de los animales, de las personas y de los alimentos que llegan a nuestra mesa. En Ciencias Veterinarias vas a formarte para atender animales de compañía, acompañar la producción agropecuaria y proteger la salud pública, con mucha práctica en contacto directo con animales. Una carrera para quienes sienten pasión por los animales y quieren convertirla en una profesión con impacto real. ",
         duracion: "5½ años",
         modalidad: [1],
         perfilEgresado: {
@@ -2507,10 +2507,10 @@ const data = [
         sector: 4,
         slug: "ingenieria-en-informatica",
         nombre: "Ingeniería en Informática",
-        descripcion: "La carrera de Ingeniería en Informática forma profesionales con capacidad para diseñar, desarrollar y gestionar sistemas tecnológicos complejos. Los estudiantes dominan herramientas de programación avanzada, arquitectura de software, bases de datos, redes, ciberseguridad e inteligencia artificial. La carrera combina teoría y práctica para desarrollar líderes capaces de tomar decisiones estratégicas en el ámbito público y privado.",
+        descripcion: "La tecnología está en todo: en cómo trabajamos, nos comunicamos, compramos y aprendemos. En Ingeniería en Informática vas a aprender a crearla: diseñar software, trabajar con datos, proteger sistemas y liderar proyectos que resuelven problemas reales. Es una profesión con alta demanda laboral, que además te permite trabajar desde cualquier lugar, pensada para quienes disfrutan resolver desafíos y quieren estar del lado de los que construyen el futuro digital ",
         duracion: "5 años",
         modalidad: [1],
-        tituloIntermedio: { nombre: "Tecnicatura Univ. en Informático", semestre: 6, requisito: "al finalizar todas las materias de tercer año" },
+        tituloIntermedio: { nombre: "Tecnicatura Univ. en Informático", semestre: 6 },
         cio: {
             materias: ["Matemática Física - Química", "Resolución de problemas con algoritmos ", "Curso Introductorio a la Vida Universitaria General"]
         },
@@ -2627,7 +2627,7 @@ const data = [
         descripcion: "La carrera de Ingeniería Industrial forma profesionales con capacidad para optimizar procesos, recursos e infraestructuras en organizaciones de bienes y servicios. Los estudiantes dominan herramientas de gestión de operaciones, logística, economía, control de calidad y dirección de proyectos. La carrera combina teoría y práctica para desarrollar líderes capaces de tomar decisiones estratégicas en el ámbito público y privado.",
         duracion: "5 años",
         modalidad: [1],
-        tituloIntermedio: { nombre: "Tecnicatura Univ. en Empresas Industriales", semestre: 6, requisito: "al finalizar todas las materias de tercer año" },
+        tituloIntermedio: { nombre: "Tecnicatura Univ. en Empresas Industriales", semestre: 6 },
         cio: {
             materias: ["Física-Quimica", "Matemáticas", "Resolución de Problemas", "MIVU"]
         },
@@ -3077,7 +3077,7 @@ const data = [
         descripcion: "La Licenciatura en Realización Audiovisual forma profesionales capacitados para conceptualizar, escribir, dirigir y producir proyectos en cine, televisión y medios digitales, integrando herramientas avanzadas de guion, dirección de cámara, iluminación, sonido y postproducción con una visión narrativa, técnica y comercial.",
         duracion: "4 años",
         modalidad: [1],
-        tituloIntermedio: { nombre: "Técnico Universitario en Realización Audiovisual", semestre: 5, requisito: "al finalizar todas las materias hasta 3.º año" },
+        tituloIntermedio: { nombre: "Técnico Universitario en Realización Audiovisual", semestre: 5},
         perfilEgresado: {
             items: [
                 "Diseñar, dirigir y ejecutar producciones audiovisuales integrales.",
@@ -3160,7 +3160,7 @@ const data = [
         descripcion: "La Licenciatura en Producción de Sonido, Eventos y Espectáculos forma profesionales capacitados para dirigir equipos y gestionar proyectos integrales en medios sonoros y espectáculos, crear y difundir contenidos culturales y artísticos e integrar tecnologías digitales y plataformas multimedia. Promueve la iniciativa, la innovación y la creatividad, con una visión crítica de la industria cultural y del entretenimiento y una formación ética y humanista orientada al impacto positivo en la sociedad. Otorga el título de Licenciado/a en Producción de Sonido, Eventos y Espectáculos.",
         duracion: "4 años",
         modalidad: [1],
-        tituloIntermedio: { nombre: "Tecnicatura Universitaria en Producción de Sonido, Eventos y Espectáculos", semestre: 5, requisito: "al finalizar todas las materias hasta el 5.º semestre (2 años y medio)" },
+        tituloIntermedio: { nombre: "Tecnicatura Universitaria en Producción de Sonido, Eventos y Espectáculos", semestre: 5 },
         perfilEgresado: {
             items: [
                 "Dirigir equipos de trabajo para gestionar y producir proyectos integrales en medios sonoros y espectáculos.",
@@ -3243,7 +3243,7 @@ const data = [
         descripcion: "La carrera de Ingeniería Civil forma profesionales con capacidad para planificar, diseñar, construir y mantener infraestructuras esenciales para el desarrollo socioeconómico. Los estudiantes dominan herramientas de cálculo estructural, hidráulica, geotecnia, vías de transporte y gestión de obras. La carrera combina teoría y práctica para desarrollar líderes capaces de tomar decisiones estratégicas en el ámbito público y privado.",
         duracion: "5 años",
         modalidad: [1],
-        tituloIntermedio: { nombre: "Tecnicatura Univ. en Construcciones Civiles", semestre: 6, requisito: "al finalizar todas las materias de tercer año" },
+        tituloIntermedio: { nombre: "Tecnicatura Univ. en Construcciones Civiles", semestre: 6},
         perfilEgresado: {
             items: [
                 "Diseñar, calcular y proyectar estructuras, obras edilicias y de infraestructura vial o hidráulica.",
@@ -3889,7 +3889,7 @@ const data = [
         descripcion: "La carrera de Traductor Público en Inglés forma profesionales con capacidad para brindar fe pública en la traducción e interpretación de documentos legales. Los estudiantes dominan herramientas de traducción jurídica, terminología técnica, lingüística aplicada, derecho comparado y edición. La carrera combina teoría y práctica para desarrollar expertos capaces de tomar decisiones estratégicas e intervenir en el ámbito legal público y privado.",
         duracion: "4 años",
         modalidad: [1],
-        tituloIntermedio: { nombre: "Técnico Traductor de Inglés", semestre: 6, requisito: "al finalizar todas las materias hasta 3.º año" },
+        tituloIntermedio: { nombre: "Técnico Traductor de Inglés", semestre: 6},
         perfilEgresado: {
             items: [
                 "Traducir y validar con fe pública documentos de carácter legal, técnico, comercial y literario.",
@@ -4090,7 +4090,7 @@ const data = [
         descripcion: "La carrera de Ingeniería en Telecomunicaciones forma profesionales con capacidad para diseñar, implementar y gestionar redes y sistemas de comunicación complejos. Los estudiantes dominan herramientas de transmisión de datos, radiocomunicaciones, procesamiento de señales, telefonía móvil y seguridad en redes. La carrera combina teoría y práctica para desarrollar líderes capaces de tomar decisiones estratégicas en el ámbito público y privado.",
         duracion: "5 años",
         modalidad: [1],
-        tituloIntermedio: { nombre: "Tecnicatura Univ. en Telecomunicaciones", semestre: 6, requisito: "al finalizar todas las materias de tercer año" },
+        tituloIntermedio: { nombre: "Tecnicatura Univ. en Telecomunicaciones", semestre: 6},
         perfilEgresado: {
             items: [
                 "Diseñar y gestionar redes y sistemas de comunicación.",
@@ -4423,7 +4423,7 @@ const data = [
         descripcion: "La Licenciatura en Comunicación forma profesionales con capacidad para planificar, gestionar y ejecutar estrategias de comunicación efectivas e innovadoras. Los estudiantes dominan herramientas de gestión de medios, producción de contenidos, comunicación institucional, marketing digital y opinión pública. La carrera combina teoría y práctica para desarrollar líderes capaces de tomar decisiones estratégicas en el ámbito público y privado.",
         duracion: "4 años",
         modalidad: [1],
-        tituloIntermedio: { nombre: "Técnico Universitario en Comunicación", semestre: 5, requisito: "al finalizar todas las materias hasta 3.º año" },
+        tituloIntermedio: { nombre: "Técnico Universitario en Comunicación", semestre: 5},
         habilitacionLocutor: true,
         perfilEgresado: {
             items: [
@@ -4517,7 +4517,7 @@ const data = [
         descripcion: "La Licenciatura en Diseño de la Comunicación Visual forma profesionales capaces de crear soluciones visuales para comunicar ideas, identidades y experiencias en medios impresos y digitales. La formación integra diseño, tipografía, lenguaje visual, herramientas digitales y comunicación, con proyectos prácticos que incorporan investigación, innovación y una mirada ética sobre las necesidades de cada público.",
         duracion: "4 años",
         modalidad: [1],
-        tituloIntermedio: { nombre: "Técnico Universitario en Diseño de la Comunicación Visual", semestre: 5, requisito: "al finalizar todas las materias hasta 3.º año" },
+        tituloIntermedio: { nombre: "Técnico Universitario en Diseño de la Comunicación Visual", semestre: 5},
         perfilEgresado: {
             items: [
                 "Diseñar y desarrollar sistemas de identidad visual para organizaciones, productos y servicios.",
@@ -4762,7 +4762,7 @@ const data = [
         descripcion: "La Licenciatura en Turismo forma profesionales con capacidad para planificar, gestionar y desarrollar proyectos turísticos sostenibles. Los estudiantes dominan herramientas de gestión hotelera, administración de agencias, patrimonio cultural, marketing turístico y políticas públicas. La carrera combina teoría y práctica para desarrollar líderes capaces de impulsar destinos competitivos e innovar en el sector público y privado.",
         duracion: "4 años",
         modalidad: [1, 7],
-        tituloIntermedio: { nombre: "Técnico en Turismo", semestre: 6, requisito: "al finalizar todas las materias hasta 3.º año" },
+        tituloIntermedio: { nombre: "Técnico en Turismo", semestre: 6},
 
         perfilEgresado: {
             items: [
@@ -4936,7 +4936,7 @@ const data = [
         descripcion: "La Licenciatura en Publicidad forma profesionales capaces de investigar, concebir, planificar y difundir estrategias y campañas publicitarias para públicos definidos, en medios sociales, de comunicación y soportes tecnológicos. El plan de estudios integra redacción publicitaria, producción creativa, planificación de medios, dirección de arte, narrativas multimedia y transmedia, y analítica y ciencia de datos aplicadas a la publicidad, con una mirada humanista y ética sobre la profesión.",
         duracion: "4 años",
         modalidad: [1],
-        tituloIntermedio: { nombre: "Técnico Universitario en Publicidad", semestre: 5, requisito: "al finalizar todas las materias hasta 3.º año" },
+        tituloIntermedio: { nombre: "Técnico Universitario en Publicidad", semestre: 5},
         habilitacionLocutor: true,
         perfilEgresado: {
             items: [
@@ -5030,7 +5030,7 @@ const data = [
         descripcion: "La Licenciatura en Periodismo forma profesionales capacitados para investigar, redactar y difundir información rigurosa en múltiples plataformas analógicas y digitales. Los estudiantes dominan herramientas de producción narrativa, investigación periodística, gestión de contenidos, ética de los medios y análisis geopolítico. Su formación impulsa un pensamiento crítico capaz de interpretar la realidad y generar impacto en la opinión pública.",
         duracion: "4 años",
         modalidad: [1],
-        tituloIntermedio: { nombre: "Técnico Universitario en Periodismo", semestre: 5, requisito: "al finalizar todas las materias hasta 3.º año" },
+        tituloIntermedio: { nombre: "Técnico Universitario en Periodismo", semestre: 5},
         habilitacionLocutor: true,
         perfilEgresado: {
             items: [
@@ -5124,7 +5124,7 @@ const data = [
         descripcion: "La Licenciatura en Producción Animal forma profesionales capacitados para optimizar la cría, nutrición y manejo integral del ganado mediante la aplicación de criterios científicos y tecnológicos. Los estudiantes dominan herramientas de genética, bioseguridad, reproducción, bienestar animal y eficiencia operativa. Su perfil responde a la creciente demanda de sistemas agropecuarios sostenibles, rentables y respetuosos con el medio ambiente.",
         duracion: "4 años",
         modalidad: [1],
-        tituloIntermedio: { nombre: "Técnico Universitario en Producción Animal", semestre: 4, requisito: "al finalizar todas las materias hasta 2.º año" },
+        tituloIntermedio: { nombre: "Técnico Universitario en Producción Animal", semestre: 4},
         perfilEgresado: {
             items: [
                 "Planificar, dirigir y optimizar sistemas de producción ganadera e insumos de origen animal.",
@@ -5452,7 +5452,7 @@ const data = [
         descripcion: "La Licenciatura en Relaciones Públicas e Institucionales forma profesionales capaces de diseñar y gestionar estrategias de comunicación integral para diversas organizaciones. Su plan de estudios integra la gestión de imagen corporativa, la resolución de crisis, la organización de eventos y las relaciones con los medios digitales. Propone un espacio académico para comprender el vínculo institucional y construir puentes de diálogo transparentes.",
         duracion: "4 años",
         modalidad: [1, 7],
-        tituloIntermedio: { nombre: "Analista Universitario en Relaciones Públicas", semestre: 6, requisito: "al finalizar todas las materias hasta 3.º año" },
+        tituloIntermedio: { nombre: "Analista Universitario en Relaciones Públicas", semestre: 6},
         perfilEgresado: {
             items: [
                 "Diseñar e implementar estrategias de comunicación institucional, reputación e imagen de marca.",
@@ -5599,7 +5599,7 @@ const data = [
         descripcion: "La Licenciatura en Filosofía forma profesionales capacitados para examinar, cuestionar y comprender de manera rigurosa los grandes dilemas del pensamiento humano y la sociedad. Los estudiantes dominan herramientas de lógica, epistemología, ética, metafísica, historia de las ideas y análisis del discurso. Esta propuesta impulsa una sólida capacidad analítica y argumentativa clave para abordar las problemáticas contemporáneas.",
         duracion: "4 años",
         modalidad: [1],
-        tituloIntermedio: { nombre: "Profesor en Fisolofía", semestre: 8, requisito: "al finalizar la licenciatura se puede optar por el título intermedio" },
+        tituloIntermedio: { nombre: "Profesor en Fisolofía", semestre: 8},
         perfilEgresado: {
             items: [
                 "Investigar y analizar temas éticos, políticos y sociales.",
@@ -7097,7 +7097,7 @@ const data = [
         descripcion: "La Licenciatura en Gastronomía forma profesionales capacitados para dirigir, diseñar y optimizar proyectos culinarios e industrias de la alimentación a nivel internacional. Los estudiantes dominan herramientas de alta cocina, enología, química de los alimentos, gestión de restaurantes, seguridad e higiene y administración financiera. Esta propuesta combina el arte culinario con la innovación empresarial para liderar la cultura gastronómica.",
         duracion: "4 años",
         modalidad: [1],
-        tituloIntermedio: { nombre: "Técnico en Gastronomía", semestre: 4, requisito: "al finalizar todas las materias hasta 2.º año" },
+        tituloIntermedio: { nombre: "Técnico en Gastronomía", semestre: 4},
         perfilEgresado: {
             items: [
                 "Diseñar, planificar y dirigir proyectos gastronómicos y emprendimientos de servicios de alimentación.",
