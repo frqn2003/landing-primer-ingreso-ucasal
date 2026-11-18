@@ -11,8 +11,9 @@ import {
 } from "../../config/modalidad";
 import { getNombreModalidades, getNombreFacultad } from "../../lib/utils";
 import BeneficiosCartas from "./BeneficiosCartas.astro";
+import CardsEspeciales from "./CardsEspeciales.astro";
 import BeneficiosEspecificos from "./BeneficiosEspecificos.astro";
-import { beneficiosEspecificos } from "../../data/beneficiosEspecificos";
+import { beneficiosEspecificos, tarjetas } from "../../data/beneficiosEspecificos";
 import ModalidadesPuerta from "./ModalidadesPuerta.astro";
 import Financiacion from "./Financiacion.astro";
 import Sedes from "./Sedes.astro";
@@ -31,6 +32,7 @@ interface Career {
   modalidad: number[];
   sector: number;
   cio?: { materias: string[] };
+  titulo?: string;
   perfilEgresado?: { items: string[] };
   /** Título de pregrado que se obtiene al aprobar hasta `semestre` inclusive. */
   tituloIntermedio?: { nombre: string; semestre: number; requisito?: string };
@@ -53,7 +55,14 @@ interface Props {
 
 const { carrera } = Astro.props;
 const experiencias = beneficiosEspecificos[carrera.codcar];
-
+// La tarjeta de ejemplo de Veterinaria todavía no es contenido publicado. Activar cuando se tenga todo con un buen diseño.
+const listaCarrerasEspecificas = [16, 46, 26, 84, 11, 14];
+const tarjetasCarrera = listaCarrerasEspecificas.includes(carrera.codcar)
+  ? tarjetas[carrera.codcar]
+  : undefined;
+/* 
+const tarjetasCarrera: any[] = [] 
+ */
 const imagenes = import.meta.glob<ImageMetadata>(
   "../../assets/{encabezados,cards}/*.{webp,jpg,jpeg,png}",
   {
@@ -288,7 +297,14 @@ const momentoIntermedio = intermedio
         }
 
         {
-          carrera.perfilEgresado && (
+          tarjetasCarrera?.length ? (
+            <>
+              <h3 class="mt-14 text-(--azul-ucasal)">
+                Como {carrera.titulo} te podes dedicar a
+              </h3>
+              <CardsEspeciales tarjetas={tarjetasCarrera} />
+            </>
+          ) : carrera.perfilEgresado && (
             <>
               <h3 class="mt-14 text-(--azul-ucasal)">
                 El graduado de {carrera.nombre} podrá
@@ -305,9 +321,9 @@ const momentoIntermedio = intermedio
           )
         }
 
-        <!-- {experiencias?.length > 0 && (
+        {experiencias && experiencias.length > 0 && (
           <BeneficiosEspecificos beneficios={experiencias} carrera={carrera.nombre} />
-        )} -->
+        )}
 
         {
           carrera.requisitosIngreso && (

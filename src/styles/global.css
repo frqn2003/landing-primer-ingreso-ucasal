@@ -54,6 +54,7 @@ html.snap-off {
   @media (min-width: 1024px) {
     padding-top: var(--alto-navbar);
     scroll-snap-stop: always;
+    min-height: 100dvh;
   }
 }
 
@@ -98,13 +99,13 @@ h1 {
 
 /* Subtitulos */
 h2 {
-  font-size: clamp(1.5rem, 4vw, 2.75rem);
+  font-size: clamp(2rem, 4vw, 2.75rem);
   font-weight: 700;
   color: var(--azul-ucasal);
 }
 
 h3 {
-  font-size: clamp(2rem, 4vw, 2rem);
+  font-size: clamp(1.75rem, 4vw, 2rem);
   font-weight: 750;
   line-height: 1;
 }

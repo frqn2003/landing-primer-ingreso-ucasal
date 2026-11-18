@@ -88,10 +88,10 @@ const modalidades = todasLasModalidades.filter(
 );
 ---
 
-<section id="modalidades" class="seccion-snap flex flex-col">
+<section id="modalidades" class="seccion-snap max-sm:-mb-40 xl:-my-16 flex-col">
   <h2 class="text-3xl font-bold text-center my-8">{titulo}</h2>
   <div class={`${!onSubPage ? 'contenedor' : ''} mx-auto flex-1 w-full flex flex-col min-h-0`}>
-    <div class="flex max-md:flex-col flex-1 min-h-0 overflow-hidden pb-8">
+    <div class="flex max-md:flex-col flex-1  min-h-0 overflow-hidden pb-8">
       {
         modalidades.map((modalidad, i) => (
           <article
@@ -124,7 +124,7 @@ const modalidades = todasLasModalidades.filter(
               </span>
             </button>
 
-            <div class="puerta-expandido absolute inset-x-0 bottom-0 flex-col items-start h-full gap-2 md:gap-4 py-10 px-4 md:px-10 justify justify-between md:justify-end flex">
+            <div class="puerta-expandido absolute inset-x-0 bottom-0 flex-col items-start h-1/2 md:h-full gap-2 md:gap-4 py-10 px-4 md:px-10 justify-end flex">
               <h3 class={`${modalidades.length === 1 ? 'hidden' : 'block'} text-white`}>{modalidad.nombre}</h3>
               <div class="flex flex-col gap-2 justify-end">
                 <p class="max-w-[40ch] text-base md:text-xl leading-relaxed text-white/90">
@@ -173,7 +173,7 @@ const modalidades = todasLasModalidades.filter(
     }
   }
   .puerta-panel[data-active="true"] {
-    flex-grow: 1.5;
+    flex-grow: 0.8;
     @media (min-width: 640px) {
       flex-grow: 2;
     }

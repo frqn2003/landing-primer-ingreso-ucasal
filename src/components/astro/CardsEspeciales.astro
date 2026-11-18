@@ -1,0 +1,98 @@
+---
+import type { Tarjeta } from '../../data/beneficiosEspecificos';
+
+
+interface Props {
+    tarjetas: Tarjeta[];
+}
+
+const { tarjetas } = Astro.props;
+---
+
+
+<div class="mt-6 grid grid-cols-2 md:grid-cols-4 gap-4">
+{
+    tarjetas.map((tarjeta) => (
+        <div class="grid grid-rows-[minmax(1fr,4fr)_4rem] min-h-50 sm:min-h-60 h-full w-full max-w-50 sm:max-w-60 rounded-2xl border-0 bg-(--rojo-ucasal)/5 mx-auto my-auto">
+            <div class="real rounded-t-lg border-2 border-(--rojo-ucasal)" tabindex="0">
+                <div class="icono">
+                    <img src={typeof tarjeta.icono === "string" ? tarjeta.icono : tarjeta.icono.src} alt={tarjeta.titulo} />
+                </div>
+                <div class="descripcion">
+                    <p>{tarjeta.descripcion}</p>
+                </div>
+            </div>
+            <div class="min-h-16 sm:min-h-18 px-3 text-center bg-(--azul-ucasal) text-white justify-center items-center flex">
+                {tarjeta.titulo}
+            </div>
+        </div>
+    ))
+}
+</div>
+<style>
+.real {
+    position: relative;
+    min-height: 11rem;
+    display: flex;
+    align-items: center;
+}
+
+@media (min-width: 40rem) {
+    .real {
+        min-height: 12rem;
+    }
+}
+
+.icono {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: min(7rem, calc(100% - 2rem));
+    aspect-ratio: 1;
+    display: grid;
+    place-items: center;
+    transform: translate(-50%, -50%);
+    transition: top 0.3s ease, left 0.3s ease, width 0.3s ease, transform 0.3s ease;
+}
+
+.icono > img {
+    width: 70%;
+    height: 70%;
+    object-fit: contain;
+}
+
+.descripcion {
+    width: 100%;
+    color: black;
+    text-align: center;
+    font-size: 1rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    padding: 4rem 0.65rem 0.65rem;
+    display: flex;
+    text-justify: inter-word;
+    pointer-events: none;
+}
+
+
+.real:hover > .icono,
+.real:focus > .icono {
+    top: 1rem;
+    left: 1rem;
+    width: 3rem;
+    transform: none;
+}
+
+.real:hover > .descripcion,
+.real:focus > .descripcion {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .icono,
+    .descripcion {
+        transition: none;
+    }
+}
+</style>
