@@ -65,7 +65,7 @@ function cargarCssTelefono() {
 }
 
 /* Campo de prueba: Lic. en Higiene y Seguridad (138) y Corredor Inmobiliario (244). */
-const CODCARS_MEDIO_CONTACTO = ['138', '244', '46', '323']
+const CODCARS_MEDIO_CONTACTO = ['138', '244', '46', '323', '96']
 const MEDIOS_CONTACTO = ['Llamada', 'Whatsapp', 'Mail']
 
 function normalizar(texto: string) {
